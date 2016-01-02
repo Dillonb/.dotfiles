@@ -1,0 +1,4 @@
+#!/bin/bash
+
+drush dis $1 -y
+drush pm-uninstall $1 -y

@@ -1,0 +1,2 @@
+#!/bin/sh
+texdockercmd /bin/sh -c "pdflatex $1"

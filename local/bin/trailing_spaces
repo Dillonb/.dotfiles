@@ -1,0 +1,2 @@
+echo "Files with trailing spaces under $(pwd):"
+find . -type f -exec egrep -l " +$" {} \;
