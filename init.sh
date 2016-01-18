@@ -26,7 +26,7 @@ for f in *; do
                     if [[ -d fs/$file ]]; then
                         mkdir -p ~/$file
                     else
-                        ln -srf $(pwd)/fs/$file $HOME/$file
+                        ln -sf $(pwd)/fs/$file $HOME/$file
                     fi
                 done
 
