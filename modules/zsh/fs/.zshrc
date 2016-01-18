@@ -20,6 +20,7 @@ alias kuvm="kinit dbelivea@uvm.edu"
 alias kwebmster="kinit webmster@uvm.edu"
 alias fucking="sudo"
 alias please="sudo !!"
+alias nload="nload -u H"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [[ -x /usr/bin/yegonesh ]]; then
+    yegonesh
+else
+    dmenu_run
+fi

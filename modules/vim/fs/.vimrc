@@ -169,6 +169,7 @@ NeoBundle 'mbbill/undotree'
 NeoBundle 'rking/ag.vim'
 NeoBundle 'editorconfig/editorconfig-vim'
 NeoBundle 'derekwyatt/vim-scala'
+NeoBundle 'lukaszkorecki/workflowish'
 
 if has("persistent_undo")
     silent !mkdir -p ~/.vim/undodir > /dev/null 2>&1

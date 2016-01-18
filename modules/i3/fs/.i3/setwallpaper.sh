@@ -9,4 +9,4 @@
 #feh --bg-scale ~/Dropbox/pictures/Wallpapers/1336934750320.jpg
 #feh --bg-scale ~/Dropbox/pictures/Wallpapers/eaFVdPu.jpg
 #feh --bg-scale ~/Dropbox/pictures/Wallpapers/music/agalloch.jpg
-feh --bg-scale ~/Dropbox/pictures/Wallpapers/wallpaper-1451432.jpg
+feh --bg-scale ~/Dropbox/Pictures/Wallpapers/wallpaper-1451432.jpg

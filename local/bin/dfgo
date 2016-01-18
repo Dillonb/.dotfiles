@@ -1,0 +1,8 @@
+#!/usr/bin/env python3
+import sys
+import webbrowser
+
+WIKI_BASE = "http://dwarffortresswiki.org/index.php"
+CURRENT_VERSION = "DF2014"
+
+webbrowser.open_new_tab(WIKI_BASE + "/" + CURRENT_VERSION + ":" +  ("_".join(sys.argv[1:])))
