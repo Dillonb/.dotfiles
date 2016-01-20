@@ -27,7 +27,8 @@ set cursorline
 "No word wrap
 set nowrap
 "Always show tab line
-set showtabline=2
+" set showtabline=1
+set showtabline=0
 
 set tabstop=4
 set shiftwidth=4
@@ -41,7 +42,7 @@ exec "set listchars=tab:>~,nbsp:_,trail:\uB7"
 set list
 
 "When multiple files are opened, open them all in tabs.
-tab all
+"tab all
 
 
 "Aliases
@@ -237,7 +238,7 @@ endif
 " clock
 let g:airline_section_b = '%{strftime("%c")}'
 " use powerline fonts
-let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 0
 " smarter tab line
 let g:airline#extensions#tabline#enabled = 1
 
