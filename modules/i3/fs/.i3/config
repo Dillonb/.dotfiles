@@ -168,77 +168,54 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+set $base00 #2d2d2d
+set $base01 #393939
+set $base02 #515151
+set $base03 #747369
+set $base04 #a09f93
+set $base05 #d3d0c8
+set $base06 #e8e6df
+set $base07 #f2f0ec
+set $base08 #f2777a
+set $base09 #f99157
+set $base0A #ffcc66
+set $base0B #99cc99
+set $base0C #66cccc
+set $base0D #6699cc
+set $base0E #cc99cc
+set $base0F #d27b53
+
+client.focused $base0D $base0D $base00 $base01
+client.focused_inactive $base02 $base02 $base03 $base01
+client.unfocused $base01 $base01 $base03 $base01
+client.urgent $base02 $base08 $base07 $base08
+
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
   status_command i3blocks
         tray_output primary
+        separator_symbol "|"
         #font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
         #font pango:DejaVu Sans Mono 6
         #font xft:Noto Emoji 5
         font pango:Terminus 5
-  colors {
-        background #232323
-        statusline #DCDCDC
-
-    #separator #dc322f
-    #background #002b36
-    #statusline #268bd2
-    #focused_workspace #fdf6e3 #4D4D4D #fdf6e3
-    #active_workspace #fdf6e3 #6c71c4 #fdf6e3
-    #inactive_workspace #586e75 #93a1a1 #002b36
-    #urgent_workspace #d33682 #d33682 #fdf6e3
-  }
+        colors {
+        separator $base03
+        background $base01
+        statusline $base05
+        focused_workspace $base0C $base0D $base00
+        active_workspace $base02 $base02 $base07
+        inactive_workspace $base01 $base01 $base03
+        urgent_workspace $base08 $base08 $base07
+        }
 }
-
-set $mode_gaps Gaps: (o) outer, (i) inner
-set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
-set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
-bindsym $mod+Shift+g mode "$mode_gaps"
-
-mode "$mode_gaps" {
-    bindsym o      mode "$mode_gaps_outer"
-        bindsym i      mode "$mode_gaps_inner"
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-
-mode "$mode_gaps_inner" {
-    bindsym plus  gaps inner current plus 5
-        bindsym minus gaps inner current minus 5
-        bindsym 0     gaps inner current set 0
-
-        bindsym Shift+plus  gaps inner all plus 5
-        bindsym Shift+minus gaps inner all minus 5
-        bindsym Shift+0     gaps inner all set 0
-
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-mode "$mode_gaps_outer" {
-    bindsym plus  gaps outer current plus 5
-        bindsym minus gaps outer current minus 5
-        bindsym 0     gaps outer current set 0
-
-        bindsym Shift+plus  gaps outer all plus 5
-        bindsym Shift+minus gaps outer all minus 5
-        bindsym Shift+0     gaps outer all set 0
-
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-
-
 
 # disable window border
 # new_window none
 
 bindsym $mod+Shift+b [class="^.*"] border toggle
-
-client.focused #353D00 #353D00 #fdf6e3 #353D00
-client.focused_inactive #073642 #073642 #eee8d5 #6c71c4
-client.unfocused #073642 #073642 #93a1a1 #586e75
-client.urgent #d33682 #d33682 #fdf6e3 #dc322f
 
 for_window [window_role="pop-up" class="Google-chrome-stable"] floating enable # Float chrome popups
 for_window [class="XMathematica"] floating enable # Float mathematica
