@@ -62,7 +62,7 @@ else
             set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h12
         " Linux
         else
-            set guifont=DejaVu\ Sans\ Mono\ 11
+            set guifont=DejaVu\ Sans\ Mono\ 14
         endif
     " Not Windows and not Unix. wut
     else
@@ -137,7 +137,7 @@ NeoBundle 'scrooloose/syntastic'
 "NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'scrooloose/nerdcommenter'
-NeoBundle 'flazz/vim-colorschemes'
+"NeoBundle 'flazz/vim-colorschemes'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'Shougo/vimproc.vim', {
             \ 'build' : {
@@ -171,6 +171,16 @@ NeoBundle 'rking/ag.vim'
 NeoBundle 'editorconfig/editorconfig-vim'
 NeoBundle 'derekwyatt/vim-scala'
 NeoBundle 'lukaszkorecki/workflowish'
+
+NeoBundle 'toyamarinyon/vim-swift'
+
+" Clojure Stuff
+NeoBundle 'tpope/vim-classpath'
+NeoBundle 'tpope/vim-fireplace'
+NeoBundle 'tpope/vim-salve'
+NeoBundle 'kien/rainbow_parentheses.vim'
+NeoBundle 'guns/vim-clojure-static'
+NeoBundle 'guns/vim-clojure-highlight'
 
 if has("persistent_undo")
     silent !mkdir -p ~/.vim/undodir > /dev/null 2>&1
@@ -218,7 +228,7 @@ syntax enable
 set background=dark
 "colorscheme solarized
 if has('gui_running')
-    colorscheme molokai
+    "colorscheme molokai
     set guioptions-=T  "remove toolbar
     set guioptions-=m  "remove menus
     set guioptions-=r  "remove right-hand scroll bar
@@ -230,7 +240,7 @@ if has('gui_running')
     "source $VIMRUNTIME/mswin.vim
     "behave mswin
 else
-    colorscheme mopkai
+    "colorscheme mopkai
 endif
 
 " Airline configuration
@@ -397,3 +407,9 @@ filetype plugin on
 "noremap   <Down>   <NOP>
 "noremap   <Left>   <NOP>
 "noremap   <Right>  <NOP>
+"
+
+autocmd VimEnter *       RainbowParenthesesToggle
+autocmd Syntax   clojure RainbowParenthesesLoadRound
+autocmd Syntax   clojure RainbowParenthesesLoadSquare
+autocmd Syntax   clojure RainbowParenthesesLoadBraces

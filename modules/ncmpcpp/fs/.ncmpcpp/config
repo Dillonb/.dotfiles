@@ -509,3 +509,11 @@ store_lyrics_in_song_dir = yes
 #
 #active_window_border = red
 #
+progressbar_look ─━┄
+autocenter_mode = "yes"
+header_visibility = "no"
+
+
+song_list_format = "{$3%a %t$9}|{%f} $R{%b} %l"
+
+main_window_color = "white"
