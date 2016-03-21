@@ -17,7 +17,6 @@ exec dunst
 exec pulseaudio --start
 exec pasystray
 exec caffeine
-exec ~/Documents/programs/btsync/btsync
 #exec compton --config ~/.dotfiles/compton.conf -b
 
 exec ~/.i3/setwallpaper.sh
