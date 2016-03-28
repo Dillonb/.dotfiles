@@ -1,6 +1,7 @@
 [options]
 font = Droid Sans Mono 10
 clickable_url = true
+browser = google-chrome-stable
 
 [colors]
 # Base16 Atelier Forest
