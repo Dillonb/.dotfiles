@@ -29,22 +29,20 @@
 
 ;;; Code:
 
-(setq mpd-packages '(
-                     libmpdee
-                     ))
+(setq mpd-packages '(libmpdee))
 
 (defun mpd/init-libmpdee()
   (use-package libmpdee
     :defer t
     :init
     (progn
-      (spacemacs/declare-prefix "M" "mpd")
+      (spacemacs/declare-prefix "am" "mpd")
 
       )
     (spacemacs/set-leader-keys
-      "Mp" 'mpd-pause
-      "Mn" 'mpd-next
-      "MN" 'mpd-prev
+      "amp" 'mpd-pause
+      "amn" 'mpd-next
+      "amN" 'mpd-prev
       )
     ))
 
