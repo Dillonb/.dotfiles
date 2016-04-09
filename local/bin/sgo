@@ -14,6 +14,7 @@ if [[ "$1" != "" ]]; then
         THEHOSTS=$(grep $1 ~/.dotfiles/local/data/hosts.txt | cut -f1 -d"#")
         select nhost in $THEHOSTS; do
             if [ -n "$nhost" ]; then
+                TERM=xterm
                 ssh $nhost
             fi
             break

@@ -32,7 +32,7 @@
 #
 ## Needed for tag editor and file operations to work.
 ##
-mpd_music_dir = ~/Music
+mpd_music_dir = /home/dillon/Dropbox/Music
 #
 #mpd_crossfade_time = 5
 #
@@ -509,3 +509,11 @@ store_lyrics_in_song_dir = yes
 #
 #active_window_border = red
 #
+progressbar_look ─━┄
+autocenter_mode = "yes"
+header_visibility = "no"
+
+
+song_list_format = "{$3%a %t$9}|{%f} $R{%b} %l"
+
+main_window_color = "white"
