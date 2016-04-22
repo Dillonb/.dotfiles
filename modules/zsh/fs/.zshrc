@@ -58,8 +58,4 @@ export JAVA_HOME
 export EDITOR="vim"
 #fortune
 #
-if [[ `uname -o` == "Cygwin" ]]; then
-    source ~/.dotfiles/mintty-colors-solarized/sol.dark
-fi
-
 source ~/.zshrc_local
