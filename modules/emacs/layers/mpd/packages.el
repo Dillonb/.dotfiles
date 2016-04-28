@@ -37,7 +37,6 @@
     :init
     (progn
       (spacemacs/declare-prefix "am" "mpd")
-
       )
     (spacemacs/set-leader-keys
       "amp" 'mpd-pause

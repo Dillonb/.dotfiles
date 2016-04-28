@@ -1,0 +1,8 @@
+[Unit]
+Description=Caffeine
+
+[Service]
+ExecStart=/usr/bin/caffeine
+
+[Install]
+WantedBy=default.target

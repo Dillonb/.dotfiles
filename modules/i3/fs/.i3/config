@@ -10,15 +10,7 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 exec dropbox
-exec kmix
-exec nm-applet
-exec xflux -z 05403
-exec dunst
-exec pulseaudio --start
-exec pasystray
-exec caffeine
 exec xrandr --output LVDS-0 --primary
-#exec compton --config ~/.dotfiles/compton.conf -b
 
 exec ~/.i3/setwallpaper.sh
 
