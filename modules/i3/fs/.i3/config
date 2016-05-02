@@ -12,7 +12,7 @@
 exec dropbox
 exec xrandr --output LVDS-0 --primary
 
-exec ~/.i3/setwallpaper.sh
+exec ~/.dotfiles/local/bin/setwallpaper
 
 set $mod Mod4
 set $alt Mod1
