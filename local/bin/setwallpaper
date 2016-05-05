@@ -1,0 +1,17 @@
+#!/bin/bash
+
+CONFIG_LOCATION=~/.dotfiles/local/config/wallpaper
+
+if [ -s $CONFIG_LOCATION ]; then
+    source $CONFIG_LOCATION
+else
+    echo '#!/bin/bash
+WALLPAPER="/path/to/wallpaper"' > $CONFIG_LOCATION
+    source $CONFIG_LOCATION
+fi
+
+if [ -s "$WALLPAPER" ]; then
+    feh --bg-scale "$WALLPAPER"
+else
+    echo "Please set your wallpaper in $CONFIG_LOCATION."
+fi

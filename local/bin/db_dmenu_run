@@ -1,7 +1,11 @@
 #!/bin/bash
 
-if [[ -x /usr/bin/yegonesh ]]; then
-    yegonesh
+if [[ -x /usr/bin/rofi ]]; then
+    rofi -show drun
 else
-    dmenu_run
+    if [[ -x /usr/bin/yegonesh ]]; then
+        yegonesh
+    else
+        dmenu_run
+    fi
 fi
