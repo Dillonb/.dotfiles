@@ -1,4 +1,12 @@
 #!/bin/bash
+CONFIG_LOCATION=./local/config/modules
+if [[ -f ./local/config/modules ]]; then
+    source $CONFIG_LOCATION
+else
+    echo '#!/bin/bash
+    MODULES=()' > $CONFIG_LOCATION
+    echo "Please configure modules in $CONFIG_LOCATION"
+fi
 
 # Silent pushd and popd
 pushd () {
@@ -11,7 +19,7 @@ popd () {
 
 # Module
 pushd modules
-for f in *; do
+for f in $MODULES; do
     if [[ -d $f ]]; then
         pushd $f
             echo $f
