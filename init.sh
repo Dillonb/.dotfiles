@@ -19,10 +19,10 @@ popd () {
 
 # Module
 pushd modules
-for f in $MODULES; do
+for f in "${MODULES[@]}"; do
     if [[ -d $f ]]; then
         pushd $f
-            echo $f
+            echo Installing module: $f
             # run pre script, if it exists and is executable
             if [[ -x pre.sh ]]; then
                 ./pre.sh
@@ -34,7 +34,7 @@ for f in $MODULES; do
                     if [[ -d fs/$file ]]; then
                         mkdir -p ~/$file
                     else
-                        ln -sf $(pwd)/fs/$file $HOME/$file
+                        ln -sfv $(pwd)/fs/$file $HOME/$file
                     fi
                 done
 
@@ -44,6 +44,8 @@ for f in $MODULES; do
                 ./post.sh
             fi
         popd
+    else
+        echo "WARNING: module $f specified, but directory not found."
     fi
 done
 popd
