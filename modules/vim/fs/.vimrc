@@ -20,6 +20,7 @@ set number "Line numbers
 set mouse=a "Mouse usage in all modes
 
 let mapleader=","
+let localleader="\\"
 set showcmd
 
 set cursorline
@@ -138,7 +139,7 @@ NeoBundle 'scrooloose/syntastic'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'scrooloose/nerdcommenter'
 "NeoBundle 'flazz/vim-colorschemes'
-NeoBundle 'airblade/vim-gitgutter'
+"NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'Shougo/vimproc.vim', {
             \ 'build' : {
             \     'windows' : 'tools\\update-dll-mingw',
@@ -150,37 +151,42 @@ NeoBundle 'Shougo/vimproc.vim', {
             \ }
 "NeoBundle 'Shougo/unite.vim'
 NeoBundle 'kien/ctrlp.vim'
-NeoBundle 'tpope/vim-fugitive'
+"NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'bling/vim-airline'
 "NeoBundle 'mhinz/vim-startify'
 NeoBundle 'othree/html5.vim'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-repeat'
 NeoBundle 'hail2u/vim-css3-syntax'
-NeoBundle 'justinmk/vim-sneak'
-NeoBundle 'christoomey/vim-tmux-navigator'
-NeoBundle 'tpope/vim-haml'
-NeoBundle 'jceb/vim-orgmode'
+"NeoBundle 'justinmk/vim-sneak'
+"NeoBundle 'christoomey/vim-tmux-navigator'
+"NeoBundle 'tpope/vim-haml'
+"NeoBundle 'jceb/vim-orgmode'
 NeoBundle 'Yggdroot/indentLine'
 NeoBundle 'pangloss/vim-javascript'
-NeoBundle 'othree/javascript-libraries-syntax.vim'
-NeoBundle 'claco/jasmine.vim'
-NeoBundle 'burnettk/vim-angular'
-NeoBundle 'mbbill/undotree'
-NeoBundle 'rking/ag.vim'
+"NeoBundle 'othree/javascript-libraries-syntax.vim'
+"NeoBundle 'claco/jasmine.vim'
+"NeoBundle 'burnettk/vim-angular'
+"NeoBundle 'mbbill/undotree'
+"NeoBundle 'rking/ag.vim'
 NeoBundle 'editorconfig/editorconfig-vim'
-NeoBundle 'derekwyatt/vim-scala'
-NeoBundle 'lukaszkorecki/workflowish'
+"NeoBundle 'derekwyatt/vim-scala'
+"NeoBundle 'lukaszkorecki/workflowish'
 
-NeoBundle 'toyamarinyon/vim-swift'
+"NeoBundle 'toyamarinyon/vim-swift'
 
 " Clojure Stuff
-NeoBundle 'tpope/vim-classpath'
-NeoBundle 'tpope/vim-fireplace'
-NeoBundle 'tpope/vim-salve'
-NeoBundle 'kien/rainbow_parentheses.vim'
-NeoBundle 'guns/vim-clojure-static'
-NeoBundle 'guns/vim-clojure-highlight'
+"NeoBundle 'tpope/vim-classpath'
+"NeoBundle 'tpope/vim-fireplace'
+"NeoBundle 'tpope/vim-salve'
+"NeoBundle 'kien/rainbow_parentheses.vim'
+"NeoBundle 'guns/vim-clojure-static'
+"NeoBundle 'guns/vim-clojure-highlight'
+
+"autocmd VimEnter *       RainbowParenthesesToggle
+"autocmd Syntax   clojure RainbowParenthesesLoadRound
+"autocmd Syntax   clojure RainbowParenthesesLoadSquare
+"autocmd Syntax   clojure RainbowParenthesesLoadBraces
 
 if has("persistent_undo")
     silent !mkdir -p ~/.vim/undodir > /dev/null 2>&1
@@ -191,7 +197,7 @@ if has("persistent_undo")
 endif
 
 if !empty($GOPATH)
-    NeoBundle 'fatih/vim-go'
+    "NeoBundle 'fatih/vim-go'
 endif
 NeoBundle 'gregsexton/MatchTag'
 
@@ -208,7 +214,7 @@ NeoBundle 'mattn/emmet-vim'
 "vim-scripts
 NeoBundle 'L9'
 NeoBundle 'FuzzyFinder'
-NeoBundle 'django.vim'
+" NeoBundle 'django.vim'
 
 let g:tex_flavor='latex'
 
@@ -409,7 +415,3 @@ filetype plugin on
 "noremap   <Right>  <NOP>
 "
 
-autocmd VimEnter *       RainbowParenthesesToggle
-autocmd Syntax   clojure RainbowParenthesesLoadRound
-autocmd Syntax   clojure RainbowParenthesesLoadSquare
-autocmd Syntax   clojure RainbowParenthesesLoadBraces
