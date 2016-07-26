@@ -50,6 +50,8 @@ values."
      javascript
      python
      clojure
+     dockerfile
+     yaml
 
      ;; Frameworks
      django
