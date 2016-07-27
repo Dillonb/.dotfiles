@@ -1,6 +1,5 @@
 dbelivea@zoo.uvm.edu#zoo uvm dbzoo
-webmster@zoo.uvm.edu#webmsterzoo webzoo wzoo
 dillon@dillonbeliveau.com#db dbcom dwh kimsufi
 dbelivea@w3.uvm.edu#silk w3 dbsilk dbw3
-helpline@w3.uvm.edu#hlsilk hlw3 helplinesilk helplinew3
 localhost#local localhost
+dillon@neckbeardnexus.1337.cx#homeserver
