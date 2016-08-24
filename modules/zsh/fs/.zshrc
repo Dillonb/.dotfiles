@@ -7,22 +7,6 @@ ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 ZSH_THEME="robbyrussell"
 
-# aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-alias root="sudo -Es"
-alias web="sudo -Esu www-data"
-alias lsla="ls -la"
-alias lah="ls -lah"
-alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-alias gco="git checkout"
-alias kuvm="kinit dbelivea@uvm.edu"
-alias kwebmster="kinit webmster@uvm.edu"
-alias fucking="sudo"
-alias please="sudo !!"
-alias please='\sudo $(fc -ln -1)'
-alias nload="nload -u H"
-
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
@@ -57,6 +41,12 @@ export PATH
 #JAVA_HOME=/opt/java
 export JAVA_HOME
 export EDITOR="vim"
-#fortune
-#
+
+# aliases
+alias root="sudo -Es"
+alias lah="ls -lah"
+alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias please='\sudo $(fc -ln -1)'
+alias nload="nload -u H"
+
 source ~/.zshrc_local
