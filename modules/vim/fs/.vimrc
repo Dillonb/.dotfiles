@@ -135,10 +135,10 @@ NeoBundle 'tpope/vim-sensible'
 NeoBundle 'majutsushi/tagbar'
 
 NeoBundle 'scrooloose/syntastic'
-"NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle 'scrooloose/nerdtree'
+""NeoBundle 'altercation/vim-colors-solarized'
+"NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'scrooloose/nerdcommenter'
-"NeoBundle 'flazz/vim-colorschemes'
+NeoBundle 'flazz/vim-colorschemes'
 "NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'Shougo/vimproc.vim', {
             \ 'build' : {
@@ -157,13 +157,13 @@ NeoBundle 'bling/vim-airline'
 NeoBundle 'othree/html5.vim'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-repeat'
-NeoBundle 'hail2u/vim-css3-syntax'
+"NeoBundle 'hail2u/vim-css3-syntax'
 "NeoBundle 'justinmk/vim-sneak'
 "NeoBundle 'christoomey/vim-tmux-navigator'
 "NeoBundle 'tpope/vim-haml'
 "NeoBundle 'jceb/vim-orgmode'
 NeoBundle 'Yggdroot/indentLine'
-NeoBundle 'pangloss/vim-javascript'
+"NeoBundle 'pangloss/vim-javascript'
 "NeoBundle 'othree/javascript-libraries-syntax.vim'
 "NeoBundle 'claco/jasmine.vim'
 "NeoBundle 'burnettk/vim-angular'
@@ -246,7 +246,7 @@ if has('gui_running')
     "source $VIMRUNTIME/mswin.vim
     "behave mswin
 else
-    "colorscheme mopkai
+    colorscheme mopkai
 endif
 
 " Airline configuration
