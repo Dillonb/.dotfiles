@@ -3,3 +3,4 @@ dillon@dillonbeliveau.com#db dbcom dwh kimsufi
 dbelivea@w3.uvm.edu#silk w3 dbsilk dbw3
 localhost#local localhost
 dillon@neckbeardnexus.1337.cx#homeserver
+dbelivea@kaladin.cems.uvm.edu#kaladin os 201
