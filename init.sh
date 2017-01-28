@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 CONFIG_LOCATION=./local/config/modules
 if [[ -f ./local/config/modules ]]; then
     source $CONFIG_LOCATION

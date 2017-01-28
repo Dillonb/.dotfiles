@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 if [[ -d ~/.oh-my-zsh ]]; then
     echo Oh-My-Zsh already installed, ignoring...

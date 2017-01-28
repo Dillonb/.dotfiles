@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 if [[ -d ~/.emacs.d ]]; then
     echo Spacemacs already installed, updating...
