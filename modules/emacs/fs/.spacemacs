@@ -42,6 +42,7 @@ values."
      shell-scripts
      html
      scala
+     haskell
      emacs-lisp
      markdown
      java
