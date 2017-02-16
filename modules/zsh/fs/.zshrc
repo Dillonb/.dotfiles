@@ -50,6 +50,10 @@ alias please='\sudo $(fc -ln -1)'
 alias nload="nload -u H"
 alias quickvim="vim -u ~/.quickvimrc"
 
+function grephistory {
+    git grep $1 $(git rev-list --all)
+}
+
 source ~/.zshrc_local
 
 export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
