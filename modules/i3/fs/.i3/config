@@ -17,8 +17,8 @@ exec ~/.dotfiles/local/bin/setwallpaper
 set $mod Mod4
 set $alt Mod1
 
-bindsym XF86AudioRaiseVolume exec pamixer -i 5
-bindsym XF86AudioLowerVolume exec pamixer -d 5
+bindsym XF86AudioRaiseVolume exec amixer sset Master 5%+
+bindsym XF86AudioLowerVolume exec amixer sset Master 5%-
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 bindsym XF86Launch1 exec lock
@@ -27,7 +27,7 @@ bindsym XF86Launch1 exec lock
 # is used in the bar {} block below.
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:Terminus 5
+font pango:Droid Sans Mono 5
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # The font above is very space-efficient, that is, it looks good, sharp and
@@ -191,9 +191,9 @@ bar {
         tray_output primary
         separator_symbol "|"
         #font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-        #font pango:DejaVu Sans Mono 6
-        #font xft:Noto Emoji 5
-        font pango:Terminus 5
+        font xft:Droid Sans Mono 10
+        font xft:Noto Emoji 5
+        #font pango:Terminus 5
         colors {
         separator $base03
         background $base01
