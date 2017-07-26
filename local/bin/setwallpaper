@@ -5,7 +5,7 @@ CONFIG_LOCATION=~/.dotfiles/local/config/wallpaper
 if [ -s $CONFIG_LOCATION ]; then
     source $CONFIG_LOCATION
 else
-    echo '#!/bin/bash
+    echo '#!/usr/bin/env bash
 WALLPAPER="/path/to/wallpaper"' > $CONFIG_LOCATION
     source $CONFIG_LOCATION
 fi
