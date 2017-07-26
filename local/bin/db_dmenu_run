@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-if [[ -x /usr/bin/rofi ]]; then
+if [[ -x `which rofi` ]]; then
     rofi -show drun
 else
-    if [[ -x /usr/bin/yegonesh ]]; then
+    if [[ -x `which yegonesh` ]]; then
         yegonesh
     else
         dmenu_run
