@@ -212,3 +212,5 @@ bindsym $mod+Shift+b [class="^.*"] border toggle
 
 # for_window [window_role="pop-up" class="Google-chrome-stable"] floating enable # Float chrome popups
 # for_window [class="XMathematica"] floating enable # Float mathematica
+#
+exec nm-applet
