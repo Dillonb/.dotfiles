@@ -1,7 +1,0 @@
-[user]
-	email = dillonbeliveau@gmail.com
-	name = Dillon Beliveau
-[push]
-	default = simple
-[core]
-	whitespace = warn
