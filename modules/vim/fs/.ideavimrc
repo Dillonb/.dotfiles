@@ -1,3 +1,5 @@
 set surround
+set ignorecase                  " Case insensitive search
+set smartcase                   " Case sensitive when uc present
 set clipboard+=unnamed
 source ~/.vimrc
