@@ -51,7 +51,7 @@ alias nload="nload -u H"
 alias quickvim="vim -u ~/.quickvimrc"
 
 function grephistory {
-    git grep $1 $(git rev-list --all)
+    git rev-list --all | xargs git grep $1
 }
 
 source ~/.zshrc_local
