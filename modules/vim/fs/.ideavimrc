@@ -1,5 +1,11 @@
 set surround
 set ignorecase                  " Case insensitive search
 set smartcase                   " Case sensitive when uc present
-set clipboard+=unnamed
+set clipboard+=unnamed          " Use system clipboard by default
 source ~/.vimrc
+
+
+let mapleader = " "
+map <leader>rr :action Rerun<CR>
+map <leader>rn :action RenameElement<CR>
+map <leader>tt :action ActivateTerminalToolWindow<CR>
