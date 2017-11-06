@@ -169,7 +169,7 @@ NeoBundle 'Yggdroot/indentLine'
 "NeoBundle 'burnettk/vim-angular'
 "NeoBundle 'mbbill/undotree'
 "NeoBundle 'rking/ag.vim'
-NeoBundle 'editorconfig/editorconfig-vim'
+"NeoBundle 'editorconfig/editorconfig-vim'
 "NeoBundle 'derekwyatt/vim-scala'
 "NeoBundle 'lukaszkorecki/workflowish'
 
