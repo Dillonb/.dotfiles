@@ -132,10 +132,10 @@ endif
 "Github
 NeoBundle 'tpope/vim-sensible'
 
-NeoBundle 'majutsushi/tagbar'
+"NeoBundle 'majutsushi/tagbar'
 
-NeoBundle 'scrooloose/syntastic'
-""NeoBundle 'altercation/vim-colors-solarized'
+"NeoBundle 'scrooloose/syntastic'
+"NeoBundle 'altercation/vim-colors-solarized'
 "NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'flazz/vim-colorschemes'
@@ -154,7 +154,7 @@ NeoBundle 'kien/ctrlp.vim'
 "NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'bling/vim-airline'
 "NeoBundle 'mhinz/vim-startify'
-NeoBundle 'othree/html5.vim'
+"NeoBundle 'othree/html5.vim'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-repeat'
 "NeoBundle 'hail2u/vim-css3-syntax'
@@ -162,7 +162,8 @@ NeoBundle 'tpope/vim-repeat'
 "NeoBundle 'christoomey/vim-tmux-navigator'
 "NeoBundle 'tpope/vim-haml'
 "NeoBundle 'jceb/vim-orgmode'
-NeoBundle 'Yggdroot/indentLine'
+"NeoBundle 'Yggdroot/indentLine'
+"let g:indentLine_setConceal = 0
 "NeoBundle 'pangloss/vim-javascript'
 "NeoBundle 'othree/javascript-libraries-syntax.vim'
 "NeoBundle 'claco/jasmine.vim'
@@ -199,7 +200,7 @@ endif
 if !empty($GOPATH)
     "NeoBundle 'fatih/vim-go'
 endif
-NeoBundle 'gregsexton/MatchTag'
+"NeoBundle 'gregsexton/MatchTag'
 
 "NeoBundle 'git://drupalcode.org/project/vimrc.git', {'rtp': 'bundle/vim-plugin-for-drupal/'}
 
@@ -213,8 +214,8 @@ NeoBundle 'mattn/emmet-vim'
 
 "vim-scripts
 NeoBundle 'L9'
-NeoBundle 'FuzzyFinder'
-" NeoBundle 'django.vim'
+"NeoBundle 'FuzzyFinder'
+"NeoBundle 'django.vim'
 
 let g:tex_flavor='latex'
 
