@@ -46,7 +46,7 @@ export EDITOR="vim"
 alias root="sudo -Es"
 alias lah="ls -lah"
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen %cD (%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-alias gbr="git for-each-ref --sort=-committerdate refs/remotes/origin/ | head"
+alias glbr="git for-each-ref --sort=-committerdate refs/remotes/origin/ | head"
 alias please='\sudo $(fc -ln -1)'
 alias nload="nload -u H"
 alias quickvim="vim -u ~/.quickvimrc"
