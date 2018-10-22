@@ -131,6 +131,7 @@ endif
 
 "Github
 NeoBundle 'tpope/vim-sensible'
+NeoBundle 'w0rp/ale'
 
 "NeoBundle 'majutsushi/tagbar'
 
