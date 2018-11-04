@@ -19,6 +19,21 @@
   (package-install 'use-package))
 (require 'use-package)
 
+(use-package evil-leader
+  :ensure t
+  :init
+  (global-evil-leader-mode)
+  (evil-leader/set-leader "<SPC>"))
+
+(evil-leader/set-key
+  "b n" 'evil-next-buffer
+  "b b" 'helm-mini
+  "b N" 'evil-buffer-new)
+
+(evil-ex-define-cmd "q" 'kill-this-buffer)
+(evil-ex-define-cmd "quit" 'evil-quit)
+
+
 (use-package evil
   :ensure t
   :init (evil-mode t))
@@ -30,3 +45,21 @@
 (use-package monokai-theme
   :ensure t
   :init (load-theme 'monokai t))
+
+(use-package magit
+  :ensure t)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (magit evil-leader use-package monokai-theme helm evil))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
