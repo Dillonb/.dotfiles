@@ -56,6 +56,14 @@
   :ensure t
   :init (add-hook 'after-init-hook 'global-company-mode))
 
+(server-start)
+
+(setq c-default-style "k&r")
+(c-set-offset 'case-label '+)
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
+(setq indent-line-function 'insert-tab)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
