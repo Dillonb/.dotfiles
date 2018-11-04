@@ -52,6 +52,10 @@
 (use-package evil-magit
   :ensure t)
 
+(use-package company
+  :ensure t
+  :init (add-hook 'after-init-hook 'global-company-mode))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
