@@ -34,6 +34,8 @@
 (evil-ex-define-cmd "q" 'kill-this-buffer)
 (evil-ex-define-cmd "quit" 'evil-quit)
 
+(use-package terraform-mode
+  :ensure t)
 
 (use-package evil
   :ensure t
@@ -72,7 +74,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (evil-magit magit evil-leader use-package monokai-theme helm evil))))
+    (terraform-mode evil-magit magit evil-leader use-package monokai-theme helm evil))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
