@@ -28,7 +28,8 @@
 (evil-leader/set-key
   "b n" 'evil-next-buffer
   "b b" 'helm-mini
-  "b N" 'evil-buffer-new)
+  "b N" 'evil-buffer-new
+  "o"   'helm-browse-project)
 
 (evil-ex-define-cmd "q" 'kill-this-buffer)
 (evil-ex-define-cmd "quit" 'evil-quit)
