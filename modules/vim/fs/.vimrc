@@ -9,7 +9,6 @@
 "./install.sh
 "Additionally, eclim can be installed with these instructions:
 "http://eclim.org/install.html
-"Exuberant ctags (exuberant-ctags) required for tagbar.
 
 
 set encoding=utf-8
@@ -42,14 +41,7 @@ set modelines=5
 exec "set listchars=tab:>~,nbsp:_,trail:\uB7"
 set list
 
-"When multiple files are opened, open them all in tabs.
-"tab all
-
-
 "Aliases
-
-:command Jio JavaImportOrganize
-:command Of browse confirm e
 :command FormatJSON %!python -m json.tool
 
 " Windows
@@ -125,22 +117,13 @@ else
     endif
 endif
 
-if filereadable(expand("~/.tern_install"))
-    NeoBundle 'marijnh/tern_for_vim', { 'build': { 'mac': 'npm install', 'unix': 'npm install' } }
-endif
-
 "Github
 NeoBundle 'tpope/vim-sensible'
 NeoBundle 'w0rp/ale'
 
-"NeoBundle 'majutsushi/tagbar'
-
-"NeoBundle 'scrooloose/syntastic'
 "NeoBundle 'altercation/vim-colors-solarized'
-"NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'flazz/vim-colorschemes'
-"NeoBundle 'airblade/vim-gitgutter'
 "NeoBundle 'Shougo/vimproc.vim', {
 "            \ 'build' : {
 "            \     'windows' : 'tools\\update-dll-mingw',
@@ -150,45 +133,10 @@ NeoBundle 'flazz/vim-colorschemes'
 "            \     'unix' : 'gmake',
 "            \    },
 "            \ }
-"NeoBundle 'Shougo/unite.vim'
 NeoBundle 'kien/ctrlp.vim'
-"NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'bling/vim-airline'
-"NeoBundle 'mhinz/vim-startify'
-"NeoBundle 'othree/html5.vim'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-repeat'
-"NeoBundle 'hail2u/vim-css3-syntax'
-"NeoBundle 'justinmk/vim-sneak'
-"NeoBundle 'christoomey/vim-tmux-navigator'
-"NeoBundle 'tpope/vim-haml'
-"NeoBundle 'jceb/vim-orgmode'
-"NeoBundle 'Yggdroot/indentLine'
-"let g:indentLine_setConceal = 0
-"NeoBundle 'pangloss/vim-javascript'
-"NeoBundle 'othree/javascript-libraries-syntax.vim'
-"NeoBundle 'claco/jasmine.vim'
-"NeoBundle 'burnettk/vim-angular'
-"NeoBundle 'mbbill/undotree'
-"NeoBundle 'rking/ag.vim'
-"NeoBundle 'editorconfig/editorconfig-vim'
-"NeoBundle 'derekwyatt/vim-scala'
-"NeoBundle 'lukaszkorecki/workflowish'
-
-"NeoBundle 'toyamarinyon/vim-swift'
-
-" Clojure Stuff
-"NeoBundle 'tpope/vim-classpath'
-"NeoBundle 'tpope/vim-fireplace'
-"NeoBundle 'tpope/vim-salve'
-"NeoBundle 'kien/rainbow_parentheses.vim'
-"NeoBundle 'guns/vim-clojure-static'
-"NeoBundle 'guns/vim-clojure-highlight'
-
-"autocmd VimEnter *       RainbowParenthesesToggle
-"autocmd Syntax   clojure RainbowParenthesesLoadRound
-"autocmd Syntax   clojure RainbowParenthesesLoadSquare
-"autocmd Syntax   clojure RainbowParenthesesLoadBraces
 
 if has("persistent_undo")
     silent !mkdir -p ~/.vim/undodir > /dev/null 2>&1
@@ -201,9 +149,6 @@ endif
 if !empty($GOPATH)
     "NeoBundle 'fatih/vim-go'
 endif
-"NeoBundle 'gregsexton/MatchTag'
-
-"NeoBundle 'git://drupalcode.org/project/vimrc.git', {'rtp': 'bundle/vim-plugin-for-drupal/'}
 
 
 if v:version < 703
@@ -215,8 +160,6 @@ NeoBundle 'mattn/emmet-vim'
 
 "vim-scripts
 NeoBundle 'L9'
-"NeoBundle 'FuzzyFinder'
-"NeoBundle 'django.vim'
 
 let g:tex_flavor='latex'
 
@@ -248,7 +191,7 @@ if has('gui_running')
     "source $VIMRUNTIME/mswin.vim
     "behave mswin
 else
-    colorscheme mopkai
+    colorscheme elflord
 endif
 
 " Airline configuration
@@ -264,108 +207,10 @@ let g:airline#extensions#tabline#enabled = 1
 " Ignore certain directories (comma separated list)
 set wildignore+=*/node_modules/*,*/bower_components/*,*.class,*.o
 
-
-" ex command for toggling hex mode - define mapping if desired
-command -bar Hexmode call ToggleHex()
-
-" helper function to toggle hex mode
-function ToggleHex()
-  " hex mode should be considered a read-only operation
-  " save values for modified and read-only for restoration later,
-  " and clear the read-only flag for now
-  let l:modified=&mod
-  let l:oldreadonly=&readonly
-  let &readonly=0
-  let l:oldmodifiable=&modifiable
-  let &modifiable=1
-  if !exists("b:editHex") || !b:editHex
-    " save old options
-    let b:oldft=&ft
-    let b:oldbin=&bin
-    " set new options
-    setlocal binary " make sure it overrides any textwidth, etc.
-    silent :e " this will reload the file without trickeries 
-              "(DOS line endings will be shown entirely )
-    let &ft="xxd"
-    " set status
-    let b:editHex=1
-    " switch to hex editor
-    %!xxd
-  else
-    " restore old options
-    let &ft=b:oldft
-    if !b:oldbin
-      setlocal nobinary
-    endif
-    " set status
-    let b:editHex=0
-    " return to normal editing
-    %!xxd -r
-  endif
-  " restore values for modified and read only state
-  let &mod=l:modified
-  let &readonly=l:oldreadonly
-  let &modifiable=l:oldmodifiable
-endfunction
-
 " Fix editing crontab on MacOS
 autocmd filetype crontab setlocal nobackup nowritebackup
 
-" autocmds to automatically enter hex mode and handle file writes properly
-if has("autocmd")
-  " vim -b : edit binary using xxd-format!
-  augroup Binary
-    au!
-
-    " set binary option for all binary files before reading them
-    au BufReadPre *.bin,*.hex setlocal binary
-
-    " if on a fresh read the buffer variable is already set, it's wrong
-    au BufReadPost *
-          \ if exists('b:editHex') && b:editHex |
-          \   let b:editHex = 0 |
-          \ endif
-
-    " convert to hex on startup for binary files automatically
-    au BufReadPost *
-          \ if &binary | Hexmode | endif
-
-    " When the text is freed, the next time the buffer is made active it will
-    " re-read the text and thus not match the correct mode, we will need to
-    " convert it again if the buffer is again loaded.
-    au BufUnload *
-          \ if getbufvar(expand("<afile>"), 'editHex') == 1 |
-          \   call setbufvar(expand("<afile>"), 'editHex', 0) |
-          \ endif
-
-    " before writing a file when editing in hex mode, convert back to non-hex
-    au BufWritePre *
-          \ if exists("b:editHex") && b:editHex && &binary |
-          \  let oldro=&ro | let &ro=0 |
-          \  let oldma=&ma | let &ma=1 |
-          \  silent exe "%!xxd -r" |
-          \  let &ma=oldma | let &ro=oldro |
-          \  unlet oldma | unlet oldro |
-          \ endif
-
-    " after writing a binary file, if we're in hex mode, restore hex mode
-    au BufWritePost *
-          \ if exists("b:editHex") && b:editHex && &binary |
-          \  let oldro=&ro | let &ro=0 |
-          \  let oldma=&ma | let &ma=1 |
-          \  silent exe "%!xxd" |
-          \  exe "set nomod" |
-          \  let &ma=oldma | let &ro=oldro |
-          \  unlet oldma | unlet oldro |
-          \ endif
-  augroup END
-endif
-
-
 "Key Bindings
-
-"Toggle tagbar (needs exuberant ctags)
-map <F8> :TagbarToggle<CR>
 
 "Pop up list of all files in current dir
 map <leader>o :CtrlP<CR>
@@ -391,32 +236,7 @@ map <leader>bd :Explore<CR>
 
 "Eclim binds
 
-"Add new imports, organize existing ones and remove unused.
-map <leader>ji :JavaImportOrganize<CR>
-"Run the program.
-map <leader>jr :Java<CR>
-"Run the current file
-map <leader>jcr :Java %<CR>
-"Open javadoc for the element under the cursor.
-map <leader>jd :JavaDocSearch<CR>
-
-map <leader>jf :FormatJSON<CR>
-
-
 "Re-load .vimrc
 map <leader>r :so $MYVIMRC<CR>
 
 filetype plugin on
-
-
-"" disable arrow keys to force me to learn hjkl
-"inoremap  <Up>     <NOP>
-"inoremap  <Down>   <NOP>
-"inoremap  <Left>   <NOP>
-"inoremap  <Right>  <NOP>
-"noremap   <Up>     <NOP>
-"noremap   <Down>   <NOP>
-"noremap   <Left>   <NOP>
-"noremap   <Right>  <NOP>
-"
-
