@@ -19,6 +19,13 @@
   (package-install 'use-package))
 (require 'use-package)
 
+(use-package helm
+  :ensure t
+  :bind (("M-x" . helm-M-x)))
+
+(use-package helm-ls-git
+  :ensure t)
+
 (use-package evil-leader
   :ensure t
   :init
@@ -28,19 +35,15 @@
 (evil-leader/set-key
   "b n" 'evil-next-buffer
   "b b" 'helm-mini
-  "b N" 'evil-buffer-new)
+  "b N" 'evil-buffer-new
+  "o" 'helm-browse-project)
 
 (evil-ex-define-cmd "q" 'kill-this-buffer)
 (evil-ex-define-cmd "quit" 'evil-quit)
 
-
 (use-package evil
   :ensure t
   :init (evil-mode t))
-
-(use-package helm
-  :ensure t
-  :bind (("M-x" . helm-M-x)))
 
 (use-package monokai-theme
   :ensure t
@@ -55,6 +58,14 @@
 (use-package company
   :ensure t
   :init (add-hook 'after-init-hook 'global-company-mode))
+
+(use-package company-jedi
+  :ensure t
+  :init
+  (defun my/python-mode-hook ()
+    (add-to-list 'company-backends 'company-jedi))
+  (add-hook 'python-mode-hook 'my/python-mode-hook))
+
 
 (server-start)
 
