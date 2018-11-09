@@ -1,9 +1,0 @@
-#!/bin/bash
-
-gcalcli agenda 12am 11:59pm \
-    --calendar dillonbeliveau@gmail.com \
-    --calendar Dillon\ Béliveau\'s\ Facebook\ Events \
-    --calendar University\ of\ Vermont \
-    --calendar uvm.cscrew@gmail.com \
-    --calendar Birthdays \
-    --calendar Weather
