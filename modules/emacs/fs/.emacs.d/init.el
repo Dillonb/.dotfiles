@@ -3,6 +3,8 @@
 (scroll-bar-mode -1) ; Hide scrollbar
 (global-linum-mode t) ; Line numbers
 
+(setq exec-path (append exec-path '("/usr/local/bin")))
+
 ; Add repos
 (require 'package)
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
@@ -48,9 +50,9 @@
   :ensure t
   :init (evil-mode t))
 
-(use-package monokai-theme
+(use-package base16-theme
   :ensure t
-  :init (load-theme 'monokai t))
+  :init (load-theme 'base16-eighties t))
 
 (use-package magit
   :ensure t)
@@ -85,7 +87,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (terraform-mode evil-magit magit evil-leader use-package monokai-theme helm evil))))
+    (base16-theme terraform-mode evil-magit magit evil-leader use-package monokai-theme helm evil))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
