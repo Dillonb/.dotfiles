@@ -57,6 +57,11 @@
 (use-package magit
   :ensure t)
 
+(use-package git-gutter
+  :ensure t
+  :init (global-git-gutter-mode t))
+
+
 (use-package evil-magit
   :ensure t)
 
@@ -87,7 +92,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (base16-theme terraform-mode evil-magit magit evil-leader use-package monokai-theme helm evil))))
+    (git-gutter base16-theme terraform-mode evil-magit magit evil-leader use-package monokai-theme helm evil))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
