@@ -50,6 +50,7 @@ alias glbr="git for-each-ref --sort=-committerdate refs/remotes/origin/ | head"
 alias please='\sudo $(fc -ln -1)'
 alias nload="nload -u H"
 alias quickvim="vim -u ~/.quickvimrc"
+alias sc="sudo systemctl"
 
 function grephistory {
     git rev-list --all | xargs git grep $1
