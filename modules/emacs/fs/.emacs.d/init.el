@@ -64,9 +64,10 @@
 (use-package magit
   :ensure t)
 
-(use-package git-gutter
-  :ensure t
-  :init (global-git-gutter-mode t))
+; This package was causing really weird bugs. Try to find an alternative sometime.
+;(use-package git-gutter
+;  :ensure t
+;  :init (global-git-gutter-mode t))
 
 
 (use-package evil-magit
