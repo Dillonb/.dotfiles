@@ -59,7 +59,7 @@
 
 (use-package base16-theme
   :ensure t
-  :init (load-theme 'base16-eighties t))
+  :init (load-theme 'base16-nord t))
 
 (use-package magit
   :ensure t)
