@@ -5,7 +5,7 @@ ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="tjkirch"
+ZSH_THEME="dgb"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -51,6 +51,14 @@ alias please='\sudo $(fc -ln -1)'
 alias nload="nload -u H"
 alias quickvim="vim -u ~/.quickvimrc"
 alias sc="sudo systemctl"
+alias mvnf="mvn -T 2C"
+alias mvnff="mvn -DskipTests -Dmaven.javadoc.skip=true -T 2C"
+alias tf="terraform"
+alias egrep="egrep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}"
+alias awsc="alks sessions console -N"
+
+export SPARK SPARK_LOCAL_IP="127.0.0.1"
+export MAVEN_OPTS="-Xms512m -Xmx1024m -XX:PermSize=768m -XX:MaxPermSize=4096m"
 
 function grephistory {
     git rev-list --all | xargs git grep $1
