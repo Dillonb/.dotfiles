@@ -61,6 +61,8 @@
   :ensure t
   :init (load-theme 'base16-nord t))
 
+(set-face-attribute 'default nil :height 140)
+
 (use-package magit
   :ensure t)
 
