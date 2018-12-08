@@ -14,6 +14,7 @@ else
     echo "Remote is NOT set correctly!"
     git remote rm origin
     git remote add origin git@github.com:Dillonb/oh-my-zsh.git
+    git remote add upstream git@github.com:robbyrussell/oh-my-zsh.git
     git fetch
     git branch --set-upstream-to=origin/master master
     git pull
