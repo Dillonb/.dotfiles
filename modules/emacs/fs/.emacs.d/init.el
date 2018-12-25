@@ -66,10 +66,9 @@
 (use-package magit
   :ensure t)
 
-; This package was causing really weird bugs. Try to find an alternative sometime.
-;(use-package git-gutter
-;  :ensure t
-;  :init (global-git-gutter-mode t))
+(use-package git-gutter+
+  :ensure t
+  :init (global-git-gutter+-mode))
 
 
 (use-package evil-magit
@@ -89,11 +88,12 @@
 
 (server-start)
 
-(setq c-default-style "k&r")
+(setq-default c-default-style "k&r")
+(setq-default c-basic-offset 4)
 (c-set-offset 'case-label '+)
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
-(setq indent-line-function 'insert-tab)
+(setq-default indent-line-function 'insert-tab)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -102,7 +102,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (markdown-mode git-gutter base16-theme terraform-mode evil-magit magit evil-leader use-package monokai-theme helm evil))))
+    (git-gutter+ markdown-mode git-gutter base16-theme terraform-mode evil-magit magit evil-leader use-package monokai-theme helm evil))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
