@@ -56,7 +56,7 @@ alias mvnff="mvn -DskipTests -Dmaven.javadoc.skip=true -T 2C"
 alias tf="terraform"
 alias egrep="egrep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}"
 alias awsc="alks sessions console -N"
-alias gbr="git branch --sort=-committerdate | head -n 10"
+alias gbr="git for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'"
 
 export SPARK SPARK_LOCAL_IP="127.0.0.1"
 export MAVEN_OPTS="-Xms512m -Xmx1024m -XX:PermSize=768m -XX:MaxPermSize=4096m"
