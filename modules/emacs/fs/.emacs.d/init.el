@@ -76,14 +76,26 @@
 
 (use-package company
   :ensure t
-  :init (add-hook 'after-init-hook 'global-company-mode))
+  :init
+  (add-hook 'after-init-hook 'global-company-mode)
+  (setq company-dabbrev-downcase 0)
+  (setq company-idle-delay 0)
+  (setq company-minimum-prefix-length 1))
 
-(use-package company-jedi
+(use-package lsp-mode
+  :ensure t
+  :commands lsp)
+
+(use-package lsp-ui
+  :commands lsp-ui-mode)
+
+(use-package company-lsp
+  :commands company-lsp)
+
+(use-package lsp-java
   :ensure t
   :init
-  (defun my/python-mode-hook ()
-    (add-to-list 'company-backends 'company-jedi))
-  (add-hook 'python-mode-hook 'my/python-mode-hook))
+  (add-hook 'java-mode-hook #'lsp))
 
 
 (server-start)
@@ -102,7 +114,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (git-gutter+ markdown-mode git-gutter base16-theme terraform-mode evil-magit magit evil-leader use-package monokai-theme helm evil))))
+    (lsp-java git-gutter+ markdown-mode git-gutter base16-theme terraform-mode evil-magit magit evil-leader use-package monokai-theme helm evil))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
