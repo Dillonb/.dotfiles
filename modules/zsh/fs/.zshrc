@@ -51,6 +51,7 @@ alias please='\sudo $(fc -ln -1)'
 alias nload="nload -u H"
 alias quickvim="vim -u ~/.quickvimrc"
 alias sc="sudo systemctl"
+alias scu="systemctl --user"
 alias mvnf="mvn -T 2C"
 alias mvnff="mvn -DskipTests -Dmaven.javadoc.skip=true -T 2C"
 alias tf="terraform"
