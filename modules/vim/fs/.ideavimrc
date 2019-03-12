@@ -10,3 +10,4 @@ map <leader>rr :action Rerun<CR>
 map <leader>rn :action RenameElement<CR>
 map <leader>tt :action ActivateTerminalToolWindow<CR>
 map <leader>bp :action ToggleLineBreakpoint<CR>
+map <leader>gi :action GotoImplementation<CR>
