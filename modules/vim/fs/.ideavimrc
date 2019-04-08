@@ -11,3 +11,4 @@ map <leader>rn :action RenameElement<CR>
 map <leader>tt :action ActivateTerminalToolWindow<CR>
 map <leader>bp :action ToggleLineBreakpoint<CR>
 map <leader>gi :action GotoImplementation<CR>
+map <leader>fu :action FindUsages<CR>
