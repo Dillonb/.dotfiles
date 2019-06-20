@@ -4,20 +4,11 @@ if [[ -d ~/.oh-my-zsh ]]; then
     echo Oh-My-Zsh already installed, ignoring...
 else
     wget --no-check-certificate https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
-fi
-
-pushd ~/.oh-my-zsh
-
-if git remote -v | grep --quiet Dillonb; then
-    echo "Remote is set correctly."
-else
-    echo "Remote is NOT set correctly!"
-    git remote rm origin
-    git remote add origin git@github.com:Dillonb/oh-my-zsh.git
+    rm -rf ~/.oh-my-zsh
+    pushd ~
+    git clone git@github.com:Dillonb/oh-my-zsh.git .oh-my-zsh
+    pushd ~/.oh-my-zsh
     git remote add upstream git@github.com:robbyrussell/oh-my-zsh.git
-    git fetch
-    git branch --set-upstream-to=origin/master master
-    git pull
+    popd
+    popd
 fi
-
-popd
