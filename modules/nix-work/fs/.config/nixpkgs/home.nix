@@ -1,7 +1,18 @@
 { config, pkgs, fetchFromGitHub, ... }:
 
+let
+    python3-packages = python-packages: with python-packages; [
+        requests
+        pip
+    ];
+
+    python3-myconfig = pkgs.python36.withPackages python3-packages;
+in
 {
     nixpkgs = {
+        config = {
+            allowUnfree = true;
+        };
         overlays = [
             (self: super: {
                 fortune-mod = super.lowPrio super.fortune-mod;
@@ -26,6 +37,7 @@
         pkgs.ncdu
         pkgs.fortune
         pkgs.awscli
+        pkgs.aws-sam-cli
         pkgs.coreutils
         pkgs.direnv
         pkgs.emacs
@@ -40,10 +52,18 @@
         pkgs.wget
         pkgs.zsh
         pkgs.terraform
+        pkgs.terraform-landscape
         pkgs.tmux
         pkgs.jq
         pkgs.gnused
         pkgs.rustup
+        pkgs.redis
+        python3-myconfig
+        pkgs.gimp
+        pkgs.links2
+        pkgs.rename
+        pkgs.mosh
+        pkgs.protobuf
 
         # Containers
         pkgs.docker
@@ -58,7 +78,6 @@
 
         # GUI
         pkgs.visualvm
-        #pkgs.plex-media-player
     ];
 
   # Let Home Manager install and manage itself.
