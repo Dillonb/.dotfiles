@@ -4,9 +4,10 @@ let
     python3-packages = python-packages: with python-packages; [
         requests
         pip
+        pyyaml
     ];
 
-    python3-myconfig = pkgs.python36.withPackages python3-packages;
+    python3-myconfig = pkgs.python37.withPackages python3-packages;
 in
 {
     nixpkgs = {
@@ -37,6 +38,7 @@ in
         pkgs.ncdu
         pkgs.fortune
         pkgs.awscli
+        #pkgs.amazon-ecs-cli
         pkgs.aws-sam-cli
         pkgs.coreutils
         pkgs.direnv
@@ -59,11 +61,14 @@ in
         pkgs.rustup
         pkgs.redis
         python3-myconfig
-        pkgs.gimp
+        #pkgs.gimp
         pkgs.links2
         pkgs.rename
         pkgs.mosh
         pkgs.protobuf
+        pkgs.fzf
+        pkgs.cmake
+        pkgs.mypy
 
         # Containers
         pkgs.docker
@@ -78,6 +83,8 @@ in
 
         # GUI
         pkgs.visualvm
+
+        pkgs.offlineimap
     ];
 
   # Let Home Manager install and manage itself.
