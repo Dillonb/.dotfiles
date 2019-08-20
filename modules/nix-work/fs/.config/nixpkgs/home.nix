@@ -5,6 +5,7 @@ let
         requests
         pip
         pyyaml
+        black
     ];
 
     python3-myconfig = pkgs.python37.withPackages python3-packages;
@@ -39,7 +40,7 @@ in
         pkgs.fortune
         pkgs.awscli
         #pkgs.amazon-ecs-cli
-        pkgs.aws-sam-cli
+        #pkgs.aws-sam-cli
         pkgs.coreutils
         pkgs.direnv
         pkgs.emacs
@@ -69,6 +70,8 @@ in
         pkgs.fzf
         pkgs.cmake
         pkgs.mypy
+        pkgs.hy
+        pkgs.dos2unix
 
         # Containers
         pkgs.docker
