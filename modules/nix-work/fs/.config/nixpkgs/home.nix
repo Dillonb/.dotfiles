@@ -6,6 +6,9 @@ let
         pip
         pyyaml
         black
+        dateutil
+        termcolor
+        boto3
     ];
 
     python3-myconfig = pkgs.python37.withPackages python3-packages;
@@ -72,6 +75,9 @@ in
         pkgs.mypy
         pkgs.hy
         pkgs.dos2unix
+        #pkgs.valgrind
+        pkgs.yarn
+        pkgs.qemu
 
         # Containers
         pkgs.docker
@@ -86,6 +92,7 @@ in
 
         # GUI
         pkgs.visualvm
+        pkgs.jd-gui
 
         pkgs.offlineimap
     ];
