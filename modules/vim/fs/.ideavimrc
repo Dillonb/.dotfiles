@@ -12,3 +12,5 @@ map <leader>tt :action ActivateTerminalToolWindow<CR>
 map <leader>bp :action ToggleLineBreakpoint<CR>
 map <leader>gi :action GotoImplementation<CR>
 map <leader>fu :action FindUsages<CR>
+map <leader>cc :action CommentByLineComment<CR>
+map <leader>cb :action CommentByLineComment<CR>
