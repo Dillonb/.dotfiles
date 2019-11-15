@@ -109,6 +109,15 @@
 (use-package rust-mode
   :ensure t)
 
+(use-package nim-mode
+  :ensure t)
+
+(use-package flycheck
+  :ensure t)
+
+(use-package flycheck-nim
+  :ensure t)
+
 (server-start)
 
 (setq-default c-default-style "k&r")
@@ -128,7 +137,7 @@
     ("527df6ab42b54d2e5f4eec8b091bd79b2fa9a1da38f5addd297d1c91aa19b616" "7559ac0083d1f08a46f65920303f970898a3d80f05905d01e81d49bb4c7f9e39" "c968804189e0fc963c641f5c9ad64bca431d41af2fb7e1d01a2a6666376f819c" default)))
  '(package-selected-packages
    (quote
-    (rust-mode yaml-mode mediawiki-el mediawiki nix-mode lsp-java git-gutter+ markdown-mode git-gutter base16-theme terraform-mode evil-magit magit evil-leader use-package monokai-theme helm evil))))
+    (flycheck-nim nim-mode rust-mode yaml-mode mediawiki-el mediawiki nix-mode lsp-java git-gutter+ markdown-mode git-gutter base16-theme terraform-mode evil-magit magit evil-leader use-package monokai-theme helm evil))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
