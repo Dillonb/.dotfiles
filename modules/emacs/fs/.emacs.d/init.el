@@ -74,13 +74,18 @@
 (use-package evil-magit
   :ensure t)
 
+(use-package company-tabnine :ensure t)
+
 (use-package company
   :ensure t
   :init
   (add-hook 'after-init-hook 'global-company-mode)
   (setq company-dabbrev-downcase 0)
-  (setq company-idle-delay 0.5)
+  (setq company-idle-delay 0)
+  (setq company-show-numbers t)
   (setq company-minimum-prefix-length 1))
+
+(add-to-list 'company-backends #'company-tabnine)
 
 (use-package lsp-mode
   :ensure t
@@ -137,7 +142,7 @@
     ("527df6ab42b54d2e5f4eec8b091bd79b2fa9a1da38f5addd297d1c91aa19b616" "7559ac0083d1f08a46f65920303f970898a3d80f05905d01e81d49bb4c7f9e39" "c968804189e0fc963c641f5c9ad64bca431d41af2fb7e1d01a2a6666376f819c" default)))
  '(package-selected-packages
    (quote
-    (flycheck-nim nim-mode rust-mode yaml-mode mediawiki-el mediawiki nix-mode lsp-java git-gutter+ markdown-mode git-gutter base16-theme terraform-mode evil-magit magit evil-leader use-package monokai-theme helm evil))))
+    (company-tabnine flycheck-nim nim-mode rust-mode yaml-mode mediawiki-el mediawiki nix-mode lsp-java git-gutter+ markdown-mode git-gutter base16-theme terraform-mode evil-magit magit evil-leader use-package monokai-theme helm evil))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
