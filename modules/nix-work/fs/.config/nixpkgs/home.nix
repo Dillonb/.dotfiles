@@ -8,7 +8,11 @@ let
         black
         dateutil
         termcolor
+        boto
         boto3
+        pymysql
+        mysql-connector
+        setuptools
     ];
 
     python3-myconfig = pkgs.python37.withPackages python3-packages;
@@ -78,6 +82,12 @@ in
         #pkgs.valgrind
         pkgs.yarn
         pkgs.qemu
+        pkgs.nim
+        pkgs.gource
+        pkgs.q-text-as-data
+        pkgs.broot
+        #pkgs.pipenv # Broken last time I tried it
+        pkgs.leiningen
 
         # Containers
         pkgs.docker
