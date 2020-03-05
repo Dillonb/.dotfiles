@@ -88,6 +88,7 @@ in
         pkgs.broot
         #pkgs.pipenv # Broken last time I tried it
         pkgs.leiningen
+        pkgs.taskwarrior
 
         # Containers
         pkgs.docker
