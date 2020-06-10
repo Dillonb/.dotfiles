@@ -17,3 +17,4 @@ map <leader>cb :action CommentByLineComment<CR>
 
 set visualbell
 set noerrorbells
+set ideajoin
