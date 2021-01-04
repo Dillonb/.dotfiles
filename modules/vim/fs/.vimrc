@@ -66,6 +66,8 @@ NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-repeat'
+NeoBundle 'Rykka/riv.vim'
+NeoBundle 'airblade/vim-gitgutter'
 
 if has("persistent_undo")
     silent !mkdir -p ~/.vim/undodir > /dev/null 2>&1
