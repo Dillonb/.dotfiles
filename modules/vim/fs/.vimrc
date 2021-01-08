@@ -59,7 +59,7 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 
 "Github
 NeoBundle 'tpope/vim-sensible'
-NeoBundle 'w0rp/ale'
+NeoBundle 'dense-analysis/ale'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'flazz/vim-colorschemes'
 NeoBundle 'kien/ctrlp.vim'
