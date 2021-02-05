@@ -9,9 +9,6 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-exec dropbox
-exec xrandr --output LVDS-0 --primary
-
 exec ~/.dotfiles/local/bin/setwallpaper
 
 set $mod Mod4
@@ -27,7 +24,7 @@ bindsym XF86Launch1 exec lock
 # is used in the bar {} block below.
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:Droid Sans Mono 5
+font pango:Droid Sans Mono 10
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # The font above is very space-efficient, that is, it looks good, sharp and
@@ -190,18 +187,15 @@ bar {
   status_command i3blocks
         tray_output primary
         separator_symbol "|"
-        #font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-        font xft:Droid Sans Mono 10
-        font xft:Noto Emoji 5
-        #font pango:Terminus 5
+        font pango:Droid Sans Mono 10
         colors {
-        separator $base03
-        background $base01
-        statusline $base05
-        focused_workspace $base0C $base0D $base00
-        active_workspace $base02 $base02 $base07
-        inactive_workspace $base01 $base01 $base03
-        urgent_workspace $base08 $base08 $base07
+            separator $base03
+            background $base01
+            statusline $base05
+            focused_workspace $base0C $base0D $base00
+            active_workspace $base02 $base02 $base07
+            inactive_workspace $base01 $base01 $base03
+            urgent_workspace $base08 $base08 $base07
         }
 }
 
