@@ -1,4 +1,4 @@
-#!/nix/store/lpk84rsbha199vm3k54498lqv2jswqj8-bash-4.4-p5/bin/sh
+#!/usr/bin/env bash
 # Copyright (C) 2014 Julien Bonjean <julien@bonjean.info>
 
 # This program is free software: you can redistribute it and/or modify
