@@ -81,3 +81,7 @@ setopt HIST_BEEP
 export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
 export HISTSIZE=100000                   # big big history
 export HISTFILESIZE=100000               # big big history
+
+# Color scheme
+source ~/.dotfiles/local/data/base16-shell/base16-shell.plugin.zsh
+base16_nord
