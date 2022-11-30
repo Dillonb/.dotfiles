@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 CONFIG_LOCATION=./local/config/modules
+
+# Ensure submodules are available
+git submodule update --init
+
 if [[ -f ./local/config/modules ]]; then
     source $CONFIG_LOCATION
 else
