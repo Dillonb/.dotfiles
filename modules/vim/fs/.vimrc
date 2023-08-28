@@ -14,7 +14,7 @@ let mapleader=","
 let localleader="\\"
 set showcmd
 
-set cursorline
+" set cursorline
 
 "No word wrap
 set nowrap
@@ -27,7 +27,7 @@ set modeline
 set modelines=5
 
 " Identifying tabs, non breakable spaces and trailing spaces.
-exec "set listchars=tab:>~,nbsp:_,trail:\uB7"
+" exec "set listchars=tab:>~,nbsp:_,trail:\uB7"
 set list
 
 "Aliases
@@ -68,6 +68,8 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-repeat'
 "NeoBundle 'Rykka/riv.vim'
 NeoBundle 'airblade/vim-gitgutter'
+NeoBundle 'yegappan/lsp'
+
 
 if has("persistent_undo")
     silent !mkdir -p ~/.vim/undodir > /dev/null 2>&1
@@ -86,6 +88,17 @@ let g:tex_flavor='latex'
 
 NeoBundleCheck
 call neobundle#end()
+
+let lspServers = [#{
+	\	  name: 'clang',
+	\	  filetype: ['c', 'cpp'],
+	\	  path: '/usr/bin/clangd',
+	\	  args: ['--background-index']
+	\ }]
+autocmd VimEnter * call LspAddServer(lspServers)
+
+let lspOpts = #{autoHighlightDiags: v:true}
+autocmd VimEnter * call LspOptionsSet(lspOpts)
 
 "Color scheme
 syntax enable
