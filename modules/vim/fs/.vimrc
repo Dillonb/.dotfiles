@@ -10,11 +10,12 @@ filetype off "Vundle requires filetype off. We turn this back on at the end of t
 set number "Line numbers
 set mouse=a "Mouse usage in all modes
 
-let mapleader=","
+nnoremap <SPACE> <Nop>
+let mapleader=" "
 let localleader="\\"
 set showcmd
 
-" set cursorline
+set cursorline
 
 "No word wrap
 set nowrap
@@ -54,6 +55,12 @@ else
     call neobundle#begin(expand('~/.vim/bundle/'))
 endif
 
+" Ale settings
+let g:ale_completion_enabled = 1
+let g:ale_set_balloons = 1
+let g:ale_floating_preview = 1
+let g:ale_cursor_detail = 1
+
 "Let neobundle update and manage itself
 NeoBundleFetch 'Shougo/neobundle.vim'
 
@@ -62,6 +69,7 @@ NeoBundle 'tpope/vim-sensible'
 NeoBundle 'dense-analysis/ale'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'flazz/vim-colorschemes'
+NeoBundle 'lifepillar/vim-gruvbox8'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'tpope/vim-surround'
@@ -69,11 +77,32 @@ NeoBundle 'tpope/vim-repeat'
 "NeoBundle 'Rykka/riv.vim'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'yegappan/lsp'
+NeoBundle 'wincent/terminus'
 
+"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
+"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
+"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
+if (empty($TMUX) && getenv('TERM_PROGRAM') != 'Apple_Terminal')
+  if (has("nvim"))
+    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  endif
+  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+  if (has("termguicolors"))
+    set termguicolors
+  endif
+endif
 
 if has("persistent_undo")
-    silent !mkdir -p ~/.vim/undodir > /dev/null 2>&1
-    set undodir=~/.vim/undodir/
+    if has("nvim")
+        silent !mkdir -p ~/.vim/undodir_nvim > /dev/null 2>&1
+        set undodir=~/.vim/undodir_nvim/
+    else
+        silent !mkdir -p ~/.vim/undodir > /dev/null 2>&1
+        set undodir=~/.vim/undodir/
+    endif
     set undofile
     set undolevels=1000
     set undoreload=10000
@@ -103,7 +132,7 @@ autocmd VimEnter * call LspOptionsSet(lspOpts)
 "Color scheme
 syntax enable
 set background=dark
-colorscheme gruvbox
+colorscheme gruvbox8
 
 if has('gui_running')
     set guioptions-=T  "remove toolbar
@@ -124,7 +153,7 @@ let g:airline#extensions#tabline#enabled = 1
 
 
 " Ignore certain directories (comma separated list)
-set wildignore+=*/node_modules/*,*/bower_components/*,*.class,*.o
+set wildignore+=*/node_modules/*,*/bower_components/*,*.class,*.o,*/.cache/*,*/.vscode/*,*/.cmake/*,*/CMakeFiles/*
 
 " Fix editing crontab on MacOS
 autocmd filetype crontab setlocal nobackup nowritebackup
@@ -152,5 +181,17 @@ map <leader>h :tabprevious<CR>
 
 "Browse current directory
 map <leader>bd :Explore<CR>
+
+"Go to definition with LSP
+map gd :ALEGoToDefinition<CR>
+
+" capital K gives help information
+nnoremap <s-k> :ALEHover<CR>
+
+" Find usages
+nnoremap <leader>fu :ALEFindReferences<CR>
+
+" Reload vimrc
+nnoremap <leader>vr :source ~/.vimrc<CR>
 
 filetype plugin on
