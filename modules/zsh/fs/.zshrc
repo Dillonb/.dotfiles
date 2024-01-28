@@ -5,7 +5,7 @@ ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="dgb"
+ZSH_THEME="ys"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -84,4 +84,4 @@ export HISTFILESIZE=100000               # big big history
 
 # Color scheme
 source ~/.dotfiles/local/data/base16-shell/base16-shell.plugin.zsh
-base16_nord
+base16_gruvbox-dark-medium
