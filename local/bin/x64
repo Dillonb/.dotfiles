@@ -1,0 +1,43 @@
+#!/usr/bin/env python
+import argparse
+
+def auto_int(x):
+    return int(x, 0)
+
+def decode_sib(args):
+    print("SIB: " + hex(args.byte))
+    scale = (args.byte >> 6) & 0b11
+    scale_by = [1, 2, 4, 8][scale]
+    index = (args.byte >> 3) & 0b111
+    base  = (args.byte >> 0) & 0b111
+    print(f"Scale: {scale} (multiply by {scale_by})")
+    print(f"Index: {index}")
+    print(f"Base : {base}")
+
+def decode_modrm(args):
+    print("ModR/M: " + hex(args.byte))
+    mod = (args.byte >> 6) & 0b11
+    reg = (args.byte >> 3) & 0b111
+    rm  = (args.byte >> 0) & 0b111
+
+    print(f"Mod: {mod}")
+    print(f"Reg: {reg}")
+    print(f"Rm : {rm}")
+    
+
+p = argparse.ArgumentParser(
+    prog="x64",
+    description="x64 encoding utils")
+subcommands = p.add_subparsers(title="command", required=True)
+
+p_sib = subcommands.add_parser('sib', help="Decode a SIB byte")
+p_sib.add_argument('byte', type=auto_int, help='Byte to decode')
+p_sib.set_defaults(f=decode_sib)
+
+
+p_modrm = subcommands.add_parser('modrm', help="Decode a ModR/M byte")
+p_modrm.add_argument('byte', type=auto_int, help='Byte to decode')
+p_modrm.set_defaults(f=decode_modrm)
+
+args = p.parse_args()
+args.f(args)
