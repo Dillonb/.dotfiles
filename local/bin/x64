@@ -34,8 +34,6 @@ def decode_sib(args):
         print(f"[{r64_names_norex[base]}]")
     else:
         print(f"[{r64_names_norex[base]} + ({r64_names_norex[index]} * {scale})] ")
-        
-        
 
     print("\nif modrm's mod field is 01:")
     print("todo")
@@ -63,7 +61,7 @@ def decode_modrm(args):
     elif mod == 0b10:
         if rm == 0b100: # sp
             print("mod = 10 and rm = 100: SIB + disp32 is next")
-    
+
 
 p = argparse.ArgumentParser(
     prog="x64",
