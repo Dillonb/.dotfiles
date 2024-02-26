@@ -6,7 +6,7 @@ def int16(x):
     return int(x, 16)
 
 r64_names = [ "rax", "rcx", "rdx", "rbx", "rsp", "rbp", "rsi", "rdi", "r8", "r9", "r10", "r11", "r12", "r13", "r14", "r15" ]
-r64_names_norax = [ "rax/r8", "rcx/r9", "rdx/r10", "rbx/r11", "rsp/r12", "rbp/r13", "rsi/r14", "rdi/r15" ]
+r64_names_norex = [ "rax/r8", "rcx/r9", "rdx/r10", "rbx/r11", "rsp/r12", "rbp/r13", "rsi/r14", "rdi/r15" ]
 
 
 def decode_sib(args):
@@ -16,8 +16,8 @@ def decode_sib(args):
     index = (args.byte >> 3) & 0b111
     base  = (args.byte >> 0) & 0b111
     print(f"Scale: {scale} (multiply by {scale_by})")
-    print(f"Index: {index} ({r64_names[index]} or {r64_names[index + 8]} with rax.x)")
-    print(f"Base : {base} ({r64_names[base]} or {r64_names[base + 8]} with rax.b)")
+    print(f"Index: {index} ({r64_names[index]} or {r64_names[index + 8]} with rex.x)")
+    print(f"Base : {base} ({r64_names[base]} or {r64_names[base + 8]} with rex.b)")
 
     print("\nif modrm's mod field is 00:")
     if base == 0b101:
@@ -29,11 +29,11 @@ def decode_sib(args):
     if base == 0b101 and index == 0b100:
         print("[disp32]")
     elif base == 0b101:
-        print(f"[({r64_names_norax[index]} * {scale_by}) + disp32]")
+        print(f"[({r64_names_norex[index]} * {scale_by}) + disp32]")
     elif index == 0b100:
-        print(f"[{r64_names_norax[base]}]")
+        print(f"[{r64_names_norex[base]}]")
     else:
-        print(f"[{r64_names_norax[base]} + ({r64_names_norax[index]} * {scale})] ")
+        print(f"[{r64_names_norex[base]} + ({r64_names_norex[index]} * {scale})] ")
         
         
 
