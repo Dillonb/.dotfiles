@@ -1,10 +1,13 @@
 #!/usr/bin/env python
 import argparse
 
-def auto_int(x):
-    return int(x, 0)
+def int16(x):
+    x = x.rstrip("h")
+    return int(x, 16)
 
 r64_names = [ "rax", "rcx", "rdx", "rbx", "rsp", "rbp", "rsi", "rdi", "r8", "r9", "r10", "r11", "r12", "r13", "r14", "r15" ]
+r64_names_norax = [ "rax/r8", "rcx/r9", "rdx/r10", "rbx/r11", "rsp/r12", "rbp/r13", "rsi/r14", "rdi/r15" ]
+
 
 def decode_sib(args):
     print("SIB: " + hex(args.byte))
@@ -16,6 +19,29 @@ def decode_sib(args):
     print(f"Index: {index} ({r64_names[index]} or {r64_names[index + 8]} with rax.x)")
     print(f"Base : {base} ({r64_names[base]} or {r64_names[base + 8]} with rax.b)")
 
+    print("\nif modrm's mod field is 00:")
+    if base == 0b101:
+        print("Base not actually bp: no base register is encoded")
+
+    if index == 0b100:
+        print("Index not actually sp: no index register is specified.")
+
+    if base == 0b101 and index == 0b100:
+        print("[disp32]")
+    elif base == 0b101:
+        print(f"[({r64_names_norax[index]} * {scale_by}) + disp32]")
+    elif index == 0b100:
+        print(f"[{r64_names_norax[base]}]")
+    else:
+        print(f"[{r64_names_norax[base]} + ({r64_names_norax[index]} * {scale})] ")
+        
+        
+
+    print("\nif modrm's mod field is 01:")
+    print("todo")
+    print("\nif modrm's mod field is 10:")
+    print("todo")
+
 def decode_modrm(args):
     print("ModR/M: " + hex(args.byte))
     mod = (args.byte >> 6) & 0b11
@@ -25,6 +51,18 @@ def decode_modrm(args):
     print(f"Mod: {mod}")
     print(f"Reg: {reg}")
     print(f"Rm : {rm}")
+
+    if mod == 0b00:
+        if rm == 0b100: # sp
+            print("mod = 00 and rm = 100: SIB byte is next.")
+        elif rm == 0b101: # bp
+            print("mod = 00 and rm = 101: This is [RIP/EIP + disp32]")
+    elif mod == 0b01:
+        if rm == 0b100: # sp
+            print("mod = 01 and rm = 100: SIB + disp8 is next")
+    elif mod == 0b10:
+        if rm == 0b100: # sp
+            print("mod = 10 and rm = 100: SIB + disp32 is next")
     
 
 p = argparse.ArgumentParser(
@@ -33,12 +71,12 @@ p = argparse.ArgumentParser(
 subcommands = p.add_subparsers(title="command", required=True)
 
 p_sib = subcommands.add_parser('sib', help="Decode a SIB byte")
-p_sib.add_argument('byte', type=auto_int, help='Byte to decode')
+p_sib.add_argument('byte', type=int16, help='Byte to decode')
 p_sib.set_defaults(f=decode_sib)
 
 
 p_modrm = subcommands.add_parser('modrm', help="Decode a ModR/M byte")
-p_modrm.add_argument('byte', type=auto_int, help='Byte to decode')
+p_modrm.add_argument('byte', type=int16, help='Byte to decode')
 p_modrm.set_defaults(f=decode_modrm)
 
 args = p.parse_args()
