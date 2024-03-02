@@ -3,11 +3,13 @@
 NIXOS_CONFIG="/etc/nixos/configuration.nix"
 NIXOS_CONFIG_DGB_BACKUP="/etc/nixos/configuration.nix.dgb-backup"
 
+
 if [ ! -f $NIXOS_CONFIG ]
 then
     echo "NixOS config did not exist. Creating a symlink. You may need to enter your password."
     sudo ln -vs $(pwd)/configuration.nix /etc/nixos/configuration.nix
-
+    echo "Adding unstable channel"
+    sudo nix-channel --add https://nixos.org/channels/nixos-unstable nixos-unstable
 else
     if [ ! -L $NIXOS_CONFIG ]
     then
@@ -20,6 +22,8 @@ else
             echo "You may need to enter your password."
             sudo mv -vn $NIXOS_CONFIG $NIXOS_CONFIG_DGB_BACKUP
             sudo ln -vs $(pwd)/configuration.nix $NIXOS_CONFIG
+            echo "Adding unstable channel"
+            sudo nix-channel --add https://nixos.org/channels/nixos-unstable nixos-unstable
         fi
     else
         echo "NixOS config at $NIXOS_CONFIG already exists and is a symbolic link, assuming we're already set up. If this is wrong, delete the link and rerun this script."
