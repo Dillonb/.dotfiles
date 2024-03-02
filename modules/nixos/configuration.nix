@@ -4,9 +4,12 @@
 
 { config, pkgs, ... }:
 
+let unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
+in
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       /etc/nixos/hardware-configuration.nix
     ];
 
@@ -84,21 +87,45 @@
     description = "Dillon Beliveau";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
+      # Browser
       firefox
+
+      # Util
+      _1password
+      _1password-gui
+
+      # Gaming
       steam
+
+      # Terminal
       alacritty
+
+      # Chat
       discord
-      ghidra
-      obsidian
       signal-desktop
       keybase
+
+      # Dev
+      ghidra
+      nil # nix language server
+      nixpkgs-fmt
+      unstable.vscode # vscode from unstable
+      emacs
+      sublime-merge
+
+      # Notes
+      obsidian
+
+      # Misc/Media
       spotify
       plex-media-player
-      gimp
       mpv
+      gimp
     ];
     shell = pkgs.zsh;
   };
+
+  security.sudo.wheelNeedsPassword = false;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -113,16 +140,24 @@
     neovim
     wget
     git
-    vscode
     fzf
+    python3
+    tmux
     gcc
-    clang
-    cmake
     ocaml
     opam
     gnumake
+    cmake
+    ninja
+    direnv
+  ];
+
+  programs.nix-ld.enable = true;
+  # Expose dynamic libraries in a normal location.
+  # Add any missing dynamic libraries for unpackaged programs here,
+  # NOT in environment.systemPackages
+  programs.nix-ld.libraries = with pkgs; [
     capstone
-    python3
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -134,9 +169,8 @@
   # };
   programs.zsh.enable = true;
 
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
+  # Services
+  services.lorri.enable = true;
   services.openssh.enable = true;
 
   # Open ports in the firewall.

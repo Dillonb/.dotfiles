@@ -85,3 +85,7 @@ export HISTFILESIZE=100000               # big big history
 # Color scheme
 source ~/.dotfiles/local/data/base16-shell/base16-shell.plugin.zsh
 base16_gruvbox-dark-medium
+
+if type "direnv" > /dev/null; then
+    eval "$(direnv hook zsh)"
+fi
