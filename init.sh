@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 CONFIG_LOCATION=./local/config/modules
 
 # Ensure submodules are available
