@@ -9,7 +9,7 @@ if [[ -f ./local/config/modules ]]; then
     source $CONFIG_LOCATION
 else
     echo '#!/bin/bash
-    MODULES=()' > $CONFIG_LOCATION
+MODULES=()' > $CONFIG_LOCATION
     echo "Please configure modules in $CONFIG_LOCATION"
 fi
 
