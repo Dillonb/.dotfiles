@@ -7,10 +7,14 @@
 let unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
 in
 {
+  # At the time of this writing, stable had a bug: https://github.com/nix-community/lorri/issues/98
+  disabledModules = [ "services/development/lorri.nix" ];
   imports =
     [
       # Include the results of the hardware scan.
       /etc/nixos/hardware-configuration.nix
+      # Replace the disabled module from stable with unstable
+      <nixos-unstable/nixos/modules/services/development/lorri.nix>
     ];
 
   # Bootloader.
@@ -178,6 +182,11 @@ in
   # Services
   services.lorri.enable = true;
   services.openssh.enable = true;
+
+  services.locate.enable = true;
+  services.locate.package = pkgs.plocate;
+  # mlocate and plocate don't support this option - set it to null to silnce a warning.
+  services.locate.localuser = null;
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 22 ];
