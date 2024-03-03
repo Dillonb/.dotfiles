@@ -158,6 +158,7 @@ in
     htop
     ncdu
     docker-compose
+    silver-searcher
   ];
 
   virtualisation.docker.enable = true;
