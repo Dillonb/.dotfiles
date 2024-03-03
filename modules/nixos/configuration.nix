@@ -85,7 +85,7 @@ in
   users.users.dillon = {
     isNormalUser = true;
     description = "Dillon Beliveau";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [
       # Browser
       firefox
@@ -96,6 +96,7 @@ in
 
       # Gaming
       steam
+      runelite
 
       # Terminal
       alacritty
@@ -150,7 +151,12 @@ in
     cmake
     ninja
     direnv
+    htop
+    ncdu
+    docker-compose
   ];
+
+  virtualisation.docker.enable = true;
 
   programs.nix-ld.enable = true;
   # Expose dynamic libraries in a normal location.
@@ -174,7 +180,7 @@ in
   services.openssh.enable = true;
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [ 22 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
