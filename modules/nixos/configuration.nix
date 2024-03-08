@@ -117,6 +117,7 @@ in
       unstable.vscode # vscode from unstable
       emacs
       sublime-merge
+      imhex
 
       # Notes
       obsidian
