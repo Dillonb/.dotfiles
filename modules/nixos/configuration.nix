@@ -156,38 +156,49 @@ in
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    # System status
+    htop
+    ncdu
+    neofetch
+    iotop
+    nethogs
+    nload
+
+    # Editor
     vim
     neovim
+
+    # Misc utils
     wget
-    git
     fzf
-    python3
+    direnv
     tmux
+    silver-searcher
+    bat
+    dos2unix
+    mosh
+    jq
+    killall
+
+    # Dev/Scripting
+    git
+    python3
     gcc
     ocaml
     opam
     gnumake
     cmake
     ninja
-    direnv
-    htop
-    ncdu
     docker-compose
-    silver-searcher
-    nload
     valgrind
-    mosh
     mypy
-    rclone
-    restic
-    bat
+
+    # Fun
     fortune
-    dos2unix
-    jq
-    killall
-    neofetch
-    iotop
-    nethogs
+
+    # Backup
+    restic
+    rclone
   ];
 
   virtualisation.docker.enable = true;
