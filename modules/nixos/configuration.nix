@@ -122,6 +122,7 @@ in
       discord
       signal-desktop
       keybase
+      keybase-gui
       hexchat
 
       # Dev
