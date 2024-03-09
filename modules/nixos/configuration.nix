@@ -121,6 +121,7 @@ in
 
       # Terminal
       alacritty
+      kitty
 
       # Chat
       discord
