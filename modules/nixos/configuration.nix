@@ -224,6 +224,8 @@ in
   # Services
   services.lorri.enable = true;
   services.openssh.enable = true;
+  services.keybase.enable = true;
+  services.kbfs.enable = true;
 
   services.locate.enable = true;
   services.locate.package = pkgs.plocate;
