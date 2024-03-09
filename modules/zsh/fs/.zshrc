@@ -28,7 +28,10 @@ COMPLETION_WAITING_DOTS="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(systemd taskwarrior git fzf sublime-merge)
+plugins=(systemd taskwarrior git sublime-merge)
+if command -v fzf &>/dev/null; then
+    plugins+=(fzf)
+fi
 
 export LANG=en_US.UTF-8
 
