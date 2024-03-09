@@ -92,3 +92,7 @@ base16_gruvbox-dark-medium
 if type "direnv" > /dev/null; then
     eval "$(direnv hook zsh)"
 fi
+
+if command -v fortune &>/dev/null; then
+    fortune
+fi
