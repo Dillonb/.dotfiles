@@ -2,11 +2,27 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
+
 { config, pkgs, ... }:
 
-let unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
+let
+  pkgsConfig = {
+    allowUnfree = true;
+    permittedInsecurePackages = [
+      "electron-25.9.0" # Needed for Obsidian
+    ];
+  };
+  dataMaster = fetchTarball "https://github.com/NixOS/nixpkgs/archive/master.tar.gz";
+  dataUnstable = fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
+  pkgsMaster = import (dataMaster) { config = pkgsConfig; };
+  pkgsUnstable = import (dataUnstable) { config = pkgsConfig; };
 in
 {
+  nixpkgs.config = pkgsConfig // {
+    packageOverrides = pkgs: {
+      vscode = pkgsMaster.vscode;
+    };
+  };
   # At the time of this writing, stable had a bug: https://github.com/nix-community/lorri/issues/98
   disabledModules = [ "services/development/lorri.nix" ];
   imports =
@@ -14,7 +30,7 @@ in
       # Include the results of the hardware scan.
       /etc/nixos/hardware-configuration.nix
       # Replace the disabled module from stable with unstable
-      <nixos-unstable/nixos/modules/services/development/lorri.nix>
+      (import "${dataUnstable}/nixos/modules/services/development/lorri.nix")
     ];
 
   # Bootloader.
@@ -114,7 +130,7 @@ in
       ghidra
       nil # nix language server
       nixpkgs-fmt
-      unstable.vscode # vscode from unstable
+      vscode
       emacs
       sublime-merge
       imhex
@@ -132,12 +148,6 @@ in
   };
 
   security.sudo.wheelNeedsPassword = false;
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.permittedInsecurePackages = [
-    "electron-25.9.0" # Needed for Obsidian
-  ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -160,6 +170,7 @@ in
     ncdu
     docker-compose
     silver-searcher
+    nload
   ];
 
   virtualisation.docker.enable = true;
