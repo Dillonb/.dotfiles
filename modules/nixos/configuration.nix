@@ -171,6 +171,15 @@ in
     docker-compose
     silver-searcher
     nload
+    valgrind
+    mosh
+    mypy
+    rclone
+    restic
+    bat
+    fortune
+    dos2unix
+    jq
   ];
 
   virtualisation.docker.enable = true;
