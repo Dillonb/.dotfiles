@@ -113,6 +113,7 @@ in
       # Util
       _1password
       _1password-gui
+      scrot
 
       # Gaming
       steam
