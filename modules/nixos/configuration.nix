@@ -27,18 +27,10 @@ in
   disabledModules = [ "services/development/lorri.nix" ];
   imports =
     [
-      # Include the results of the hardware scan.
-      /etc/nixos/hardware-configuration.nix
+      ./this-machine.nix
       # Replace the disabled module from stable with unstable
       (import "${dataUnstable}/nixos/modules/services/development/lorri.nix")
     ];
-
-  # Bootloader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda";
-  boot.loader.grub.useOSProber = true;
-
-  networking.hostName = "nixos"; # Define your hostname.
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -118,6 +110,9 @@ in
       # Gaming
       steam
       runelite
+      chiaki # ps5 remote play
+      lutris
+      sunshine
 
       # Terminal
       alacritty
@@ -127,6 +122,7 @@ in
       discord
       signal-desktop
       keybase
+      hexchat
 
       # Dev
       ghidra
@@ -136,6 +132,8 @@ in
       emacs
       sublime-merge
       imhex
+      renderdoc
+      zeal
 
       # Notes
       obsidian
@@ -145,6 +143,10 @@ in
       plex-media-player
       mpv
       gimp
+      audacity
+      gnuradio
+      simplescreenrecorder
+      teamspeak_client
     ];
     shell = pkgs.zsh;
   };
@@ -182,6 +184,10 @@ in
     fortune
     dos2unix
     jq
+    killall
+    neofetch
+    iotop
+    nethogs
   ];
 
   virtualisation.docker.enable = true;
