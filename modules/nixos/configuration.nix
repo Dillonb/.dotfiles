@@ -106,6 +106,7 @@ in
       _1password
       _1password-gui
       scrot
+      kdePackages.kdeconnect-kde
 
       # Gaming
       steam
@@ -233,10 +234,16 @@ in
   services.locate.localuser = null;
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 22 ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  networking.firewall = { 
+    enable = true; 
+    allowedTCPPorts = [ 22 ];
+    allowedTCPPortRanges = [ 
+      { from = 1714; to = 1764; } # KDE Connect 
+    ]; 
+    allowedUDPPortRanges = [ 
+      { from = 1714; to = 1764; } # KDE Connect 
+    ]; 
+  }; 
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
