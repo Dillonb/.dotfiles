@@ -172,19 +172,17 @@ in
     mosh
     jq
     killall
+    xorg.xkill
 
     # Dev/Scripting
     git
     python3
-    gcc
     ocaml
     opam
-    gnumake
-    cmake
-    ninja
     docker-compose
     valgrind
     mypy
+    distrobox
 
     # Fun
     fortune
