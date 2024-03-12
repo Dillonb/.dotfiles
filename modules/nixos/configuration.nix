@@ -98,7 +98,7 @@ in
       "networkmanager" "wheel" "docker" "audio" "video" "input"
       # for SDR
       "plugdev"
-      ];
+    ];
     packages = with pkgs; [
       # Browser
       firefox
