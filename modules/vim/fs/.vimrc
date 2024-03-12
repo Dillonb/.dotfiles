@@ -119,16 +119,18 @@ let g:tex_flavor='latex'
 NeoBundleCheck
 call neobundle#end()
 
-let lspServers = [#{
-	\	  name: 'clang',
-	\	  filetype: ['c', 'cpp'],
-	\	  path: '/usr/bin/clangd',
-	\	  args: ['--background-index']
-	\ }]
-autocmd VimEnter * call LspAddServer(lspServers)
+if v:version >= 900
+    let lspServers = [#{
+        \	  name: 'clang',
+        \	  filetype: ['c', 'cpp'],
+        \	  path: 'clangd',
+        \	  args: ['--background-index']
+        \ }]
+    autocmd VimEnter * call LspAddServer(lspServers)
 
-let lspOpts = #{autoHighlightDiags: v:true}
-autocmd VimEnter * call LspOptionsSet(lspOpts)
+    let lspOpts = #{autoHighlightDiags: v:true}
+    autocmd VimEnter * call LspOptionsSet(lspOpts)
+endif
 
 "Color scheme
 syntax enable
@@ -198,8 +200,8 @@ nnoremap <leader>vr :source ~/.vimrc<CR>
 filetype plugin on
 
 " Start NERDTree. If a file is specified, move the cursor to its window.
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * NERDTree | if argc() > 0 || exists("s:std_in") | wincmd p | endif
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * NERDTree | if argc() > 0 || exists("s:std_in") | wincmd p | endif
 "
 " Exit Vim if NERDTree is the only window remaining in the only tab.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
