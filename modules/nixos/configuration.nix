@@ -64,16 +64,25 @@ in
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # Enable sound with pipewire.
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
-  hardware.pulseaudio.support32Bit = true;
+  # Allows processes to request realtime priority. Pulseaudio needs this.
   security.rtkit.enable = true;
+
+  # Sound
+  sound.enable = true;
+  hardware.pulseaudio = {
+    enable = true;
+    support32Bit = true;
+  };
+
   services.pipewire = {
+    # Disable pulseaudio above, change enable below to true and uncomment the first 3 options to try Pipewire again.
+    # I had a lot of problems with it when I tried it, specifically with my headset.
     enable = false;
     # alsa.enable = true;
     # alsa.support32Bit = true;
     # pulse.enable = true;
+
+    # Everything else in here was commented out in the default config.
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
 
