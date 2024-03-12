@@ -34,6 +34,8 @@
   networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp38s0.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlo1.useDHCP = lib.mkDefault true;
+  networking.hostName = "battlestation";
+  networking.enableIPv6 = false;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
@@ -43,18 +45,20 @@
     driSupport32Bit = true;
   };
   services.xserver.videoDrivers = ["nvidia"];
-  services.xserver.dpi = 109;
+  services.xserver.dpi = 109; # calculated using https://www.sven.de/dpi/ for 2560x1440 27"
   hardware.nvidia = {
     modesetting.enable = true;
     open = false;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
+
   # Nvidia in Docker
   virtualisation.containers.cdi.dynamic.nvidia.enable = true;
-  networking.hostName = "battlestation";
-  networking.enableIPv6 = false;
 
   # VMWare Workstation
   virtualisation.vmware.host.enable = true;
+
+  # I dual boot Windows on this machine, so store the time in local time.
+  time.hardwareClockInLocalTime = true;
 }
