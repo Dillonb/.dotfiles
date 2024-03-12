@@ -85,11 +85,20 @@ in
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+  # SDR device udev rules
+  hardware.hackrf.enable = true;
+  hardware.rtl-sdr.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.dillon = {
     isNormalUser = true;
     description = "Dillon Beliveau";
-    extraGroups = [ "networkmanager" "wheel" "docker" "audio" "video" "input" ];
+    extraGroups = [
+      # Should be self explanatory
+      "networkmanager" "wheel" "docker" "audio" "video" "input"
+      # for SDR
+      "plugdev"
+      ];
     packages = with pkgs; [
       # Browser
       firefox
@@ -97,13 +106,10 @@ in
       microsoft-edge
 
       # Util
-      _1password
-      _1password-gui
       scrot
       kdePackages.kdeconnect-kde
 
       # Gaming
-      steam
       runelite
       chiaki # ps5 remote play
       lutris
@@ -160,6 +166,7 @@ in
   environment.systemPackages = with pkgs; [
     # System status
     htop
+    btop
     ncdu
     neofetch
     iotop
@@ -220,6 +227,19 @@ in
   # };
   programs.zsh.enable = true;
   programs.noisetorch.enable = true;
+  programs.thefuck.enable = true;
+
+  programs._1password.enable = true;
+  programs._1password-gui = {
+    enable = true;
+    # Needed so the browser extension can interact with the application and with system auth
+    polkitPolicyOwners = [ "dillon" ];
+  };
+
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+  };
 
   # Services
   services.lorri.enable = true;
@@ -258,5 +278,4 @@ in
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11"; # Did you read the comment?
-
 }

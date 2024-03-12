@@ -98,3 +98,7 @@ fi
 if command -v fortune &>/dev/null; then
     fortune
 fi
+
+if command -v thefuck &>/dev/null; then
+    eval $(thefuck --alias)
+fi
