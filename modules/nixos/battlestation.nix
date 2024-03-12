@@ -54,4 +54,7 @@
   virtualisation.containers.cdi.dynamic.nvidia.enable = true;
   networking.hostName = "battlestation";
   networking.enableIPv6 = false;
+
+  # VMWare Workstation
+  virtualisation.vmware.host.enable = true;
 }
