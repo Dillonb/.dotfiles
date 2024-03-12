@@ -13,9 +13,7 @@ let
     ];
   };
   dataMaster = fetchTarball "https://github.com/NixOS/nixpkgs/archive/master.tar.gz";
-  dataUnstable = fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
   pkgsMaster = import (dataMaster) { config = pkgsConfig; };
-  pkgsUnstable = import (dataUnstable) { config = pkgsConfig; };
 in
 {
   nixpkgs.config = pkgsConfig // {
@@ -23,14 +21,7 @@ in
       vscode = pkgsMaster.vscode;
     };
   };
-  # At the time of this writing, stable had a bug: https://github.com/nix-community/lorri/issues/98
-  disabledModules = [ "services/development/lorri.nix" ];
-  imports =
-    [
-      ./this-machine.nix
-      # Replace the disabled module from stable with unstable
-      (import "${dataUnstable}/nixos/modules/services/development/lorri.nix")
-    ];
+  imports = [ ./this-machine.nix ];
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -66,8 +57,8 @@ in
 
   # Configure keymap in X11
   services.xserver = {
-    layout = "us";
-    xkbVariant = "";
+    xkb.layout = "us";
+    xkb.variant = "";
   };
 
   # Enable CUPS to print documents.
