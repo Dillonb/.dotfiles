@@ -103,3 +103,12 @@ fi
 if command -v thefuck &>/dev/null; then
     eval $(thefuck --alias)
 fi
+
+if command -v distrobox &>/dev/null; then
+    # arch alias only if distrobox is available"
+    alias arch="distrobox enter arch"
+    if ! command -v code &>/dev/null; then
+        # If the distrobox command is available but the code command is not, alias code to run in distrobox
+        alias code="distrobox enter arch -- code"
+    fi
+fi
