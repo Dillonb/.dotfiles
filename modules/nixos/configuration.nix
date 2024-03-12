@@ -59,7 +59,9 @@ in
   services.xserver = {
     xkb.layout = "us";
     xkb.variant = "";
+    xkb.options = "caps:ctrl_modifier"; # Caps lock is also control
   };
+  console.useXkbConfig = true; # Use xserver keyboard settings in virtual terminals
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
