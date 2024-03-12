@@ -88,11 +88,12 @@ in
   users.users.dillon = {
     isNormalUser = true;
     description = "Dillon Beliveau";
-    extraGroups = [ "networkmanager" "wheel" "docker" "audio" "video" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "audio" "video" "input" ];
     packages = with pkgs; [
       # Browser
       firefox
-      google-chrome
+      # google-chrome
+      microsoft-edge
 
       # Util
       _1password
@@ -105,7 +106,7 @@ in
       runelite
       chiaki # ps5 remote play
       lutris
-      sunshine
+      sunshine # nvidia gamestream server
 
       # Terminal
       alacritty
@@ -122,7 +123,7 @@ in
       ghidra
       nil # nix language server
       nixpkgs-fmt
-      vscode
+      # vscode
       emacs
       sublime-merge
       imhex
@@ -211,6 +212,7 @@ in
   #   enableSSHSupport = true;
   # };
   programs.zsh.enable = true;
+  programs.noisetorch.enable = true;
 
   # Services
   services.lorri.enable = true;
@@ -224,16 +226,21 @@ in
   services.locate.localuser = null;
 
   # Open ports in the firewall.
-  networking.firewall = { 
-    enable = true; 
-    allowedTCPPorts = [ 22 ];
-    allowedTCPPortRanges = [ 
-      { from = 1714; to = 1764; } # KDE Connect 
-    ]; 
-    allowedUDPPortRanges = [ 
-      { from = 1714; to = 1764; } # KDE Connect 
-    ]; 
-  }; 
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [
+      22 # SSH
+      47990 # Sunshine webUI
+      47984 47989 48010  # Sunshine
+    ];
+    allowedTCPPortRanges = [
+      { from = 1714; to = 1764; } # KDE Connect
+    ];
+    allowedUDPPortRanges = [
+      { from = 1714; to = 1764; } # KDE Connect
+      { from = 47998; to = 48000; } # Sunshine
+    ];
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
