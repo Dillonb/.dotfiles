@@ -67,6 +67,7 @@ in
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
+  hardware.pulseaudio.support32Bit = true;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = false;
@@ -120,15 +121,21 @@ in
       hexchat
 
       # Dev
+      # vscode should be used through distrobox
       ghidra
       nil # nix language server
       nixpkgs-fmt
-      # vscode
       emacs
       sublime-merge
       imhex
       renderdoc
       zeal
+
+      # Fonts
+      hasklig
+      terminus_font
+      dejavu_fonts
+      hack-font
 
       # Notes
       obsidian
@@ -220,10 +227,12 @@ in
   services.keybase.enable = true;
   services.kbfs.enable = true;
 
-  services.locate.enable = true;
-  services.locate.package = pkgs.plocate;
-  # mlocate and plocate don't support this option - set it to null to silnce a warning.
-  services.locate.localuser = null;
+  services.locate = {
+    enable = true;
+    package = pkgs.plocate;
+    # mlocate and plocate don't support this option - set it to null to silnce a warning.
+    localuser = null;
+  };
 
   # Open ports in the firewall.
   networking.firewall = {
