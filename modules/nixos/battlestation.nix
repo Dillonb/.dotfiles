@@ -50,5 +50,8 @@
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
+  # Nvidia in Docker
+  virtualisation.containers.cdi.dynamic.nvidia.enable = true;
   networking.hostName = "battlestation";
+  networking.enableIPv6 = false;
 }
