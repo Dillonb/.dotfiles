@@ -200,6 +200,8 @@ in
     jq
     killall
     xorg.xkill
+    usbutils # for lsusb
+    pciutils # for lspci
 
     # Dev/Scripting
     git
