@@ -7,3 +7,6 @@ mods = "Control|Shift"
 action = "SpawnNewInstance"
 key = "N"
 mods = "Control|Shift"
+
+[font]
+size = 7
