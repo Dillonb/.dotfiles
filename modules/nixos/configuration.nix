@@ -92,6 +92,7 @@ in
     packages = with pkgs; [
       # Browser
       firefox
+      google-chrome
 
       # Util
       _1password
