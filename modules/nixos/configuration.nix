@@ -185,7 +185,7 @@ in
     nload
 
     # Editor
-    vim
+    vim-full # vim-full includes gvim compared to the regular vim package
     neovim
 
     # Misc utils
@@ -259,13 +259,13 @@ in
   services.openssh.enable = true;
   services.keybase.enable = true;
   services.kbfs.enable = true;
-  # "strongly discouraged" to turn this off, but Steam downloads are very slow with this on.
+  # "discouraged" to turn this off, but Steam downloads are very slow with this on.
   services.nscd.enableNsncd = false;
 
   services.locate = {
     enable = true;
     package = pkgs.plocate;
-    # mlocate and plocate don't support this option - set it to null to silnce a warning.
+    # mlocate and plocate don't support this option - set it to null to silence a warning.
     localuser = null;
   };
 
