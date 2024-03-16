@@ -121,7 +121,7 @@ in
       kdePackages.kdeconnect-kde
 
       # Gaming
-      runelite
+      # runelite
       chiaki # ps5 remote play
       lutris
       sunshine # nvidia gamestream server
