@@ -259,6 +259,8 @@ in
   services.openssh.enable = true;
   services.keybase.enable = true;
   services.kbfs.enable = true;
+  # "strongly discouraged" to turn this off, but Steam downloads are very slow with this on.
+  services.nscd.enableNsncd = false;
 
   services.locate = {
     enable = true;
