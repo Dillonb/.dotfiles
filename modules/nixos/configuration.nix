@@ -166,6 +166,7 @@ in
       gnuradio
       simplescreenrecorder
       teamspeak_client
+      nextcloud-client
     ];
     shell = pkgs.zsh;
   };
