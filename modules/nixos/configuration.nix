@@ -205,6 +205,7 @@ in
     usbutils # for lsusb
     pciutils # for lspci
     nix-search-cli
+    file
 
     # Dev/Scripting
     git
