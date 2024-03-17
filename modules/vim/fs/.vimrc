@@ -120,16 +120,18 @@ NeoBundleCheck
 call neobundle#end()
 
 if v:version >= 900
-    let lspServers = [#{
-        \	  name: 'clang',
-        \	  filetype: ['c', 'cpp'],
-        \	  path: 'clangd',
-        \	  args: ['--background-index']
-        \ }]
-    autocmd VimEnter * call LspAddServer(lspServers)
+    if executable("clangd") == 1
+        let lspServers = [#{
+            \	  name: 'clang',
+            \	  filetype: ['c', 'cpp'],
+            \	  path: 'clangd',
+            \	  args: ['--background-index']
+            \ }]
+        autocmd VimEnter * call LspAddServer(lspServers)
 
-    let lspOpts = #{autoHighlightDiags: v:true}
-    autocmd VimEnter * call LspOptionsSet(lspOpts)
+        let lspOpts = #{autoHighlightDiags: v:true}
+        autocmd VimEnter * call LspOptionsSet(lspOpts)
+    endif
 endif
 
 "Color scheme
