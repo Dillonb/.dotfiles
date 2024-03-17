@@ -119,6 +119,7 @@ in
       # Util
       scrot
       kdePackages.kdeconnect-kde
+      feh
 
       # Gaming
       # runelite
