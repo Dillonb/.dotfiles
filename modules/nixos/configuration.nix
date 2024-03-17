@@ -204,6 +204,7 @@ in
     xorg.xkill
     usbutils # for lsusb
     pciutils # for lspci
+    nix-search-cli
 
     # Dev/Scripting
     git
