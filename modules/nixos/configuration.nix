@@ -114,7 +114,7 @@ in
       # Browser
       firefox
       # google-chrome
-      microsoft-edge
+      # microsoft-edge
 
       # Util
       scrot
