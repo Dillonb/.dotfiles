@@ -14,7 +14,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/87303987-7581-4340-a158-abebfe0d02b3";
       fsType = "ext4";
@@ -28,6 +27,11 @@
   fileSystems."/win" =
     { device = "/dev/disk/by-uuid/E8204E89204E5F26";
       fsType = "ntfs";
+    };
+
+  fileSystems."/arch" =
+    { device = "/dev/disk/by-uuid/acd118ca-367e-402f-b351-b90f3c441460";
+      fsType = "ext4";
     };
 
   swapDevices = [ ];
