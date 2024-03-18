@@ -1,0 +1,43 @@
+#!/usr/bin/env python3
+import tempfile
+import subprocess
+import os
+
+class TempFilename:
+    def __enter__(self):
+        d, self.path = tempfile.mkstemp()
+        os.close(d)
+        return self
+
+    def __exit__(self, *args):
+        if os.path.exists(self.path):
+            os.unlink(self.path)
+
+def get_input():
+    while True:
+        try:
+            asm = input("> ")
+            if asm is not None:
+                asm = asm.strip()
+            if asm != "":
+                return asm
+        except (EOFError, KeyboardInterrupt):
+            print("\nBye")
+            quit()
+
+while True:
+    with tempfile.NamedTemporaryFile() as tmp:
+        with TempFilename() as output:
+            tmp.write("BITS 64\n".encode("utf-8"))
+            tmp.write(get_input().encode("utf-8"))
+            tmp.flush()
+            try:
+                p = subprocess.run(["nasm", tmp.name, "-o", output.path], stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True, text=True)
+                with open(output.path, "rb") as f:
+                    bytes = f.read()
+                    print(" ".join([f"{byte:02x}" for byte in bytes]))
+            except subprocess.CalledProcessError as e:
+                print(e.stderr)
+                print(e.stdout)
+            except Exception as e:
+                print(e)
