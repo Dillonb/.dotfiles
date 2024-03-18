@@ -27,6 +27,11 @@ set expandtab
 set modeline
 set modelines=5
 
+" Searches are case insensitive unless they contain an uppercase letter
+" (need both ignorecase and smartcase for this)
+set ignorecase
+set smartcase
+
 " Identifying tabs, non breakable spaces and trailing spaces.
 " exec "set listchars=tab:>~,nbsp:_,trail:\uB7"
 set list
