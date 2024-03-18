@@ -81,7 +81,7 @@ in
   };
 
   # KDE Connect
-  services.kdeconnect.enable = true;
+  programs.kdeconnect.enable = true;
 
   # I dual boot Windows on this machine, so store the time in local time.
   time.hardwareClockInLocalTime = true;
