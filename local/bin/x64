@@ -62,6 +62,20 @@ def decode_modrm(args):
         if rm == 0b100: # sp
             print("mod = 10 and rm = 100: SIB + disp32 is next")
 
+def decode_rex(args):
+    print("REX: " + hex(args.byte))
+    fixed = (args.byte >> 4) & 0b1111
+    if fixed != 0b0100:
+        print("This is not a REX byte! (first bits are not 0b0100)")
+    else:
+        w = (args.byte >> 3) & 1
+        r = (args.byte >> 2) & 1
+        x = (args.byte >> 1) & 1
+        b = (args.byte >> 0) & 1
+        print(f"W: {w}")
+        print(f"R: {r}")
+        print(f"X: {x}")
+        print(f"B: {b}")
 
 p = argparse.ArgumentParser(
     prog="x64",
@@ -76,6 +90,10 @@ p_sib.set_defaults(f=decode_sib)
 p_modrm = subcommands.add_parser('modrm', help="Decode a ModR/M byte")
 p_modrm.add_argument('byte', type=int16, help='Byte to decode')
 p_modrm.set_defaults(f=decode_modrm)
+
+p_rex = subcommands.add_parser('rex', help="Decode a REX byte")
+p_rex.add_argument('byte', type=int16, help='Byte to decode')
+p_rex.set_defaults(f=decode_rex)
 
 args = p.parse_args()
 args.f(args)
