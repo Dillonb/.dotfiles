@@ -149,6 +149,7 @@ in
       renderdoc
       zeal
       nasm
+      pyright # python language server
 
       # Fonts
       hasklig
