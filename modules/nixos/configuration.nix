@@ -125,7 +125,6 @@ in
       # runelite
       chiaki # ps5 remote play
       lutris
-      sunshine # nvidia gamestream server
 
       # Terminal
       alacritty
@@ -280,15 +279,15 @@ in
     enable = true;
     allowedTCPPorts = [
       22 # SSH
-      47990 # Sunshine webUI
-      47984 47989 48010  # Sunshine
+      # 47990 # Sunshine webUI
+      # 47984 47989 48010  # Sunshine
     ];
     allowedTCPPortRanges = [
       { from = 1714; to = 1764; } # KDE Connect
     ];
     allowedUDPPortRanges = [
       { from = 1714; to = 1764; } # KDE Connect
-      { from = 47998; to = 48000; } # Sunshine
+      # { from = 47998; to = 48000; } # Sunshine
     ];
   };
 
