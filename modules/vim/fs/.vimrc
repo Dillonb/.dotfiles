@@ -135,7 +135,16 @@ if v:version >= 900
             \	  name: 'pyright',
             \	  filetype: ['python'],
             \	  path: 'pyright',
-            \	  args: ['']
+            \	  args: ['--watch']
+            \ }]
+    endif
+
+    if executable("nil") == 1
+        let lspServers = lspServers + [#{
+            \	  name: 'nil',
+            \	  filetype: ['nix'],
+            \	  path: 'nil',
+            \	  args: ['--stdio']
             \ }]
     endif
 
