@@ -1,9 +1,14 @@
 # Configuration specific to my desktop PC
 { config, lib, pkgs, modulesPath, ... }:
 
+let
+  dataDevusb = fetchTarball "https://github.com/devusb/nix-packages/archive/main.tar.gz";
+in
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [ 
+      (modulesPath + "/installer/scan/not-detected.nix")
+      (import "${dataDevusb}/modules/nixos/sunshine.nix")
     ];
 
   # Bootloader.
@@ -67,6 +72,13 @@
 
   # VMWare Workstation
   virtualisation.vmware.host.enable = true;
+
+  # Sunshine nvidia gamestream server
+  services.sunshine = {
+    enable = true;
+    openFirewall = true;
+    capSysAdmin = true;
+  };
 
   # I dual boot Windows on this machine, so store the time in local time.
   time.hardwareClockInLocalTime = true;
