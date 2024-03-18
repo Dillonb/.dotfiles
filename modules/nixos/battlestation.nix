@@ -80,6 +80,9 @@ in
     capSysAdmin = true;
   };
 
+  # KDE Connect
+  services.kdeconnect.enable = true;
+
   # I dual boot Windows on this machine, so store the time in local time.
   time.hardwareClockInLocalTime = true;
 }
