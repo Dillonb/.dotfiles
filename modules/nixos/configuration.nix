@@ -118,7 +118,6 @@ in
 
       # Util
       scrot
-      kdePackages.kdeconnect-kde
       feh
 
       # Gaming
@@ -283,10 +282,10 @@ in
       # 47984 47989 48010  # Sunshine
     ];
     allowedTCPPortRanges = [
-      { from = 1714; to = 1764; } # KDE Connect
+      # { from = 1714; to = 1764; } # KDE Connect
     ];
     allowedUDPPortRanges = [
-      { from = 1714; to = 1764; } # KDE Connect
+      # { from = 1714; to = 1764; } # KDE Connect
       # { from = 47998; to = 48000; } # Sunshine
     ];
   };
