@@ -148,6 +148,7 @@ in
       imhex
       renderdoc
       zeal
+      nasm
 
       # Fonts
       hasklig
