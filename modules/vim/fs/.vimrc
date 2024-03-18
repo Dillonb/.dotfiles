@@ -120,13 +120,26 @@ NeoBundleCheck
 call neobundle#end()
 
 if v:version >= 900
+    let lspServers = []
     if executable("clangd") == 1
-        let lspServers = [#{
+        let lspServers = lspServers + [#{
             \	  name: 'clang',
             \	  filetype: ['c', 'cpp'],
             \	  path: 'clangd',
             \	  args: ['--background-index']
             \ }]
+    endif
+
+    if executable("pyright") == 1
+        let lspServers = lspServers + [#{
+            \	  name: 'pyright',
+            \	  filetype: ['python'],
+            \	  path: 'pyright',
+            \	  args: ['']
+            \ }]
+    endif
+
+    if len(lspServers) > 0
         autocmd VimEnter * call LspAddServer(lspServers)
 
         let lspOpts = #{autoHighlightDiags: v:true}
