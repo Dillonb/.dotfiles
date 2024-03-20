@@ -207,6 +207,9 @@ in
     nix-search-cli
     nix-index
     file
+    netcat-gnu
+    iodine
+    networkmanager-iodine
 
     # Dev/Scripting
     git
