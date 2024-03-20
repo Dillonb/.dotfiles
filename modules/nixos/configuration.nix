@@ -210,6 +210,11 @@ in
     netcat-gnu
     iodine
     networkmanager-iodine
+    tsocks
+    tshark
+    wireshark
+    mitmproxy
+    inetutils
 
     # Dev/Scripting
     git
