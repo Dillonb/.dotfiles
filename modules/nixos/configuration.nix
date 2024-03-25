@@ -117,6 +117,7 @@ in
       scrot
       feh
       keymapp # flashing ZSA keyboards
+      wally-cli # also for flashing ZSA keyboards (cli tool)
 
       # Gaming
       # runelite
