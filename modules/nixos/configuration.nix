@@ -200,6 +200,7 @@ in
     pciutils # for lspci
     nix-search-cli
     nix-index
+    nix-output-monitor
     file
     netcat-gnu
     iodine
