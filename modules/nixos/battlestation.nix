@@ -61,10 +61,15 @@ in
   services.xserver.videoDrivers = ["nvidia"];
   services.xserver.dpi = 109; # calculated using https://www.sven.de/dpi/ for 2560x1440 27"
   hardware.nvidia = {
+    powerManagement = {
+      enable = false;
+      finegrained = false;
+    };
+
     modesetting.enable = true;
     open = false;
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    package = config.boot.kernelPackages.nvidiaPackages.production;
   };
 
   # Nvidia in Docker
