@@ -94,6 +94,8 @@ in
   # SDR device udev rules
   hardware.hackrf.enable = true;
   hardware.rtl-sdr.enable = true;
+  # ZSA keyboard udev rule
+  hardware.keyboard.zsa.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.dillon = {
@@ -114,6 +116,7 @@ in
       # Util
       scrot
       feh
+      keymapp # flashing ZSA keyboards
 
       # Gaming
       # runelite
