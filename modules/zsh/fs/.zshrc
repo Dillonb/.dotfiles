@@ -111,4 +111,7 @@ if command -v distrobox &>/dev/null; then
         # If the distrobox command is available but the code command is not, alias code to run in distrobox
         alias code="distrobox enter arch -- code"
     fi
+else
+    unalias code
+    unalias arch
 fi
