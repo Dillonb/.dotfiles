@@ -112,6 +112,5 @@ if command -v distrobox &>/dev/null; then
         alias code="distrobox enter arch -- code"
     fi
 else
-    unalias code
-    unalias arch
+    unalias code arch >/dev/null 2>/dev/null
 fi
