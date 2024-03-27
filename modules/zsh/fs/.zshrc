@@ -61,7 +61,7 @@ alias mvndeps="mvn dependency:go-offline"
 alias tf="terraform"
 alias egrep="egrep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}"
 alias gbr="git for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'"
-alias nixupdate="sudo nixos-rebuild switch --upgrade"
+alias nixupdate="sudo nixos-rebuild switch --upgrade |& nom"
 alias arch-fastestmirrors="curl -s \"https://archlinux.org/mirrorlist/?country=US&country=CA&protocol=https&use_mirror_status=on\" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 -"
 
 export SPARK SPARK_LOCAL_IP="127.0.0.1"
