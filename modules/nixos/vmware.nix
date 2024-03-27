@@ -29,4 +29,13 @@
   # networking.interfaces.ens33.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+
+  services.autossh.sessions = [
+    {
+      extraArguments = "-N -L9000:localhost:9000 dillon@dgb.sh";
+      monitoringPort = 20000;
+      name = "dgb-sh-weechat-relay";
+      user = "dillon";
+    }
+  ];
 }
