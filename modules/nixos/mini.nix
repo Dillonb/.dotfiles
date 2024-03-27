@@ -6,7 +6,7 @@ let
 in
 {
   imports =
-    [ 
+    [
       (modulesPath + "/installer/scan/not-detected.nix")
       # https://github.com/NixOS/nixos-hardware/tree/master/dell/xps/13-9300
       (import "${nixosHardware}/dell/xps/13-9300/default.nix")
