@@ -9,6 +9,15 @@ let
   };
   dataMaster = fetchTarball "https://github.com/NixOS/nixpkgs/archive/master.tar.gz";
   pkgsMaster = import (dataMaster) { config = pkgsConfig; };
+  discover-flatpak = pkgs.symlinkJoin
+  {
+    name = "discover-flatpak-backend";
+    paths = [ pkgs.libsForQt5.discover ];
+    buildInputs = [ pkgs.makeWrapper ];
+    postBuild = ''
+      wrapProgram $out/bin/plasma-discover --add-flags "--backends flatpak"
+    '';
+  };
 in
 {
   nixpkgs.config = pkgsConfig // {
@@ -17,6 +26,9 @@ in
     };
   };
   imports = [ ./this-machine.nix ];
+
+  xdg.portal.enable = true;
+  fonts.fontDir.enable = true;
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -118,6 +130,7 @@ in
       feh
       keymapp # flashing ZSA keyboards
       wally-cli # also for flashing ZSA keyboards (cli tool)
+      discover-flatpak
 
       # Gaming
       # runelite
@@ -259,6 +272,7 @@ in
   };
 
   # Services
+  services.flatpak.enable = true;
   services.lorri.enable = true;
   services.openssh.enable = true;
   services.keybase.enable = true;
@@ -289,6 +303,15 @@ in
       # { from = 47998; to = 48000; } # Sunshine
     ];
   };
+
+  services.autossh.sessions = [
+    {
+      extraArguments = "-N -L9000:localhost:9000 dillon@dgb.sh";
+      monitoringPort = 20000;
+      name = "dgb-sh";
+      user = "dillon";
+    }
+  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
