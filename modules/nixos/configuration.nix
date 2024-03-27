@@ -147,6 +147,7 @@ in
       zeal
       nasm
       pyright # python language server
+      pipenv
 
       # Fonts
       hasklig
