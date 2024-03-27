@@ -72,7 +72,7 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 "Github
 NeoBundle 'tpope/vim-sensible'
 NeoBundle 'dense-analysis/ale'
-NeoBundle 'scrooloose/nerdcommenter'
+NeoBundle 'preservim/nerdcommenter'
 NeoBundle 'flazz/vim-colorschemes'
 NeoBundle 'lifepillar/vim-gruvbox8'
 NeoBundle 'kien/ctrlp.vim'
@@ -191,6 +191,9 @@ set wildignore+=*/node_modules/*,*/bower_components/*,*.class,*.o,*/.cache/*,*/.
 autocmd filetype crontab setlocal nobackup nowritebackup
 
 "Key Bindings
+
+" ctrl-/ to toggle comments
+noremap <C-_> <plug>NERDCommenterToggle
 
 "Pop up list of all files in current dir
 map <leader>o :CtrlP<CR>
