@@ -27,9 +27,6 @@ in
   };
   imports = [ ./this-machine.nix ];
 
-  xdg.portal.enable = true;
-  fonts.fontDir.enable = true;
-
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -271,8 +268,13 @@ in
     remotePlay.openFirewall = true;
   };
 
-  # Services
+
+  # Flatpak
   services.flatpak.enable = true;
+  xdg.portal.enable = true;
+  fonts.fontDir.enable = true;
+
+  # Services
   services.lorri.enable = true;
   services.openssh.enable = true;
   services.keybase.enable = true;
