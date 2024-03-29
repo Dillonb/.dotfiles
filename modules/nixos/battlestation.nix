@@ -1,14 +1,10 @@
 # Configuration specific to my desktop PC
 { config, lib, pkgs, modulesPath, ... }:
 
-let
-  dataDevusb = fetchTarball "https://github.com/devusb/nix-packages/archive/main.tar.gz";
-in
 {
   imports =
-    [ 
+    [
       (modulesPath + "/installer/scan/not-detected.nix")
-      (import "${dataDevusb}/modules/nixos/sunshine.nix")
     ];
 
   # Bootloader.
@@ -78,12 +74,25 @@ in
   # VMWare Workstation
   virtualisation.vmware.host.enable = true;
 
-  # Sunshine nvidia gamestream server
-  services.sunshine = {
-    enable = true;
-    openFirewall = true;
-    capSysAdmin = true;
+  environment.systemPackages = with pkgs; [
+    sunshine
+  ];
+
+  # Needed for KMS capture mode - unsure if needed for X11
+  security.wrappers.sunshine = with pkgs; {
+    owner = "dillon";
+    group = "users";
+    capabilities = "cap_sys_admin+p";
+    source = "${sunshine}/bin/sunshine";
   };
+
+  networking.firewall = {
+    allowedTCPPorts = [ 47984 47989 47990 48010 ]; # Sunshine
+    allowedUDPPortRanges = [
+      { from = 47998; to = 48000; } # Sunshine
+    ];
+  };
+
 
   # KDE Connect
   programs.kdeconnect.enable = true;
