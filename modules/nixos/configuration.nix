@@ -133,6 +133,7 @@ in
       # runelite
       chiaki # ps5 remote play
       lutris
+      moonlight-qt
 
       # Terminal
       alacritty
