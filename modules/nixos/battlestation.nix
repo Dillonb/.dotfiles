@@ -12,8 +12,15 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+    efi.canTouchEfiVariables = true;
+    grub = {
+      enable = true;
+      useOSProber = true;
+      device = "/dev/nvme0n1";
+      default = "saved";
+    };
+  };
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/87303987-7581-4340-a158-abebfe0d02b3";
