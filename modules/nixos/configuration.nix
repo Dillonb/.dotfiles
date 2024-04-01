@@ -173,7 +173,7 @@ in
       # Misc/Media
       spotify
       spotify-qt
-      plex-media-player
+      # plex-media-player - install plex desktop from flatpak
       mpv
       gimp
       audacity
