@@ -1,10 +1,10 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 let
   pkgsConfig = {
     allowUnfree = true;
     permittedInsecurePackages = [
-      "electron-25.9.0" # Needed for Obsidian
+      # "electron-25.9.0" # Needed for Obsidian
     ];
   };
   dataMaster = fetchTarball "https://github.com/NixOS/nixpkgs/archive/master.tar.gz";
@@ -185,26 +185,39 @@ in
     shell = pkgs.zsh;
   };
 
-  home-manager.users.dillon = {pkgs, ...}: {
-    home.stateVersion = "23.11";
+  home-manager = {
+    useGlobalPkgs = true;
+    users.dillon = {pkgs, ...}: {
+      home.stateVersion = "23.11";
 
-    programs.alacritty = {
-      enable = true;
-      settings = {
-        keyboard.bindings = [
-          {
-            key = "T";
-            mods = "Control|Shift";
-            action = "SpawnNewInstance"; 
-          }
-          {
-            key = "N";
-            mods = "Control|Shift";
-            action = "SpawnNewInstance"; 
-          }
-        ];
-        font.size = 12;
+      programs.alacritty = {
+        enable = true;
+        settings = {
+          keyboard.bindings = [
+            {
+              key = "T";
+              mods = "Control|Shift";
+              action = "SpawnNewInstance"; 
+            }
+            {
+              key = "N";
+              mods = "Control|Shift";
+              action = "SpawnNewInstance"; 
+            }
+          ];
+          font.size = 12;
+        };
       };
+
+      # TODO: get the password working somehow
+      # services.spotifyd = {
+      #   enable = true;
+      #   settings.global = {
+      #     bitrate = 320;
+      #     username = "dillonbeliveau";
+      #     password_cmd = "${lib.getExe pkgs._1password} read 'op://Personal/Spotify/password'";
+      #   };
+      # };
     };
   };
 
