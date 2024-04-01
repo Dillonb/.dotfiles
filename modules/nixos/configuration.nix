@@ -119,7 +119,7 @@ in
     ];
     packages = with pkgs; [
       # Browser
-      firefox
+      # firefox # configured with programs.firefox below
       # google-chrome
       # microsoft-edge
 
@@ -294,6 +294,8 @@ in
   programs.zsh.enable = true;
   programs.noisetorch.enable = true;
   programs.thefuck.enable = true;
+
+  programs.firefox.enable = true;
 
   programs._1password.enable = true;
   programs._1password-gui = {
