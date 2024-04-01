@@ -9,6 +9,7 @@ let
   };
   dataMaster = fetchTarball "https://github.com/NixOS/nixpkgs/archive/master.tar.gz";
   pkgsMaster = import (dataMaster) { config = pkgsConfig; };
+  home-manager = fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
   discover-flatpak = pkgs.symlinkJoin
   {
     name = "discover-flatpak-backend";
@@ -25,7 +26,7 @@ in
       vscode = pkgsMaster.vscode;
     };
   };
-  imports = [ ./this-machine.nix ];
+  imports = [ ./this-machine.nix "${home-manager}/nixos" ];
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -181,6 +182,29 @@ in
       nextcloud-client
     ];
     shell = pkgs.zsh;
+  };
+
+  home-manager.users.dillon = {pkgs, ...}: {
+    home.stateVersion = "23.11";
+
+    programs.alacritty = {
+      enable = true;
+      settings = {
+        keyboard.bindings = [
+          {
+            key = "T";
+            mods = "Control|Shift";
+            action = "SpawnNewInstance"; 
+          }
+          {
+            key = "N";
+            mods = "Control|Shift";
+            action = "SpawnNewInstance"; 
+          }
+        ];
+        font.size = 12;
+      };
+    };
   };
 
   security.sudo.wheelNeedsPassword = false;
