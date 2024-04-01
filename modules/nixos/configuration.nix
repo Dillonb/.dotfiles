@@ -283,30 +283,32 @@ in
 
   virtualisation.docker.enable = true;
 
-  programs.nix-ld.enable = true;
-  # Expose dynamic libraries in a normal location.
-  # Add any missing dynamic libraries for unpackaged programs here,
-  # NOT in environment.systemPackages
-  programs.nix-ld.libraries = with pkgs; [
-    capstone
-  ];
+  programs = {
+    nix-ld.enable = true;
+    # Expose dynamic libraries in a normal location.
+    # Add any missing dynamic libraries for unpackaged programs here,
+    # NOT in environment.systemPackages
+    nix-ld.libraries = with pkgs; [
+      capstone
+    ];
 
-  programs.zsh.enable = true;
-  programs.noisetorch.enable = true;
-  programs.thefuck.enable = true;
+    zsh.enable = true;
+    noisetorch.enable = true;
+    thefuck.enable = true;
 
-  programs.firefox.enable = true;
+    firefox.enable = true;
 
-  programs._1password.enable = true;
-  programs._1password-gui = {
-    enable = true;
-    # Needed so the browser extension can interact with the application and with system auth
-    polkitPolicyOwners = [ "dillon" ];
-  };
+    _1password.enable = true;
+    _1password-gui = {
+      enable = true;
+      # Needed so the browser extension can interact with the application and with system auth
+      polkitPolicyOwners = [ "dillon" ];
+    };
 
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true;
+    steam = {
+      enable = true;
+      remotePlay.openFirewall = true;
+    };
   };
 
 
@@ -316,18 +318,28 @@ in
   fonts.fontDir.enable = true;
 
   # Services
-  services.lorri.enable = true;
-  services.openssh.enable = true;
-  services.keybase.enable = true;
-  services.kbfs.enable = true;
-  # "discouraged" to turn this off, but Steam downloads are very slow with this on.
-  services.nscd.enableNsncd = false;
+  services = {
+    lorri.enable = true;
+    openssh.enable = true;
+    keybase.enable = true;
+    kbfs.enable = true;
+    # "discouraged" to turn this off, but Steam downloads are very slow with this on.
+    nscd.enableNsncd = false;
 
-  services.locate = {
-    enable = true;
-    package = pkgs.plocate;
-    # mlocate and plocate don't support this option - set it to null to silence a warning.
-    localuser = null;
+    locate = {
+      enable = true;
+      package = pkgs.plocate;
+      # mlocate and plocate don't support this option - set it to null to silence a warning.
+      localuser = null;
+    };
+    autossh.sessions = [
+      {
+        extraArguments = "-N -L9000:localhost:9000 dillon@dgb.sh";
+        monitoringPort = 20000;
+        name = "dgb-sh";
+        user = "dillon";
+      }
+    ];
   };
 
   # Open ports in the firewall.
@@ -347,14 +359,6 @@ in
     ];
   };
 
-  services.autossh.sessions = [
-    {
-      extraArguments = "-N -L9000:localhost:9000 dillon@dgb.sh";
-      monitoringPort = 20000;
-      name = "dgb-sh";
-      user = "dillon";
-    }
-  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
