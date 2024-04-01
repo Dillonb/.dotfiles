@@ -172,6 +172,7 @@ in
 
       # Misc/Media
       spotify
+      spotify-qt
       plex-media-player
       mpv
       gimp
