@@ -209,15 +209,36 @@ in
         };
       };
 
-      # TODO: get the password working somehow
-      # services.spotifyd = {
-      #   enable = true;
-      #   settings.global = {
-      #     bitrate = 320;
-      #     username = "dillonbeliveau";
-      #     password_cmd = "${lib.getExe pkgs._1password} read 'op://Personal/Spotify/password'";
-      #   };
-      # };
+      systemd.user.services = {
+        _1password = {
+          Unit = {
+            Description = "1password gui";
+            Requires = "graphical-session.target";
+            After = "graphical-session.target";
+          };
+
+          Install = {
+            Alias = "1password.service";
+            WantedBy = [ "graphical-session.target" ];
+            Before = [ "spotifyd.service" ]; # Ensure 1password is running before spotifyd starts
+          };
+
+          Service = {
+            ExecStart = "${lib.getExe pkgs._1password-gui} --silent";
+            Type = "exec";
+            Restart = "always";
+          };
+        };
+      };
+
+      services.spotifyd = {
+        enable = true;
+        settings.global = {
+          bitrate = 320;
+          username = "dillonbeliveau";
+          password_cmd = "/home/dillon/.dotfiles/local/bin/get-spotify-password";
+        };
+      };
     };
   };
 
