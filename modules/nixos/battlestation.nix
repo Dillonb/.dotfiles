@@ -13,11 +13,13 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
   boot.loader = {
-    efi.canTouchEfiVariables = true;
+    efi.canTouchEfiVariables = false;
     grub = {
+      efiSupport = true;
+      efiInstallAsRemovable = true;
       enable = true;
       useOSProber = true;
-      device = "/dev/nvme0n1";
+      device = "nodev";
       default = "saved";
     };
   };
