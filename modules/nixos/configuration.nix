@@ -161,12 +161,6 @@ in
       pyright # python language server
       pipenv
 
-      # Fonts
-      hasklig
-      terminus_font
-      dejavu_fonts
-      hack-font
-
       # Notes
       obsidian
 
@@ -185,6 +179,16 @@ in
     ];
     shell = pkgs.zsh;
   };
+
+  fonts.packages = with pkgs; [
+      hasklig
+      terminus_font
+      dejavu_fonts
+      hack-font
+      noto-fonts-cjk
+      noto-fonts-cjk-sans
+  ];
+
 
   home-manager = {
     useGlobalPkgs = true;
