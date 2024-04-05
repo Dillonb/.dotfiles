@@ -189,6 +189,14 @@ in
       noto-fonts-cjk-sans
   ];
 
+  i18n.inputMethod = {
+    enabled = "fcitx5";
+    fcitx5.addons = with pkgs; [
+      fcitx5-anthy
+      libsForQt5.fcitx5-qt
+    ];
+  };
+
 
   home-manager = {
     useGlobalPkgs = true;
