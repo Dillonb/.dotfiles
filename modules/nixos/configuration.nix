@@ -10,15 +10,6 @@ let
   dataMaster = fetchTarball "https://github.com/NixOS/nixpkgs/archive/master.tar.gz";
   pkgsMaster = import (dataMaster) { config = pkgsConfig; };
   home-manager = fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
-  discover-flatpak = pkgs.symlinkJoin
-  {
-    name = "discover-flatpak-backend";
-    paths = [ pkgs.libsForQt5.discover ];
-    buildInputs = [ pkgs.makeWrapper ];
-    postBuild = ''
-      wrapProgram $out/bin/plasma-discover --add-flags "--backends flatpak"
-    '';
-  };
 in
 {
   nixpkgs.config = pkgsConfig // {
@@ -26,7 +17,11 @@ in
       vscode = pkgsMaster.vscode;
     };
   };
-  imports = [ ./this-machine.nix "${home-manager}/nixos" ];
+  imports = [ 
+    ./this-machine.nix
+    "${home-manager}/nixos"
+    ./modules/flatpak-support.nix
+  ];
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -128,7 +123,6 @@ in
       feh
       keymapp # flashing ZSA keyboards
       wally-cli # also for flashing ZSA keyboards (cli tool)
-      discover-flatpak
 
       # Gaming
       # runelite
@@ -344,12 +338,6 @@ in
       remotePlay.openFirewall = true;
     };
   };
-
-
-  # Flatpak
-  services.flatpak.enable = true;
-  xdg.portal.enable = true;
-  fonts.fontDir.enable = true;
 
   # Services
   services = {
