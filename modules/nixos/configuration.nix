@@ -181,6 +181,7 @@ in
       simplescreenrecorder
       teamspeak_client
       nextcloud-client
+      kicad
     ];
     shell = pkgs.zsh;
   };
