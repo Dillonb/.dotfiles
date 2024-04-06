@@ -118,6 +118,9 @@ in
       # google-chrome
       # microsoft-edge
 
+      # Mail
+      mailspring
+
       # Util
       scrot
       feh
