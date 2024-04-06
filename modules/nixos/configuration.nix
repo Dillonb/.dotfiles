@@ -201,6 +201,14 @@ in
     users.dillon = {pkgs, ...}: {
       home.stateVersion = "23.11";
 
+      gtk = {
+        enable = true;
+        theme = {
+          name = "Breeze-Dark";
+          package = pkgs.libsForQt5.breeze-gtk;
+        };
+      };
+
       programs.alacritty = {
         enable = true;
         settings = {
