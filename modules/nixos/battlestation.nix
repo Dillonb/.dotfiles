@@ -77,6 +77,12 @@
     package = config.boot.kernelPackages.nvidiaPackages.production;
   };
 
+  # udev rules and software for configuring logitech unifying recivers
+  # hardware.logitech.wireless = {
+  #   enable = true;
+  #   enableGraphical = true;
+  # };
+
   # Nvidia in Docker
   virtualisation.containers.cdi.dynamic.nvidia.enable = true;
 
