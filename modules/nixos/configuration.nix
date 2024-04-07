@@ -109,7 +109,7 @@ in
     extraGroups = [
       # Should be self explanatory
       "networkmanager" "wheel" "docker" "audio" "video" "input"
-      # for SDR
+      # for SDR/logitech unifying
       "plugdev"
     ];
     packages = with pkgs; [
