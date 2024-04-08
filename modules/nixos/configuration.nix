@@ -21,6 +21,11 @@ in
     ./this-machine.nix
     "${home-manager}/nixos"
     ./modules/flatpak-support.nix
+    ./modules/ime.nix
+    ./modules/kde.nix
+    ./modules/pulseaudio.nix
+    ./modules/home-manager.nix
+    ./modules/packages.nix
   ];
 
   # Configure network proxy if necessary
@@ -48,50 +53,8 @@ in
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the KDE Plasma Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
-
-  # Configure keymap in X11
-  services.xserver = {
-    xkb.layout = "us";
-    xkb.variant = "";
-    xkb.options = "caps:ctrl_modifier"; # Caps lock is also control
-  };
-  console.useXkbConfig = true; # Use xserver keyboard settings in virtual terminals
-
   # Enable CUPS to print documents.
   services.printing.enable = true;
-
-  # Allows processes to request realtime priority. Pulseaudio needs this.
-  security.rtkit.enable = true;
-
-  # Sound
-  sound.enable = true;
-  hardware.pulseaudio = {
-    enable = true;
-    support32Bit = true;
-  };
-
-  services.pipewire = {
-    # Disable pulseaudio above, change enable below to true and uncomment the first 3 options to try Pipewire again.
-    # I had a lot of problems with it when I tried it, specifically with my headset.
-    enable = false;
-    # alsa.enable = true;
-    # alsa.support32Bit = true;
-    # pulse.enable = true;
-
-    # Everything else in here was commented out in the default config.
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
-  };
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
@@ -101,6 +64,15 @@ in
   hardware.rtl-sdr.enable = true;
   # ZSA keyboard udev rule
   hardware.keyboard.zsa.enable = true;
+
+  fonts.packages = with pkgs; [
+      hasklig
+      terminus_font
+      dejavu_fonts
+      hack-font
+      noto-fonts-cjk
+      noto-fonts-cjk-sans
+  ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.dillon = {
@@ -112,214 +84,10 @@ in
       # for SDR/logitech unifying
       "plugdev"
     ];
-    packages = with pkgs; [
-      # Browser
-      # firefox # configured with programs.firefox below
-      # google-chrome
-      # microsoft-edge
-
-      # Mail
-      mailspring
-
-      # Util
-      scrot
-      feh
-      keymapp # flashing ZSA keyboards
-      wally-cli # also for flashing ZSA keyboards (cli tool)
-      remmina
-
-      # Gaming
-      # runelite
-      chiaki # ps5 remote play
-      lutris
-      moonlight-qt
-
-      # Terminal
-      alacritty
-      kitty
-
-      # Chat
-      discord
-      signal-desktop
-      keybase
-      keybase-gui
-      hexchat
-
-      # Dev
-      # vscode should be used through distrobox
-      ghidra
-      nil # nix language server
-      nixpkgs-fmt
-      emacs
-      sublime-merge
-      imhex
-      renderdoc
-      zeal
-      nasm
-      pyright # python language server
-      pipenv
-
-      # Notes
-      obsidian
-
-      # Misc/Media
-      spotify
-      spotify-qt
-      # plex-media-player - install plex desktop from flatpak
-      mpv
-      gimp
-      audacity
-      gnuradio
-      simplescreenrecorder
-      teamspeak_client
-      nextcloud-client
-      kicad
-    ];
     shell = pkgs.zsh;
   };
 
-  fonts.packages = with pkgs; [
-      hasklig
-      terminus_font
-      dejavu_fonts
-      hack-font
-      noto-fonts-cjk
-      noto-fonts-cjk-sans
-  ];
-
-  i18n.inputMethod = {
-    enabled = "fcitx5";
-    fcitx5.addons = with pkgs; [
-      fcitx5-anthy
-      libsForQt5.fcitx5-qt
-    ];
-  };
-
-
-  home-manager = {
-    useGlobalPkgs = true;
-    users.dillon = {pkgs, ...}: {
-      home.stateVersion = "23.11";
-
-      gtk = {
-        enable = true;
-        theme = {
-          name = "Breeze-Dark";
-          package = pkgs.libsForQt5.breeze-gtk;
-        };
-      };
-
-      programs.alacritty = {
-        enable = true;
-        settings = {
-          keyboard.bindings = [
-            {
-              key = "T";
-              mods = "Control|Shift";
-              action = "SpawnNewInstance"; 
-            }
-            {
-              key = "N";
-              mods = "Control|Shift";
-              action = "SpawnNewInstance"; 
-            }
-          ];
-          font.size = 12;
-        };
-      };
-
-      systemd.user.services = {
-        _1password = {
-          Unit = {
-            Description = "1password gui";
-            Requires = "graphical-session.target";
-            After = "graphical-session.target";
-          };
-
-          Install = {
-            Alias = "1password.service";
-            WantedBy = [ "graphical-session.target" ];
-            Before = [ "spotifyd.service" ]; # Ensure 1password is running before spotifyd starts
-          };
-
-          Service = {
-            ExecStart = "${lib.getExe pkgs._1password-gui} --silent";
-            Type = "exec";
-            Restart = "always";
-          };
-        };
-      };
-
-      services.spotifyd = {
-        enable = true;
-        settings.global = {
-          bitrate = 320;
-          username = "dillonbeliveau";
-          password_cmd = "/home/dillon/.dotfiles/local/bin/get-spotify-password";
-        };
-      };
-    };
-  };
-
   security.sudo.wheelNeedsPassword = false;
-
-  # List packages installed in system profile.
-  environment.systemPackages = with pkgs; [
-    # System status
-    htop
-    btop
-    ncdu
-    neofetch
-    iotop
-    nethogs
-    nload
-
-    # Editor
-    vim-full # vim-full includes gvim compared to the regular vim package
-    neovim
-
-    # Misc utils
-    wget
-    fzf
-    direnv
-    tmux
-    silver-searcher
-    bat
-    dos2unix
-    mosh
-    jq
-    killall
-    xorg.xkill
-    usbutils # for lsusb
-    pciutils # for lspci
-    nix-search-cli
-    nix-index
-    nix-output-monitor
-    file
-    netcat-gnu
-    iodine
-    networkmanager-iodine
-    tsocks
-    tshark
-    wireshark
-    mitmproxy
-    inetutils
-
-    # Dev/Scripting
-    git
-    python3
-    docker-compose
-    valgrind
-    mypy
-    distrobox
-
-    # Fun
-    fortune
-
-    # Backup
-    restic
-    rclone
-  ];
 
   virtualisation.docker.enable = true;
 
@@ -383,7 +151,6 @@ in
       22 # SSH
     ];
   };
-
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
