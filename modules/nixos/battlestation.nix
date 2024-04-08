@@ -1,10 +1,11 @@
 # Configuration specific to my desktop PC
-{ config, lib, pkgs, modulesPath, ... }:
+{ config, lib, modulesPath, ... }:
 
 {
   imports =
     [
       (modulesPath + "/installer/scan/not-detected.nix")
+      ./modules/sunshine.nix
     ];
 
   # Bootloader.
@@ -88,26 +89,6 @@
 
   # VMWare Workstation
   virtualisation.vmware.host.enable = true;
-
-  environment.systemPackages = with pkgs; [
-    sunshine
-  ];
-
-  # Needed for KMS capture mode - unsure if needed for X11
-  security.wrappers.sunshine = with pkgs; {
-    owner = "dillon";
-    group = "users";
-    capabilities = "cap_sys_admin+p";
-    source = "${sunshine}/bin/sunshine";
-  };
-
-  networking.firewall = {
-    allowedTCPPorts = [ 47984 47989 47990 48010 ]; # Sunshine
-    allowedUDPPortRanges = [
-      { from = 47998; to = 48000; } # Sunshine
-    ];
-  };
-
 
   # KDE Connect
   programs.kdeconnect.enable = true;
