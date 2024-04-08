@@ -26,6 +26,7 @@ in
     ./modules/pulseaudio.nix
     ./modules/home-manager.nix
     ./modules/packages.nix
+    ./modules/appimage-support.nix
   ];
 
   # Configure network proxy if necessary
