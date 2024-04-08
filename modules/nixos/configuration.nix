@@ -75,16 +75,18 @@ in
   ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.dillon = {
-    isNormalUser = true;
-    description = "Dillon Beliveau";
-    extraGroups = [
-      # Should be self explanatory
-      "networkmanager" "wheel" "docker" "audio" "video" "input"
-      # for SDR/logitech unifying
-      "plugdev"
-    ];
-    shell = pkgs.zsh;
+  users = {
+    defaultUserShell = pkgs.zsh;
+    users.dillon = {
+      isNormalUser = true;
+      description = "Dillon Beliveau";
+      extraGroups = [
+        # Should be self explanatory
+        "networkmanager" "wheel" "docker" "audio" "video" "input"
+        # for SDR/logitech unifying
+        "plugdev"
+      ];
+    };
   };
 
   security.sudo.wheelNeedsPassword = false;
