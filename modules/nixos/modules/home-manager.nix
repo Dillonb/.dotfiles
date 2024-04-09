@@ -11,6 +11,27 @@
           name = "Breeze-Dark";
           package = pkgs.libsForQt5.breeze-gtk;
         };
+        cursorTheme = {
+          name = "breeze_cursors";
+          size = 24;
+          package = pkgs.libsForQt5.breeze-gtk;
+        };
+        iconTheme = {
+          name = "breeze-dark";
+          package = pkgs.libsForQt5.breeze-gtk;
+        };
+        font = {
+          name = "Noto Sans";
+          size = 10;
+          package = pkgs.noto-fonts;
+        };
+        gtk2.extraConfig =''
+          gtk-enable-animations=1
+          gtk-primary-button-warps-slider=0
+          gtk-toolbar-style=3
+          gtk-menu-images=1
+          gtk-button-images=1
+        '';
       };
 
       programs.alacritty = {
