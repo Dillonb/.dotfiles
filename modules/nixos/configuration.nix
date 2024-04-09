@@ -127,8 +127,15 @@ in
     enable = true;
     defaultApplications = {
       "text/html" = "firefox.desktop";
+      "x-scheme-handler/http" = "firefox.desktop";
+      "scheme-handler/http" = "firefox.desktop";
+      "x-scheme-handler/https" = "firefox.desktop";
+      "scheme-handler/https" = "firefox.desktop";
     };
   };
+  # Cover all my bases
+  environment.sessionVariables.BROWSER = "firefox";
+  environment.sessionVariables.DEFAULT_BROWSER = "firefox";
 
   # Services
   services = {
