@@ -4,7 +4,7 @@
     # Browser
     # firefox # configured with programs.firefox below
     # google-chrome
-    # microsoft-edge
+    microsoft-edge
 
     # Mail
     mailspring

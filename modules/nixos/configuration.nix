@@ -123,6 +123,13 @@ in
     };
   };
 
+  xdg.mime = {
+    enable = true;
+    defaultApplications = {
+      "text/html" = "firefox.desktop";
+    };
+  };
+
   # Services
   services = {
     lorri.enable = true;
