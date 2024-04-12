@@ -4,17 +4,20 @@ let
   pkgsConfig = {
     allowUnfree = true;
     permittedInsecurePackages = [
-      # "electron-25.9.0" # Needed for Obsidian
+       "electron-25.9.0" # Needed for Obsidian
     ];
   };
   dataMaster = fetchTarball "https://github.com/NixOS/nixpkgs/archive/master.tar.gz";
   pkgsMaster = import (dataMaster) { config = pkgsConfig; };
+  dataStable = fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-23.11.tar.gz";
+  pkgsStable = import (dataStable) { config = pkgsConfig; };
   home-manager = fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
 in
 {
   nixpkgs.config = pkgsConfig // {
     packageOverrides = pkgs: {
       vscode = pkgsMaster.vscode;
+      obsidian = pkgsStable.obsidian;
     };
   };
   imports = [ 
