@@ -102,6 +102,7 @@
     wireshark
     mitmproxy
     inetutils
+    asciinema
 
     # Dev/Scripting
     git
