@@ -86,7 +86,7 @@ in
       description = "Dillon Beliveau";
       extraGroups = [
         # Should be self explanatory
-        "networkmanager" "wheel" "docker" "audio" "video" "input"
+        "networkmanager" "wheel" "docker" "audio" "video" "input" "wireshark"
         # for SDR/logitech unifying
         "plugdev"
       ];
@@ -124,6 +124,8 @@ in
       remotePlay.openFirewall = true;
       extraCompatPackages = with pkgs; [ proton-ge-bin ];
     };
+
+    wireshark.enable = true;
   };
 
   xdg.mime = {
