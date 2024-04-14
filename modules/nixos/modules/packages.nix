@@ -101,6 +101,7 @@
     mitmproxy
     inetutils
     asciinema
+    unzip
 
     # Dev/Scripting
     git
