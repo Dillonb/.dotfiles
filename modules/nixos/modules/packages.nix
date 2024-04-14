@@ -19,7 +19,7 @@
     # Gaming
     # runelite
     chiaki # ps5 remote play
-    lutris
+    # lutris
     moonlight-qt
 
     # Terminal
