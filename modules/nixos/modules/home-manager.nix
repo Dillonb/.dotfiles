@@ -2,6 +2,7 @@
 {
   home-manager = {
     useGlobalPkgs = true;
+    backupFileExtension = "home-manager-backup";
     users.dillon = {pkgs, ...}: {
       home.stateVersion = "23.11";
 
@@ -25,13 +26,6 @@
           size = 10;
           package = pkgs.noto-fonts;
         };
-        gtk2.extraConfig =''
-          gtk-enable-animations=1
-          gtk-primary-button-warps-slider=0
-          gtk-toolbar-style=3
-          gtk-menu-images=1
-          gtk-button-images=1
-        '';
       };
 
       programs.alacritty = {
