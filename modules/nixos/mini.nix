@@ -10,6 +10,7 @@ in
       (modulesPath + "/installer/scan/not-detected.nix")
       # https://github.com/NixOS/nixos-hardware/tree/master/dell/xps/13-9300
       (import "${nixosHardware}/dell/xps/13-9300/default.nix")
+      ./modules/bluetooth.nix
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
