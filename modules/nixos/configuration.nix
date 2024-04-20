@@ -17,7 +17,7 @@ in
   nixpkgs.config = pkgsConfig // {
     packageOverrides = pkgs: {
       vscode = pkgsMaster.vscode;
-      obsidian = pkgsStable.obsidian;
+      # obsidian = pkgsStable.obsidian;
     };
   };
   imports = [ 
