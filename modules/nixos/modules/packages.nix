@@ -102,6 +102,7 @@
     inetutils
     asciinema
     unzip
+    pavucontrol
 
     # Dev/Scripting
     git
