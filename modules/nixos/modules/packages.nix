@@ -75,6 +75,8 @@
     # Editor
     vim-full # vim-full includes gvim compared to the regular vim package
     neovim
+    neovim-qt
+    neovide
 
     # Misc utils
     wget
