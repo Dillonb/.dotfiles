@@ -30,6 +30,7 @@ in
     ./modules/home-manager.nix
     ./modules/packages.nix
     ./modules/appimage-support.nix
+    ./modules/libreoffice.nix
   ];
 
   # Configure network proxy if necessary
