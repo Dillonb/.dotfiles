@@ -17,7 +17,6 @@
     remmina
 
     # Gaming
-    runelite
     chiaki # ps5 remote play
     # lutris
     moonlight-qt
