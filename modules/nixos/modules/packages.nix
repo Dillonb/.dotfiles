@@ -61,6 +61,7 @@
     teamspeak_client
     nextcloud-client
     kicad
+    virt-manager # Installed as a package to remotely connect to a machine running libvirt
 
     # System status
     htop
