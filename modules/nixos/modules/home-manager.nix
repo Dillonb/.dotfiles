@@ -1,8 +1,11 @@
-{lib, ...}:
+{lib, pkgs, ...}:
+let 
+timestamp = "${pkgs.runCommand "timestamp" { env.when = builtins.currentTime; } "echo -n `date -d @$when +%Y-%m-%d_%H-%M-%S` > $out"}";
+in
 {
   home-manager = {
     useGlobalPkgs = true;
-    backupFileExtension = "home-manager-backup";
+    backupFileExtension = "home-manager-backup-${timestamp}";
     users.dillon = {pkgs, ...}: {
       home.stateVersion = "23.11";
 
