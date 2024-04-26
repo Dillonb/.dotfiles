@@ -64,4 +64,8 @@ in
     };
   };
 
+  environment.systemPackages = with pkgs; [
+    acpi
+  ];
+
 }
