@@ -23,6 +23,7 @@ in
   imports = [ 
     ./this-machine.nix
     "${home-manager}/nixos"
+    ./modules/custom-options.nix
     ./modules/flatpak-support.nix
     ./modules/ime.nix
     ./modules/kde.nix
