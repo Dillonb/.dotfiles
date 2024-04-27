@@ -1,6 +1,7 @@
-{lib, pkgs, ...}:
+{config, lib, pkgs, ...}:
 let 
 timestamp = "${pkgs.runCommand "timestamp" { env.when = builtins.currentTime; } "echo -n `date -d @$when +%Y-%m-%d_%H-%M-%S` > $out"}";
+dgbCustom = config.dgbCustom;
 in
 {
   home-manager = {
@@ -46,7 +47,7 @@ in
               action = "SpawnNewInstance"; 
             }
           ];
-          font.size = 12;
+          font.size = dgbCustom.alacritty.fontSize;
         };
       };
 
