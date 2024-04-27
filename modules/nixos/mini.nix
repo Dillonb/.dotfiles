@@ -68,4 +68,6 @@ in
     acpi
   ];
 
+  dgbCustom.alacritty.fontSize = 9;
+
 }
