@@ -104,6 +104,7 @@
     inetutils
     asciinema
     unzip
+    zip
     pavucontrol
 
     # Dev/Scripting
