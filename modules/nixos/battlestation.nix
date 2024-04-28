@@ -86,7 +86,8 @@
   # };
 
   # Nvidia in Docker
-  virtualisation.containers.cdi.dynamic.nvidia.enable = true;
+  # virtualisation.containers.cdi.dynamic.nvidia.enable = true;
+  hardware.nvidia-container-toolkit.enable = true;
 
   # VMWare Workstation
   virtualisation.vmware.host.enable = true;
