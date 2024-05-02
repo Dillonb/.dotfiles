@@ -62,7 +62,6 @@ in
           Install = {
             Alias = "1password.service";
             WantedBy = [ "graphical-session.target" ];
-            Before = [ "spotifyd.service" ]; # Ensure 1password is running before spotifyd starts
           };
 
           Service = {
@@ -70,15 +69,6 @@ in
             Type = "exec";
             Restart = "always";
           };
-        };
-      };
-
-      services.spotifyd = {
-        enable = true;
-        settings.global = {
-          bitrate = 320;
-          username = "dillonbeliveau";
-          password_cmd = "/home/dillon/.dotfiles/local/bin/get-spotify-password";
         };
       };
     };
