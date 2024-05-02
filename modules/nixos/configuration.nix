@@ -159,14 +159,6 @@ in
       # mlocate and plocate don't support this option - set it to null to silence a warning.
       localuser = null;
     };
-    autossh.sessions = [
-      {
-        extraArguments = "-N -L9000:localhost:9000 dillon@dgb.sh";
-        monitoringPort = 20000;
-        name = "dgb-sh";
-        user = "dillon";
-      }
-    ];
   };
 
   # Open ports in the firewall.
