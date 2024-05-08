@@ -86,11 +86,9 @@
   # };
 
   # Nvidia in Docker
+  virtualisation.docker.enableNvidia = true;
   # virtualisation.containers.cdi.dynamic.nvidia.enable = true;
-  hardware.nvidia-container-toolkit.enable = true;
-
-  # VMWare Workstation
-  virtualisation.vmware.host.enable = true;
+  # hardware.nvidia-container-toolkit.enable = true;
 
   # KDE Connect
   programs.kdeconnect.enable = true;

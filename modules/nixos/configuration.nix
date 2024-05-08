@@ -5,18 +5,17 @@ let
     allowUnfree = true;
     permittedInsecurePackages = [
        "electron-25.9.0" # Needed for Obsidian
+       "mailspring-1.12.0"
     ];
   };
-  dataMaster = fetchTarball "https://github.com/NixOS/nixpkgs/archive/master.tar.gz";
-  pkgsMaster = import (dataMaster) { config = pkgsConfig; };
-  dataStable = fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-23.11.tar.gz";
-  pkgsStable = import (dataStable) { config = pkgsConfig; };
-  home-manager = fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
+  # dataMaster = fetchTarball "https://github.com/NixOS/nixpkgs/archive/master.tar.gz";
+  # pkgsMaster = import (dataMaster) { config = pkgsConfig; };
+  home-manager = fetchTarball "https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz";
 in
 {
   nixpkgs.config = pkgsConfig // {
     packageOverrides = pkgs: {
-      vscode = pkgsMaster.vscode;
+      # vscode = pkgsMaster.vscode;
       # obsidian = pkgsStable.obsidian;
     };
   };
@@ -128,6 +127,7 @@ in
     };
 
     wireshark.enable = true;
+    dconf.enable = true; # for home-manager
   };
 
   xdg.mime = {

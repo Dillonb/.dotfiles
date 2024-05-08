@@ -6,7 +6,7 @@ in
 {
   home-manager = {
     useGlobalPkgs = true;
-    backupFileExtension = "home-manager-backup-${timestamp}";
+    backupFileExtension = "home-manager-backup-${builtins.readFile timestamp}";
     users.dillon = {pkgs, ...}: {
       home.stateVersion = "23.11";
 
