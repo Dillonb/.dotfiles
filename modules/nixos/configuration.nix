@@ -15,7 +15,7 @@ in
 {
   nixpkgs.config = pkgsConfig // {
     packageOverrides = pkgs: {
-      # vscode = pkgsMaster.vscode;
+      vscode = pkgsMaster.vscode;
       # obsidian = pkgsStable.obsidian;
       sublime-merge = pkgsMaster.sublime-merge;
     };
@@ -160,6 +160,12 @@ in
       # mlocate and plocate don't support this option - set it to null to silence a warning.
       localuser = null;
     };
+  };
+
+  # Remove me when https://github.com/NixOS/nixpkgs/pull/275024 is on stable
+  systemd.user.services.lorri.serviceConfig = {
+    ProtectSystem = pkgs.lib.mkForce "full";
+    ProtectHome = pkgs.lib.mkForce false;
   };
 
   # Open ports in the firewall.
