@@ -33,7 +33,7 @@
     hexchat
 
     # Dev
-    # vscode should be used through distrobox
+    vscode
     ghidra
     nil # nix language server
     nixpkgs-fmt
@@ -113,7 +113,7 @@
     docker-compose
     valgrind
     mypy
-    distrobox
+    # distrobox
 
     # Fun
     fortune
