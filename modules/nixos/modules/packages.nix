@@ -45,6 +45,8 @@
     nasm
     pyright # python language server
     pipenv
+    ocaml
+    opam
 
     # Notes
     obsidian
