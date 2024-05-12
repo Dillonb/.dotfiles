@@ -203,6 +203,7 @@ map <leader>p :CtrlPBuffer<CR>
 
 "Close current buffer
 map <leader>w :bdelete<CR>
+map <C-w> :bdelete<CR>
 
 "Open new tab
 map <leader>t :tabnew<CR>
