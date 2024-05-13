@@ -8,8 +8,12 @@ let
        "mailspring-1.12.0"
     ];
   };
+  dataUnstable = fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
+  pkgsUnstable = import (dataUnstable) { config = pkgsConfig; };
+
   dataMaster = fetchTarball "https://github.com/NixOS/nixpkgs/archive/master.tar.gz";
   pkgsMaster = import (dataMaster) { config = pkgsConfig; };
+
   home-manager = fetchTarball "https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz";
 in
 {
@@ -18,6 +22,7 @@ in
       vscode = pkgsMaster.vscode-fhs;
       # obsidian = pkgsStable.obsidian;
       sublime-merge = pkgsMaster.sublime-merge;
+      ghidra = pkgsUnstable.ghidra;
     };
   };
   imports = [ 
