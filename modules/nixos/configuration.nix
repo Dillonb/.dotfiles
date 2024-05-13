@@ -25,7 +25,7 @@ in
       ghidra = pkgsUnstable.ghidra;
     };
   };
-  imports = [ 
+  imports = [
     ./this-machine.nix
     "${home-manager}/nixos"
     ./modules/custom-options.nix
