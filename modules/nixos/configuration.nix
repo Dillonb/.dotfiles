@@ -15,7 +15,7 @@ in
 {
   nixpkgs.config = pkgsConfig // {
     packageOverrides = pkgs: {
-      vscode = pkgsMaster.vscode;
+      vscode = pkgsMaster.vscode-fhs;
       # obsidian = pkgsStable.obsidian;
       sublime-merge = pkgsMaster.sublime-merge;
     };
