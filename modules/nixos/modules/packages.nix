@@ -47,6 +47,21 @@
     pipenv
     ocaml
     opam
+    gdb
+    lldb
+    git
+    python3
+    docker-compose
+    valgrind
+    mypy
+    gh
+
+    # Sec
+    tcpdump
+    nmap
+    burpsuite
+    foremost
+    hashcat
 
     # Notes
     obsidian
@@ -108,14 +123,6 @@
     unzip
     zip
     pavucontrol
-
-    # Dev/Scripting
-    git
-    python3
-    docker-compose
-    valgrind
-    mypy
-    # distrobox
 
     # Fun
     fortune
