@@ -70,9 +70,6 @@ if command -v nixos-rebuild &>/dev/null; then
 fi
 alias arch-fastestmirrors="curl -s \"https://archlinux.org/mirrorlist/?country=US&country=CA&protocol=https&use_mirror_status=on\" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 -"
 
-export SPARK SPARK_LOCAL_IP="127.0.0.1"
-export MAVEN_OPTS="-Xms512m -Xmx1024m"
-
 function grephistory {
     git rev-list --all | xargs git grep $1
 }
@@ -108,15 +105,4 @@ fi
 
 if command -v thefuck &>/dev/null; then
     eval $(thefuck --alias)
-fi
-
-if command -v distrobox &>/dev/null; then
-    # arch alias only if distrobox is available"
-    alias arch="distrobox enter arch"
-    if ! command -v code &>/dev/null; then
-        # If the distrobox command is available but the code command is not, alias code to run in distrobox
-        alias code="distrobox enter arch -- code"
-    fi
-else
-    unalias code arch >/dev/null 2>/dev/null
 fi
