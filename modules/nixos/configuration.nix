@@ -23,6 +23,9 @@ in
       # obsidian = pkgsStable.obsidian;
       sublime-merge = pkgsMaster.sublime-merge;
       ghidra = pkgsUnstable.ghidra;
+      keybase = pkgsUnstable.keybase;
+      keybase-gui = pkgsUnstable.keybase-gui;
+      kbfs = pkgsUnstable.kbfs;
     };
   };
   imports = [
