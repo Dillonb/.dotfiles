@@ -4,8 +4,7 @@ let
   pkgsConfig = {
     allowUnfree = true;
     permittedInsecurePackages = [
-       "electron-25.9.0" # Needed for Obsidian
-       "mailspring-1.12.0"
+      #  "electron-25.9.0" # Needed for Obsidian on stable
     ];
   };
   dataUnstable = fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
@@ -20,12 +19,13 @@ in
   nixpkgs.config = pkgsConfig // {
     packageOverrides = pkgs: {
       vscode = pkgsMaster.vscode-fhs;
-      # obsidian = pkgsStable.obsidian;
+      obsidian = pkgsUnstable.obsidian;
       sublime-merge = pkgsMaster.sublime-merge;
       ghidra = pkgsUnstable.ghidra;
       keybase = pkgsUnstable.keybase;
       keybase-gui = pkgsUnstable.keybase-gui;
       kbfs = pkgsUnstable.kbfs;
+      mailspring = pkgsUnstable.mailspring;
     };
   };
   imports = [
