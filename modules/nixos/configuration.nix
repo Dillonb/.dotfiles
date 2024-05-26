@@ -26,6 +26,7 @@ in
       keybase-gui = pkgsUnstable.keybase-gui;
       kbfs = pkgsUnstable.kbfs;
       mailspring = pkgsUnstable.mailspring;
+      gruvbox-plus-icons = pkgsUnstable.gruvbox-plus-icons;
     };
   };
   imports = [
