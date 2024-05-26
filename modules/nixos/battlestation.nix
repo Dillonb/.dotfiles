@@ -86,8 +86,11 @@ in
     modesetting.enable = true;
     open = false;
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.production;
+    # package = config.boot.kernelPackages.nvidiaPackages.production;
+    package = nvidia_555_42_02;
   };
+
+  # boot.kernelParams = [ "nvidia-drm.modeset=1" "nvidia-drm.fbdev=1" ];
 
   # udev rules and software for configuring logitech unifying recivers
   # hardware.logitech.wireless = {
