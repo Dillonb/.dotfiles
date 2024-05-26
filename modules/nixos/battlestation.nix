@@ -108,4 +108,7 @@ in
 
   # I dual boot Windows on this machine, so store the time in local time.
   time.hardwareClockInLocalTime = true;
+
+  # Fixes some Wayland stuff on Nvidia
+  environment.sessionVariables = { NIXOS_OZONE_WL = "1"; };
 }
