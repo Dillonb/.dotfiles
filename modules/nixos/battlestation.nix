@@ -93,10 +93,10 @@ in
   # boot.kernelParams = [ "nvidia-drm.modeset=1" "nvidia-drm.fbdev=1" ];
 
   # udev rules and software for configuring logitech unifying recivers
-  # hardware.logitech.wireless = {
-  #   enable = true;
-  #   enableGraphical = true;
-  # };
+  hardware.logitech.wireless = {
+    enable = true;
+    enableGraphical = true;
+  };
 
   # Nvidia in Docker
   virtualisation.docker.enableNvidia = true;
