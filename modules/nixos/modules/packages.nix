@@ -16,6 +16,12 @@
     wally-cli # also for flashing ZSA keyboards (cli tool)
     remmina
 
+    # themes
+    kde-gruvbox
+    gruvbox-dark-gtk
+    gruvbox-plus-icons
+    capitaine-cursors-themed
+
     # Gaming
     chiaki # ps5 remote play
     # lutris
