@@ -172,12 +172,6 @@ in
     };
   };
 
-  # Remove me when https://github.com/NixOS/nixpkgs/pull/275024 is on stable
-  systemd.user.services.lorri.serviceConfig = {
-    ProtectSystem = pkgs.lib.mkForce "full";
-    ProtectHome = pkgs.lib.mkForce false;
-  };
-
   # Open ports in the firewall.
   networking.firewall = {
     enable = true;
