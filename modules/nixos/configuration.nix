@@ -88,6 +88,7 @@ in
       hack-font
       noto-fonts-cjk
       noto-fonts-cjk-sans
+      cascadia-code
   ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
