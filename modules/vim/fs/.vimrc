@@ -231,6 +231,9 @@ map gd :ALEGoToDefinition<CR>
 " capital K gives help information
 nnoremap <s-k> :ALEHover<CR>
 
+" Go to implementation
+nnoremap <leader>gi :LspGotoImpl<CR>
+
 " Find usages
 nnoremap <leader>fu :ALEFindReferences<CR>
 
