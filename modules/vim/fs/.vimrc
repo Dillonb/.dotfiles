@@ -156,7 +156,14 @@ if v:version >= 900
     if len(lspServers) > 0
         autocmd VimEnter * call LspAddServer(lspServers)
 
-        let lspOpts = #{ autoHighlightDiags: v:true, aleSupport: v:true, autoHighlight: v:true, showInlayHints: v:true }
+        let lspOpts = #{
+                    \autoHighlightDiags: v:true,
+                    \aleSupport: v:true,
+                    \autoHighlight: v:true,
+                    \showInlayHints: v:true,
+                    \semanticHighlight: v:true
+                \}
+
         autocmd VimEnter * call LspOptionsSet(lspOpts)
     endif
 endif
