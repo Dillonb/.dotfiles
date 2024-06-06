@@ -1,4 +1,4 @@
-# Note: I had a lot of problems with pipewire when I tried it, specifically with my headset.
+{pkgs, ...}:
 {
   security.rtkit.enable = true;
   services.pipewire = {
@@ -6,12 +6,14 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-
-    # If you want to use JACK applications, uncomment this
     jack.enable = true;
 
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
+    # Should fix audio crackling issues
+    # TODO: different values for desktop and laptop?
+    extraConfig.pipewire."92-low-latency" = {
+      context.properties.default.clock.min-quantum = 512;
+    };
+
   };
+  environment.systemPackages = with pkgs; [ easyeffects ];
 }
