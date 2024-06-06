@@ -36,8 +36,8 @@ in
     ./modules/flatpak-support.nix
     ./modules/ime.nix
     ./modules/kde.nix
-    ./modules/pulseaudio.nix
-    # ./modules/pipewire.nix
+    # ./modules/pulseaudio.nix
+    ./modules/pipewire.nix
     ./modules/home-manager.nix
     ./modules/packages.nix
     ./modules/appimage-support.nix
