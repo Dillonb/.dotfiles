@@ -15,5 +15,8 @@
     };
 
   };
-  environment.systemPackages = with pkgs; [ easyeffects ];
+  environment.systemPackages = with pkgs; [ 
+    easyeffects
+    qpwgraph
+  ];
 }
