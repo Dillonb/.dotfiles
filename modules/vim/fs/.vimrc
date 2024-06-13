@@ -153,6 +153,15 @@ if v:version >= 900
             \ }]
     endif
 
+    if executable("jdtls") == 1
+        let lspServers = lspServers + [#{
+            \	  name: 'jdtls',
+            \	  filetype: ['java'],
+            \	  path: 'jdtls',
+            \	  args: []
+            \ }]
+    endif
+
     if len(lspServers) > 0
         autocmd VimEnter * call LspAddServer(lspServers)
 
