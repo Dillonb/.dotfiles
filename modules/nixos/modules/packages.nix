@@ -8,6 +8,7 @@
 
     # Mail
     mailspring
+    protonmail-desktop
 
     # Util
     scrot
