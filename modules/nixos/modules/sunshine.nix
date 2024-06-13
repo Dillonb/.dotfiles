@@ -1,12 +1,14 @@
 { config, pkgs, ... }:
 
+let sunshine = pkgs.sunshine.override { cudaSupport = true; };
+in
 {
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = [
     sunshine
   ];
 
   # Needed for KMS capture mode - unsure if needed for X11
-  security.wrappers.sunshine = with pkgs; {
+  security.wrappers.sunshine = {
     owner = "dillon";
     group = "users";
     capabilities = "cap_sys_admin+p";
