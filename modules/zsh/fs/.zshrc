@@ -64,8 +64,10 @@ alias gbr="git for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %
 if command -v nixos-rebuild &>/dev/null; then
     if command -v nom &>/dev/null; then
         alias nixupdate="sudo nixos-rebuild switch --upgrade |& nom"
+        alias nixupdate-boot="sudo nixos-rebuild boot --upgrade |& nom"
     else
         alias nixupdate="sudo nixos-rebuild switch --upgrade"
+        alias nixupdate-boot="sudo nixos-rebuild boot --upgrade"
     fi
 fi
 alias arch-fastestmirrors="curl -s \"https://archlinux.org/mirrorlist/?country=US&country=CA&protocol=https&use_mirror_status=on\" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 -"
