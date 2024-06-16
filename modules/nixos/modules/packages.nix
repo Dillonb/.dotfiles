@@ -16,6 +16,8 @@
     # keymapp # flashing ZSA keyboards
     wally-cli # also for flashing ZSA keyboards (cli tool)
     remmina
+    wl-clipboard # Wayland clipboard from cli
+    xclip # X11 clipboard from cli
 
     # themes
     kde-gruvbox
