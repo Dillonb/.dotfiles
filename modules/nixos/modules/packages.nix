@@ -47,7 +47,6 @@
     ghidra
     nil # nix language server
     nixpkgs-fmt
-    emacs
     sublime-merge
     imhex
     renderdoc

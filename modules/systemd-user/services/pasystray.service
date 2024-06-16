@@ -1,8 +1,0 @@
-[Unit]
-Description=Pasystray
-
-[Service]
-ExecStart=/usr/bin/pasystray
-
-[Install]
-WantedBy=default.target
