@@ -73,6 +73,7 @@
     burpsuite
     foremost
     hashcat
+    proxmark3
 
     # Notes
     obsidian
