@@ -118,7 +118,7 @@ require("lazy").setup({
 
     -- Tabs
     {
-      'romgrk/barbar.nvim', 
+      'romgrk/barbar.nvim',
       dependencies = {
         -- Filetype icons
         'nvim-tree/nvim-web-devicons',
@@ -144,7 +144,7 @@ require("lazy").setup({
 
     -- Search
     {
-      'nvim-telescope/telescope.nvim', 
+      'nvim-telescope/telescope.nvim',
       branch = '0.1.x',
       dependencies = { 'nvim-lua/plenary.nvim' },
       config = function()
