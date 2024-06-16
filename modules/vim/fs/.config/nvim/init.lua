@@ -161,7 +161,16 @@ require("lazy").setup({
       init = function()
         require("betterquit").setup{}
       end,
-    }
+    },
+
+    -- Set the working directory to the root of the project
+    {
+      'notjedi/nvim-rooter.lua', 
+      lazy = false,
+      init = function()
+        require('nvim-rooter').setup()
+      end,
+    },
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {
