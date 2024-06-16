@@ -66,6 +66,7 @@
     lua-language-server
     ripgrep
     fd
+    cmake-language-server
 
     # Sec
     tcpdump
