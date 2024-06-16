@@ -148,8 +148,15 @@ require("lazy").setup({
           autocmd = { enabled = true }
         })
       end,
-    }
+    },
 
+    -- :q closes the current tab/buffer, and only closes Neovim if this buffer is the last one.
+    {
+      'Dillonb/betterquit.nvim',
+      init = function()
+        require("betterquit").setup{}
+      end,
+    }
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {
