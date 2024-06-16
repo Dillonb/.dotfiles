@@ -1,2 +1,0 @@
-xrandr --output HDMI-0 --right-of LVDS-0 --auto
-xrandr --output LVDS-0 --primary
