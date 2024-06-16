@@ -62,6 +62,9 @@
     valgrind
     mypy
     gh
+    lua-language-server
+    ripgrep
+    fd
 
     # Sec
     tcpdump
