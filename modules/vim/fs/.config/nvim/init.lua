@@ -26,6 +26,12 @@ vim.opt.expandtab = true
 vim.opt.modeline = true
 vim.opt.modelines = 5
 
+-- Persistent undo between sessions
+vim.opt.undodir = vim.fn.stdpath('config') .. '/undo'
+vim.opt.undofile = true
+vim.opt.undolevels = 1000
+vim.opt.undoreload = 1000
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -85,7 +91,7 @@ require("lazy").setup({
 
     -- Nicer status line
     {
-      'bling/vim-airline',
+      'vim-airline/vim-airline',
       config = function()
         vim.g.airline_section_b = '%{strftime("%c")}'
       end,
@@ -110,8 +116,11 @@ require("lazy").setup({
         -- go to the next tab
         vim.keymap.set('n', '<leader>l', ':BufferNext<CR>');
         vim.keymap.set('n', '<leader>L', ':BufferPrevious<CR>');
+        vim.keymap.set('n', '<C-w>', ':BufferClose<CR>');
       end,
     },
+
+    -- File browser
     {'ms-jpq/chadtree', lazy = false},
 
     -- Search
@@ -163,7 +172,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
 
     -- Switch between C/C++ source and header files
-    vim.keymap.set('n', '<leader>sh', ':ClangdSwitchSourceHeader')
+    vim.keymap.set('n', '<leader>sh', ':ClangdSwitchSourceHeader<CR>')
 
     -- quick fix (LSP code actions)
     vim.keymap.set('n', '<leader>qf', vim.lsp.buf.code_action, opts)
