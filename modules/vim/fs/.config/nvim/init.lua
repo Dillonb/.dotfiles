@@ -202,24 +202,32 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     -- shift-k for hover information about a symbol
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+    vim.cmd.amenu([[PopUp.LSP\ hover <Cmd>lua vim.lsp.buf.hover()<CR>]])
 
     -- gd to go to definition
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+    vim.cmd.amenu([[PopUp.Go\ to\ definition <Cmd>lua vim.lsp.buf.definition()<CR>]])
 
     -- gi to go to implementation
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
 
     -- <leader> rn to rename the symbol under the cursor
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
+    vim.cmd.amenu([[PopUp.Rename\ symbol <Cmd>lua vim.lsp.buf.rename()<CR>]])
 
     -- Switch between C/C++ source and header files
     vim.keymap.set('n', '<leader>sh', ':ClangdSwitchSourceHeader<CR>')
 
     -- quick fix (LSP code actions)
     vim.keymap.set('n', '<leader>qf', vim.lsp.buf.code_action, opts)
+    vim.cmd.amenu([[PopUp.Code\ action <Cmd>lua vim.lsp.buf.code_action()<CR>]])
 
     -- Find usages
     vim.keymap.set('n', '<leader>fu', ':Telescope lsp_references<CR>')
+    vim.cmd.amenu([[PopUp.Find\ usages <Cmd>:Telescope lsp_references<CR>]])
+
+    -- ctrl-p in insert mode to get 'signature help' for the function call you're currently writing
+    vim.keymap.set('i', '<C-p>', vim.lsp.buf.signature_help, opts)
 
     -- enable clangd inlay hints
     require("clangd_extensions.inlay_hints").setup_autocmd()
@@ -234,4 +242,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.bo[bufnr].tagfunc = "v:lua.vim.lsp.tagfunc"
     end
   end,
+})
+
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function(args)
+    vim.cmd.aunmenu([[PopUp.How-to\ disable\ mouse]])
+  end
 })
