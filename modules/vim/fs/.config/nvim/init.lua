@@ -99,12 +99,7 @@ require("lazy").setup({
     'tpope/vim-surround',
 
     -- Nicer status line
-    {
-      'vim-airline/vim-airline',
-      config = function()
-        vim.g.airline_section_b = '%{strftime("%c")}'
-      end,
-    },
+    'vim-airline/vim-airline',
 
     -- Show git changes on the left side of the window
     'airblade/vim-gitgutter',
@@ -175,6 +170,9 @@ require("lazy").setup({
         require('nvim-rooter').setup()
       end,
     },
+
+    -- Git integration
+    'tpope/vim-fugitive'
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {
