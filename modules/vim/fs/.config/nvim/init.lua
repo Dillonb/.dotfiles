@@ -19,7 +19,7 @@ vim.opt.smartcase = true
 -- No word wrap
 vim.opt.wrap = false
 
--- Default formatting settings. 
+-- Default formatting settings.
 -- vim-sleuth will determine these automatically most of the time,
 -- so these are just for when it can't.
 vim.opt.tabstop = 2
@@ -228,6 +228,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     -- ctrl-p in insert mode to get 'signature help' for the function call you're currently writing
     vim.keymap.set('i', '<C-p>', vim.lsp.buf.signature_help, opts)
+
+    -- Search for symbols in project
+    vim.keymap.set('n', '<leader>s', ':Telescope lsp_dynamic_workspace_symbols<CR>')
 
     -- enable clangd inlay hints
     require("clangd_extensions.inlay_hints").setup_autocmd()
