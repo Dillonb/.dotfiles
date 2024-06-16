@@ -78,6 +78,7 @@ require("lazy").setup({
         lspconfig.nil_ls.setup(coq.lsp_ensure_capabilities())
         lspconfig.jdtls.setup(coq.lsp_ensure_capabilities())
         lspconfig.ocamllsp.setup(coq.lsp_ensure_capabilities())
+        lspconfig.cmake.setup(coq.lsp_ensure_capabilities())
       end,
     },
 
