@@ -1,5 +1,0 @@
-[Unit]
-Description=Periodically sync tasks with taskserver
-
-[Timer]
-OnCalendar=*:0/30

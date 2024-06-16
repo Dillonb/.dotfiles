@@ -1,6 +1,0 @@
-[Unit]
-Description=Syncs tasks with taskserver
-
-[Service]
-Type=oneshot
-ExecStart=/usr/bin/task sync

@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-if ! command -v acpi &> /dev/null
-then
-    cat /sys/class/power_supply/cw2015-battery/capacity
-else
-    ~/.dotfiles/modules/i3/i3blocks_scripts/battery_acpi
-fi
