@@ -38,6 +38,7 @@
     keybase
     keybase-gui
     hexchat
+    element-desktop
 
     # Dev
     vscode
