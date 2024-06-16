@@ -45,6 +45,7 @@ export PATH
 export JAVA_HOME
 if type "direnv" > /dev/null; then
     export EDITOR="nvim"
+    alias vim="nvim"
 else
     export EDITOR="vim"
 fi
