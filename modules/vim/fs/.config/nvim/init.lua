@@ -182,6 +182,15 @@ require("lazy").setup({
 
     -- Commenting
     'tpope/vim-commentary',
+
+    -- Automatically close braces, parens, etc, and allows you to type "through" 
+    {
+      'windwp/nvim-autopairs',
+      init = function()
+        require("nvim-autopairs").setup()
+      end
+    }
+
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {
