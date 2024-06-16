@@ -34,6 +34,12 @@ vim.opt.undofile = true
 vim.opt.undolevels = 1000
 vim.opt.undoreload = 1000
 
+-- Show tab characters and trailing whitespace
+vim.opt.list = true
+
+-- Use system clipboard
+vim.cmd [[ set clipboard+=unnamedplus ]]
+
 -- Automatically install lazy.nvim if it's not already installed
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -164,7 +170,7 @@ require("lazy").setup({
 
     -- Set the working directory to the root of the project
     {
-      'notjedi/nvim-rooter.lua', 
+      'notjedi/nvim-rooter.lua',
       lazy = false,
       init = function()
         require('nvim-rooter').setup()
@@ -172,7 +178,10 @@ require("lazy").setup({
     },
 
     -- Git integration
-    'tpope/vim-fugitive'
+    'tpope/vim-fugitive',
+
+    -- Commenting
+    'tpope/vim-commentary',
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {
