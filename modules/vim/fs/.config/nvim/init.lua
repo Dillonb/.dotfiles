@@ -19,10 +19,12 @@ vim.opt.smartcase = true
 -- No word wrap
 vim.opt.wrap = false
 
+-- Default formatting settings. 
+-- vim-sleuth will determine these automatically most of the time,
+-- so these are just for when it can't.
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
-
 vim.opt.modeline = true
 vim.opt.modelines = 5
 
@@ -32,8 +34,8 @@ vim.opt.undofile = true
 vim.opt.undolevels = 1000
 vim.opt.undoreload = 1000
 
+-- Automatically install lazy.nvim if it's not already installed
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   vim.fn.system({
     "git",
@@ -45,6 +47,8 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   })
 end
 vim.opt.rtp:prepend(lazypath)
+
+-- Install and setup plugins
 require("lazy").setup({
     -- LSP
     {
