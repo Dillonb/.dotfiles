@@ -43,7 +43,11 @@ export LANG=en_US.UTF-8
 export PATH
 #JAVA_HOME=/opt/java
 export JAVA_HOME
-export EDITOR="vim"
+if type "direnv" > /dev/null; then
+    export EDITOR="nvim"
+else
+    export EDITOR="vim"
+fi
 
 # aliases
 alias root="sudo -Es"
