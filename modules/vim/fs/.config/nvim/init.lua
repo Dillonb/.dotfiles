@@ -58,9 +58,11 @@ require("lazy").setup({
         -- Additional sources
         { 'ms-jpq/coq.thirdparty', branch = "3p" },
         -- coq requires treesitter
-        'nvim-treesitter/nvim-treesitter',
+        "nvim-treesitter/nvim-treesitter",
         -- Extra features for clangd LSP
         "p00f/clangd_extensions.nvim",
+        -- Extra features for jdtls
+        "mfussenegger/nvim-jdtls"
       },
       init = function()
         vim.g.coq_settings = {
@@ -74,6 +76,8 @@ require("lazy").setup({
         lspconfig.pyright.setup(coq.lsp_ensure_capabilities())
         lspconfig.clangd.setup(coq.lsp_ensure_capabilities())
         lspconfig.nil_ls.setup(coq.lsp_ensure_capabilities())
+        lspconfig.jdtls.setup(coq.lsp_ensure_capabilities())
+        lspconfig.ocamllsp.setup(coq.lsp_ensure_capabilities())
       end,
     },
 
