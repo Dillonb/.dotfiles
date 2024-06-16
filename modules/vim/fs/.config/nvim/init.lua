@@ -37,6 +37,9 @@ vim.opt.undoreload = 1000
 -- Show tab characters and trailing whitespace
 vim.opt.list = true
 
+-- Always show at least this many lines above and below the cursor when scrolling
+vim.opt.scrolloff = 5
+
 -- Use system clipboard
 vim.cmd [[ set clipboard+=unnamedplus ]]
 
