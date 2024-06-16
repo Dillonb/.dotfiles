@@ -134,7 +134,13 @@ require("lazy").setup({
     },
 
     -- File browser
-    {'ms-jpq/chadtree', lazy = false},
+    {
+      'ms-jpq/chadtree',
+      lazy = false,
+      init = function()
+        vim.keymap.set('n', '<leader>t', ':CHADopen<CR>');
+      end
+    },
 
     -- Search
     {
