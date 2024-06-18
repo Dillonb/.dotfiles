@@ -3,6 +3,9 @@ vim.opt.encoding = "utf-8"
 vim.opt.compatible = false
 vim.opt.showcmd = true
 
+-- 24 bit color
+vim.opt.termguicolors = true
+
 -- Spacebar as leader key
 vim.g.mapleader = ' '
 
