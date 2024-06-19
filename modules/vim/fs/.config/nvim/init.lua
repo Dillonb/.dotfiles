@@ -247,7 +247,20 @@ require("lazy").setup({
       init = function()
         require('overseer').setup()
       end
-    }
+    },
+
+    -- Debugger
+    {
+      'mfussenegger/nvim-dap',
+      init = function()
+        local dap = require("dap")
+        dap.adapters.gdb = {
+          type = "executable",
+          command = "gdb",
+          args = { "-i", "dap" }
+        }
+      end
+    },
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {
