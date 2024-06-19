@@ -1,5 +1,5 @@
 {config, lib, pkgs, ...}:
-let 
+let
 timestamp = "${pkgs.runCommand "timestamp" { env.when = builtins.currentTime; } "echo -n `date -d @$when +%Y-%m-%d_%H-%M-%S` > $out"}";
 dgbCustom = config.dgbCustom;
 in
@@ -39,15 +39,20 @@ in
             {
               key = "T";
               mods = "Control|Shift";
-              action = "SpawnNewInstance"; 
+              action = "SpawnNewInstance";
             }
             {
               key = "N";
               mods = "Control|Shift";
-              action = "SpawnNewInstance"; 
+              action = "SpawnNewInstance";
             }
           ];
-          font.size = dgbCustom.alacritty.fontSize;
+          font = {
+            size = dgbCustom.alacritty.fontSize;
+            normal = { family = dgbCustom.alacritty.fontFamily; style = "Regular"; };
+            bold   = { family = dgbCustom.alacritty.fontFamily; style = "Bold"; };
+            italic = { family = dgbCustom.alacritty.fontFamily; style = "Italic"; };
+          };
         };
       };
 
