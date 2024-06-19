@@ -159,7 +159,7 @@ require("lazy").setup({
       'ms-jpq/chadtree',
       lazy = false,
       init = function()
-        vim.keymap.set('n', '<leader>t', ':CHADopen<CR>');
+        vim.keymap.set('n', '<leader>b', ':CHADopen<CR>');
       end
     },
 
@@ -181,7 +181,7 @@ require("lazy").setup({
     },
 
     -- show a lightbulb emoji when LSP code actions are available
-    { 
+    {
       'kosayoda/nvim-lightbulb',
       init = function()
         require("nvim-lightbulb").setup({
@@ -229,8 +229,25 @@ require("lazy").setup({
       init = function()
         require("nvim-autopairs").setup()
       end
-    }
+    },
 
+    -- Embedded toggleable terminal
+    {
+      'akinsho/toggleterm.nvim',
+      version = "*",
+      config = true,
+      init = function()
+        vim.keymap.set('n', '<leader>t', ':ToggleTerm<CR>');
+      end
+    },
+
+    -- Task runner
+    {
+      'stevearc/overseer.nvim',
+      init = function()
+        require('overseer').setup()
+      end
+    }
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {
