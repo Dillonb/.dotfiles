@@ -1,10 +1,20 @@
 {pkgs, lib, ...}:
 {
   options.dgbCustom = {
-    alacritty.fontSize = lib.mkOption {
-      type = with pkgs.lib; types.int;
-      default = 12;
-      description = "The font size for alacritty";
+    alacritty = {
+
+      fontSize = lib.mkOption {
+        type = with pkgs.lib; types.int;
+        default = 14;
+        description = "The font size for Alacritty";
+      };
+
+      fontFamily = lib.mkOption {
+        type = with pkgs.lib; types.string;
+        default = "Cascadia Code";
+        description = "The font family for Alacritty";
+      };
+
     };
   };
 }
