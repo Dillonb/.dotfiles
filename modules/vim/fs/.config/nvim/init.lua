@@ -193,7 +193,17 @@ require("lazy").setup({
     'tpope/vim-fugitive',
 
     -- Commenting
-    'tpope/vim-commentary',
+    {
+      'tpope/vim-commentary',
+      lazy = false,
+      init = function()
+        -- map ctrl-/ to toggle comments
+        -- Some terminals will send ctrl-/ as ctrl-_
+        -- but some (newer?) will send it correctly, so map both
+        vim.keymap.set({'n', 'v'}, '<C-_>', ":Commentary<CR>", opts)
+        vim.keymap.set({'n', 'v'}, '<C-/>', ":Commentary<CR>", opts)
+      end,
+    },
 
     -- Automatically close braces, parens, etc, and allows you to type "through" 
     {
