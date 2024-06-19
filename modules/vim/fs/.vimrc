@@ -80,9 +80,7 @@ NeoBundle 'bling/vim-airline'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-repeat'
 NeoBundle 'tpope/vim-sleuth'
-"NeoBundle 'Rykka/riv.vim'
 NeoBundle 'airblade/vim-gitgutter'
-NeoBundle 'yegappan/lsp'
 NeoBundle 'wincent/terminus'
 NeoBundle 'preservim/nerdtree'
 
@@ -124,59 +122,6 @@ let g:tex_flavor='latex'
 
 NeoBundleCheck
 call neobundle#end()
-
-if v:version >= 900
-    let lspServers = []
-    if executable("clangd") == 1
-        let lspServers = lspServers + [#{
-            \	  name: 'clang',
-            \	  filetype: ['c', 'cpp'],
-            \	  path: 'clangd',
-            \	  args: ['--background-index']
-            \ }]
-    endif
-
-    if executable("pyright") == 1
-        let lspServers = lspServers + [#{
-            \	  name: 'pyright',
-            \	  filetype: ['python'],
-            \	  path: 'pyright',
-            \	  args: ['--watch']
-            \ }]
-    endif
-
-    if executable("nil") == 1
-        let lspServers = lspServers + [#{
-            \	  name: 'nil',
-            \	  filetype: ['nix'],
-            \	  path: 'nil',
-            \	  args: ['--stdio']
-            \ }]
-    endif
-
-    if executable("jdtls") == 1
-        let lspServers = lspServers + [#{
-            \	  name: 'jdtls',
-            \	  filetype: ['java'],
-            \	  path: 'jdtls',
-            \	  args: []
-            \ }]
-    endif
-
-    if len(lspServers) > 0
-        autocmd VimEnter * call LspAddServer(lspServers)
-
-        let lspOpts = #{
-                    \autoHighlightDiags: v:true,
-                    \aleSupport: v:true,
-                    \autoHighlight: v:true,
-                    \showInlayHints: v:true,
-                    \semanticHighlight: v:true
-                \}
-
-        autocmd VimEnter * call LspOptionsSet(lspOpts)
-    endif
-endif
 
 "Color scheme
 syntax enable
@@ -239,14 +184,11 @@ map <leader>h :tabprevious<CR>
 "Browse current directory
 map <leader>bd :Explore<CR>
 
-"Go to definition with LSP
+"Go to definition with Ale
 map gd :ALEGoToDefinition<CR>
 
 " capital K gives help information
 nnoremap <s-k> :ALEHover<CR>
-
-" Go to implementation
-nnoremap <leader>gi :LspGotoImpl<CR>
 
 " Find usages
 nnoremap <leader>fu :ALEFindReferences<CR>
@@ -262,7 +204,6 @@ filetype plugin on
 "
 " Exit Vim if NERDTree is the only window remaining in the only tab.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-
 
 " Always open new buffers as tabs
 autocmd BufAdd,BufNewFile,BufRead * nested tab sball
