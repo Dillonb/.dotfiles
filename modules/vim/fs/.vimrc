@@ -210,7 +210,11 @@ autocmd filetype crontab setlocal nobackup nowritebackup
 "Key Bindings
 
 " ctrl-/ to toggle comments
+" some terminals send ctrl-/ as C-_,
+" some (newer?) send it correctly as C-/
+" so map both
 noremap <C-_> <plug>NERDCommenterToggle
+noremap <C-/> <plug>NERDCommenterToggle
 
 "Pop up list of all files in current dir
 map <leader>o :CtrlP<CR>
