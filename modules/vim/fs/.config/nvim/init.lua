@@ -89,12 +89,30 @@ require("lazy").setup({
         local lspconfig = require('lspconfig')
         local coq = require('coq')
 
-        lspconfig.pyright.setup(coq.lsp_ensure_capabilities())
-        lspconfig.clangd.setup(coq.lsp_ensure_capabilities())
-        lspconfig.nil_ls.setup(coq.lsp_ensure_capabilities())
-        lspconfig.jdtls.setup(coq.lsp_ensure_capabilities())
-        lspconfig.ocamllsp.setup(coq.lsp_ensure_capabilities())
-        lspconfig.cmake.setup(coq.lsp_ensure_capabilities())
+        if vim.fn.executable("pyright") then
+          lspconfig.pyright.setup(coq.lsp_ensure_capabilities())
+        end
+
+        if vim.fn.executable("clangd") then
+          lspconfig.clangd.setup(coq.lsp_ensure_capabilities())
+        end
+
+        if vim.fn.executable("nil") then
+          lspconfig.nil_ls.setup(coq.lsp_ensure_capabilities())
+        end
+
+        if vim.fn.executable("jdtls") then
+          lspconfig.jdtls.setup(coq.lsp_ensure_capabilities())
+        end
+
+        if vim.fn.executable("ocamllsp") then
+          lspconfig.ocamllsp.setup(coq.lsp_ensure_capabilities())
+        end
+
+        if vim.fn.executable("cmake-language-server") then
+          lspconfig.cmake.setup(coq.lsp_ensure_capabilities())
+        end
+
       end,
     },
 
