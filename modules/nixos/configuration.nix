@@ -89,6 +89,7 @@ in
       noto-fonts-cjk
       noto-fonts-cjk-sans
       cascadia-code
+      (nerdfonts.override { fonts = [ "CascadiaCode" ]; })
   ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
