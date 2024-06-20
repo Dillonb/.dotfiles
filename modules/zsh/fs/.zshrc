@@ -1,10 +1,7 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
-if command -v oh-my-posh &>/dev/null; then
-    # if oh-my-posh is available, use that for theming
-    eval "$(oh-my-posh init zsh --config ~/.dotfiles/modules/zsh/ys.omp.json)"
-else
+if ! command -v oh-my-posh &>/dev/null; then
     # Set name of the theme to load.
     # Look in ~/.oh-my-zsh/themes/
     # Optionally, if you set this to "random", it'll load a random theme each
@@ -121,4 +118,7 @@ if command -v thefuck &>/dev/null; then
     eval $(thefuck --alias)
 fi
 
-eval "$(oh-my-posh init zsh --config ~/.dotfiles/modules/zsh/ys.omp.json)"
+if command -v oh-my-posh &>/dev/null; then
+    # if oh-my-posh is available, use that for theming
+    eval "$(oh-my-posh init zsh --config ~/.dotfiles/modules/zsh/ys.omp.json)"
+fi
