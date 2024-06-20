@@ -24,6 +24,7 @@
     gruvbox-dark-gtk
     gruvbox-plus-icons
     capitaine-cursors-themed
+    oh-my-posh
 
     # Gaming
     chiaki # ps5 remote play
