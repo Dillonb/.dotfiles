@@ -10,8 +10,8 @@
       };
 
       fontFamily = lib.mkOption {
-        type = with pkgs.lib; types.string;
-        default = "Cascadia Code";
+        type = with pkgs.lib; types.str;
+        default = "CaskaydiaCove Nerd Font";
         description = "The font family for Alacritty";
       };
 
