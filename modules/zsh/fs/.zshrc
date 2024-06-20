@@ -1,11 +1,16 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-ZSH_THEME="ys"
+if command -v oh-my-posh &>/dev/null; then
+    # if oh-my-posh is available, use that for theming
+    eval "$(oh-my-posh init zsh --config ~/.dotfiles/modules/zsh/ys.omp.json)"
+else
+    # Set name of the theme to load.
+    # Look in ~/.oh-my-zsh/themes/
+    # Optionally, if you set this to "random", it'll load a random theme each
+    # time that oh-my-zsh is loaded.
+    ZSH_THEME="ys"
+fi
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -41,9 +46,8 @@ source $ZSH/oh-my-zsh.sh
 PATH=$PATH:~/.local/bin:~/.dotfiles/local/bin
 export LANG=en_US.UTF-8
 export PATH
-#JAVA_HOME=/opt/java
-export JAVA_HOME
-if type "direnv" > /dev/null; then
+
+if command -v nvim &>/dev/null; then
     export EDITOR="nvim"
     alias vim="nvim"
 else
@@ -116,3 +120,5 @@ fi
 if command -v thefuck &>/dev/null; then
     eval $(thefuck --alias)
 fi
+
+eval "$(oh-my-posh init zsh --config ~/.dotfiles/modules/zsh/ys.omp.json)"
