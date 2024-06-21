@@ -1,5 +1,5 @@
 # Configuration specific to my desktop PC
-{ config, lib, modulesPath, ... }:
+{ config, lib, modulesPath, pkgs, ... }:
 
 let
   nvidia_555_42_02 = config.boot.kernelPackages.nvidiaPackages.mkDriver {
@@ -57,7 +57,7 @@ in
       fsType = "ntfs";
     };
 
-  fileSystems."/arch" =
+  fileSystems."/secondary" =
     { device = "/dev/disk/by-uuid/acd118ca-367e-402f-b351-b90f3c441460";
       fsType = "ext4";
     };
@@ -117,4 +117,21 @@ in
 
   # Fixes some Wayland stuff on Nvidia
   environment.sessionVariables = { NIXOS_OZONE_WL = "1"; };
+
+  # libvirtd
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu = {
+      package = pkgs.qemu_kvm;
+      runAsRoot = true;
+      swtpm.enable = true;
+      ovmf = {
+        enable = true;
+        packages = [(pkgs.OVMF.override {
+            secureBoot = true;
+            tpmSupport = true;
+            }).fd];
+      };
+    };
+  };
 }
