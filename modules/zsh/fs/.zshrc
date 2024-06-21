@@ -72,9 +72,11 @@ alias neovide-config="neovide ~/.config/nvim/init.lua"
 
 if command -v nixos-rebuild &>/dev/null; then
     if command -v nom &>/dev/null; then
+        alias nixrebuild="sudo nixos-rebuild switch |& nom"
         alias nixupdate="sudo nixos-rebuild switch --upgrade |& nom"
         alias nixupdate-boot="sudo nixos-rebuild boot --upgrade |& nom"
     else
+        alias nixrebuild="sudo nixos-rebuild switch"
         alias nixupdate="sudo nixos-rebuild switch --upgrade"
         alias nixupdate-boot="sudo nixos-rebuild boot --upgrade"
     fi
