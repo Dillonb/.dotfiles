@@ -100,7 +100,7 @@ in
       description = "Dillon Beliveau";
       extraGroups = [
         # Should be self explanatory
-        "networkmanager" "wheel" "docker" "audio" "video" "input" "wireshark"
+        "networkmanager" "wheel" "docker" "audio" "video" "input" "wireshark" "libvirtd"
         # for SDR/logitech unifying
         "plugdev"
       ];
