@@ -262,6 +262,14 @@ require("lazy").setup({
         }
       end
     },
+
+    -- Automatic session save/restore
+    {
+      'rmagatti/auto-session',
+      init = function()
+        require('auto-session').setup()
+      end
+    }
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {
