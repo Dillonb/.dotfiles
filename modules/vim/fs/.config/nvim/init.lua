@@ -280,6 +280,15 @@ require("lazy").setup({
       end
     },
 
+    -- UI for debugger
+    {
+      "rcarriga/nvim-dap-ui",
+      dependencies = {
+        "mfussenegger/nvim-dap",
+        "nvim-neotest/nvim-nio"
+      }
+    },
+
     -- Automatic session save/restore
     {
       'rmagatti/auto-session',
