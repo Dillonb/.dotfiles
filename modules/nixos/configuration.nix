@@ -27,6 +27,9 @@ in
       kbfs = pkgsUnstable.kbfs;
       mailspring = pkgsUnstable.mailspring;
       gruvbox-plus-icons = pkgsUnstable.gruvbox-plus-icons;
+      neovim = pkgsUnstable.neovim;
+      neovim-qt = pkgsUnstable.neovim-qt;
+      neovide = pkgsUnstable.neovide;
     };
   };
   imports = [
