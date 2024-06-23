@@ -171,7 +171,8 @@ require("lazy").setup({
       config = function()
         -- Find files by filename
         vim.keymap.set('n', '<leader>o', ':Telescope find_files<CR>');
-        --
+        vim.keymap.set('n', '<C-p>', ':Telescope find_files<CR>');
+
         -- Find currently open files by filename
         vim.keymap.set('n', '<leader>p', ':Telescope buffers<CR>');
 
