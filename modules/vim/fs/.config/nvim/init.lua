@@ -129,7 +129,24 @@ require("lazy").setup({
     'tpope/vim-surround',
 
     -- Nicer status line
-    'vim-airline/vim-airline',
+    {
+      'nvim-lualine/lualine.nvim',
+      dependencies = { 'nvim-tree/nvim-web-devicons' },
+      init = function()
+        require('lualine').setup {
+          options = {
+            theme = 'gruvbox_dark';
+            extensions = {
+              'quickfix',
+              'chadtree',
+              'fugitive',
+              'nvim-dap-ui',
+              'toggleterm'
+            }
+          }
+        }
+      end
+    },
 
     -- Show git changes on the left side of the window
     'airblade/vim-gitgutter',
