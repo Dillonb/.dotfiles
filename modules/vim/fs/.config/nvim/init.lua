@@ -136,13 +136,13 @@ require("lazy").setup({
         require('lualine').setup {
           options = {
             theme = 'gruvbox_dark';
-            extensions = {
-              'quickfix',
-              'chadtree',
-              'fugitive',
-              'nvim-dap-ui',
-              'toggleterm'
-            }
+          },
+          extensions = {
+            'quickfix',
+            'chadtree',
+            'fugitive',
+            'nvim-dap-ui',
+            'toggleterm'
           }
         }
       end
@@ -177,6 +177,7 @@ require("lazy").setup({
       lazy = false,
       init = function()
         vim.keymap.set('n', '<leader>b', ':CHADopen<CR>');
+        vim.cmd.amenu([[PopUp.File\ Browser <Cmd>:CHADopen<CR>]])
       end
     },
 
@@ -286,7 +287,14 @@ require("lazy").setup({
       dependencies = {
         "mfussenegger/nvim-dap",
         "nvim-neotest/nvim-nio"
-      }
+      },
+      init = function()
+        local dap = require("dapui")
+        dap.setup()
+        -- vim.keymap.set('n', '<leader>d', dap.toggle);
+        vim.cmd.amenu([[PopUp.Debug\ UI <Cmd>lua require("dapui").toggle()<CR>]])
+        vim.cmd.amenu([[PopUp.Toggle\ Breakpoint <Cmd>lua require("dap").toggle_breakpoint()<CR>]])
+      end
     },
 
     -- Automatic session save/restore
