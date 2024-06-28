@@ -3,6 +3,9 @@ vim.opt.encoding = "utf-8"
 vim.opt.compatible = false
 vim.opt.showcmd = true
 
+-- Don't add a newline at the end of the file when saving
+vim.opt.fixeol = false
+
 -- 24 bit color
 vim.opt.termguicolors = true
 
@@ -188,8 +191,11 @@ require("lazy").setup({
       dependencies = { 'nvim-lua/plenary.nvim' },
       config = function()
         -- Find files by filename
-        vim.keymap.set('n', '<leader>o', ':Telescope find_files<CR>');
-        vim.keymap.set('n', '<C-p>', ':Telescope find_files<CR>');
+        -- vim.keymap.set('n', '<leader>o', ':Telescope find_files<CR>');
+        vim.keymap.set('n', '<leader>o', ':lua require"telescope.builtin".find_files({ hidden = true })<CR>', {noremap = true, silent = true})
+        -- vim.keymap.set('n', '<C-p>', ':Telescope find_files<CR>');
+        vim.keymap.set('n', '<C-p>', ':lua require"telescope.builtin".find_files({ hidden = true })<CR>', {noremap = true, silent = true})
+
 
         -- Find currently open files by filename
         vim.keymap.set('n', '<leader>p', ':Telescope buffers<CR>');
