@@ -4,7 +4,6 @@ let
   pkgsConfig = {
     allowUnfree = true;
     permittedInsecurePackages = [
-      #  "electron-25.9.0" # Needed for Obsidian on stable
     ];
   };
   dataUnstable = fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
