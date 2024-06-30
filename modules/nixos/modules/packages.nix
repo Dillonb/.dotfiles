@@ -42,6 +42,7 @@
     keybase-gui
     hexchat
     element-desktop
+    slack
 
     # Dev
     vscode
