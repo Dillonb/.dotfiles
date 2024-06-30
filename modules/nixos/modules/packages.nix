@@ -138,6 +138,7 @@
     asciinema
     unzip
     zip
+    p7zip
     pavucontrol
 
     # Fun
