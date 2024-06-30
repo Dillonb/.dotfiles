@@ -13,8 +13,6 @@ let
   pkgsMaster = import (dataMaster) { config = pkgsConfig; };
 
   home-manager = fetchTarball "https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz";
-
-  private-imports = lib.optional (builtins.pathExists /home/dillon/Nextcloud/nix-private-pkgs) /home/dillon/Nextcloud/nix-private-pkgs;
 in
 {
   nixpkgs.config = pkgsConfig // {
@@ -46,7 +44,7 @@ in
     ./modules/packages.nix
     ./modules/appimage-support.nix
     ./modules/libreoffice.nix
-  ] ++ private-imports;
+  ];
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -113,7 +111,12 @@ in
 
   security.sudo.wheelNeedsPassword = false;
 
-  virtualisation.docker.enable = true;
+  virtualisation.containers.enable = true;
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+    defaultNetwork.settings.dns_enabled = true;
+  };
 
   programs = {
     nix-ld.enable = true;
