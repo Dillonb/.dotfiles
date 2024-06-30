@@ -140,6 +140,7 @@
     zip
     p7zip
     pavucontrol
+    distrobox
 
     # Fun
     fortune
