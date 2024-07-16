@@ -36,7 +36,7 @@
     kitty
 
     # Chat
-    discord
+    # discord # get discord through flatpak (for now?)
     signal-desktop
     keybase
     keybase-gui
