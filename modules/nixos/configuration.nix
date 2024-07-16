@@ -3,6 +3,7 @@
 let
   pkgsConfig = {
     allowUnfree = true;
+    nvidia.acceptLicense = true;
     permittedInsecurePackages = [
     ];
   };
