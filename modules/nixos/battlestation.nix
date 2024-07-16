@@ -2,13 +2,11 @@
 { config, lib, modulesPath, pkgs, ... }:
 
 let
-  nvidia_555_58 = config.boot.kernelPackages.nvidiaPackages.mkDriver {
-    version = "555.58";
-    sha256_64bit = "sha256-bXvcXkg2kQZuCNKRZM5QoTaTjF4l2TtrsKUvyicj5ew=";
-    sha256_aarch64 = "sha256-7XswQwW1iFP4ji5mbRQ6PVEhD4SGWpjUJe1o8zoXYRE=";
-    openSha256 = "sha256-hEAmFISMuXm8tbsrB+WiUcEFuSGRNZ37aKWvf0WJ2/c=";
-    settingsSha256 = "sha256-vWnrXlBCb3K5uVkDFmJDVq51wrCoqgPF03lSjZOuU8M=";
-    persistencedSha256 = "sha256-lyYxDuGDTMdGxX3CaiWUh1IQuQlkI2hPEs5LI20vEVw=";
+  nvidia_555_58_02 = config.boot.kernelPackages.nvidiaPackages.mkDriver {
+    version = "555.58.02";
+    sha256_64bit = "sha256-xctt4TPRlOJ6r5S54h5W6PT6/3Zy2R4ASNFPu8TSHKM=";
+    settingsSha256 = "sha256-ZpuVZybW6CFN/gz9rx+UJvQ715FZnAOYfHn5jt5Z2C8=";
+    persistencedSha256 = "sha256-a1D7ZZmcKFWfPjjH1REqPM5j/YLWKnbkP9qfRyIyxAw=";
   };
 in
 {
@@ -87,7 +85,7 @@ in
     open = false;
     nvidiaSettings = true;
     # package = config.boot.kernelPackages.nvidiaPackages.production;
-    package = nvidia_555_58;
+    package = nvidia_555_58_02;
   };
 
   # boot.kernelParams = [ "nvidia-drm.modeset=1" "nvidia-drm.fbdev=1" ];
