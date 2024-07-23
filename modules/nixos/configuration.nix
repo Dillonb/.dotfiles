@@ -135,7 +135,6 @@ in
     ];
 
     zsh.enable = true;
-    noisetorch.enable = true;
     thefuck.enable = true;
 
     firefox.enable = true;

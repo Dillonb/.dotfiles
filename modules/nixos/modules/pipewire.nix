@@ -8,7 +8,6 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     jack.enable = true;
-    # wireplumber.enable = true;
     wireplumber = {
       enable = true;
       configPackages = [
@@ -31,12 +30,6 @@
           ]
         '')
       ];
-    };
-
-    # Should fix audio crackling issues
-    # TODO: different values for desktop and laptop?
-    extraConfig.pipewire."92-low-latency" = {
-      context.properties.default.clock.min-quantum = 512;
     };
 
   };

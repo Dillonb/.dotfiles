@@ -10,4 +10,5 @@
     extraConfig = "unload-module module-role-cork";
   };
   services.pipewire.enable = false;
+  noisetorch.enable = true;
 }
