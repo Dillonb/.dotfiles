@@ -13,8 +13,6 @@ in
   imports =
     [
       (modulesPath + "/installer/scan/not-detected.nix")
-      ../modules/sunshine.nix
-      ../modules/bluetooth.nix
     ];
 
   # Bootloader.
