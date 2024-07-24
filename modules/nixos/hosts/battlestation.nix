@@ -61,7 +61,6 @@ in
   networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp38s0.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlo1.useDHCP = lib.mkDefault true;
-  networking.hostName = "battlestation";
   networking.enableIPv6 = false;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
