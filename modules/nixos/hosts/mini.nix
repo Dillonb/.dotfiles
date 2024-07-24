@@ -1,9 +1,6 @@
 # Configuration specific to my laptop
 { config, lib, pkgs, modulesPath, ... }:
 
-# let
-  # nixosHardware = fetchTarball "https://github.com/NixOS/nixos-hardware/archive/master.tar.gz";
-# in
 {
   imports =
     [
