@@ -74,15 +74,11 @@ if command -v xdg-open &>/dev/null; then
     alias open="xdg-open"
 fi
 
-if command -v nixos-rebuild &>/dev/null; then
-    if command -v nom &>/dev/null; then
-        alias nixrebuild="sudo nixos-rebuild switch --flake ~/.dotfiles/modules/nixos#$(hostname) |& nom"
-        alias nixrebuild-boot="sudo nixos-rebuild boot --flake ~/.dotfiles/modules/nixos#$(hostname) |& nom"
-    else
-        alias nixrebuild="sudo nixos-rebuild switch --flake ~/.dotfiles/modules/nixos#$(hostname)"
-        alias nixrebuild-boot="sudo nixos-rebuild boot --flake ~/.dotfiles/modules/nixos#$(hostname)"
-    fi
+if command -v nh &>/dev/null; then
+    export FLAKE=$(readlink -f ~/.dotfiles/modules/nixos)
+    eval "$(nh completions --shell zsh)"
 fi
+
 alias arch-fastestmirrors="curl -s \"https://archlinux.org/mirrorlist/?country=US&country=CA&protocol=https&use_mirror_status=on\" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 -"
 
 function grephistory {
