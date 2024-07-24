@@ -76,13 +76,11 @@ fi
 
 if command -v nixos-rebuild &>/dev/null; then
     if command -v nom &>/dev/null; then
-        alias nixrebuild="sudo nixos-rebuild switch |& nom"
-        alias nixupdate="sudo nixos-rebuild switch --upgrade |& nom"
-        alias nixupdate-boot="sudo nixos-rebuild boot --upgrade |& nom"
+        alias nixrebuild="sudo nixos-rebuild switch --flake ~/.dotfiles/modules/nixos#battlestation |& nom"
+        alias nixrebuild-boot="sudo nixos-rebuild boot --flake ~/.dotfiles/modules/nixos#battlestation |& nom"
     else
-        alias nixrebuild="sudo nixos-rebuild switch"
-        alias nixupdate="sudo nixos-rebuild switch --upgrade"
-        alias nixupdate-boot="sudo nixos-rebuild boot --upgrade"
+        alias nixrebuild="sudo nixos-rebuild switch --flake ~/.dotfiles/modules/nixos#battlestation"
+        alias nixrebuild-boot="sudo nixos-rebuild boot --flake ~/.dotfiles/modules/nixos#battlestation"
     fi
 fi
 alias arch-fastestmirrors="curl -s \"https://archlinux.org/mirrorlist/?country=US&country=CA&protocol=https&use_mirror_status=on\" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 -"
