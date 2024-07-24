@@ -139,8 +139,8 @@
   services = {
     lorri.enable = true;
     openssh.enable = true;
-    # keybase.enable = true;
-    # kbfs.enable = true;
+    keybase.enable = true;
+    kbfs.enable = true;
     # "discouraged" to turn this off, but Steam downloads are very slow with this on.
     nscd.enableNsncd = false;
 
