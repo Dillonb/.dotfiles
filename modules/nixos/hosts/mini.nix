@@ -1,16 +1,15 @@
 # Configuration specific to my laptop
 { config, lib, pkgs, modulesPath, ... }:
 
-let
-  nixosHardware = fetchTarball "https://github.com/NixOS/nixos-hardware/archive/master.tar.gz";
-in
+# let
+  # nixosHardware = fetchTarball "https://github.com/NixOS/nixos-hardware/archive/master.tar.gz";
+# in
 {
   imports =
     [
       (modulesPath + "/installer/scan/not-detected.nix")
       # https://github.com/NixOS/nixos-hardware/tree/master/dell/xps/13-9300
-      (import "${nixosHardware}/dell/xps/13-9300/default.nix")
-      ./modules/bluetooth.nix
+      # (import "${nixosHardware}/dell/xps/13-9300/default.nix")
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
