@@ -64,7 +64,7 @@
         ];
       };
 
-      mini = nixpkgs.lib.nixosSystem {
+      mini = nixos {
         hostname = "mini";
         system = "x86_64-linux";
         modules = [
