@@ -1,46 +1,11 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 
-let
-  pkgsConfig = {
-    allowUnfree = true;
-    nvidia.acceptLicense = true;
-    permittedInsecurePackages = [
-    ];
-  };
-  dataUnstable = fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
-  pkgsUnstable = import (dataUnstable) { config = pkgsConfig; };
-
-  dataMaster = fetchTarball "https://github.com/NixOS/nixpkgs/archive/master.tar.gz";
-  pkgsMaster = import (dataMaster) { config = pkgsConfig; };
-
-  home-manager = fetchTarball "https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz";
-in
 {
-  nixpkgs.config = pkgsConfig // {
-    packageOverrides = pkgs: {
-      vscode = pkgsMaster.vscode-fhs;
-      obsidian = pkgsUnstable.obsidian;
-      sublime-merge = pkgsMaster.sublime-merge;
-      ghidra = pkgsUnstable.ghidra;
-      keybase = pkgsUnstable.keybase;
-      keybase-gui = pkgsUnstable.keybase-gui;
-      kbfs = pkgsUnstable.kbfs;
-      mailspring = pkgsUnstable.mailspring;
-      gruvbox-plus-icons = pkgsUnstable.gruvbox-plus-icons;
-      neovim = pkgsUnstable.neovim;
-      neovim-qt = pkgsUnstable.neovim-qt;
-      neovide = pkgsUnstable.neovide;
-    };
-  };
   imports = [
-    ./this-machine.nix
-    "${home-manager}/nixos"
     ./modules/custom-options.nix
     ./modules/flatpak-support.nix
     ./modules/ime.nix
     ./modules/kde.nix
-    # ./modules/pulseaudio.nix
-    ./modules/pipewire.nix
     ./modules/home-manager.nix
     ./modules/packages.nix
     ./modules/appimage-support.nix
@@ -174,8 +139,8 @@ in
   services = {
     lorri.enable = true;
     openssh.enable = true;
-    keybase.enable = true;
-    kbfs.enable = true;
+    # keybase.enable = true;
+    # kbfs.enable = true;
     # "discouraged" to turn this off, but Steam downloads are very slow with this on.
     nscd.enableNsncd = false;
 

@@ -7,7 +7,7 @@
     microsoft-edge
 
     # Mail
-    mailspring
+    unstable.mailspring
     protonmail-desktop
 
     # Util
@@ -22,7 +22,7 @@
     # themes
     kde-gruvbox
     gruvbox-dark-gtk
-    gruvbox-plus-icons
+    unstable.gruvbox-plus-icons
     capitaine-cursors-themed
     oh-my-posh
 
@@ -38,18 +38,18 @@
     # Chat
     # discord # get discord through flatpak (for now?)
     signal-desktop
-    keybase
-    keybase-gui
+    # keybase
+    # keybase-gui
     hexchat
     element-desktop
     slack
 
     # Dev
-    vscode
-    ghidra
+    master.vscode
+    unstable.ghidra
     nil # nix language server
     nixpkgs-fmt
-    sublime-merge
+    master.sublime-merge
     imhex
     renderdoc
     zeal
@@ -80,7 +80,7 @@
     proxmark3
 
     # Notes
-    obsidian
+    unstable.obsidian
 
     # Misc/Media
     spotify
@@ -108,9 +108,9 @@
 
     # Editor
     vim-full # vim-full includes gvim compared to the regular vim package
-    neovim
-    neovim-qt
-    neovide
+    unstable.neovim
+    unstable.neovim-qt
+    unstable.neovide
 
     # Misc utils
     wget
