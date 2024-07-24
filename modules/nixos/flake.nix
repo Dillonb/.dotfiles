@@ -16,60 +16,59 @@
 
   outputs = { self, nixpkgs, nixpkgs-unstable, nixpkgs-master, nixos-hardware, home-manager, ... }@inputs:
   let
-    system_x86_64_linux = "x86_64-linux";
     nixpkgs-config = {
       allowUnfree = true;
       nvidia.acceptLicense = true;
     };
-    overlay-unstable = final: prev: {
-        unstable = import nixpkgs-unstable {
-          system = system_x86_64_linux;
-          config = nixpkgs-config;
+    nixos = { hostname, system, modules, extra ? {} }:
+      let
+        overlay-unstable = final: prev: {
+            unstable = import nixpkgs-unstable {
+              system = system;
+              config = nixpkgs-config;
+            };
         };
-    };
 
-    overlay-master = final: prev: {
-        master = import nixpkgs-master {
-          system = system_x86_64_linux;
-          config = nixpkgs-config;
+        overlay-master = final: prev: {
+            master = import nixpkgs-master {
+              system = system;
+              config = nixpkgs-config;
+            };
         };
-    };
-    overlays = ({ config, pkgs, ... }: {
-      nixpkgs.overlays = [ overlay-unstable overlay-master ];
-      nixpkgs.config = nixpkgs-config;
-    });
+        overlays = ({ config, pkgs, ... }: {
+          nixpkgs.overlays = [ overlay-unstable overlay-master ];
+          nixpkgs.config = nixpkgs-config;
+        });
+      in nixpkgs.lib.nixosSystem {
+        system = system;
+        modules = [
+          {
+            networking.hostName = hostname;
+          }
+          ./configuration.nix
+          ./hosts/${hostname}.nix
+          ./modules/pipewire.nix
+          ./modules/bluetooth.nix
+          home-manager.nixosModules.home-manager
+          overlays
+        ] ++ modules;
+      };
   in
   {
     nixosConfigurations = {
-      battlestation = nixpkgs.lib.nixosSystem {
-        system = system_x86_64_linux;
+      battlestation = nixos {
+        hostname = "battlestation";
+        system = "x86_64-linux";
         modules = [
-
-          ./hosts/battlestation.nix
-          ./configuration.nix
-          ./modules/pipewire.nix
           ./modules/sunshine.nix
-          ./modules/bluetooth.nix
-
-
-          overlays
-          home-manager.nixosModules.home-manager
         ];
       };
 
       mini = nixpkgs.lib.nixosSystem {
-        system = system_x86_64_linux;
+        hostname = "mini";
+        system = "x86_64-linux";
         modules = [
-
-          ./hosts/mini.nix
-          ./configuration.nix
-          ./modules/pipewire.nix
-          ./modules/bluetooth.nix
-
           nixos-hardware.nixosModules.dell-xps-13-9300
-
-          overlays
-          home-manager.nixosModules.home-manager
         ];
       };
     };
