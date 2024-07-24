@@ -38,8 +38,7 @@
     # Chat
     # discord # get discord through flatpak (for now?)
     signal-desktop
-    # keybase
-    # keybase-gui
+    keybase-gui
     hexchat
     element-desktop
     slack
