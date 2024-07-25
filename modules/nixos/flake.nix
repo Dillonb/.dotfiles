@@ -20,7 +20,7 @@
       allowUnfree = true;
       nvidia.acceptLicense = true;
     };
-    nixos = { hostname, system, modules, extra ? {} }:
+    nixos = { hostname, system, role, modules, extra ? {} }:
       let
         overlay-unstable = final: prev: {
             unstable = import nixpkgs-unstable {
@@ -39,25 +39,31 @@
           nixpkgs.overlays = [ overlay-unstable overlay-master ];
           nixpkgs.config = nixpkgs-config;
         });
+        role-modules = {
+          workstation = [
+            ./workstation.nix
+            ./modules/pipewire.nix
+            ./modules/bluetooth.nix
+          ];
+        };
       in nixpkgs.lib.nixosSystem {
         system = system;
         modules = [
           {
             networking.hostName = hostname;
           }
-          ./configuration.nix
           ./hosts/${hostname}.nix
-          ./modules/pipewire.nix
-          ./modules/bluetooth.nix
           home-manager.nixosModules.home-manager
           overlays
-        ] ++ modules;
+        ] ++ modules 
+          ++ role-modules.${role};
       };
   in
   {
     nixosConfigurations = {
       battlestation = nixos {
         hostname = "battlestation";
+        role = "workstation";
         system = "x86_64-linux";
         modules = [
           ./modules/sunshine.nix
@@ -67,6 +73,7 @@
       mini = nixos {
         hostname = "mini";
         system = "x86_64-linux";
+        role = "workstation";
         modules = [
           nixos-hardware.nixosModules.dell-xps-13-9300
         ];
