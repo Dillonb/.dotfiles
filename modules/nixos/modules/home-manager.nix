@@ -8,7 +8,7 @@ in
     useGlobalPkgs = true;
     # backupFileExtension = "home-manager-backup-${builtins.readFile timestamp}";
     backupFileExtension = "home-manager-backup";
-    users.dillon = {pkgs, ...}: {
+    users.dillon = {pkgs, config, ...}: {
       home.stateVersion = "23.11";
 
       gtk = {
@@ -32,6 +32,9 @@ in
           package = pkgs.noto-fonts;
         };
       };
+
+      # Force home-manager to overwrite ~/.gtkrc-2.0 file
+      home.file.${config.gtk.gtk2.configLocation}.force = true;
 
       programs.alacritty = {
         enable = true;
