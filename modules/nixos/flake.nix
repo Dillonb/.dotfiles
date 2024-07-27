@@ -45,9 +45,20 @@
             ./workstation.nix
             ./modules/pipewire.nix
             ./modules/bluetooth.nix
+            ./modules/custom-options.nix
+            ./modules/flatpak-support.nix
+            ./modules/ime.nix
+            ./modules/kde.nix
+            ./modules/home-manager.nix
+            ./modules/workstation-packages.nix
+            ./modules/common-packages.nix
+            ./modules/appimage-support.nix
+            ./modules/libreoffice.nix
           ];
           server = [
             ./common.nix
+            ./modules/server-packages.nix
+            ./modules/common-packages.nix
           ];
         };
       in nixpkgs.lib.nixosSystem {

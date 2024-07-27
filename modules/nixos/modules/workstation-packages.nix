@@ -46,29 +46,14 @@
     # Dev
     master.vscode
     unstable.ghidra
-    nil # nix language server
-    nixpkgs-fmt
     master.sublime-merge
     imhex
     renderdoc
     zeal
-    nasm
-    pyright # python language server
-    pipenv
     ocaml
     opam
     gdb
     lldb
-    git
-    python3
-    docker-compose
-    valgrind
-    mypy
-    gh
-    lua-language-server
-    ripgrep
-    fd
-    cmake-language-server
 
     # Sec
     tcpdump
@@ -107,46 +92,16 @@
 
     # Editor
     vim-full # vim-full includes gvim compared to the regular vim package
-    unstable.neovim
     unstable.neovim-qt
     unstable.neovide
 
     # Misc utils
-    wget
-    fzf
-    direnv
-    tmux
-    silver-searcher
-    bat
-    dos2unix
-    mosh
-    jq
-    killall
     xorg.xkill
-    usbutils # for lsusb
-    pciutils # for lspci
-    nix-search-cli
-    nix-index
-    nix-output-monitor
-    file
-    netcat-gnu
     iodine
     networkmanager-iodine
     tsocks
     mitmproxy
-    inetutils
-    asciinema
-    unzip
-    zip
-    p7zip
     pavucontrol
     distrobox
-
-    # Fun
-    fortune
-
-    # Backup
-    restic
-    rclone
   ];
 }
