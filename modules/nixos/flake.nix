@@ -41,9 +41,13 @@
         });
         role-modules = {
           workstation = [
+            ./common.nix
             ./workstation.nix
             ./modules/pipewire.nix
             ./modules/bluetooth.nix
+          ];
+          server = [
+            ./common.nix
           ];
         };
       in nixpkgs.lib.nixosSystem {
@@ -55,7 +59,7 @@
           ./hosts/${hostname}.nix
           home-manager.nixosModules.home-manager
           overlays
-        ] ++ modules 
+        ] ++ modules
           ++ role-modules.${role};
       };
   in
@@ -76,6 +80,13 @@
         role = "workstation";
         modules = [
           nixos-hardware.nixosModules.dell-xps-13-9300
+        ];
+      };
+      teamspeak-server = nixos {
+        hostname = "teamspeak-server";
+        system = "x86_64-linux";
+        role = "server";
+        modules = [
         ];
       };
     };
