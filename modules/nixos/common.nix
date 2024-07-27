@@ -31,7 +31,7 @@
       description = "Dillon Beliveau";
       extraGroups = [
         # Should be self explanatory
-        "networkmanager" "wheel" "docker" "audio" "video" "input" "wireshark" "libvirtd"
+        "networkmanager" "wheel" "docker" "podman" "audio" "video" "input" "wireshark" "libvirtd"
         # for SDR/logitech unifying
         "plugdev"
       ];
@@ -65,4 +65,8 @@
 
   security.sudo.wheelNeedsPassword = false;
 
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = "dillonbeliveau@gmail.com";
+  };
 }
