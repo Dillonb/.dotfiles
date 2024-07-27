@@ -1,4 +1,4 @@
-{ ... }:
+{pkgs, ... }:
 {
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
@@ -24,12 +24,36 @@
     };
   };
 
+  users = {
+    defaultUserShell = pkgs.zsh;
+    users.dillon = {
+      isNormalUser = true;
+      description = "Dillon Beliveau";
+      extraGroups = [
+        # Should be self explanatory
+        "networkmanager" "wheel" "docker" "audio" "video" "input" "wireshark" "libvirtd"
+        # for SDR/logitech unifying
+        "plugdev"
+      ];
+    };
+  };
+  nix.settings.trusted-users = [ "@wheel" ];
+
   programs = {
     zsh.enable = true;
     nh.enable = true;
   };
 
-  services.openssh.enable = true;
+  services = {
+    openssh.enable = true;
+    lorri.enable = true;
+    locate = {
+      enable = true;
+      package = pkgs.plocate;
+      # mlocate and plocate don't support this option - set it to null to silence a warning.
+      localuser = null;
+    };
+  };
 
   # Open ports in the firewall.
   networking.firewall = {
@@ -38,5 +62,7 @@
       22 # SSH
     ];
   };
+
+  security.sudo.wheelNeedsPassword = false;
 
 }
