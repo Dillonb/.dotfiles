@@ -31,6 +31,13 @@
       (nerdfonts.override { fonts = [ "CascadiaCode" ]; })
   ];
 
+  virtualisation.containers.enable = true;
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+    defaultNetwork.settings.dns_enabled = true;
+  };
+
   programs = {
     nix-ld.enable = true;
     # Expose dynamic libraries in a normal location.
