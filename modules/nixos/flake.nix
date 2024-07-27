@@ -93,12 +93,14 @@
           nixos-hardware.nixosModules.dell-xps-13-9300
         ];
       };
+
       teamspeak-server = nixos {
         hostname = "teamspeak-server";
         system = "x86_64-linux";
         role = "server";
         modules = [
           ./modules/teamspeak-server.nix
+          ./modules/restic.nix
         ];
       };
     };

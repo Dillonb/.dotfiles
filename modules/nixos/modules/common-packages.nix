@@ -52,12 +52,9 @@
     unzip
     zip
     p7zip
+    rclone
 
     # Fun
     fortune
-
-    # Backup
-    restic
-    rclone
   ];
 }

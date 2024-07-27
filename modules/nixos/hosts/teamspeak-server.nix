@@ -1,5 +1,8 @@
-{ modulesPath, ... }:
+{ modulesPath, lib, pkgs, ... }:
 
+let
+rclone-config = /home/dillon/.config/rclone/rclone.conf;
+in
 {
   imports = [ "${modulesPath}/virtualisation/azure-common.nix" ];
 
@@ -33,5 +36,29 @@
       22 # SSH
       80 443 # Web
     ];
+  };
+
+  # Can't figure this out when using flakes
+  # services.restic = lib.mkIf (builtins.pathExists rclone-config) {
+  services.restic = {
+    backups = {
+      teamspeak-server = {
+        initialize = true;
+        rcloneConfigFile = rclone-config;
+        passwordFile = "${(pkgs.writeText "restic-password" "password")}"; # pls no hack
+        user = "teamspeak";
+        paths = [
+          "/var/log/teamspeak3-server"
+          "/var/lib/teamspeak3-server"
+        ];
+        repository = "rclone:proton:restic-backups/teamspeak-server";
+        pruneOpts = [
+          "--keep-daily 7"
+            "--keep-weekly 5"
+            "--keep-monthly 12"
+            "--keep-yearly 75"
+        ];
+      };
+    };
   };
 }
