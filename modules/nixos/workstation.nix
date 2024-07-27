@@ -31,23 +31,6 @@
       (nerdfonts.override { fonts = [ "CascadiaCode" ]; })
   ];
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users = {
-    defaultUserShell = pkgs.zsh;
-    users.dillon = {
-      isNormalUser = true;
-      description = "Dillon Beliveau";
-      extraGroups = [
-        # Should be self explanatory
-        "networkmanager" "wheel" "docker" "audio" "video" "input" "wireshark" "libvirtd"
-        # for SDR/logitech unifying
-        "plugdev"
-      ];
-    };
-  };
-
-  security.sudo.wheelNeedsPassword = false;
-
   virtualisation.containers.enable = true;
   virtualisation.podman = {
     enable = true;
@@ -108,13 +91,6 @@
     kbfs.enable = true;
     # "discouraged" to turn this off, but Steam downloads are very slow with this on.
     nscd.enableNsncd = false;
-
-    locate = {
-      enable = true;
-      package = pkgs.plocate;
-      # mlocate and plocate don't support this option - set it to null to silence a warning.
-      localuser = null;
-    };
   };
 
   # This value determines the NixOS release from which the default
