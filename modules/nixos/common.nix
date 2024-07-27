@@ -44,13 +44,6 @@
     nh.enable = true;
   };
 
-  virtualisation.containers.enable = true;
-  virtualisation.podman = {
-    enable = true;
-    dockerCompat = true;
-    defaultNetwork.settings.dns_enabled = true;
-  };
-
   services = {
     openssh.enable = true;
     lorri.enable = true;
