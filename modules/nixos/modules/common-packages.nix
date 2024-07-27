@@ -9,7 +9,6 @@
     pipenv
     git
     python3
-    docker-compose
     valgrind
     mypy
     gh

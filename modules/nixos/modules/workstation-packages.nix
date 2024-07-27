@@ -44,6 +44,7 @@
     slack
 
     # Dev
+    docker-compose
     master.vscode
     unstable.ghidra
     master.sublime-merge
