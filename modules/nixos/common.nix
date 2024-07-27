@@ -28,4 +28,15 @@
     zsh.enable = true;
     nh.enable = true;
   };
+
+  services.openssh.enable = true;
+
+  # Open ports in the firewall.
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [
+      22 # SSH
+    ];
+  };
+
 }

@@ -104,7 +104,6 @@
   # Services
   services = {
     lorri.enable = true;
-    openssh.enable = true;
     keybase.enable = true;
     kbfs.enable = true;
     # "discouraged" to turn this off, but Steam downloads are very slow with this on.
@@ -116,14 +115,6 @@
       # mlocate and plocate don't support this option - set it to null to silence a warning.
       localuser = null;
     };
-  };
-
-  # Open ports in the firewall.
-  networking.firewall = {
-    enable = true;
-    allowedTCPPorts = [
-      22 # SSH
-    ];
   };
 
   # This value determines the NixOS release from which the default
