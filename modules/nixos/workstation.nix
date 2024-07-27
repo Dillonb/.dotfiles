@@ -31,13 +31,6 @@
       (nerdfonts.override { fonts = [ "CascadiaCode" ]; })
   ];
 
-  virtualisation.containers.enable = true;
-  virtualisation.podman = {
-    enable = true;
-    dockerCompat = true;
-    defaultNetwork.settings.dns_enabled = true;
-  };
-
   programs = {
     nix-ld.enable = true;
     # Expose dynamic libraries in a normal location.
@@ -86,7 +79,6 @@
 
   # Services
   services = {
-    lorri.enable = true;
     keybase.enable = true;
     kbfs.enable = true;
     # "discouraged" to turn this off, but Steam downloads are very slow with this on.
