@@ -68,6 +68,7 @@
         modules = [
           {
             networking.hostName = hostname;
+            environment.systemPackages = [ agenix.packages.${system}.default ];
           }
           ./hosts/${hostname}.nix
           home-manager.nixosModules.home-manager
