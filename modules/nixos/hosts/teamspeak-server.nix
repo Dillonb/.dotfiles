@@ -8,6 +8,12 @@
 
   virtualisation.docker.enable = true;
 
+  services.teamspeak3 = {
+    enable = true;
+    openFirewall = true;
+    openFirewallServerQuery = true;
+  };
+
   services.nginx = {
     enable = true;
     virtualHosts = {
