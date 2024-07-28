@@ -73,10 +73,7 @@
           home-manager.nixosModules.home-manager
           overlays
           agenix.nixosModules.default
-          {
-            age.secrets."rclone.conf".file = ./secrets/rclone.conf.age;
-            age.secrets."restic".file = ./secrets/restic.age;
-          }
+          ./secrets/load-secrets.nix
         ] ++ modules
           ++ role-modules.${role};
       };
