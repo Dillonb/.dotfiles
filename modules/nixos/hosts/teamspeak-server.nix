@@ -6,6 +6,8 @@
 
   system.stateVersion = "24.05";
 
+  nix.optimise.automatic = true;
+
   virtualisation.docker.enable = true;
 
   services.teamspeak3 = {
