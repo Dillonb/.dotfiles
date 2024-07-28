@@ -6,6 +6,8 @@
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
 
+    agenix.url = "github:ryantm/agenix";
+
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     home-manager = {
@@ -14,7 +16,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, nixpkgs-master, nixos-hardware, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, nixpkgs-master, nixos-hardware, home-manager, agenix, ... }@inputs:
   let
     nixpkgs-config = {
       allowUnfree = true;
@@ -70,6 +72,11 @@
           ./hosts/${hostname}.nix
           home-manager.nixosModules.home-manager
           overlays
+          agenix.nixosModules.default
+          {
+            age.secrets."rclone.conf".file = ./secrets/rclone.conf.age;
+            age.secrets."restic".file = ./secrets/restic.age;
+          }
         ] ++ modules
           ++ role-modules.${role};
       };
