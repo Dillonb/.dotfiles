@@ -34,6 +34,8 @@
         "networkmanager" "wheel" "docker" "podman" "audio" "video" "input" "wireshark" "libvirtd"
         # for SDR/logitech unifying
         "plugdev"
+        # Access to secrets
+        "agenix"
       ];
     };
   };
