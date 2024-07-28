@@ -1,8 +1,4 @@
-{ modulesPath, lib, pkgs, ... }:
-
-let
-rclone-config = /home/dillon/.config/rclone/rclone.conf;
-in
+{ modulesPath, config, lib, pkgs, ... }:
 {
   imports = [ "${modulesPath}/virtualisation/azure-common.nix" ];
 
@@ -43,8 +39,8 @@ in
     backups = {
       teamspeak-server = {
         initialize = true;
-        rcloneConfigFile = rclone-config;
-        passwordFile = "${(pkgs.writeText "restic-password" "password")}"; # pls no hack
+        passwordFile = config.age.secrets.restic.path;
+        rcloneConfigFile = config.age.secrets."rclone.conf".path;
         user = "teamspeak";
         paths = [
           "/var/log/teamspeak3-server"
