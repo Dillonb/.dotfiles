@@ -87,6 +87,7 @@
         system = "x86_64-linux";
         modules = [
           ./modules/sunshine.nix
+          ./modules/restic.nix
         ];
       };
 
