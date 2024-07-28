@@ -1,14 +1,18 @@
 { ... }:
 {
+  users.groups.agenix = {};
+
   age.identityPaths = [
     "/home/dillon/.ssh/id_rsa"
   ];
   age.secrets."rclone.conf" = {
     file = ./rclone.conf.age;
-    owner = "dillon";
+    group = "agenix";
+    mode = "440";
   };
   age.secrets."restic" = {
     file = ./restic.age;
-    owner = "dillon";
+    group = "agenix";
+    mode = "440";
   };
 }

@@ -38,8 +38,7 @@ in
     ];
   };
 
-  # Can't figure this out when using flakes
-  # services.restic = lib.mkIf (builtins.pathExists rclone-config) {
+  users.users.teamspeak.extraGroups = [ "agenix" ]; # secrets access
   services.restic = {
     backups = {
       teamspeak-server = {
