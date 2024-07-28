@@ -1,4 +1,4 @@
-{ modulesPath, config, lib, pkgs, ... }:
+{ modulesPath, config, ... }:
 {
   imports = [ "${modulesPath}/virtualisation/azure-common.nix" ];
 
@@ -49,9 +49,9 @@
         repository = "rclone:proton:restic-backups/teamspeak-server";
         pruneOpts = [
           "--keep-daily 7"
-            "--keep-weekly 5"
-            "--keep-monthly 12"
-            "--keep-yearly 75"
+          "--keep-weekly 5"
+          "--keep-monthly 12"
+          "--keep-yearly 75"
         ];
       };
     };
