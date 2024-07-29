@@ -36,7 +36,7 @@
     kitty
 
     # Chat
-    # discord # get discord through flatpak (for now?)
+    discord
     signal-desktop
     keybase-gui
     hexchat
