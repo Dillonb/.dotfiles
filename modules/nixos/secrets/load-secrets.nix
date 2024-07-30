@@ -15,4 +15,14 @@
     group = "agenix";
     mode = "440";
   };
+  age.secrets."ts3status.properties" = {
+    file = ./ts3status.properties.age;
+    group = "agenix";
+    mode = "440";
+  };
+  age.secrets."ts3status.dev.properties" = {
+    file = ./ts3status.dev.properties.age;
+    group = "agenix";
+    mode = "440";
+  };
 }
