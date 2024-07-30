@@ -14,4 +14,6 @@ in {
   # agenix -e <filename> to edit a secret
   "restic.age".publicKeys = keys;
   "rclone.conf.age".publicKeys = keys;
+  "ts3status.properties.age".publicKeys = keys;
+  "ts3status.dev.properties.age".publicKeys = keys;
 }
