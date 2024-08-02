@@ -25,4 +25,9 @@
     group = "agenix";
     mode = "440";
   };
+  age.secrets."resilio-rclone-config-secret" = {
+    file = ./resilio-rclone-config-secret.age;
+    group = "agenix";
+    mode = "440";
+  };
 }
