@@ -100,6 +100,7 @@
         role = "workstation";
         modules = [
           nixos-hardware.nixosModules.dell-xps-13-9300
+          ./modules/syncthing.nix
         ];
       };
 
