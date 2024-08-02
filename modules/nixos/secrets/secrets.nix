@@ -17,4 +17,6 @@ in {
   "ts3status.dev.properties.age".publicKeys = keys;
   "teamspeak-server-syncthing.key.pem.age".publicKeys = keys;
   "teamspeak-server-syncthing.cert.pem.age".publicKeys = keys;
+  "mini-syncthing.key.pem.age".publicKeys = keys;
+  "mini-syncthing.cert.pem.age".publicKeys = keys;
 }
