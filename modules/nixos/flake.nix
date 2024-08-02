@@ -110,6 +110,7 @@
         modules = [
           ./modules/restic.nix
           ./modules/ts3status.nix
+          ./modules/syncthing.nix
         ];
       };
     };

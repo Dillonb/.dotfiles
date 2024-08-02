@@ -42,13 +42,16 @@
     ];
   };
 
-  users.users.teamspeak.extraGroups = [ "agenix" ]; # secrets access
+  users.users.teamspeak.extraGroups = [
+    "agenix" # secrets access
+    "syncthing" # access to syncthing data
+  ];
   services.restic = {
     backups = {
       teamspeak-server = {
         initialize = true;
         passwordFile = config.age.secrets.restic.path;
-        rcloneConfigFile = config.age.secrets."rclone.conf".path;
+        rcloneConfigFile = "/var/lib/syncthing/rclone-config/rclone.conf";
         user = "teamspeak";
         paths = [
           "/var/log/teamspeak3-server"
