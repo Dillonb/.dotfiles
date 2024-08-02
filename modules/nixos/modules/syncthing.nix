@@ -1,4 +1,7 @@
 { config, ... }:
+let
+  allDevices = builtins.attrNames config.services.syncthing.settings.devices;
+in
 {
   services.syncthing = {
     enable = true;
@@ -15,7 +18,7 @@
       folders = {
         "rclone-config" = {
           path = "/var/lib/syncthing/rclone-config";
-          devices = [ "desktop-windows" "teamspeak-server" "mini" ];
+          devices = allDevices;
         };
       };
     };
