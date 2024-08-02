@@ -1,5 +1,7 @@
+# agenix -r to re-key all secrets when adding a new key
+# agenix -e <filename> to edit a secret (.age is appended automatically to the name in the `secrets` list)
+
 let
-  # agenix -r to re-key all secrets when adding a new key
   keys = [
   # battlestation
   "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCu32eRLkFV0Pa95ue1M0Nhs+G8H00jAKEkg9Aq7xSQ7aunlp6yfEw+iYpEOKN7ul6DR9VQEC/CP+NH7sL4iyjId0QU8lW/2SPe9Sn+XprnyEqMjUQCdQG1Yp6+No1BmlYFf1P8vKRff/qsxj9rN7lliwKF1eATJBhIuIEgddODTilbaGGv5aZVZCQ2Z/tZ7O/EAGjjeXwG39UYoF28scBca9A6H7Q1GvbsAd0pKS41S5HnJ+YEsNzLZNHc+btWw3ExUaUbmuJN6IdYB0ASKqKVdb67zo7B6QlCi6IVAIJRrj/6jK4D4vzCpdbW5EPcVKd0TT8AY5Ho27c6RFSuNHVp"
@@ -10,13 +12,24 @@ let
   # teamspeak-server
   "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCew9oqunRwsUtu/m8mcC1xh2Qmb6HMDGIPQgwNrGa5+SiQb8MYsnP7hsuGCMsGMHr/lL8x0rUj90ssTIE78iQONBP2KsnPv2ZuUoAYiEC/RRIC0atN5uR0zndGxNm8iTt03BpcWeDThngpr/B1ZW9g8K1MbTUrujaf7AU/wquXoLs/WpxkfDwq+2ZPOuE1en1ytSP/0E9c0Tq3HbJPp0Qp6a6OPrQT6G3pS1MtHmFaxJJFXvtvykMO87yb9cRdmOhQsXV3HajxHyXGy59qR0xVoC0QbdVHccW1JjhgBtO9hEMCGlXitOAFdYNqM1Gep+yt3TJ1HvQIKSKshy9oZHyjwYIv5w+potfYcQTW6PL5beZfv9T1CnYgWluzxHwRFebSUK/iuVHKI+583hzoVbfbglk2e5dL9rIJSgxg/RnvrrAEWdU/Ugt+XkiRZ7DifqDoaWdhIneCtSYOkx9aZAnICpFo4I3nPwOiGoGMbEuNV1o6Bhw7xcmzxorAGWecjW8="
   ];
-in {
-  # agenix -e <filename> to edit a secret
-  "restic.age".publicKeys = keys;
-  "ts3status.properties.age".publicKeys = keys;
-  "ts3status.dev.properties.age".publicKeys = keys;
-  "teamspeak-server-syncthing.key.pem.age".publicKeys = keys;
-  "teamspeak-server-syncthing.cert.pem.age".publicKeys = keys;
-  "mini-syncthing.key.pem.age".publicKeys = keys;
-  "mini-syncthing.cert.pem.age".publicKeys = keys;
-}
+
+  # Decrypted filename - this is how the secret will appear in /run/agenix/
+  # The file in this directory will be named SECRET.age if SECRET is in this list
+  secrets = [
+    "restic"
+    "ts3status.properties"
+    "ts3status.dev.properties"
+    "teamspeak-server-syncthing.key.pem"
+    "teamspeak-server-syncthing.cert.pem"
+    "mini-syncthing.key.pem"
+    "mini-syncthing.cert.pem"
+  ];
+
+  secretsAttrList = map (filename: {
+    name = "${filename}.age";
+    value = {
+      publicKeys = keys;
+      decryptedFilename = filename;
+    };
+  }) secrets;
+in builtins.listToAttrs secretsAttrList
