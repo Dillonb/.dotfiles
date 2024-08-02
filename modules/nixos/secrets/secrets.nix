@@ -16,4 +16,5 @@ in {
   "rclone.conf.age".publicKeys = keys;
   "ts3status.properties.age".publicKeys = keys;
   "ts3status.dev.properties.age".publicKeys = keys;
+  "resilio-rclone-config-secret.age".publicKeys = keys;
 }
