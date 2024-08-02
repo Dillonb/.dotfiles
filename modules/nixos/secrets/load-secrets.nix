@@ -5,11 +5,6 @@
   age.identityPaths = [
     "/home/dillon/.ssh/id_rsa"
   ];
-  age.secrets."rclone.conf" = {
-    file = ./rclone.conf.age;
-    group = "agenix";
-    mode = "440";
-  };
   age.secrets."restic" = {
     file = ./restic.age;
     group = "agenix";
@@ -25,8 +20,13 @@
     group = "agenix";
     mode = "440";
   };
-  age.secrets."resilio-rclone-config-secret" = {
-    file = ./resilio-rclone-config-secret.age;
+  age.secrets."teamspeak-server-syncthing.key.pem" = {
+    file = ./teamspeak-server-syncthing.key.pem.age;
+    group = "agenix";
+    mode = "440";
+  };
+  age.secrets."teamspeak-server-syncthing.cert.pem" = {
+    file = ./teamspeak-server-syncthing.cert.pem.age;
     group = "agenix";
     mode = "440";
   };
