@@ -14,9 +14,11 @@
       url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    ts3status.url = "github:Dillonb/ts3status";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, nixpkgs-master, nixos-hardware, home-manager, agenix, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, nixpkgs-master, nixos-hardware, home-manager, agenix, ts3status, ... }@inputs:
   let
     nixpkgs-config = {
       allowUnfree = true;
@@ -65,6 +67,7 @@
         };
       in nixpkgs.lib.nixosSystem {
         system = system;
+        specialArgs = { inherit inputs; };
         modules = [
           {
             networking.hostName = hostname;
@@ -106,6 +109,7 @@
         role = "server";
         modules = [
           ./modules/restic.nix
+          ./modules/ts3status.nix
         ];
       };
     };
