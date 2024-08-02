@@ -53,6 +53,7 @@
         paths = [
           "/var/log/teamspeak3-server"
           "/var/lib/teamspeak3-server"
+          "/var/lib/ts3status"
         ];
         repository = "rclone:proton:restic-backups/teamspeak-server";
         pruneOpts = [
