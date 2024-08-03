@@ -32,7 +32,6 @@
     # Misc utils
     wget
     fzf
-    direnv
     tmux
     silver-searcher
     bat
