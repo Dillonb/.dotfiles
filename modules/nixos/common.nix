@@ -47,6 +47,10 @@
     zsh.enable = true;
     nh.enable = true;
     direnv.enable = true;
+    git = {
+      enable = true;
+      lfs.enable = true;
+    };
   };
 
   services = {

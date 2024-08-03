@@ -7,7 +7,6 @@
     nasm
     pyright # python language server
     pipenv
-    git
     python3
     valgrind
     mypy
