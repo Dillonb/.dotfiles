@@ -46,6 +46,7 @@
   programs = {
     zsh.enable = true;
     nh.enable = true;
+    direnv.enable = true;
   };
 
   services = {
