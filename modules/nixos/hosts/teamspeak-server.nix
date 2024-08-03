@@ -65,6 +65,10 @@
           "--keep-monthly 12"
           "--keep-yearly 75"
         ];
+        timerConfig = {
+          OnCalendar = "00:00";
+          RandomizedDelaySec = "5h";
+        };
       };
     };
   };
