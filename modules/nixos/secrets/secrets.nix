@@ -23,6 +23,8 @@ let
     "teamspeak-server-syncthing.cert.pem"
     "mini-syncthing.key.pem"
     "mini-syncthing.cert.pem"
+    "battlestation-syncthing.key.pem"
+    "battlestation-syncthing.cert.pem"
   ];
 
   secretsAttrList = map (filename: {
