@@ -36,6 +36,8 @@
         "plugdev"
         # Access to secrets
         "agenix"
+        # Access to syncthing data
+        "syncthing"
       ];
     };
   };
