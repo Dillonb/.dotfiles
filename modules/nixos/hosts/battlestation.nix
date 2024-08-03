@@ -123,4 +123,29 @@ in
       };
     };
   };
+
+  services.restic = {
+    backups = {
+      steam-compatdata = {
+        initialize = true;
+        passwordFile = config.age.secrets.restic.path;
+        rcloneConfigFile = "/var/lib/syncthing/rclone-config/rclone.conf";
+        user = "dillon";
+        paths = [
+          "/home/dillon/.local/share/Steam/steamapps/compatdata"
+        ];
+        repository = "rclone:proton:restic-backups/battlestation-steam-compatdata";
+        pruneOpts = [
+          "--keep-daily 7"
+          "--keep-weekly 5"
+          "--keep-monthly 12"
+          "--keep-yearly 75"
+        ];
+        timerConfig = {
+          OnCalendar = "23:00";
+          # RandomizedDelaySec = "5h";
+        };
+      };
+    };
+  };
 }
