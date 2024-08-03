@@ -91,6 +91,7 @@
         modules = [
           ./modules/sunshine.nix
           ./modules/restic.nix
+          ./modules/syncthing.nix
         ];
       };
 
