@@ -67,7 +67,6 @@
 
     wireshark.enable = true;
     dconf.enable = true; # for home-manager
-    nh.enable = true;
   };
 
   xdg.mime = {
