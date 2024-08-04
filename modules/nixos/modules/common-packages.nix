@@ -2,7 +2,7 @@
 {
   environment.systemPackages = with pkgs; [
     # Dev
-    nil # nix language server
+    unstable.nixd # nix language server
     nixpkgs-fmt
     nasm
     pyright # python language server
