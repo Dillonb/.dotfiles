@@ -1,8 +1,12 @@
 { config, ... }:
 let
   allDevices = builtins.attrNames config.services.syncthing.settings.devices;
+  syncthing-data = "/var/lib/syncthing-data";
 in
 {
+  systemd.tmpfiles.rules = [
+    "d ${syncthing-data} 770 syncthing syncthing"
+  ];
   services.syncthing = {
     enable = true;
     overrideDevices = true;
@@ -18,7 +22,7 @@ in
       };
       folders = {
         "rclone-config" = {
-          path = "/var/lib/syncthing/rclone-config";
+          path = "${syncthing-data}/rclone-config";
           devices = allDevices;
         };
       };
