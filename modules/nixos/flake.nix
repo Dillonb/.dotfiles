@@ -115,6 +115,14 @@
           ./modules/syncthing.nix
         ];
       };
+
+      dulu = nixos {
+        hostname = "dulu";
+        system = "x86_64-linux";
+        role = "server";
+        modules = [
+        ];
+      };
     };
   };
 }
