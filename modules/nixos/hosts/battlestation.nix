@@ -129,7 +129,7 @@ in
       steam-compatdata = {
         initialize = true;
         passwordFile = config.age.secrets.restic.path;
-        rcloneConfigFile = "/var/lib/syncthing/rclone-config/rclone.conf";
+        rcloneConfigFile = "${config.services.syncthing.settings.folders."rclone-config".path}/rclone.conf";
         user = "dillon";
         paths = [
           "/home/dillon/.local/share/Steam/steamapps/compatdata"

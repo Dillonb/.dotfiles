@@ -6,7 +6,9 @@ in
 {
   systemd.tmpfiles.rules = [
     "d ${syncthing-data} 770 syncthing syncthing"
-  ];
+  ]
+  ++ map (folder: "d ${config.services.syncthing.settings.folders.${folder}.path} 770 syncthing syncthing") (builtins.attrNames config.services.syncthing.settings.folders);
+
   services.syncthing = {
     enable = true;
     overrideDevices = true;
