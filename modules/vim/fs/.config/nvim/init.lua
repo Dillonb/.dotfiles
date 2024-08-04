@@ -100,7 +100,9 @@ require("lazy").setup({
           lspconfig.clangd.setup(coq.lsp_ensure_capabilities())
         end
 
-        if vim.fn.executable("nil") then
+        if vim.fn.executable("nixd") then
+          lspconfig.nixd.setup(coq.lsp_ensure_capabilities())
+        elseif vim.fn.executable("nil") then
           lspconfig.nil_ls.setup(coq.lsp_ensure_capabilities())
         end
 
