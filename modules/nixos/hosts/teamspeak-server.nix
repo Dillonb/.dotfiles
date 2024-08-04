@@ -51,7 +51,7 @@
       teamspeak-server = {
         initialize = true;
         passwordFile = config.age.secrets.restic.path;
-        rcloneConfigFile = "/var/lib/syncthing/rclone-config/rclone.conf";
+        rcloneConfigFile = "${config.services.syncthing.settings.folders."rclone-config".path}/rclone.conf";
         user = "teamspeak";
         paths = [
           "/var/log/teamspeak3-server"
