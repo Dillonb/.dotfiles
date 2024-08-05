@@ -46,6 +46,7 @@
     "agenix" # secrets access
     "syncthing" # access to syncthing data
   ];
+
   services.restic = {
     backups = {
       teamspeak-server = {
