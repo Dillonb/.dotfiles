@@ -39,6 +39,30 @@
   services.nginx = {
     enable = true;
     virtualHosts = {
+      "dgb.sh" = {
+        forceSSL = true;
+        enableACME = true;
+        root = "/var/www/html/dgb.sh";
+      };
+
+      "dgb.gay" = {
+        forceSSL = true;
+        enableACME = true;
+        root = "/var/www/html/dgb.gay";
+      };
+
+      "picrite.dgb.gay" = {
+        forceSSL = true;
+        enableACME = true;
+        root = "/var/www/html/picrite.dgb.gay";
+      };
+
+      "kanin.dgb.gay" = {
+        forceSSL = true;
+        enableACME = true;
+        root = "/var/www/html/dgb.gay/kanin";
+      };
+
       "dulu.dgb.sh" = {
         forceSSL = true;
         enableACME = true;
@@ -47,11 +71,31 @@
         };
       };
 
+      "plex-requests.dgb.sh" = {
+        forceSSL = true;
+        enableACME = true;
+        locations."/" = {
+          proxyPass = "http://localhost:3579/";
+        };
+      };
+
       "jellyfin.dgb.sh" = {
         forceSSL = true;
         enableACME = true;
         locations."/" = {
           proxyPass = "http://localhost:8096/";
+        };
+
+        locations."/socket" = {
+          proxyWebsockets = true;
+        };
+      };
+
+      "jellyfin-dev.dgb.sh" = {
+        forceSSL = true;
+        enableACME = true;
+        locations."/" = {
+          proxyPass = "http://localhost:8097/";
         };
 
         locations."/socket" = {
@@ -104,6 +148,14 @@
         enableACME = true;
         locations."/" = {
           proxyPass = "http://localhost:8111/";
+        };
+      };
+
+      "tt.cyphe.red" = {
+        forceSSL = true;
+        enableACME = true;
+        locations."/" = {
+          proxyPass = "http://localhost:8181/";
         };
       };
     };
