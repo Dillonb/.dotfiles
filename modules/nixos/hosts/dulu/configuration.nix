@@ -32,6 +32,10 @@
     allowedTCPPorts = [ 22 80 443 9999 ];
   };
 
+  environment.systemPackages = with pkgs; [
+    weechat
+  ];
+
   services.nginx = {
     enable = true;
     virtualHosts = {
