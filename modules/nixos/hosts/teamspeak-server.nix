@@ -25,7 +25,7 @@
           "youcantseeme.bingchill.ing"
           "ts3.bingchill.ing"
         ];
-        addSSL = true;
+        forceSSL = true;
         enableACME = true;
         locations."/" = {
           proxyPass = "http://localhost:8080/";
