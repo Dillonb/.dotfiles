@@ -17,8 +17,10 @@ let
   # The file in this directory will be named SECRET.age if SECRET is in this list
   secrets = [
     "restic"
+
     "ts3status.properties"
     "ts3status.dev.properties"
+
     "teamspeak-server-syncthing.key.pem"
     "teamspeak-server-syncthing.cert.pem"
     "mini-syncthing.key.pem"
@@ -27,6 +29,8 @@ let
     "battlestation-syncthing.cert.pem"
     "dulu-syncthing.key.pem"
     "dulu-syncthing.cert.pem"
+
+    "netdata-discord.conf"
   ];
 
   secretsAttrList = map (filename: {
