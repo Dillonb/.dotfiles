@@ -22,6 +22,8 @@
   boot.supportedFilesystems = [ "zfs" ];
   boot.zfs.extraPools = [ "zpool" ];
 
+  nix.optimise.automatic = true;
+
   virtualisation.docker.enable = true;
 
   networking.hostId = "ad4d1b00";
