@@ -121,6 +121,8 @@
         system = "x86_64-linux";
         role = "server";
         modules = [
+          ./modules/syncthing.nix
+          ./modules/restic.nix
         ];
       };
     };

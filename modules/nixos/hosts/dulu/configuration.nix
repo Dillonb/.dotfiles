@@ -14,6 +14,10 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Disable SSD power management to stop / from vanishing
+  # https://lore.kernel.org/linux-nvme/YnR%2FFiWbErNGXIx+@kbusch-mbp/T/
+  boot.kernelParams = [ "nvme_core.default_ps_max_latency_us=0" ];
+
   # ZFS
   boot.supportedFilesystems = [ "zfs" ];
   boot.zfs.extraPools = [ "zpool" ];
@@ -88,6 +92,14 @@
         enableACME = true;
         locations."/" = {
           proxyPass = "http://localhost:9091/";
+        };
+      };
+
+      "sk.cyphe.red" = {
+        forceSSL = true;
+        enableACME = true;
+        locations."/" = {
+          proxyPass = "http://localhost:8111/";
         };
       };
     };
