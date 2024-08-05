@@ -21,6 +21,7 @@ in
         "teamspeak-server" = { id = "FA2QTLW-XOXLFNT-KG6WGGY-CXFQBKU-A4XKJMX-SCGOWSE-2M4NO4E-N3WCQAI"; };
         "mini" = { id = "TMPP7GZ-25UWINW-RL4LTP5-FDCDVGU-7GPR6CW-QZWLHZS-RX5VKY5-XL43DAM"; };
         "battlestation" = { id = "GVFGK6Z-NLFR24N-NJJ7GMR-RH2W2SO-D5I5DUD-ZAJHUKR-LU2JJMU-VSMOIQI"; };
+        "dulu" = { id = "3HS7WI5-AAIUDOL-XFPAECF-JB5QSMU-2HIBG44-MBDQSXI-T53BGPG-ADKSRQP"; };
       };
       folders = {
         "rclone-config" = {

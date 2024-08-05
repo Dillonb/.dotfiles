@@ -25,6 +25,8 @@ let
     "mini-syncthing.cert.pem"
     "battlestation-syncthing.key.pem"
     "battlestation-syncthing.cert.pem"
+    "dulu-syncthing.key.pem"
+    "dulu-syncthing.cert.pem"
   ];
 
   secretsAttrList = map (filename: {
