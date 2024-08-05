@@ -123,6 +123,7 @@
         modules = [
           ./modules/syncthing.nix
           ./modules/restic.nix
+          ./modules/netdata.nix
         ];
       };
     };
