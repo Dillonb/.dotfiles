@@ -113,6 +113,7 @@
           ./modules/restic.nix
           ./modules/ts3status.nix
           ./modules/syncthing.nix
+          ./modules/netdata.nix
         ];
       };
 
