@@ -67,7 +67,7 @@
         forceSSL = true;
         enableACME = true;
         locations."/" = {
-          proxyPass = "http://localhost:32400/";
+          proxyPass = "http://127.0.0.1:32400/";
         };
       };
 
@@ -75,7 +75,7 @@
         forceSSL = true;
         enableACME = true;
         locations."/" = {
-          proxyPass = "http://localhost:3579/";
+          proxyPass = "http://127.0.0.1:3579/";
         };
       };
 
@@ -83,7 +83,7 @@
         forceSSL = true;
         enableACME = true;
         locations."/" = {
-          proxyPass = "http://localhost:8096/";
+          proxyPass = "http://127.0.0.1:8096/";
         };
 
         locations."/socket" = {
@@ -95,7 +95,7 @@
         forceSSL = true;
         enableACME = true;
         locations."/" = {
-          proxyPass = "http://localhost:8097/";
+          proxyPass = "http://127.0.0.1:8097/";
         };
 
         locations."/socket" = {
@@ -107,7 +107,7 @@
         forceSSL = true;
         enableACME = true;
         locations."/" = {
-          proxyPass = "http://localhost:7878/";
+          proxyPass = "http://127.0.0.1:7878/";
         };
       };
 
@@ -115,7 +115,7 @@
         forceSSL = true;
         enableACME = true;
         locations."/" = {
-          proxyPass = "http://localhost:8989/";
+          proxyPass = "http://127.0.0.1:8989/";
         };
       };
 
@@ -123,7 +123,7 @@
         forceSSL = true;
         enableACME = true;
         locations."/" = {
-          proxyPass = "https://localhost:1010/";
+          proxyPass = "https://127.0.0.1:1010/";
         };
       };
 
@@ -131,7 +131,7 @@
         forceSSL = true;
         enableACME = true;
         locations."/" = {
-          proxyPass = "http://localhost:8081/";
+          proxyPass = "http://127.0.0.1:8081/";
         };
       };
 
@@ -139,7 +139,7 @@
         forceSSL = true;
         enableACME = true;
         locations."/" = {
-          proxyPass = "http://localhost:9091/";
+          proxyPass = "http://127.0.0.1:9091/";
         };
       };
 
@@ -147,7 +147,7 @@
         forceSSL = true;
         enableACME = true;
         locations."/" = {
-          proxyPass = "http://localhost:8111/";
+          proxyPass = "http://127.0.0.1:8111/";
         };
       };
 
@@ -155,15 +155,12 @@
         forceSSL = true;
         enableACME = true;
         locations."/" = {
-          proxyPass = "http://localhost:8181/";
+          proxyPass = "http://127.0.0.1:8181/";
         };
       };
 
     };
   };
-
-
-  services.netdata.enable = true;
 
   services.restic = {
     backups = {
