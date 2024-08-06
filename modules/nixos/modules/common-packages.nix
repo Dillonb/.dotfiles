@@ -51,6 +51,8 @@
     zip
     p7zip
     rclone
+    nvme-cli
+    smartmontools
 
     # Fun
     fortune
