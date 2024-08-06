@@ -39,8 +39,14 @@
               config = nixpkgs-config;
             };
         };
+
+        overlay-missing-modules-okay = (final: super: {
+             makeModulesClosure = x:
+             super.makeModulesClosure (x // { allowMissing = true; });
+             });
+
         overlays = ({ config, pkgs, ... }: {
-          nixpkgs.overlays = [ overlay-unstable overlay-master ];
+          nixpkgs.overlays = [ overlay-unstable overlay-master overlay-missing-modules-okay ];
           nixpkgs.config = nixpkgs-config;
         });
         role-modules = {
@@ -125,6 +131,15 @@
           ./modules/syncthing.nix
           ./modules/restic.nix
           ./modules/netdata.nix
+        ];
+      };
+
+      pi4 = nixos {
+        hostname = "pi4";
+        system = "aarch64-linux";
+        role = "server";
+        modules = [
+          nixos-hardware.nixosModules.raspberry-pi-4
         ];
       };
     };
