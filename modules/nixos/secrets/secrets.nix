@@ -31,6 +31,8 @@ let
     "battlestation-syncthing.cert.pem"
     "dulu-syncthing.key.pem"
     "dulu-syncthing.cert.pem"
+    "pi4-syncthing.key.pem"
+    "pi4-syncthing.cert.pem"
 
     "netdata-discord.conf"
   ];
