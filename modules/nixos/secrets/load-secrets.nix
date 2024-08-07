@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 let
   secrets = import ./secrets.nix;
   secret-filenames = builtins.attrNames secrets;
@@ -14,9 +14,10 @@ in
 {
   users.groups.agenix = {};
 
-  age.identityPaths = [
-    "/home/dillon/.ssh/id_rsa"
-  ];
+  # Paths to private keys to look for at runtime. The default is just the hostKeys.
+  # But it's necessary to add them to the list again if we're overriding it here.
+  age.identityPaths = (map (key: key.path) config.services.openssh.hostKeys)
+    ++ [ "/home/dillon/.ssh/id_rsa" ];
 
   age.secrets = builtins.listToAttrs secretsAttrList;
 }
