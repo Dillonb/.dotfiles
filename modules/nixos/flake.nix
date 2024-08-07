@@ -143,6 +143,7 @@
         role = "server";
         modules = [
           nixos-hardware.nixosModules.raspberry-pi-4
+          ./modules/bluetooth.nix
         ];
       };
     };

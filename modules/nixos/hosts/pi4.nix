@@ -5,6 +5,8 @@
     generic-extlinux-compatible.enable = true;
   };
 
+  hardware.raspberry-pi."4".bluetooth.enable = true;
+
   networking.useDHCP = lib.mkDefault true;
 
   nix.settings.trusted-users = [ "dillon" ];
