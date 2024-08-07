@@ -22,6 +22,7 @@ in
         "mini" = { id = "TMPP7GZ-25UWINW-RL4LTP5-FDCDVGU-7GPR6CW-QZWLHZS-RX5VKY5-XL43DAM"; };
         "battlestation" = { id = "GVFGK6Z-NLFR24N-NJJ7GMR-RH2W2SO-D5I5DUD-ZAJHUKR-LU2JJMU-VSMOIQI"; };
         "dulu" = { id = "3HS7WI5-AAIUDOL-XFPAECF-JB5QSMU-2HIBG44-MBDQSXI-T53BGPG-ADKSRQP"; };
+        "pi4" = { id = "QZOWDVT-6SYXCXP-5IEM3EM-VZO3ZKQ-N7X6GGS-YG4U7WD-QOFVEMF-3ALABAU"; };
       };
       folders = {
         "rclone-config" = {
