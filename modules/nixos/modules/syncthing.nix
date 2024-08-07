@@ -29,6 +29,11 @@ in
           path = "${syncthing-data}/rclone-config";
           devices = allDevices;
         };
+
+        "ble-scale-data" = {
+          path = "${syncthing-data}/ble-scale-data";
+          devices = allDevices;
+        };
       };
     };
   };
