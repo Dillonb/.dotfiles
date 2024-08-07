@@ -98,6 +98,7 @@
           ./modules/sunshine.nix
           ./modules/restic.nix
           ./modules/syncthing.nix
+          ./modules/ssd.nix
         ];
       };
 
@@ -132,6 +133,7 @@
           ./modules/syncthing.nix
           ./modules/restic.nix
           ./modules/netdata.nix
+          ./modules/ssd.nix
         ];
       };
 
