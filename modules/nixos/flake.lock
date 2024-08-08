@@ -21,6 +21,24 @@
         "type": "github"
       }
     },
+    "ble-scale": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "lastModified": 1723087564,
+        "narHash": "sha256-3PTAnv4boTOx1m7wDeY+O9p6cYW6fjMURfgbVINC0sM=",
+        "owner": "Dillonb",
+        "repo": "ble-scale",
+        "rev": "f8a70e5f0e8a5d150a4fe6aa1a3de2c5235b1d7c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Dillonb",
+        "repo": "ble-scale",
+        "type": "github"
+      }
+    },
     "darwin": {
       "inputs": {
         "nixpkgs": [
@@ -151,6 +169,22 @@
     },
     "nixpkgs_2": {
       "locked": {
+        "lastModified": 1722957468,
+        "narHash": "sha256-SQ0TCC4aklOhN/OzcztrKqDLY8SjpIZcyvTulzhDXs0=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "2a13929e1f191b3690dd2f2db13098b04adb9043",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
         "lastModified": 1722869614,
         "narHash": "sha256-7ojM1KSk3mzutD7SkrdSflHXEujPvW1u7QuqWoTLXQU=",
         "owner": "NixOS",
@@ -165,7 +199,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
+    "nixpkgs_4": {
       "locked": {
         "lastModified": 1722221733,
         "narHash": "sha256-sga9SrrPb+pQJxG1ttJfMPheZvDOxApFfwXCFO0H9xw=",
@@ -184,9 +218,10 @@
     "root": {
       "inputs": {
         "agenix": "agenix",
+        "ble-scale": "ble-scale",
         "home-manager": "home-manager_2",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs_3",
         "nixpkgs-master": "nixpkgs-master",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "ts3status": "ts3status"
@@ -224,7 +259,7 @@
     },
     "ts3status": {
       "inputs": {
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": "nixpkgs_4",
         "systems": "systems_2"
       },
       "locked": {
