@@ -16,6 +16,7 @@
     };
 
     ts3status.url = "github:Dillonb/ts3status";
+    ble-scale.url = "github:Dillonb/ble-scale";
   };
 
   outputs = { self, nixpkgs, nixpkgs-unstable, nixpkgs-master, nixos-hardware, home-manager, agenix, ts3status, ... }@inputs:
