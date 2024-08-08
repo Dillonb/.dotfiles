@@ -63,6 +63,7 @@
     foremost
     hashcat
     proxmark3
+    pwndbg
 
     # Notes
     unstable.obsidian
