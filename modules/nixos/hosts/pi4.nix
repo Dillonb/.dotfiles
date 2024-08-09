@@ -1,4 +1,4 @@
-{ pkgs, inputs, lib, ... }:
+{ config, pkgs, inputs, lib, ... }:
 let
   ble-scale = inputs.ble-scale.packages."${pkgs.system}".default;
 in
@@ -14,7 +14,7 @@ in
     useDHCP = lib.mkDefault true;
     wireless = {
       enable = true;
-      environmentFile = "/run/agenix/wireless.env";
+      environmentFile = config.age.secrets."wireless.env".path;
       networks = {
         dgb.psk = "@DGB_PSK@";
       };
