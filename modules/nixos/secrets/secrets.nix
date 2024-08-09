@@ -20,6 +20,8 @@ let
   secrets = [
     "restic"
 
+    "wireless.env"
+
     "ts3status.properties"
     "ts3status.dev.properties"
 

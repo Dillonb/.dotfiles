@@ -10,7 +10,16 @@ in
 
   hardware.raspberry-pi."4".bluetooth.enable = true;
 
-  networking.useDHCP = lib.mkDefault true;
+  networking = {
+    useDHCP = lib.mkDefault true;
+    wireless = {
+      enable = true;
+      environmentFile = "/run/agenix/wireless.env";
+      networks = {
+        dgb.psk = "@DGB_PSK@";
+      };
+    };
+  };
 
   nix.settings.trusted-users = [ "dillon" ];
 
