@@ -53,6 +53,7 @@
     rclone
     nvme-cli
     smartmontools
+    sqlite
 
     # Fun
     fortune
