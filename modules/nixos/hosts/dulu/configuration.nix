@@ -130,6 +130,10 @@
         enableACME = true;
         locations."/" = {
           proxyPass = "https://127.0.0.1:1010/";
+          extraConfig = ''
+            client_max_body_size 10G;
+            client_body_buffer_size 400M;
+          '';
         };
       };
 
