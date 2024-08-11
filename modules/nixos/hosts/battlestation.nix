@@ -98,6 +98,9 @@ in
   # virtualisation.containers.cdi.dynamic.nvidia.enable = true;
   # hardware.nvidia-container-toolkit.enable = true;
 
+  # VMWare
+  virtualisation.vmware.host.enable = true;
+
   # KDE Connect
   programs.kdeconnect.enable = true;
 
