@@ -48,7 +48,7 @@
     master.vscode
     unstable.ghidra
     master.sublime-merge
-    imhex
+    unstable.imhex
     renderdoc
     zeal
     ocaml
