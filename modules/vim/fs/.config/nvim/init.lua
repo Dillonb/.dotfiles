@@ -70,52 +70,97 @@ require("lazy").setup({
       "neovim/nvim-lspconfig",
       lazy = false,
       dependencies = {
-        -- LSP completion
-        { "ms-jpq/coq_nvim", branch = "coq" },
-        -- Snippets
-        { "ms-jpq/coq.artifacts", branch = "artifacts" },
-        -- Additional sources
-        { 'ms-jpq/coq.thirdparty', branch = "3p" },
-        -- coq requires treesitter
+        {
+          "hrsh7th/nvim-cmp",
+          dependencies = {
+            "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-path",
+            "hrsh7th/cmp-cmdline",
+            "saadparwaiz1/cmp_luasnip",
+          }
+        },
+        --
+        -- coq requires treesitter (does cmp?)
         "nvim-treesitter/nvim-treesitter",
         -- Extra features for clangd LSP
         "p00f/clangd_extensions.nvim",
         -- Extra features for jdtls
         "mfussenegger/nvim-jdtls"
       },
-      init = function()
-        vim.g.coq_settings = {
-            auto_start = 'shut-up'
-        }
-      end,
       config = function()
         local lspconfig = require('lspconfig')
-        local coq = require('coq')
+        local cmp = require("cmp")
+
+        cmp.setup({
+          snippet = {
+            expand = function(args)
+              require('luasnip').lsp_expand(args.body)
+            end,
+          },
+          mapping = {
+            -- confirm with enter if something is selected, if not, insert enter as normal
+            ["<CR>"] = cmp.mapping({
+              i = function(fallback)
+                if cmp.visible() and cmp.get_active_entry() then
+                  cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+                else
+                  fallback()
+                end
+              end,
+              s = cmp.mapping.confirm({ select = true }),
+              c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+            }),
+            -- Select next with down and previous with up, or fallback if cmp is not visible
+            ["<Down>"] = cmp.mapping(function(fallback)
+              if cmp.visible() then
+                cmp.select_next_item()
+              else
+                fallback()
+              end
+            end, { "i", "s" }),
+            ["<Up>"] = cmp.mapping(function(fallback)
+              if cmp.visible() then
+                cmp.select_prev_item()
+              else
+                fallback()
+              end
+            end, { "i", "s" }),
+          },
+          sources = cmp.config.sources({
+            { name = 'nvim_lsp' },
+            { name = 'luasnip' },
+          }, {
+            { name = 'buffer' },
+          })
+        })
+
+        local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
 
         if vim.fn.executable("pyright") then
-          lspconfig.pyright.setup(coq.lsp_ensure_capabilities())
+          lspconfig.pyright.setup(lsp_capabilities)
         end
 
         if vim.fn.executable("clangd") then
-          lspconfig.clangd.setup(coq.lsp_ensure_capabilities())
+          lspconfig.clangd.setup(lsp_capabilities)
         end
 
         if vim.fn.executable("nixd") then
-          lspconfig.nixd.setup(coq.lsp_ensure_capabilities())
+          lspconfig.nixd.setup(lsp_capabilities)
         elseif vim.fn.executable("nil") then
-          lspconfig.nil_ls.setup(coq.lsp_ensure_capabilities())
+          lspconfig.nil_ls.setup(lsp_capabilities)
         end
 
         if vim.fn.executable("jdtls") then
-          lspconfig.jdtls.setup(coq.lsp_ensure_capabilities())
+          lspconfig.jdtls.setup(lsp_capabilities)
         end
 
         if vim.fn.executable("ocamllsp") then
-          lspconfig.ocamllsp.setup(coq.lsp_ensure_capabilities())
+          lspconfig.ocamllsp.setup(lsp_capabilities)
         end
 
         if vim.fn.executable("cmake-language-server") then
-          lspconfig.cmake.setup(coq.lsp_ensure_capabilities())
+          lspconfig.cmake.setup(lsp_capabilities)
         end
 
       end,
@@ -144,7 +189,6 @@ require("lazy").setup({
           },
           extensions = {
             'quickfix',
-            'chadtree',
             'fugitive',
             'nvim-dap-ui',
             'toggleterm'
@@ -178,12 +222,13 @@ require("lazy").setup({
 
     -- File browser
     {
-      'ms-jpq/chadtree',
-      lazy = false,
-      init = function()
-        vim.keymap.set('n', '<leader>b', ':CHADopen<CR>');
-        vim.cmd.amenu([[PopUp.File\ Browser <Cmd>:CHADopen<CR>]])
-      end
+      "nvim-neo-tree/neo-tree.nvim",
+      branch = "v3.x",
+      dependencies = {
+        "nvim-lua/plenary.nvim",
+        "nvim-tree/nvim-web-devicons",
+        "MunifTanjim/nui.nvim",
+      },
     },
 
     -- Search
