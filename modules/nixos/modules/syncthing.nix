@@ -34,6 +34,11 @@ in
           path = "${syncthing-data}/ble-scale-data";
           devices = allDevices;
         };
+
+        "binary-ninja" = {
+          path = "${syncthing-data}/binary-ninja";
+          devices = ["battlestation" "mini" "dulu"];
+        };
       };
     };
   };
