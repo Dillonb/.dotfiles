@@ -26,11 +26,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1723242768,
-        "narHash": "sha256-GUavTp+bv84KnFKaI7ZtE7SDIgtg640i/B/kPKWLIsQ=",
+        "lastModified": 1723401330,
+        "narHash": "sha256-sly0A1HX6hFzAx+5BWksGCQb49Li0StyjIH5hyKNm/w=",
         "owner": "Dillonb",
         "repo": "ble-scale",
-        "rev": "58e6cfb8855bf809ccb8a9bbebb96d083d242e1d",
+        "rev": "d8db3eaf433f8be7b9e4a25ef29e9f7511d33438",
         "type": "github"
       },
       "original": {
