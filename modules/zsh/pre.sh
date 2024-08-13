@@ -1,14 +1,19 @@
 #!/usr/bin/env bash
 #
 if [[ -d ~/.oh-my-zsh ]]; then
-    echo Oh-My-Zsh already installed, ignoring...
-else
-    wget --no-check-certificate https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
-    rm -rf ~/.oh-my-zsh
-    pushd ~
-    git clone git@github.com:Dillonb/oh-my-zsh.git .oh-my-zsh
+    echo Oh-My-Zsh already installed, ensuring origin remote is correct...
     pushd ~/.oh-my-zsh
-    git remote add upstream git@github.com:robbyrussell/oh-my-zsh.git
+    echo "Origin is currently `git remote get-url origin`"
+    if echo "`git remote get-url origin`" | grep -q ohmyzsh/ohmyzsh; then
+        echo "Origin is correct!"
+    else
+        echo "Origin is incorrect, fixing..."
+        git remote rm origin
+        git remote add origin https://github.com/ohmyzsh/ohmyzsh
+        git fetch
+        git branch --set-upstream-to=origin/master
+    fi
     popd
-    popd
+else
+    git clone https://github.com/ohmyzsh/ohmyzsh ~/.oh-my-zsh
 fi
