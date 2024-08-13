@@ -67,11 +67,7 @@ in
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-  hardware.opengl = {
-    enable = true;
-    # driSupport = true;
-    # driSupport32Bit = true;
-  };
+  hardware.graphics.enable = true;
   services.xserver.videoDrivers = ["nvidia"];
   services.xserver.dpi = 109; # calculated using https://www.sven.de/dpi/ for 2560x1440 27"
   hardware.nvidia = {
