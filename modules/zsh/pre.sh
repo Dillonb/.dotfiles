@@ -12,6 +12,7 @@ if [[ -d ~/.oh-my-zsh ]]; then
         git remote add origin https://github.com/ohmyzsh/ohmyzsh
         git fetch
         git branch --set-upstream-to=origin/master
+        git reset --hard origin/master
     fi
     popd
 else
