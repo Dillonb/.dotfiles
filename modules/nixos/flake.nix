@@ -90,7 +90,7 @@
         };
 
         nixpkgs = nixpkgs-by-channel."${channel}";
-        home-manager = home-manager-stable;
+        home-manager = home-manager-by-channel."${channel}";
       in nixpkgs.lib.nixosSystem {
         system = system;
         specialArgs = { inherit inputs; };
