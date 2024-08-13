@@ -2,7 +2,7 @@
   description = "Dillon's NixOS configuration";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
 
@@ -10,22 +10,27 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
-    home-manager = {
+    home-manager-stable = {
       url = "github:nix-community/home-manager/release-24.05";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
+    };
+
+    home-manager-unstable = {
+      url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
     ts3status.url = "github:Dillonb/ts3status";
     ble-scale.url = "github:Dillonb/ble-scale";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, nixpkgs-master, nixos-hardware, home-manager, agenix, ts3status, ... }@inputs:
+  outputs = { self, nixpkgs-stable, nixpkgs-unstable, nixpkgs-master, nixos-hardware, home-manager-stable, home-manager-unstable, agenix, ts3status, ... }@inputs:
   let
     nixpkgs-config = {
       allowUnfree = true;
       nvidia.acceptLicense = true;
     };
-    nixos = { hostname, system, role, modules, extra ? {} }:
+    nixos = { hostname, system, role, modules, channel ? "stable", extra ? {} }:
       let
         overlay-unstable = final: prev: {
             unstable = import nixpkgs-unstable {
@@ -72,6 +77,20 @@
             ./modules/common-packages.nix
           ];
         };
+
+
+        nixpkgs-by-channel = {
+          stable = nixpkgs-stable;
+          unstable = nixpkgs-unstable;
+        };
+
+        home-manager-by-channel = {
+          stable = home-manager-stable;
+          unstable = home-manager-unstable;
+        };
+
+        nixpkgs = nixpkgs-by-channel."${channel}";
+        home-manager = home-manager-stable;
       in nixpkgs.lib.nixosSystem {
         system = system;
         specialArgs = { inherit inputs; };
@@ -94,6 +113,7 @@
       battlestation = nixos {
         hostname = "battlestation";
         role = "workstation";
+        channel = "unstable";
         system = "x86_64-linux";
         modules = [
           ./modules/sunshine.nix
