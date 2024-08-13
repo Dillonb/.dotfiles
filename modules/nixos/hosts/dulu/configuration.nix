@@ -40,6 +40,30 @@
     weechat
   ];
 
+  services.samba = {
+    enable = true;
+    securityType = "user";
+    openFirewall = true;
+
+    extraConfig = ''
+      workgroup = DGB
+      server string = smbnix
+      netbios name = smbnix
+      server role = standalone server
+      map to guest = bad user
+      '';
+
+    shares = {
+      zpool = {
+        path = "/zpool";
+        browseable = "yes";
+        "guest ok" = "no";
+        "read only" = "no";
+        "create mask" = "755";
+      };
+    };
+  };
+
   services.nginx = {
     enable = true;
     virtualHosts = {
