@@ -55,6 +55,7 @@
     opam
     gdb
     lldb
+    cargo
 
     # Sec
     tcpdump
@@ -64,6 +65,7 @@
     hashcat
     proxmark3
     pwndbg
+    pwntools
 
     # Notes
     unstable.obsidian
