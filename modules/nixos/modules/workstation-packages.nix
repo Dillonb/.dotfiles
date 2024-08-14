@@ -82,8 +82,7 @@
     teamspeak_client
     teamspeak5_client
     nextcloud-client
-    # kicad
-    virt-manager # Installed as a package to remotely connect to a machine running libvirt
+    protonvpn-gui
 
     # System status
     htop
