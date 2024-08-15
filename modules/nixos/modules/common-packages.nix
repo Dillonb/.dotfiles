@@ -54,6 +54,7 @@
     nvme-cli
     smartmontools
     sqlite
+    sshfs
 
     # Fun
     fortune

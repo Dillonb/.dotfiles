@@ -24,7 +24,7 @@
     gruvbox-dark-gtk
     unstable.gruvbox-plus-icons
     capitaine-cursors-themed
-    oh-my-posh
+    unstable.oh-my-posh
 
     # Gaming
     chiaki # ps5 remote play
