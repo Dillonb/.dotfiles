@@ -36,7 +36,7 @@
     kitty
 
     # Chat
-    discord
+    unstable.discord
     signal-desktop
     keybase-gui
     hexchat
