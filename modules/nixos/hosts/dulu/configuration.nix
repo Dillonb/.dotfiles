@@ -212,6 +212,7 @@
 
         exclude = [
           "/zpool/Media"
+          "/zpool/no-backup"
           "/home/dillon/Media"
           "/home/dillon/Dropbox"
           "/home/dillon/.dropbox"
