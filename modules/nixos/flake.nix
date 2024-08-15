@@ -127,7 +127,7 @@
         hostname = "mini";
         system = "x86_64-linux";
         role = "workstation";
-        channel = "unstable";
+        channel = "stable";
         modules = [
           nixos-hardware.nixosModules.dell-xps-13-9300
           ./modules/syncthing.nix
