@@ -353,6 +353,10 @@ require("lazy").setup({
     -- Automatic session save/restore
     {
       'rmagatti/auto-session',
+      lazy = false,
+      dependencies = {
+        'nvim-telescope/telescope.nvim',
+      },
       init = function()
         require('auto-session').setup()
       end
