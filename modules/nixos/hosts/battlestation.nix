@@ -1,5 +1,15 @@
 # Configuration specific to my desktop PC
 { config, lib, modulesPath, pkgs, ... }:
+let
+  nvidia_555_58_02 = config.boot.kernelPackages.nvidiaPackages.mkDriver {
+    version = "555.58.02";
+    sha256_64bit = "sha256-xctt4TPRlOJ6r5S54h5W6PT6/3Zy2R4ASNFPu8TSHKM=";
+    sha256_aarch64 = "sha256-wb20isMrRg8PeQBU96lWJzBMkjfySAUaqt4EgZnhyF8=";
+    openSha256 = "sha256-8hyRiGB+m2hL3c9MDA/Pon+Xl6E788MZ50WrrAGUVuY=";
+    settingsSha256 = "sha256-ZpuVZybW6CFN/gz9rx+UJvQ715FZnAOYfHn5jt5Z2C8=";
+    persistencedSha256 = "sha256-a1D7ZZmcKFWfPjjH1REqPM5j/YLWKnbkP9qfRyIyxAw=";
+  };
+in
 {
   imports =
     [
@@ -56,7 +66,14 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-  hardware.graphics.enable = true;
+  # 24.11+
+  # hardware.graphics.enable = true;
+  # 24.05
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+  };
   services.xserver.videoDrivers = ["nvidia"];
   services.xserver.dpi = 109; # calculated using https://www.sven.de/dpi/ for 2560x1440 27"
   hardware.nvidia = {
@@ -68,7 +85,8 @@
     modesetting.enable = true;
     open = false;
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.latest;
+    # package = config.boot.kernelPackages.nvidiaPackages.latest;
+    package = nvidia_555_58_02;
   };
 
   # boot.kernelParams = [ "nvidia-drm.modeset=1" "nvidia-drm.fbdev=1" ];
