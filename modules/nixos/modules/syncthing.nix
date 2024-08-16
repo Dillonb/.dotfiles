@@ -37,7 +37,7 @@ in
 
         "binary-ninja" = {
           path = "${syncthing-data}/binary-ninja";
-          devices = ["battlestation" "mini" "dulu"];
+          devices = allDevices;
         };
       };
     };
