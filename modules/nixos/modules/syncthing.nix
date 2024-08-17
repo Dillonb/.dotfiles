@@ -5,12 +5,14 @@ let
 in
 {
   systemd.tmpfiles.rules = [
-    "d ${syncthing-data} 770 syncthing syncthing"
+    "d ${syncthing-data} 770 dillon syncthing"
   ]
-  ++ map (folder: "d ${config.services.syncthing.settings.folders.${folder}.path} 770 syncthing syncthing") (builtins.attrNames config.services.syncthing.settings.folders);
+  ++ map (folder: "d ${config.services.syncthing.settings.folders.${folder}.path} 770 dillon syncthing") (builtins.attrNames config.services.syncthing.settings.folders);
 
   services.syncthing = {
     enable = true;
+    user = "dillon";
+    group = "syncthing";
     overrideDevices = true;
     overrideFolders = true;
     key = config.age.secrets."${config.networking.hostName}-syncthing.key.pem".path;
