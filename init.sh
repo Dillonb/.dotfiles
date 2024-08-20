@@ -2,7 +2,8 @@
 set -e
 CONFIG_LOCATION=./local/config/modules
 
-# Ensure submodules are available
+# Update git repo and ensure submodules are available
+git pull
 git submodule update --init
 
 if [[ -f ./local/config/modules ]]; then
