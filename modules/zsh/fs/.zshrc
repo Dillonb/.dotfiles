@@ -76,6 +76,10 @@ if command -v xdg-open &>/dev/null; then
     alias open="xdg-open"
 fi
 
+if command -v fdfind &>/dev/null; then
+    alias fd="fdfind"
+fi
+
 if command -v nh &>/dev/null; then
     export FLAKE=$(readlink -f ~/.dotfiles/modules/nixos)
     eval "$(nh completions --shell zsh)"
