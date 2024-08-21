@@ -30,6 +30,10 @@
       allowUnfree = true;
       nvidia.acceptLicense = true;
     };
+    systems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
+    forEachSystem = f: nixpkgs-stable.lib.genAttrs systems (system: f {
+      pkgs = import nixpkgs-stable { inherit system; };
+    });
     nixos = { hostname, system, role, modules, channel ? "stable", extra ? {} }:
       let
         overlay-unstable = final: prev: {
@@ -170,5 +174,16 @@
         ];
       };
     };
+
+    devShells = forEachSystem ({ pkgs }: {
+      default = pkgs.mkShell {
+        packages = with pkgs; [
+          git
+          vim
+          zsh
+          wget
+        ];
+      };
+    });
   };
 }
