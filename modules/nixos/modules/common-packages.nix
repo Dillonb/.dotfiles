@@ -24,6 +24,7 @@
     iotop
     nethogs
     nload
+    sysstat
 
     # Editor
     unstable.neovim
