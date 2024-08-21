@@ -1,7 +1,24 @@
-{ config, ... }:
+{ config, lib, ... }:
 let
   allDevices = builtins.attrNames config.services.syncthing.settings.devices;
   syncthing-data = "/var/lib/syncthing-data";
+  folders = {
+    "rclone-config" = {
+      path = "${syncthing-data}/rclone-config";
+      devices = allDevices;
+    };
+
+    "ble-scale-data" = {
+      path = "${syncthing-data}/ble-scale-data";
+      devices = allDevices;
+    };
+
+    "binary-ninja" = {
+      path = "${syncthing-data}/binary-ninja";
+      devices = [ "teamspeak-server" "mini" "battlestation" "dulu" ];
+    };
+  };
+
 in
 {
   systemd.tmpfiles.rules = [
@@ -26,22 +43,13 @@ in
         "dulu" = { id = "3HS7WI5-AAIUDOL-XFPAECF-JB5QSMU-2HIBG44-MBDQSXI-T53BGPG-ADKSRQP"; };
         "pi4" = { id = "QZOWDVT-6SYXCXP-5IEM3EM-VZO3ZKQ-N7X6GGS-YG4U7WD-QOFVEMF-3ALABAU"; };
       };
-      folders = {
-        "rclone-config" = {
-          path = "${syncthing-data}/rclone-config";
-          devices = allDevices;
-        };
-
-        "ble-scale-data" = {
-          path = "${syncthing-data}/ble-scale-data";
-          devices = allDevices;
-        };
-
-        "binary-ninja" = {
-          path = "${syncthing-data}/binary-ninja";
-          devices = allDevices;
-        };
-      };
+      # Just folders that have this device in `devices`
+      folders = builtins.listToAttrs (lib.filter
+        (folder: (builtins.elem config.networking.hostName folder.value.devices))
+        map
+        (folder: { name = folder; value = folders.${folder}; })
+        builtins.attrNames
+        folders);
     };
   };
 
@@ -51,5 +59,5 @@ in
     group = "syncthing";
     extraGroups = [ "agenix" ]; # secrets access
   };
-  users.groups.syncthing = {};
+  users.groups.syncthing = { };
 }
