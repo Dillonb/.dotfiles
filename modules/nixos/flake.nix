@@ -184,6 +184,9 @@
           wget
           nh
         ];
+        shellHook = ''
+          export FLAKE="`readlink -f ~/.dotfiles/modules/nixos`"
+        '';
       };
     });
   };
