@@ -182,6 +182,7 @@
           vim
           zsh
           wget
+          nh
         ];
       };
     });
