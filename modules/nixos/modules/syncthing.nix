@@ -2,23 +2,6 @@
 let
   allDevices = builtins.attrNames config.services.syncthing.settings.devices;
   syncthing-data = "/var/lib/syncthing-data";
-  folders = {
-    "rclone-config" = {
-      path = "${syncthing-data}/rclone-config";
-      devices = allDevices;
-    };
-
-    "ble-scale-data" = {
-      path = "${syncthing-data}/ble-scale-data";
-      devices = allDevices;
-    };
-
-    "binary-ninja" = {
-      path = "${syncthing-data}/binary-ninja";
-      devices = [ "teamspeak-server" "mini" "battlestation" "dulu" ];
-    };
-  };
-
 in
 {
   systemd.tmpfiles.rules = [
@@ -44,7 +27,22 @@ in
         "pi4" = { id = "QZOWDVT-6SYXCXP-5IEM3EM-VZO3ZKQ-N7X6GGS-YG4U7WD-QOFVEMF-3ALABAU"; };
       };
       # Just folders that have this device in `devices`
-      folders = lib.attrsets.filterAttrs (n: v: builtins.elem config.networking.hostName v.devices) folders;
+      folders = lib.attrsets.filterAttrs (n: v: builtins.elem config.networking.hostName v.devices) {
+        "rclone-config" = {
+          path = "${syncthing-data}/rclone-config";
+          devices = allDevices;
+        };
+
+        "ble-scale-data" = {
+          path = "${syncthing-data}/ble-scale-data";
+          devices = allDevices;
+        };
+
+        "binary-ninja" = {
+          path = "${syncthing-data}/binary-ninja";
+          devices = [ "teamspeak-server" "mini" "battlestation" "dulu" ];
+        };
+      };
     };
   };
 
