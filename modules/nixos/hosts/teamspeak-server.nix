@@ -29,6 +29,11 @@
           proxyPass = "http://localhost:8080/";
         };
       };
+      "bingchill.ing" = {
+        forceSSL = true;
+        enableACME = true;
+        root = "/var/www/html/bingchill.ing";
+      };
     };
   };
 
@@ -56,6 +61,7 @@
           "/var/log/teamspeak3-server"
           "/var/lib/teamspeak3-server"
           "/var/lib/ts3status"
+          "/var/www"
         ];
         repository = "rclone:proton:restic-backups/teamspeak-server";
         pruneOpts = [
