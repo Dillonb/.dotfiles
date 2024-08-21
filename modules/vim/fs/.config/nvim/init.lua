@@ -49,6 +49,22 @@ vim.opt.scrolloff = 5
 -- Use system clipboard
 vim.cmd [[ set clipboard+=unnamedplus ]]
 
+if vim.g.neovide then
+  -- Fun little shadow under floating windows
+  vim.g.neovide_floating_shadow = true
+  vim.g.neovide_floating_z_height = 10
+  vim.g.neovide_light_angle_degrees = 45
+  vim.g.neovide_light_radius = 5
+
+  -- Disable scrolling animation
+  vim.g.neovide_scroll_animation_length = 0
+
+  vim.g.neovide_confirm_quit = true
+
+  -- Less distracting swoopy cursor
+  vim.g.neovide_cursor_animation_length = 0.01
+end
+
 -- Automatically install lazy.nvim if it's not already installed
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
