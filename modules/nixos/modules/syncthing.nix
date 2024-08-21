@@ -44,11 +44,7 @@ in
         "pi4" = { id = "QZOWDVT-6SYXCXP-5IEM3EM-VZO3ZKQ-N7X6GGS-YG4U7WD-QOFVEMF-3ALABAU"; };
       };
       # Just folders that have this device in `devices`
-      folders = builtins.listToAttrs (lib.filter
-        (folder: (builtins.elem config.networking.hostName folder.value.devices))
-        (map
-          (folder: { name = folder; value = folders.${folder}; })
-          (builtins.attrNames folders)));
+      folders = lib.attrsets.filterAttrs (n: v: builtins.elem config.networking.hostName v.devices) folders;
     };
   };
 
