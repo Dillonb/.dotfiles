@@ -46,10 +46,9 @@ in
       # Just folders that have this device in `devices`
       folders = builtins.listToAttrs (lib.filter
         (folder: (builtins.elem config.networking.hostName folder.value.devices))
-        map
-        (folder: { name = folder; value = folders.${folder}; })
-        builtins.attrNames
-        folders);
+        (map
+          (folder: { name = folder; value = folders.${folder}; })
+          (builtins.attrNames folders)));
     };
   };
 
