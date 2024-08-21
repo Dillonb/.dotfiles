@@ -20,19 +20,21 @@
   services.xserver.dpi = 109;
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/f0731786-5488-4f0d-90c3-836f780198a7";
+    { device = "/dev/disk/by-uuid/4ac1cbed-dc0a-4bc4-8ec7-70570076ca78";
       fsType = "ext4";
     };
 
-  boot.initrd.luks.devices."luks-012dae05-3772-4220-8e2e-25e0a762eb65" = {
-    device = "/dev/disk/by-uuid/012dae05-3772-4220-8e2e-25e0a762eb65";
+  boot.initrd.luks.devices."luks-2016fdc0-97f6-4b06-8dc1-5ac49bf0c86e" = {
+    device = "/dev/disk/by-uuid/2016fdc0-97f6-4b06-8dc1-5ac49bf0c86e";
     allowDiscards = true;
   };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/8B3A-0B76";
+    { device = "/dev/disk/by-uuid/DE9C-875E";
       fsType = "vfat";
+      options = [ "fmask=0022" "dmask=0022" ];
     };
+
 
   swapDevices = [ ];
 
