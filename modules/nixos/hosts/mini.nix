@@ -19,21 +19,21 @@
   # Same value as in battlestation.nix. Real value makes everything way too big.
   services.xserver.dpi = 109;
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/4ac1cbed-dc0a-4bc4-8ec7-70570076ca78";
-      fsType = "ext4";
-    };
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/4ac1cbed-dc0a-4bc4-8ec7-70570076ca78";
+    fsType = "ext4";
+  };
 
   boot.initrd.luks.devices."luks-2016fdc0-97f6-4b06-8dc1-5ac49bf0c86e" = {
     device = "/dev/disk/by-uuid/2016fdc0-97f6-4b06-8dc1-5ac49bf0c86e";
     allowDiscards = true;
   };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/DE9C-875E";
-      fsType = "vfat";
-      options = [ "fmask=0022" "dmask=0022" ];
-    };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/DE9C-875E";
+    fsType = "vfat";
+    options = [ "fmask=0022" "dmask=0022" ];
+  };
 
 
   swapDevices = [ ];
