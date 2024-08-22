@@ -42,6 +42,11 @@ in
           path = "${syncthing-data}/binary-ninja";
           devices = [ "teamspeak-server" "mini" "battlestation" "dulu" ];
         };
+
+        "syncthing" = {
+          path = "/home/dillon/Syncthing";
+          devices = [ "mini" "battlestation" "dulu" ];
+        };
       };
     };
   };
