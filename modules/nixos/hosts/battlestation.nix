@@ -111,8 +111,8 @@ in
   # I dual boot Windows on this machine, so store the time in local time.
   time.hardwareClockInLocalTime = true;
 
-  # Fixes some Wayland stuff on Nvidia
-  environment.sessionVariables = { NIXOS_OZONE_WL = "1"; };
+  # Run Electron apps with native wayland instead of XWayland (buggy)
+  # environment.sessionVariables = { NIXOS_OZONE_WL = "1"; };
 
   # libvirtd
   virtualisation.libvirtd = {
