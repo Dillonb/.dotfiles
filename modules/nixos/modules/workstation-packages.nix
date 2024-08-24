@@ -22,7 +22,7 @@
     # themes
     kde-gruvbox
     gruvbox-dark-gtk
-    unstable.gruvbox-plus-icons
+    # unstable.gruvbox-plus-icons
     capitaine-cursors-themed
     unstable.oh-my-posh
 
