@@ -184,10 +184,11 @@ require("lazy").setup({
 
     -- Gruvbox my beloved
     {
-      "lifepillar/vim-gruvbox8",
-      lazy = false,
+      "ellisonleao/gruvbox.nvim",
+      priority = 1000,
+      config = true,
       config = function()
-        vim.cmd [[colorscheme gruvbox8]]
+        vim.cmd [[colorscheme gruvbox]]
       end,
     },
 
