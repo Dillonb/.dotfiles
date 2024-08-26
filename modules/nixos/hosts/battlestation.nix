@@ -34,22 +34,26 @@ in
   };
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/87303987-7581-4340-a158-abebfe0d02b3";
+    {
+      device = "/dev/disk/by-uuid/87303987-7581-4340-a158-abebfe0d02b3";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/52FB-1A5F";
+    {
+      device = "/dev/disk/by-uuid/52FB-1A5F";
       fsType = "vfat";
     };
 
   fileSystems."/win" =
-    { device = "/dev/disk/by-uuid/E8204E89204E5F26";
+    {
+      device = "/dev/disk/by-uuid/E8204E89204E5F26";
       fsType = "ntfs";
     };
 
   fileSystems."/secondary" =
-    { device = "/dev/disk/by-uuid/acd118ca-367e-402f-b351-b90f3c441460";
+    {
+      device = "/dev/disk/by-uuid/acd118ca-367e-402f-b351-b90f3c441460";
       fsType = "ext4";
     };
 
@@ -74,7 +78,7 @@ in
     driSupport = true;
     driSupport32Bit = true;
   };
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = [ "nvidia" ];
   services.xserver.dpi = 109; # calculated using https://www.sven.de/dpi/ for 2560x1440 27"
   hardware.nvidia = {
     powerManagement = {
@@ -123,10 +127,12 @@ in
       swtpm.enable = true;
       ovmf = {
         enable = true;
-        packages = [(pkgs.OVMF.override {
+        packages = [
+          (pkgs.OVMF.override {
             secureBoot = true;
             tpmSupport = true;
-            }).fd];
+          }).fd
+        ];
       };
     };
   };

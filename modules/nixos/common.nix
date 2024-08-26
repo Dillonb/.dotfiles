@@ -1,4 +1,4 @@
-{pkgs, ... }:
+{ pkgs, ... }:
 {
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
@@ -32,7 +32,15 @@
       description = "Dillon Beliveau";
       extraGroups = [
         # Should be self explanatory
-        "networkmanager" "wheel" "docker" "podman" "audio" "video" "input" "wireshark" "libvirtd"
+        "networkmanager"
+        "wheel"
+        "docker"
+        "podman"
+        "audio"
+        "video"
+        "input"
+        "wireshark"
+        "libvirtd"
         # for SDR/logitech unifying
         "plugdev"
         # Access to secrets

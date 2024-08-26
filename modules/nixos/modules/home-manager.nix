@@ -1,12 +1,12 @@
-{config, lib, ...}:
+{ config, lib, ... }:
 let
-dgbCustom = config.dgbCustom;
+  dgbCustom = config.dgbCustom;
 in
 {
   home-manager = {
     useGlobalPkgs = true;
     backupFileExtension = "home-manager-backup";
-    users.dillon = {pkgs, config, ...}: {
+    users.dillon = { pkgs, config, ... }: {
       home.stateVersion = "23.11";
 
       gtk = {
@@ -52,7 +52,7 @@ in
           font = {
             size = dgbCustom.alacritty.fontSize;
             normal = { family = dgbCustom.alacritty.fontFamily; style = "Regular"; };
-            bold   = { family = dgbCustom.alacritty.fontFamily; style = "Bold"; };
+            bold = { family = dgbCustom.alacritty.fontFamily; style = "Bold"; };
             italic = { family = dgbCustom.alacritty.fontFamily; style = "Italic"; };
           };
         };
