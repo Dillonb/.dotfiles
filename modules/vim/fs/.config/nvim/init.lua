@@ -192,6 +192,9 @@ require("lazy").setup({
       end,
     },
 
+    -- Rainbow brackets, etc
+    { "HiPhish/rainbow-delimiters.nvim", lazy = false },
+
     -- Nice actions for editing surrounding text
     'tpope/vim-surround',
 
