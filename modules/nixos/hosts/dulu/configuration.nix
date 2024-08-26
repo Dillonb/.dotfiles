@@ -307,6 +307,7 @@
           "/zpool"
           "/etc"
           "/var/lib/syncthing-data"
+          "/var/lib/plex"
           "/var/www"
         ];
 
