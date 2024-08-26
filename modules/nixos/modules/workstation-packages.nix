@@ -33,7 +33,7 @@
 
     # Terminal
     alacritty
-    kitty
+    # kitty
 
     # Chat
     unstable.discord
