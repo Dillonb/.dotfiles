@@ -1,4 +1,4 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 {
   security.rtkit.enable = true;
   hardware.pulseaudio.enable = false;
@@ -33,7 +33,7 @@
     };
 
   };
-  environment.systemPackages = with pkgs; [ 
+  environment.systemPackages = with pkgs; [
     easyeffects
     qpwgraph
   ];

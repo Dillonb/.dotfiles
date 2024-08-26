@@ -41,7 +41,8 @@
     enable = true;
     allowedTCPPorts = [
       22 # SSH
-      80 443 # Web
+      80
+      443 # Web
     ];
   };
 
