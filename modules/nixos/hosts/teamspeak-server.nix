@@ -34,6 +34,11 @@
         enableACME = true;
         root = "/var/www/html/bingchill.ing";
       };
+      "dudesa.me" = {
+        forceSSL = true;
+        enableACME = true;
+        root = "/var/www/html/dudesa.me";
+      };
     };
   };
 
