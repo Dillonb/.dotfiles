@@ -162,5 +162,9 @@ in
     };
   };
 
+  environment.systemPackages = with pkgs; [
+    master.r2modman
+  ];
+
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 }
