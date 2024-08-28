@@ -39,6 +39,7 @@
 
   environment.systemPackages = with pkgs; [
     weechat
+    intel-gpu-tools
   ];
 
   services.samba = {
