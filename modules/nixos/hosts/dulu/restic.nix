@@ -19,6 +19,7 @@
           "/var/lib/radarr"
           "/var/lib/sabnzbd"
           "/var/lib/transmission"
+          "/var/lib/tautulli"
           "/var/www"
         ];
 

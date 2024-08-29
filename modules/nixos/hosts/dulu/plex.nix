@@ -88,5 +88,7 @@ in
       enable = true;
       package = pkgs.unstable.tautulli;
       user = "dillon";
+      dataDir = "/var/lib/tautulli";
+      configFile = "/var/lib/tautulli/config.ini";
     };
 }
