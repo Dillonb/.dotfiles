@@ -60,6 +60,10 @@
       enable = true;
       lfs.enable = true;
     };
+    mosh = {
+      enable = true;
+      openFirewall = true;
+    };
   };
 
   services = {

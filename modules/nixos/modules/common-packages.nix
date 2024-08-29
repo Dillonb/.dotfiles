@@ -38,7 +38,7 @@
     silver-searcher
     bat
     dos2unix
-    mosh
+    # mosh # installed through programs.mosh.enable
     jq
     killall
     usbutils # for lsusb
