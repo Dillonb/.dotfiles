@@ -15,6 +15,10 @@
           "/var/lib/syncthing-data"
           "/var/lib/plex"
           "/var/lib/sonarr"
+          "/var/lib/private"
+          "/var/lib/radarr"
+          "/var/lib/sabnzbd"
+          "/var/lib/transmission"
           "/var/www"
         ];
 
@@ -30,7 +34,8 @@
           "/home/dillon/.rustup"
           "/home/dillon/.vscode-server"
           "/home/dillon/src/meta-pine64"
-          "/zpool/docker_volumes/transmission_downloads/incomplete"
+          "/zpool/transmission/incomplete"
+          "/zpool/sabnzbd/incomplete"
         ];
 
         repository = "rclone:b2-media:restic-dulu";
