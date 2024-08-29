@@ -17,6 +17,7 @@
     cmake-language-server
     clang-tools # for clangd
     gdb
+    bear
 
     # System status
     htop
