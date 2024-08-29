@@ -14,6 +14,7 @@
           "/etc"
           "/var/lib/syncthing-data"
           "/var/lib/plex"
+          "/var/lib/sonarr"
           "/var/www"
         ];
 
