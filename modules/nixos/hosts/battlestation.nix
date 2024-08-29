@@ -164,6 +164,7 @@ in
 
   environment.systemPackages = with pkgs; [
     master.r2modman
+    obs-studio
   ];
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
