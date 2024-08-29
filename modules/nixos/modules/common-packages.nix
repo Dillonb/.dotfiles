@@ -15,6 +15,8 @@
     ripgrep
     fd
     cmake-language-server
+    clang-tools # for clangd
+    gdb
 
     # System status
     htop
