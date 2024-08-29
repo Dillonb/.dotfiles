@@ -37,4 +37,10 @@ in
         })
       ];
     };
+
+    services.sonarr = {
+      enable = true;
+      package = pkgs.unstable.sonarr;
+      user = "dillon";
+    };
 }
