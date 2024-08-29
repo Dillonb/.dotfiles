@@ -179,6 +179,10 @@ require("lazy").setup({
           lspconfig.cmake.setup(lsp_capabilities)
         end
 
+        if vim.fn.executable("terraform-ls") then
+          lspconfig.terraformls.setup(lsp_capabilities)
+        end
+
       end,
     },
 
