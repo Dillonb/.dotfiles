@@ -38,57 +38,57 @@ in
       ];
     };
 
-    services.sonarr = {
-      enable = true;
-      package = pkgs.unstable.sonarr;
-      user = "dillon";
-    };
+  services.sonarr = {
+    enable = true;
+    package = pkgs.unstable.sonarr;
+    user = "dillon";
+  };
 
-    services.radarr = {
-      enable = true;
-      package = pkgs.unstable.radarr;
-      user = "dillon";
-    };
+  services.radarr = {
+    enable = true;
+    package = pkgs.unstable.radarr;
+    user = "dillon";
+  };
 
-    services.sabnzbd = {
-      enable = true;
-      user = "dillon";
-    };
+  services.sabnzbd = {
+    enable = true;
+    user = "dillon";
+  };
 
-    services.transmission = {
-      enable = true;
-      package = pkgs.unstable.transmission;
-      user = "dillon";
-      settings = {
-        incomplete-dir = "/zpool/transmission/incomplete";
-        incomplete-dir-enabled = true;
-        download-dir = "/zpool/transmission/complete";
+  services.transmission = {
+    enable = true;
+    package = pkgs.unstable.transmission;
+    user = "dillon";
+    settings = {
+      incomplete-dir = "/zpool/transmission/incomplete";
+      incomplete-dir-enabled = true;
+      download-dir = "/zpool/transmission/complete";
 
-        bind-address-ipv4 = "0.0.0.0";
-        cache-size-mb = 4;
-        dht-enabled = true;
-        encryption = 1;
-        message-level = 2;
-        rpc-bind-address = "127.0.0.1";
-        rpc-enabled = true;
-        rpc-host-whitelist = "127.0.0.1";
-        rpc-host-whitelist-enabled = true;
-        rpc-authentication-required = false;
-        rpc-port = 9091;
-        rpc-url = "/transmission/";
-      };
+      bind-address-ipv4 = "0.0.0.0";
+      cache-size-mb = 4;
+      dht-enabled = true;
+      encryption = 1;
+      message-level = 2;
+      rpc-bind-address = "127.0.0.1";
+      rpc-enabled = true;
+      rpc-host-whitelist = "127.0.0.1";
+      rpc-host-whitelist-enabled = true;
+      rpc-authentication-required = false;
+      rpc-port = 9091;
+      rpc-url = "/transmission/";
     };
+  };
 
-    services.prowlarr = {
-      enable = true;
-      package = pkgs.unstable.prowlarr;
-    };
+  services.prowlarr = {
+    enable = true;
+    package = pkgs.unstable.prowlarr;
+  };
 
-    services.tautulli = {
-      enable = true;
-      package = pkgs.unstable.tautulli;
-      user = "dillon";
-      dataDir = "/var/lib/tautulli";
-      configFile = "/var/lib/tautulli/config.ini";
-    };
+  services.tautulli = {
+    enable = true;
+    package = pkgs.unstable.tautulli;
+    user = "dillon";
+    dataDir = "/var/lib/tautulli";
+    configFile = "/var/lib/tautulli/config.ini";
+  };
 }
