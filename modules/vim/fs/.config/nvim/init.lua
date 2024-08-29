@@ -273,6 +273,15 @@ require("lazy").setup({
 
         -- Search in all files
         vim.keymap.set('n', '<C-f>', ':Telescope live_grep<CR>');
+
+        require("telescope").setup {
+          defaults = {
+            file_ignore_patterns = {
+              "node_modules",
+              ".git"
+            }
+          }
+        }
       end,
     },
 
