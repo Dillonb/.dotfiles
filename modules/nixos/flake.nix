@@ -94,6 +94,7 @@
             wsl = [
               ./common.nix
               ./modules/common-packages.nix
+              ./modules/wsl-packages.nix
               nixos-wsl.nixosModules.wsl
               {
                 wsl.enable = true;
