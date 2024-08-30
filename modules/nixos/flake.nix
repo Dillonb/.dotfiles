@@ -10,6 +10,8 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
+    nixos-wsl.url = "github:nix-community/nixos-WSL/main";
+
     home-manager-stable = {
       url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs-stable";
@@ -24,7 +26,7 @@
     ble-scale.url = "github:Dillonb/ble-scale";
   };
 
-  outputs = { self, nixpkgs-stable, nixpkgs-unstable, nixpkgs-master, nixos-hardware, home-manager-stable, home-manager-unstable, agenix, ts3status, ... }@inputs:
+  outputs = { self, nixpkgs-stable, nixpkgs-unstable, nixpkgs-master, nixos-hardware, home-manager-stable, home-manager-unstable, agenix, ts3status, nixos-wsl, ... }@inputs:
     let
       nixpkgs-config = {
         allowUnfree = true;
@@ -79,6 +81,15 @@
               ./common.nix
               ./modules/server-packages.nix
               ./modules/common-packages.nix
+            ];
+            wsl = [
+              ./common.nix
+              ./modules/common-packages.nix
+              nixos-wsl.nixosModules.wsl
+              {
+                wsl.enable = true;
+                wsl.defaultUser = "dillon";
+              }
             ];
           };
 
@@ -173,6 +184,13 @@
             ./modules/bluetooth.nix
             ./modules/syncthing.nix
           ];
+        };
+
+        wsl = nixos {
+          hostname = "wsl";
+          system = "x86_64-linux";
+          role = "wsl";
+          modules = [];
         };
       };
 
