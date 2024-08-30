@@ -63,6 +63,9 @@
           });
           role-modules = {
             workstation = [
+              {
+                environment.systemPackages = [ agenix.packages.${system}.default ];
+              }
               ./common.nix
               ./workstation.nix
               ./modules/pipewire.nix
@@ -78,6 +81,9 @@
               ./modules/libreoffice.nix
             ];
             server = [
+              {
+                environment.systemPackages = [ agenix.packages.${system}.default ];
+              }
               ./common.nix
               ./modules/server-packages.nix
               ./modules/common-packages.nix
@@ -113,7 +119,6 @@
           modules = [
             {
               networking.hostName = hostname;
-              environment.systemPackages = [ agenix.packages.${system}.default ];
             }
             ./hosts/${hostname}.nix
             home-manager.nixosModules.home-manager
