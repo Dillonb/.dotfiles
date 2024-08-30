@@ -61,11 +61,15 @@
             nixpkgs.overlays = [ overlay-unstable overlay-master overlay-missing-modules-okay ];
             nixpkgs.config = nixpkgs-config;
           });
+          agenix-modules = [
+            agenix.nixosModules.default
+            ./secrets/load-secrets.nix
+            {
+              environment.systemPackages = [ agenix.packages.${system}.default ];
+            }
+          ];
           role-modules = {
             workstation = [
-              {
-                environment.systemPackages = [ agenix.packages.${system}.default ];
-              }
               ./common.nix
               ./workstation.nix
               ./modules/pipewire.nix
@@ -79,15 +83,14 @@
               ./modules/common-packages.nix
               ./modules/appimage-support.nix
               ./modules/libreoffice.nix
-            ];
+            ] ++ agenix-modules;
+
             server = [
-              {
-                environment.systemPackages = [ agenix.packages.${system}.default ];
-              }
               ./common.nix
               ./modules/server-packages.nix
               ./modules/common-packages.nix
-            ];
+            ] ++ agenix-modules;
+
             wsl = [
               ./common.nix
               ./modules/common-packages.nix
@@ -123,8 +126,6 @@
             ./hosts/${hostname}.nix
             home-manager.nixosModules.home-manager
             overlays
-            agenix.nixosModules.default
-            ./secrets/load-secrets.nix
           ] ++ modules
           ++ role-modules.${role};
         };
