@@ -13,3 +13,7 @@ This can then be imported on Windows with:
 and then run with:
 
 `wsl -d NixOS`
+
+and set as the default with:
+
+`wsl -s NixOS`
