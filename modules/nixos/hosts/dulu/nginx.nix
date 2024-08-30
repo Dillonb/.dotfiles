@@ -163,13 +163,14 @@
         };
       };
 
-      # "t.cyphe.red" = {
-      #   forceSSL = true;
-      #   enableACME = true;
-      #   locations."/" = {
-      #     proxyPass = "http://127.0.0.1:9091/";
-      #   };
-      # };
+      "t.cyphe.red" = {
+        forceSSL = true;
+        enableACME = true;
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:9091/";
+          basicAuthFile = "/run/agenix/transmission-auth";
+        };
+      };
 
       "sk.cyphe.red" = {
         forceSSL = true;
@@ -188,5 +189,9 @@
       };
 
     };
+  };
+
+  users.users.nginx = {
+    extraGroups = [ "agenix" ]; # secrets access
   };
 }

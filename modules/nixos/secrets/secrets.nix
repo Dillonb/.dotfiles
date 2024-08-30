@@ -25,6 +25,8 @@ let
     "ts3status.properties"
     "ts3status.dev.properties"
 
+    "transmission-auth"
+
     "teamspeak-server-syncthing.key.pem"
     "teamspeak-server-syncthing.cert.pem"
     "mini-syncthing.key.pem"
