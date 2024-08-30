@@ -18,6 +18,7 @@
     clang-tools # for clangd
     gdb
     bear
+    cachix
 
     # System status
     htop
