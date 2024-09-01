@@ -136,7 +136,7 @@
         battlestation = nixos {
           hostname = "battlestation";
           role = "workstation";
-          channel = "stable";
+          channel = "unstable";
           system = "x86_64-linux";
           modules = [
             ./modules/sunshine.nix
