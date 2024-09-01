@@ -12,6 +12,11 @@
 
     nixos-wsl.url = "github:nix-community/nixos-WSL/main";
 
+    darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
+    };
+
     home-manager-stable = {
       url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs-stable";
@@ -26,7 +31,7 @@
     ble-scale.url = "github:Dillonb/ble-scale";
   };
 
-  outputs = { self, nixpkgs-stable, nixpkgs-unstable, nixpkgs-master, nixos-hardware, home-manager-stable, home-manager-unstable, agenix, ts3status, nixos-wsl, ... }@inputs:
+  outputs = { self, nixpkgs-stable, nixpkgs-unstable, nixpkgs-master, nixos-hardware, home-manager-stable, home-manager-unstable, agenix, ts3status, nixos-wsl, darwin, ... }@inputs:
     let
       nixpkgs-config = {
         allowUnfree = true;
@@ -36,6 +41,34 @@
       forEachSystem = f: nixpkgs-stable.lib.genAttrs systems (system: f {
         pkgs = import nixpkgs-stable { inherit system; };
       });
+      mac = { hostname, system, modules }:
+        let
+          overlay-unstable = final: prev: {
+            unstable = import nixpkgs-unstable {
+              system = system;
+              config = nixpkgs-config;
+            };
+          };
+          overlay-master = final: prev: {
+            master = import nixpkgs-master {
+              system = system;
+              config = nixpkgs-config;
+            };
+          };
+          overlays = ({ config, pkgs, ... }: {
+            nixpkgs.overlays = [ overlay-unstable overlay-master ];
+            nixpkgs.config = nixpkgs-config;
+          });
+        in
+        darwin.lib.darwinSystem {
+          inherit system;
+          modules = modules ++ [
+            ./hosts/${hostname}.nix
+            ./modules/osx.nix
+            ./modules/common-packages.nix
+            overlays
+          ];
+        };
       nixos = { hostname, system, role, modules, channel ? "stable", extra ? { } }:
         let
           overlay-unstable = final: prev: {
@@ -197,7 +230,15 @@
           hostname = "wsl";
           system = "x86_64-linux";
           role = "wsl";
-          modules = [];
+          modules = [ ];
+        };
+      };
+
+      darwinConfigurations = {
+        dgbmbp = mac {
+          hostname = "dgbmbp";
+          system = "aarch64-darwin";
+          modules = [ ];
         };
       };
 
