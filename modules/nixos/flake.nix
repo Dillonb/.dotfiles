@@ -76,7 +76,7 @@
               ./modules/bluetooth.nix
               ./modules/custom-options.nix
               ./modules/flatpak-support.nix
-              ./modules/ime.nix
+              # ./modules/ime.nix
               ./modules/kde.nix
               ./modules/home-manager.nix
               ./modules/workstation-packages.nix
