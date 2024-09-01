@@ -1,6 +1,29 @@
 { pkgs, ... }:
-{
-  environment.systemPackages = with pkgs; [
+let
+  optionals = pkgs.lib.optionals;
+  isLinux = pkgs.stdenv.isLinux;
+  isDarwin = pkgs.stdenv.isDarwin;
+  linuxPkgs = optionals isLinux (with pkgs; [
+    # Dev
+    valgrind
+    gdb
+
+    # System status
+    iotop
+    nethogs
+    sysstat
+    ncdu
+
+    # Misc utils
+    usbutils # for lsusb
+    pciutils # for lspci
+    nvme-cli
+    smartmontools
+  ]);
+  macPkgs = optionals isDarwin (with pkgs; [
+    # nothing yet
+  ]);
+  commonPkgs = with pkgs; [
     # Dev
     unstable.nixd # nix language server
     nixpkgs-fmt
@@ -8,7 +31,6 @@
     pyright # python language server
     pipenv
     python3
-    valgrind
     mypy
     gh
     lua-language-server
@@ -16,19 +38,14 @@
     fd
     cmake-language-server
     clang-tools # for clangd
-    gdb
     bear
     cachix
 
     # System status
     htop
     btop
-    ncdu
     neofetch
-    iotop
-    nethogs
     nload
-    sysstat
 
     # Editor
     unstable.neovim
@@ -43,8 +60,6 @@
     # mosh # installed through programs.mosh.enable
     jq
     killall
-    usbutils # for lsusb
-    pciutils # for lspci
     nix-search-cli
     nix-index
     nix-output-monitor
@@ -56,12 +71,13 @@
     zip
     p7zip
     rclone
-    nvme-cli
-    smartmontools
     sqlite
     sshfs
 
     # Fun
     fortune
   ];
+in
+{
+  environment.systemPackages = linuxPkgs ++ macPkgs ++ commonPkgs;
 }
