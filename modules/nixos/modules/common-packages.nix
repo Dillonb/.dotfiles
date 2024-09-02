@@ -73,6 +73,7 @@ let
     rclone
     sqlite
     sshfs
+    dig
 
     # Fun
     fortune
