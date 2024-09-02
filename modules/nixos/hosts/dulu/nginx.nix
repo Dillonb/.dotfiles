@@ -4,6 +4,9 @@
     enable = true;
     virtualHosts = {
       "dgb.sh" = {
+        serverAliases = [
+          "home.dgb.sh"
+        ];
         forceSSL = true;
         enableACME = true;
         root = "/var/www/html/dgb.sh";
