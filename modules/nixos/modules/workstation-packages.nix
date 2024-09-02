@@ -18,6 +18,7 @@
     master.freerdp3
     wl-clipboard # Wayland clipboard from cli
     xclip # X11 clipboard from cli
+    parsec-bin
 
     # themes
     kde-gruvbox
