@@ -27,6 +27,8 @@ let
 
     "transmission-auth"
 
+    "dgb.sh-dynamic-dns-password"
+
     "teamspeak-server-syncthing.key.pem"
     "teamspeak-server-syncthing.cert.pem"
     "mini-syncthing.key.pem"

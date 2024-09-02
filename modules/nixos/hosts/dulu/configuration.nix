@@ -12,6 +12,8 @@
       ./restic.nix
       ./plex.nix
       ./nginx.nix
+      ./dns.nix
+      ./pihole.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
