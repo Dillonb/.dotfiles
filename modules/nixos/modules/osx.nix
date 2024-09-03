@@ -16,8 +16,4 @@
   };
 
   security.pam.enableSudoTouchIdAuth = true;
-
-  environment.systemPackages = with pkgs; [
-    nh
-  ];
 }
