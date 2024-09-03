@@ -75,7 +75,7 @@
     # Misc/Media
     spotify
     spotify-qt
-    # plex-media-player - install plex desktop from flatpak
+    unstable.plex-desktop
     mpv
     gimp
     audacity
