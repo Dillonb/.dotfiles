@@ -5,7 +5,8 @@
   nix = {
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
-      auto-optimise-store = true;
+      # This casues problems on osx
+      # auto-optimise-store = true;
       trusted-users = [ "dbeliveau" "dillon" ];
     };
   };
