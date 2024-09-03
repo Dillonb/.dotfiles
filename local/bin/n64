@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -e
+N64_PATH=/home/dillon/src/n64
+
+if test -d $N64_PATH; then
+  nix develop /home/dillon/src/n64 --command bash -c "pushd /home/dillon/src/n64/build && ninja n64 && popd"
+  nix develop /home/dillon/src/n64 --command /home/dillon/src/n64/build/n64 $@
+else
+  echo "$N64_PATH does not exist!"
+fi
+
