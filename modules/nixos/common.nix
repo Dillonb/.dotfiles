@@ -68,7 +68,7 @@
 
   services = {
     openssh.enable = true;
-    lorri.enable = true;
+    # lorri.enable = true;
     locate = {
       enable = true;
       package = pkgs.plocate;
