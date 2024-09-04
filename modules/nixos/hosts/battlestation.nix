@@ -109,7 +109,12 @@ in
     # package = nvidia_555_58_02;
   };
 
-  # boot.kernelParams = [ "nvidia-drm.modeset=1" "nvidia-drm.fbdev=1" ];
+  boot.kernelParams = [
+    "nvidia-drm.modeset=1"
+    "nvidia-drm.fbdev=1"
+    "nvidia.NVreg_EnableGpuFirmware=0"
+    # "nvidia.Nvreg_PreserveVideoMemoryAllocations"
+  ];
 
   # udev rules and software for configuring logitech unifying recivers
   hardware.logitech.wireless = {
