@@ -161,6 +161,10 @@ require("lazy").setup({
           lspconfig.clangd.setup(lsp_capabilities)
         end
 
+        if vim.fn.executable("rust-analyzer") then
+          lspconfig.rust_analyzer.setup(lsp_capabilities)
+        end
+
         if vim.fn.executable("nixd") then
           lspconfig.nixd.setup(lsp_capabilities)
         elseif vim.fn.executable("nil") then
