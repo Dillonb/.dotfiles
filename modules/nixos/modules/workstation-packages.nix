@@ -28,7 +28,7 @@
     unstable.oh-my-posh
 
     # Gaming
-    chiaki # ps5 remote play
+    master.chiaki-ng # ps5 remote play
     # lutris
     moonlight-qt
 
