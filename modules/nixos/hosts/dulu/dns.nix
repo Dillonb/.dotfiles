@@ -8,6 +8,7 @@
     passwordFile = config.age.secrets."dgb.sh-dynamic-dns-password".path;
     domains = [
       "home.dgb.sh"
+      "@"
     ];
   };
 }
