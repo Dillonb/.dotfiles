@@ -1,12 +1,12 @@
 { pkgs, ... }:
 let
-  plex-version = "1.41.0.8911-1bd569c5f";
+  plex-version = "1.41.0.8930-056c2ed26";
   plex-package = pkgs.plex.override {
     plexRaw = pkgs.plexRaw.overrideAttrs (old: rec {
       version = plex-version;
       src = pkgs.fetchurl {
         url = "https://downloads.plex.tv/plex-media-server-new/${version}/debian/plexmediaserver_${version}_amd64.deb";
-        sha256 = "sha256-2emtJM5XBgwkZ/D04AEn4RxKQW7Nhexr4r+AJq6Q/ds=";
+        sha256 = "sha256-Kf/7eGtx2vwSix8KIhGvBWGyE84alSF2uZiO6u+JdTs=";
       };
     });
   };
