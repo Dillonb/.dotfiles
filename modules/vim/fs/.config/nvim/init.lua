@@ -148,7 +148,8 @@ require("lazy").setup({
             { name = 'luasnip' },
           }, {
             { name = 'buffer' },
-          })
+          }),
+          preselect = cmp.PreselectMode.None
         })
 
         local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
