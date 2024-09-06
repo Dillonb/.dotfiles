@@ -128,3 +128,7 @@ if command -v oh-my-posh &>/dev/null; then
     # if oh-my-posh is available, use that for theming
     eval "$(oh-my-posh init zsh --config ~/.dotfiles/modules/zsh/ys.omp.json)"
 fi
+
+if command -v nix-your-shell > /dev/null; then
+  nix-your-shell zsh | source /dev/stdin
+fi

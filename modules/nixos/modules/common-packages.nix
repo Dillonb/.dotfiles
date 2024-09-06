@@ -74,6 +74,7 @@ let
     sqlite
     sshfs
     dig
+    nix-your-shell
 
     # Fun
     fortune
