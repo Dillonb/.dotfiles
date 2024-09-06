@@ -139,7 +139,8 @@ in
   # Run Electron apps with native wayland instead of XWayland (buggy)
   # environment.sessionVariables = { NIXOS_OZONE_WL = "1"; };
   environment.sessionVariables = {
-    "KWIN_DRM_DISABLE_TRIPLE_BUFFERING" = "1";
+    # Disabled for now - if stuttering comes back try reenabling
+    # "KWIN_DRM_DISABLE_TRIPLE_BUFFERING" = "1";
   };
 
   # libvirtd
