@@ -41,12 +41,6 @@
 
   programs = {
     nix-ld.enable = true;
-    # Expose dynamic libraries in a normal location.
-    # Add any missing dynamic libraries for unpackaged programs here,
-    # NOT in environment.systemPackages
-    nix-ld.libraries = with pkgs; [
-      capstone
-    ];
 
     zsh.enable = true;
     thefuck.enable = true;
