@@ -191,6 +191,17 @@ require("lazy").setup({
       end,
     },
 
+    {
+      "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+      config = function()
+        require("lsp_lines").setup()
+        -- Disable builtin LSP diagnostic text
+        vim.diagnostic.config({
+          virtual_text = false,
+        })
+      end,
+    },
+
     -- Gruvbox my beloved
     {
       "ellisonleao/gruvbox.nvim",
