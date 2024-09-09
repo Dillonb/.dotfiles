@@ -195,9 +195,11 @@ require("lazy").setup({
       "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
       config = function()
         require("lsp_lines").setup()
-        -- Disable builtin LSP diagnostic text
         vim.diagnostic.config({
-          virtual_text = false,
+          -- Still show builtin LSP error text
+          virtual_text = true,
+          -- Also show text from this plugin, but only on the current line
+          virtual_lines = { only_current_line = true }
         })
       end,
     },
