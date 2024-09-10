@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 let
   optionals = pkgs.lib.optionals;
   isLinux = pkgs.stdenv.isLinux;
@@ -78,6 +78,8 @@ let
 
     # Fun
     fortune
+  ] ++ [
+    inputs.detectcharset.packages."${pkgs.system}".default
   ];
 in
 {

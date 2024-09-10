@@ -29,6 +29,7 @@
 
     ts3status.url = "github:Dillonb/ts3status";
     ble-scale.url = "github:Dillonb/ble-scale";
+    detectcharset.url = "github:Dillonb/detectcharset";
   };
 
   outputs = { self, nixpkgs-stable, nixpkgs-unstable, nixpkgs-master, nixos-hardware, home-manager-stable, home-manager-unstable, agenix, ts3status, nixos-wsl, darwin, ... }@inputs:
