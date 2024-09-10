@@ -258,6 +258,7 @@ require("lazy").setup({
         -- go to the next tab
         vim.keymap.set('n', '<leader>l', ':BufferNext<CR>');
         vim.keymap.set('n', '<leader>L', ':BufferPrevious<CR>');
+        vim.keymap.set('n', '<leader>h', ':BufferPrevious<CR>');
         vim.keymap.set('n', '<C-w>', ':BufferClose<CR>');
       end,
     },
