@@ -1,1 +1,14 @@
 .oh-my-zsh/cache
+{{- if eq .chezmoi.os "windows" }}
+.config
+.ideavimrc
+.quickvimrc
+.tmux.conf
+.vimrc
+.zshrc
+touch_dotzshrc_local.sh
+.oh-my-zsh
+{{- else }}
+# Non-Windows OS (Linux/Mac)
+AppData
+{{- end }}
