@@ -63,6 +63,7 @@
         in
         darwin.lib.darwinSystem {
           inherit system;
+          specialArgs = { inherit inputs; };
           modules = modules ++ [
             ./nix/hosts/${hostname}.nix
             ./nix/modules/osx.nix
