@@ -81,7 +81,7 @@ if command -v fdfind &>/dev/null; then
 fi
 
 if command -v nh &>/dev/null; then
-    export FLAKE=$(readlink -f ~/.dotfiles/modules/nixos)
+    export FLAKE=$(readlink -f ~/.dotfiles)
     eval "$(nh completions --shell zsh)"
 fi
 
