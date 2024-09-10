@@ -1,0 +1,1 @@
+chezmoi -S ./chezmoi apply
