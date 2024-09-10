@@ -32,7 +32,7 @@
     detectcharset.url = "github:Dillonb/detectcharset";
   };
 
-  outputs = { self, nixpkgs-stable, nixpkgs-unstable, nixpkgs-master, nixos-hardware, home-manager-stable, home-manager-unstable, agenix, ts3status, nixos-wsl, darwin, ... }@inputs:
+  outputs = { nixpkgs-stable, nixpkgs-unstable, nixpkgs-master, nixos-hardware, home-manager-stable, home-manager-unstable, agenix, nixos-wsl, darwin, ... }@inputs:
     let
       nixpkgs-config = {
         allowUnfree = true;
@@ -56,7 +56,7 @@
               config = nixpkgs-config;
             };
           };
-          overlays = ({ config, pkgs, ... }: {
+          overlays = ({ ... }: {
             nixpkgs.overlays = [ overlay-unstable overlay-master ];
             nixpkgs.config = nixpkgs-config;
           });
@@ -70,7 +70,7 @@
             overlays
           ];
         };
-      nixos = { hostname, system, role, modules, channel ? "stable", extra ? { } }:
+      nixos = { hostname, system, role, modules, channel ? "stable" }:
         let
           overlay-unstable = final: prev: {
             unstable = import nixpkgs-unstable {
@@ -91,7 +91,7 @@
               super.makeModulesClosure (x // { allowMissing = true; });
           });
 
-          overlays = ({ config, pkgs, ... }: {
+          overlays = ({ ... }: {
             nixpkgs.overlays = [ overlay-unstable overlay-master overlay-missing-modules-okay ];
             nixpkgs.config = nixpkgs-config;
           });
