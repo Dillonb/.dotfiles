@@ -75,6 +75,7 @@ let
     sshfs
     dig
     nix-your-shell
+    chezmoi
 
     # Fun
     fortune
