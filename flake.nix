@@ -64,9 +64,9 @@
         darwin.lib.darwinSystem {
           inherit system;
           modules = modules ++ [
-            ./hosts/${hostname}.nix
-            ./modules/osx.nix
-            ./modules/common-packages.nix
+            ./nix/hosts/${hostname}.nix
+            ./nix/modules/osx.nix
+            ./nix/modules/common-packages.nix
             overlays
           ];
         };
@@ -97,38 +97,38 @@
           });
           agenix-modules = [
             agenix.nixosModules.default
-            ./secrets/load-secrets.nix
+            ./nix/secrets/load-secrets.nix
             {
               environment.systemPackages = [ agenix.packages.${system}.default ];
             }
           ];
           role-modules = {
             workstation = [
-              ./common.nix
-              ./workstation.nix
-              ./modules/pipewire.nix
-              ./modules/bluetooth.nix
-              ./modules/custom-options.nix
-              ./modules/flatpak-support.nix
-              # ./modules/ime.nix
-              ./modules/kde.nix
-              ./modules/home-manager.nix
-              ./modules/workstation-packages.nix
-              ./modules/common-packages.nix
-              ./modules/appimage-support.nix
-              ./modules/libreoffice.nix
+              ./nix/common.nix
+              ./nix/workstation.nix
+              ./nix/modules/pipewire.nix
+              ./nix/modules/bluetooth.nix
+              ./nix/modules/custom-options.nix
+              ./nix/modules/flatpak-support.nix
+              # ./nix/modules/ime.nix
+              ./nix/modules/kde.nix
+              ./nix/modules/home-manager.nix
+              ./nix/modules/workstation-packages.nix
+              ./nix/modules/common-packages.nix
+              ./nix/modules/appimage-support.nix
+              ./nix/modules/libreoffice.nix
             ] ++ agenix-modules;
 
             server = [
-              ./common.nix
-              ./modules/server-packages.nix
-              ./modules/common-packages.nix
+              ./nix/common.nix
+              ./nix/modules/server-packages.nix
+              ./nix/modules/common-packages.nix
             ] ++ agenix-modules;
 
             wsl = [
-              ./common.nix
-              ./modules/common-packages.nix
-              ./modules/wsl-packages.nix
+              ./nix/common.nix
+              ./nix/modules/common-packages.nix
+              ./nix/modules/wsl-packages.nix
               nixos-wsl.nixosModules.wsl
               {
                 wsl.enable = true;
@@ -158,7 +158,7 @@
             {
               networking.hostName = hostname;
             }
-            ./hosts/${hostname}.nix
+            ./nix/hosts/${hostname}.nix
             home-manager.nixosModules.home-manager
             overlays
           ] ++ modules
@@ -173,10 +173,10 @@
           channel = "unstable";
           system = "x86_64-linux";
           modules = [
-            ./modules/sunshine.nix
-            ./modules/restic.nix
-            ./modules/syncthing.nix
-            ./modules/ssd.nix
+            ./nix/modules/sunshine.nix
+            ./nix/modules/restic.nix
+            ./nix/modules/syncthing.nix
+            ./nix/modules/ssd.nix
           ];
         };
 
@@ -187,8 +187,8 @@
           channel = "unstable";
           modules = [
             nixos-hardware.nixosModules.dell-xps-13-9300
-            ./modules/syncthing.nix
-            ./modules/ssd.nix
+            ./nix/modules/syncthing.nix
+            ./nix/modules/ssd.nix
           ];
         };
 
@@ -197,10 +197,10 @@
           system = "x86_64-linux";
           role = "server";
           modules = [
-            ./modules/restic.nix
-            ./modules/ts3status.nix
-            ./modules/syncthing.nix
-            ./modules/netdata.nix
+            ./nix/modules/restic.nix
+            ./nix/modules/ts3status.nix
+            ./nix/modules/syncthing.nix
+            ./nix/modules/netdata.nix
           ];
         };
 
@@ -209,10 +209,10 @@
           system = "x86_64-linux";
           role = "server";
           modules = [
-            ./modules/syncthing.nix
-            ./modules/restic.nix
-            ./modules/netdata.nix
-            ./modules/ssd.nix
+            ./nix/modules/syncthing.nix
+            ./nix/modules/restic.nix
+            ./nix/modules/netdata.nix
+            ./nix/modules/ssd.nix
           ];
         };
 
@@ -222,8 +222,8 @@
           role = "server";
           modules = [
             nixos-hardware.nixosModules.raspberry-pi-4
-            ./modules/bluetooth.nix
-            ./modules/syncthing.nix
+            ./nix/modules/bluetooth.nix
+            ./nix/modules/syncthing.nix
           ];
         };
 
@@ -253,7 +253,7 @@
             nh
           ];
           shellHook = ''
-            export FLAKE="`readlink -f ~/.dotfiles/modules/nixos`"
+            export FLAKE="`readlink -f ~/.dotfiles`"
           '';
         };
       });
