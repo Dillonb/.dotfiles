@@ -282,9 +282,9 @@ require("lazy").setup({
       config = function()
         -- Find files by filename
         -- vim.keymap.set('n', '<leader>o', ':Telescope find_files<CR>');
-        vim.keymap.set('n', '<leader>o', ':lua require"telescope.builtin".find_files({ hidden = true })<CR>', {noremap = true, silent = true})
+        vim.keymap.set('n', '<leader>o', ':lua require"telescope.builtin".git_files({ hidden = true })<CR>', {noremap = true, silent = true})
         -- vim.keymap.set('n', '<C-p>', ':Telescope find_files<CR>');
-        vim.keymap.set('n', '<C-p>', ':lua require"telescope.builtin".find_files({ hidden = true })<CR>', {noremap = true, silent = true})
+        vim.keymap.set('n', '<C-p>', ':lua require"telescope.builtin".git_files({ hidden = true })<CR>', {noremap = true, silent = true})
 
 
         -- Find currently open files by filename
