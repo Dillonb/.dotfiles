@@ -25,6 +25,10 @@ vim.opt.smartcase = true
 -- No word wrap
 vim.opt.wrap = false
 
+-- Disable swap files and sync buffers between all neovim processes
+vim.opt.autoread = true
+vim.opt.swapfile = false
+
 -- Default formatting settings.
 -- vim-sleuth will determine these automatically most of the time,
 -- so these are just for when it can't.
