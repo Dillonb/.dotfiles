@@ -252,6 +252,7 @@
             zsh
             wget
             nh
+            chezmoi
           ];
           shellHook = ''
             export FLAKE="`readlink -f ~/.dotfiles`"
