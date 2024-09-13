@@ -48,7 +48,7 @@
     # Dev
     docker-compose
     master.vscode-fhs
-    unstable.ghidra
+    master.ghidra
     master.sublime-merge
     unstable.imhex
     renderdoc
