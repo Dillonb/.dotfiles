@@ -107,7 +107,7 @@
             workstation = [
               ./nix/common.nix
               ./nix/workstation.nix
-              ./nix/fonts.nix
+              ./nix/modules/fonts.nix
               ./nix/modules/pipewire.nix
               ./nix/modules/bluetooth.nix
               ./nix/modules/custom-options.nix
