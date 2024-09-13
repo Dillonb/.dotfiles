@@ -6,4 +6,6 @@
       home = "/Users/dbeliveau";
     };
   };
+
+  system.stateVersion = 5;
 }

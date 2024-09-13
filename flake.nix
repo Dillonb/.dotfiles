@@ -107,6 +107,7 @@
             workstation = [
               ./nix/common.nix
               ./nix/workstation.nix
+              ./nix/fonts.nix
               ./nix/modules/pipewire.nix
               ./nix/modules/bluetooth.nix
               ./nix/modules/custom-options.nix
@@ -240,7 +241,9 @@
         dgbmbp = mac {
           hostname = "dgbmbp";
           system = "aarch64-darwin";
-          modules = [ ];
+          modules = [
+            ./nix/modules/fonts.nix
+          ];
         };
       };
 

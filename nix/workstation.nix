@@ -20,18 +20,6 @@
   # ZSA keyboard udev rule
   hardware.keyboard.zsa.enable = true;
 
-  fonts.packages = with pkgs; [
-    hasklig
-    terminus_font
-    dejavu_fonts
-    hack-font
-    noto-fonts-cjk
-    noto-fonts-cjk-sans
-    cascadia-code
-    noto-fonts-color-emoji
-    (nerdfonts.override { fonts = [ "CascadiaCode" ]; })
-  ];
-
   virtualisation.containers.enable = true;
   virtualisation.podman = {
     enable = true;
