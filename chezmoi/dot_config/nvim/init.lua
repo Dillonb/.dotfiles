@@ -195,7 +195,6 @@ require("lazy").setup({
         if vim.fn.executable("OmniSharp") then
           lspconfig.omnisharp.setup(lsp_capabilities)
         end
-
       end,
     },
 
