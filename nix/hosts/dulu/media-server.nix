@@ -91,4 +91,11 @@ in
     dataDir = "/var/lib/tautulli";
     configFile = "/var/lib/tautulli/config.ini";
   };
+
+  services.jellyfin = {
+    enable = true;
+    openFirewall = true;
+    user = "dillon";
+    package = pkgs.master.jellyfin;
+  };
 }

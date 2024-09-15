@@ -14,6 +14,7 @@
           "/etc"
           "/var/lib/syncthing-data"
           "/var/lib/plex"
+          "/var/lib/jellyfin"
           "/var/lib/sonarr"
           "/var/lib/private"
           "/var/lib/radarr"
