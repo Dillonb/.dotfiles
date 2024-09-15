@@ -47,6 +47,22 @@
     intel-gpu-tools
   ];
 
+  # for QSV
+  nixpkgs.config.packageOverrides = pkgs: {
+    vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
+  };
+  hardware.opengl = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver
+      intel-vaapi-driver
+      vaapiVdpau
+      libvdpau-va-gl
+      intel-compute-runtime
+      unstable.vpl-gpu-rt
+    ];
+  };
+
   services.samba = {
     enable = true;
     securityType = "user";

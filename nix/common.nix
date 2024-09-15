@@ -38,6 +38,7 @@
         "podman"
         "audio"
         "video"
+        "render"
         "input"
         "wireshark"
         "libvirtd"
