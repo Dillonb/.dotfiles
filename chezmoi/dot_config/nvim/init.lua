@@ -192,6 +192,10 @@ require("lazy").setup({
           lspconfig.terraformls.setup(lsp_capabilities)
         end
 
+        if vim.fn.executable("OmniSharp") then
+          lspconfig.omnisharp.setup(lsp_capabilities)
+        end
+
       end,
     },
 
