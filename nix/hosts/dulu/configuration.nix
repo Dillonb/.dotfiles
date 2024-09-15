@@ -10,7 +10,7 @@
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./restic.nix
-      ./plex.nix
+      ./media-server.nix
       ./nginx.nix
       ./dns.nix
       ./pihole.nix
