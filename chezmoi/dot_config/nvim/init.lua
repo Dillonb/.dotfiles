@@ -419,6 +419,10 @@ require("lazy").setup({
       init = function()
         require('auto-session').setup()
       end
+    },
+
+    {
+      'f-person/git-blame.nvim'
     }
 })
 
