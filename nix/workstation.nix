@@ -45,6 +45,8 @@
     steam = {
       enable = true;
       remotePlay.openFirewall = true;
+      localNetworkGameTransfers.openFirewall = true;
+
       extraCompatPackages = with pkgs; [ proton-ge-bin ];
 
       # Because steam-run is the best way to get unusual binaries to run
