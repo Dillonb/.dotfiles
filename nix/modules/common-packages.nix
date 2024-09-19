@@ -76,6 +76,7 @@ let
     dig
     nix-your-shell
     chezmoi
+    unstable.yt-dlp
 
     # Fun
     fortune
