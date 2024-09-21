@@ -20,11 +20,14 @@
   # ZSA keyboard udev rule
   hardware.keyboard.zsa.enable = true;
 
-  virtualisation.containers.enable = true;
-  virtualisation.podman = {
-    enable = true;
-    dockerCompat = true;
-    defaultNetwork.settings.dns_enabled = true;
+  virtualisation = {
+    containers.enable = true;
+    podman = {
+      enable = true;
+      dockerCompat = true;
+      defaultNetwork.settings.dns_enabled = true;
+    };
+    waydroid.enable = true;
   };
 
   programs = {
