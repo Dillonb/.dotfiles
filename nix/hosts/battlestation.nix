@@ -116,12 +116,6 @@ in
     # "nvidia.Nvreg_PreserveVideoMemoryAllocations"
   ];
 
-  # udev rules and software for configuring logitech unifying recivers
-  hardware.logitech.wireless = {
-    enable = true;
-    enableGraphical = true;
-  };
-
   # Nvidia in Docker
   virtualisation.docker.enableNvidia = true;
   # virtualisation.containers.cdi.dynamic.nvidia.enable = true;
