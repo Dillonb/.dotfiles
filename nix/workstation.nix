@@ -14,11 +14,19 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  # SDR device udev rules
-  hardware.hackrf.enable = true;
-  hardware.rtl-sdr.enable = true;
-  # ZSA keyboard udev rule
-  hardware.keyboard.zsa.enable = true;
+  hardware = {
+    # SDR device udev rules
+    hackrf.enable = true;
+    rtl-sdr.enable = true;
+    # ZSA keyboard udev rule
+    keyboard.zsa.enable = true;
+
+    # udev rules and software for configuring logitech unifying recivers
+    logitech.wireless = {
+      enable = true;
+      enableGraphical = true;
+    };
+  };
 
   virtualisation = {
     containers.enable = true;
