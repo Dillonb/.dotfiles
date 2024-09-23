@@ -230,11 +230,27 @@ require("lazy").setup({
     -- Nicer status line
     {
       'nvim-lualine/lualine.nvim',
-      dependencies = { 'nvim-tree/nvim-web-devicons' },
+      dependencies = {
+        'nvim-tree/nvim-web-devicons',
+        'f-person/git-blame.nvim'
+      },
       init = function()
+        local git_blame = require('gitblame')
+        vim.g.gitblame_display_virtual_text = false;
         require('lualine').setup {
           options = {
             theme = 'gruvbox_dark';
+          },
+          sections = {
+            lualine_c = {
+              {
+                git_blame.get_current_blame_text,
+                cond = git_blame.is_blame_text_available,
+                on_click = function(num_clicks, button, modifiers)
+                  vim.cmd [[ :GitBlameOpenFileURL ]]
+                end
+              }
+            }
           },
           extensions = {
             'quickfix',
@@ -420,10 +436,6 @@ require("lazy").setup({
         require('auto-session').setup()
       end
     },
-
-    {
-      'f-person/git-blame.nvim'
-    }
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {
