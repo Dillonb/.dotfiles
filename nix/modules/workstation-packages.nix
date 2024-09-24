@@ -77,7 +77,7 @@
     spotify-qt
     unstable.plex-desktop
     mpv
-    gimp
+    no-cuda.gimp
     audacity
     gnuradio
     simplescreenrecorder

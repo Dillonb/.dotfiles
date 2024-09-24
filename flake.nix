@@ -75,6 +75,28 @@
       nixos = { hostname, system, role, modules, channel ? "stable", cuda ? false }:
         let
           nixpkgs-config = nixpkgs-config-base // { cudaSupport = cuda; };
+          nixpkgs-config-no-cuda = nixpkgs-config-base // { cudaSupport = false; };
+
+          nixpkgs-by-channel = {
+            stable = nixpkgs-stable;
+            unstable = nixpkgs-unstable;
+          };
+
+          home-manager-by-channel = {
+            stable = home-manager-stable;
+            unstable = home-manager-unstable;
+          };
+
+          nixpkgs = nixpkgs-by-channel."${channel}";
+          home-manager = home-manager-by-channel."${channel}";
+
+          overlay-no-cuda = final: prev: {
+            no-cuda = import nixpkgs {
+              system = system;
+              config = nixpkgs-config-no-cuda;
+            };
+          };
+
           overlay-unstable = final: prev: {
             unstable = import nixpkgs-unstable {
               system = system;
@@ -95,7 +117,7 @@
           });
 
           overlays = ({ ... }: {
-            nixpkgs.overlays = [ overlay-unstable overlay-master overlay-missing-modules-okay ];
+            nixpkgs.overlays = [ overlay-unstable overlay-master overlay-missing-modules-okay overlay-no-cuda ];
             nixpkgs.config = nixpkgs-config;
           });
           agenix-modules = [
@@ -140,20 +162,6 @@
               }
             ];
           };
-
-
-          nixpkgs-by-channel = {
-            stable = nixpkgs-stable;
-            unstable = nixpkgs-unstable;
-          };
-
-          home-manager-by-channel = {
-            stable = home-manager-stable;
-            unstable = home-manager-unstable;
-          };
-
-          nixpkgs = nixpkgs-by-channel."${channel}";
-          home-manager = home-manager-by-channel."${channel}";
         in
         nixpkgs.lib.nixosSystem {
           system = system;
