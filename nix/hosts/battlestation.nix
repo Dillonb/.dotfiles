@@ -187,4 +187,10 @@ in
   ];
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
+  programs.alvr = {
+    enable = true;
+    package = (pkgs.callPackage ../packages/alvr {});
+    openFirewall = true;
+  };
 }
