@@ -34,7 +34,7 @@
 
   outputs = { nixpkgs-stable, nixpkgs-unstable, nixpkgs-master, nixos-hardware, home-manager-stable, home-manager-unstable, agenix, nixos-wsl, darwin, ... }@inputs:
     let
-      nixpkgs-config = {
+      nixpkgs-config-base = {
         allowUnfree = true;
         nvidia.acceptLicense = true;
       };
@@ -44,6 +44,7 @@
       });
       mac = { hostname, system, modules }:
         let
+          nixpkgs-config = nixpkgs-config-base;
           overlay-unstable = final: prev: {
             unstable = import nixpkgs-unstable {
               system = system;
@@ -71,8 +72,9 @@
             overlays
           ];
         };
-      nixos = { hostname, system, role, modules, channel ? "stable" }:
+      nixos = { hostname, system, role, modules, channel ? "stable", cuda ? false }:
         let
+          nixpkgs-config = nixpkgs-config-base // { cudaSupport = cuda; };
           overlay-unstable = final: prev: {
             unstable = import nixpkgs-unstable {
               system = system;
@@ -174,6 +176,7 @@
           role = "workstation";
           channel = "unstable";
           system = "x86_64-linux";
+          cuda = true;
           modules = [
             ./nix/modules/sunshine.nix
             ./nix/modules/restic.nix
