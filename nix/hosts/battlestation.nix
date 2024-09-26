@@ -46,6 +46,10 @@ in
       useOSProber = true;
       device = "nodev";
       default = "saved";
+      theme = pkgs.sleek-grub-theme.override {
+        withBanner = "battlestation";
+        withStyle = "dark";
+      };
     };
   };
 
