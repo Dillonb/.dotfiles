@@ -244,6 +244,7 @@
           hostname = "wsl";
           system = "x86_64-linux";
           role = "wsl";
+          channel = "unstable";
           modules = [ ];
         };
       };
