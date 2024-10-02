@@ -1,7 +1,7 @@
 { ... }:
 {
   docker-containers.pihole = {
-    image = "pihole/pihole:latest";
+    image = "pihole/pihole:2024.07.0";
 
     ports = [
       "53:53/tcp"
