@@ -98,4 +98,9 @@ in
     user = "dillon";
     package = pkgs.master.jellyfin;
   };
+
+  services.ombi = {
+    enable = true;
+    user = "dillon";
+  };
 }
