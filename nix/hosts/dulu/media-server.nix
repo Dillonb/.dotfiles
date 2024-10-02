@@ -99,6 +99,12 @@ in
     package = pkgs.master.jellyfin;
   };
 
+  nixpkgs.overlays = [
+    (final: prev: {
+       ombi = pkgs.unstable.ombi;
+     })
+  ];
+
   services.ombi = {
     enable = true;
     user = "dillon";
