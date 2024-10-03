@@ -77,6 +77,7 @@ let
     nix-your-shell
     chezmoi
     unstable.yt-dlp
+    mediainfo
 
     # Fun
     fortune
