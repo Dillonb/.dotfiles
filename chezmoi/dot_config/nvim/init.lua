@@ -436,6 +436,20 @@ require("lazy").setup({
         require('auto-session').setup()
       end
     },
+
+  -- HTTP Client
+  {
+    'mistweaverco/kulala.nvim',
+    opts = {},
+    init = function()
+      -- Associate .http files with this plugin
+      vim.filetype.add({
+        extension = {
+          ['http'] = 'http',
+        },
+      })
+    end
+  },
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {
