@@ -1,7 +1,11 @@
 #!/usr/bin/env nix-shell
 #!nix-shell -i bash -p nix nix-prefetch curl jq
 CURRENT_PLEX_VER=`nix-instantiate --eval -E '(import ./plex.nix).version' | tr -d '"'`
-PLEX_VER=`curl -s https://plex.tv/api/downloads/5.json | jq ".computer.Linux.version" -r`
+if [ -z "${1}" ]; then
+  PLEX_VER=`curl -s https://plex.tv/api/downloads/5.json | jq ".computer.Linux.version" -r`
+else
+  PLEX_VER=$1
+fi
 echo "Latest version is $PLEX_VER"
 echo "Current version is $CURRENT_PLEX_VER"
 
@@ -20,4 +24,3 @@ EOF
 else
   echo "Already up to date."
 fi
-
