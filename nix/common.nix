@@ -66,6 +66,7 @@
       enable = true;
       openFirewall = true;
     };
+    bandwhich.enable = true;
   };
 
   services = {
