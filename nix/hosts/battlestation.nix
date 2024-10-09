@@ -187,7 +187,7 @@ in
 
   environment.systemPackages = with pkgs; [
     master.r2modman
-    no-cuda.obs-studio
+    obs-studio
   ];
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
