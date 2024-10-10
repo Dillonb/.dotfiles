@@ -1,15 +1,11 @@
-$profile_path = (Resolve-Path ~\AppData\Local\DillonCustomPowershell\profile.ps1).Path
-
 $loader_script = @"
-. $profile_path
+. (Resolve-Path ~\AppData\Local\DillonCustomPowershell\profile.ps1).Path
 "@;
 
 if (Test-Path -Path $PROFILE) {
   $existing_profile = Get-Content -Path $PROFILE
 
-  if ($loader_script -eq $existing_profile) {
-    Write-Host "No change needed to profile."
-  } else {
+  if ($loader_script -ne $existing_profile) {
     Write-Host "!!!!!!!!!!!!!!!!!!!!!!!!!!"
     Write-Host "!!Profile does not match!!"
     Write-Host "!!!!!!!!!!!!!!!!!!!!!!!!!!"
