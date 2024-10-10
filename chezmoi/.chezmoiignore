@@ -6,4 +6,5 @@
 {{- else }}
 # Non-Windows OS (Linux/Mac)
 AppData
+*.ps1
 {{- end }}
