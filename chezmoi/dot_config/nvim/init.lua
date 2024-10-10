@@ -468,6 +468,11 @@ require("lazy").setup({
       { "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
       { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
     },
+  },
+
+  -- Changes made in a quickfix window are reflected in the actual file
+  {
+    "stefandtw/quickfix-reflector.vim"
   }
 })
 
