@@ -17,3 +17,5 @@ $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
 if (Test-Path($ChocolateyProfile)) {
   Import-Module "$ChocolateyProfile"
 }
+
+Import-Module ~\AppData\Local\DillonCustomPowershell\posh-git\src\posh-git.psd1
