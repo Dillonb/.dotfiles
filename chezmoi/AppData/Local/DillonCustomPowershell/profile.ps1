@@ -8,6 +8,8 @@ Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
 Set-PSReadLineKeyHandler -Chord Tab -Function MenuComplete
 Set-PSReadLineOption -EditMode Emacs
 
+Set-Alias -Name vim -Value nvim
+
 # Import the Chocolatey Profile that contains the necessary code to enable
 # tab-completions to function for `choco`.
 # Be aware that if you are missing these lines from your profile, tab completion
