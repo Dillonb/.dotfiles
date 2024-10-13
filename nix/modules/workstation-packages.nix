@@ -58,6 +58,7 @@
     gdb
     lldb
     cargo
+    qtcreator
 
     # Sec
     tcpdump
