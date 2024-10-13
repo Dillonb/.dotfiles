@@ -138,10 +138,3 @@ fi
 if command -v nix-your-shell > /dev/null; then
   nix-your-shell zsh | source /dev/stdin
 fi
-
-if command -v chezmoi > /dev/null; then
-    if ! chezmoi verify; then
-        echo ""
-        echo "!! Dotfiles out of sync, run 'chezmoi apply'"
-    fi
-fi
