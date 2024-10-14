@@ -62,12 +62,14 @@
         initialize = true;
         passwordFile = config.age.secrets.restic.path;
         rcloneConfigFile = "${config.services.syncthing.settings.folders."rclone-config".path}/rclone.conf";
-        user = "teamspeak";
+        user = "root";
         paths = [
           "/var/log/teamspeak3-server"
           "/var/lib/teamspeak3-server"
           "/var/lib/ts3status"
           "/var/www"
+          "/home/dillon"
+          "/home/sean"
         ];
         repository = "rclone:proton:restic-backups/teamspeak-server";
         pruneOpts = [
