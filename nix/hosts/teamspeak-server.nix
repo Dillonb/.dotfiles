@@ -1,4 +1,4 @@
-{ modulesPath, config, ... }:
+{ modulesPath, config, pkgs, ... }:
 {
   imports = [ "${modulesPath}/virtualisation/azure-common.nix" ];
 
@@ -82,5 +82,17 @@
         };
       };
     };
+  };
+
+  users.users.sean = {
+    isNormalUser = true;
+    description = "Parmesean McFlurry";
+    shell = pkgs.bashInteractive;
+    packages = with pkgs; [
+      (python312.withPackages(python-pkgs: with python-pkgs; [
+        discordpy
+        requests
+      ]))
+    ];
   };
 }
