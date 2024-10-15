@@ -80,7 +80,7 @@
     mpv
     no-cuda.gimp
     audacity
-    gnuradio
+    # gnuradio
     simplescreenrecorder
     teamspeak_client
     teamspeak5_client

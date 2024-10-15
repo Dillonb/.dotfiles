@@ -45,6 +45,12 @@
       mac = { hostname, system, modules }:
         let
           nixpkgs-config = nixpkgs-config-base;
+          overlay-stable = final: prev: {
+            stable = import nixpkgs-stable {
+              system = system;
+              config = nixpkgs-config;
+            };
+          };
           overlay-unstable = final: prev: {
             unstable = import nixpkgs-unstable {
               system = system;
@@ -58,7 +64,7 @@
             };
           };
           overlays = ({ ... }: {
-            nixpkgs.overlays = [ overlay-unstable overlay-master ];
+            nixpkgs.overlays = [ overlay-unstable overlay-master overlay-stable ];
             nixpkgs.config = nixpkgs-config;
           });
         in
@@ -97,6 +103,13 @@
             };
           };
 
+          overlay-stable = final: prev: {
+            stable = import nixpkgs-stable {
+              system = system;
+              config = nixpkgs-config;
+            };
+          };
+
           overlay-unstable = final: prev: {
             unstable = import nixpkgs-unstable {
               system = system;
@@ -117,7 +130,7 @@
           });
 
           overlays = ({ ... }: {
-            nixpkgs.overlays = [ overlay-unstable overlay-master overlay-missing-modules-okay overlay-no-cuda ];
+            nixpkgs.overlays = [ overlay-stable overlay-unstable overlay-master overlay-missing-modules-okay overlay-no-cuda ];
             nixpkgs.config = nixpkgs-config;
           });
           agenix-modules = [

@@ -38,7 +38,7 @@ let
     fd
     cmake-language-server
     clang-tools # for clangd
-    bear
+    stable.bear
     cachix
 
     # System status
