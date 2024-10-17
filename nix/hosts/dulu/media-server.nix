@@ -101,8 +101,8 @@ in
 
   nixpkgs.overlays = [
     (final: prev: {
-       ombi = pkgs.unstable.ombi;
-     })
+      ombi = pkgs.unstable.ombi;
+    })
   ];
 
   services.ombi = {
