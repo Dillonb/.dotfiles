@@ -188,6 +188,7 @@ in
   environment.systemPackages = with pkgs; [
     master.r2modman
     obs-studio
+    prismlauncher
   ];
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
