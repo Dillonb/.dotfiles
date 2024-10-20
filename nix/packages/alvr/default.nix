@@ -1,143 +1,83 @@
-{
-  lib,
-  rustPlatform,
-  fetchFromGitHub,
-  substituteAll,
-  nix-update-script,
-  pkg-config,
-  autoAddDriverRunpath,
-  alsa-lib,
-  brotli,
-  bzip2,
-  celt,
-  ffmpeg,
-  jack2,
-  lame,
-  libX11,
-  libXi,
-  libXrandr,
-  libXcursor,
-  libdrm,
-  libglvnd,
-  libogg,
-  libpng,
-  libtheora,
-  libunwind,
-  libva,
-  libvdpau,
-  libxkbcommon,
-  openssl,
-  openvr,
-  pipewire,
-  rust-cbindgen,
-  soxr,
-  vulkan-headers,
-  vulkan-loader,
-  wayland,
-  x264,
-  xvidcore,
+{ lib
+, stdenv
+, fetchzip
+, fetchFromGitHub
+, alsa-lib
+, autoPatchelfHook
+, brotli
+, ffmpeg
+, libdrm
+, libGL
+, libunwind
+, libva
+, libvdpau
+, libxkbcommon
+, nix-update-script
+, openssl
+, pipewire
+, pulseaudio
+, vulkan-loader
+, wayland
+, x264
+, xorg
+, SDL2
 }:
-
-rustPlatform.buildRustPackage rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "alvr";
   version = "20.11.1";
 
-  src = fetchFromGitHub {
+  src = fetchzip {
+    url = "https://github.com/alvr-org/ALVR/releases/download/v${finalAttrs.version}/alvr_streamer_linux.tar.gz";
+    hash = "sha256-/m5uyqI1qrWc82FSoU+baSzpvIGXOwjjJhObMeWPjfg=";
+  };
+
+  alvrSrc = fetchFromGitHub {
     owner = "alvr-org";
     repo = "ALVR";
-    rev = "refs/tags/v${version}";
-    fetchSubmodules = true; #TODO devendor openvr
-    hash = "sha256-d4KldPii8W1HcfnMSD8Fn+IGO/a3r8747APPjRCnbe8=";
+    rev = "v${finalAttrs.version}";
+    hash = "sha256-boSS7eEfcKRJf5gt1LKk/DuyZEWMTun093P7mkIjUgs=";
   };
-
-  cargoLock = {
-    lockFile = ./Cargo.lock;
-    outputHashes = {
-      "openxr-0.18.0" = "sha256-v8sY9PROrqzkpuq3laIn2hPaX+DY7Fbca6i/Xiacd1g=";
-      "settings-schema-0.2.0" = "sha256-luEdAKDTq76dMeo5kA+QDTHpRMFUg3n0qvyQ7DkId0k=";
-    };
-  };
-
-  patches = [
-    (substituteAll {
-      src = ./fix-finding-libs.patch;
-      ffmpeg = lib.getDev ffmpeg;
-      x264 = lib.getDev x264;
-    })
-  ];
-
-  env = {
-    NIX_CFLAGS_COMPILE = toString [
-      "-lbrotlicommon"
-      "-lbrotlidec"
-      "-lcrypto"
-      "-lpng"
-      "-lssl"
-    ];
-  };
-
-  RUSTFLAGS = map (a: "-C link-arg=${a}") [
-    "-Wl,--push-state,--no-as-needed"
-    "-lEGL"
-    "-lwayland-client"
-    "-lxkbcommon"
-    "-Wl,--pop-state"
-  ];
 
   nativeBuildInputs = [
-    rust-cbindgen
-    pkg-config
-    rustPlatform.bindgenHook
-    autoAddDriverRunpath
+    autoPatchelfHook
   ];
 
   buildInputs = [
     alsa-lib
-    brotli
-    bzip2
-    celt
-    ffmpeg
-    jack2
-    lame
-    libX11
-    libXcursor
-    libXi
-    libXrandr
-    libdrm
-    libglvnd
-    libogg
-    libpng
-    libtheora
     libunwind
     libva
     libvdpau
-    libxkbcommon
-    openssl
-    openvr
-    pipewire
-    soxr
-    vulkan-headers
     vulkan-loader
-    wayland
-    x264
-    xvidcore
+    pipewire
+    SDL2
   ];
 
-  postBuild = ''
-    # Build SteamVR driver ("streamer")
-    cargo xtask build-streamer --release
-  '';
+  runtimeDependencies = [
+    brotli
+    ffmpeg
+    libdrm
+    libGL
+    libxkbcommon
+    openssl
+    pipewire
+    pulseaudio
+    wayland
+    x264
+    xorg.libX11
+    xorg.libXcursor
+    xorg.libxcb
+    xorg.libXi
+  ];
 
-  postInstall = ''
-    install -Dm755 ${src}/alvr/xtask/resources/alvr.desktop $out/share/applications/alvr.desktop
-    install -Dm644 ${src}/resources/alvr.png $out/share/icons/hicolor/256x256/apps/alvr.png
+  installPhase = ''
+    runHook preInstall
 
-    # Install SteamVR driver
-    mkdir -p $out/{libexec,lib/alvr,share}
-    cp -r ./build/alvr_streamer_linux/lib64/. $out/lib
-    cp -r ./build/alvr_streamer_linux/libexec/. $out/libexec
-    cp -r ./build/alvr_streamer_linux/share/. $out/share
-    ln -s $out/lib $out/lib64
+    mkdir -p $out/share/applications
+    cp -r $src/* $out
+    install -Dm444 $alvrSrc/alvr/xtask/resources/alvr.desktop -t $out/share/applications
+    install -Dm444 $alvrSrc/resources/alvr.png -t $out/share/icons/hicolor/256x256/apps
+
+    runHook postInstall
   '';
 
   passthru.updateScript = nix-update-script { };
@@ -145,10 +85,10 @@ rustPlatform.buildRustPackage rec {
   meta = with lib; {
     description = "Stream VR games from your PC to your headset via Wi-Fi";
     homepage = "https://github.com/alvr-org/ALVR/";
-    changelog = "https://github.com/alvr-org/ALVR/releases/tag/v${version}";
+    changelog = "https://github.com/alvr-org/ALVR/releases/tag/v${finalAttrs.version}";
     license = licenses.mit;
-    mainProgram = "alvr_dashboard";
-    maintainers = with maintainers; [ passivelemon ];
+    # maintainers = with maintainers; [ ];
     platforms = platforms.linux;
+    mainProgram = "alvr_dashboard";
   };
-}
+})
