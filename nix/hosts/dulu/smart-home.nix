@@ -1,7 +1,9 @@
+{ config, pkgs, ... }:
 {
   networking.firewall.allowedTCPPorts = [
     # home assistant
     8123
+    config.services.zigbee2mqtt.settings.frontend.port
   ];
   services.mosquitto = {
     enable = true;
@@ -16,6 +18,7 @@
 
   services.zigbee2mqtt = {
     enable = true;
+    package = pkgs.unstable.zigbee2mqtt;
     settings = {
       homeassistant = true;
       permit_join = false;
@@ -29,6 +32,9 @@
       advanced.transmit_power = 20;
       mqtt = {
         server = "mqtt://localhost:1883";
+      };
+      frontend = {
+        port = 8099;
       };
     };
   };

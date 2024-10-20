@@ -4,9 +4,6 @@
     enable = true;
     virtualHosts = {
       "dgb.sh" = {
-        serverAliases = [
-          "home.dgb.sh"
-        ];
         forceSSL = true;
         enableACME = true;
         root = "/var/www/html/dgb.sh";
@@ -218,6 +215,21 @@
         };
       };
 
+      "home.dgb.sh" = {
+        forceSSL = true;
+
+        enableACME = true;
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:8123/";
+          extraConfig = ''
+            proxy_redirect   http://    https://;
+            proxy_set_header Host       $host;
+            proxy_set_header X-Real-IP  $remote_addr;
+            proxy_set_header Upgrade    $http_upgrade;
+            proxy_set_header Connection "upgrade";
+          '';
+        };
+      };
     };
   };
 
