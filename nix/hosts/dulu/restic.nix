@@ -21,6 +21,11 @@
           "/var/lib/sabnzbd"
           "/var/lib/transmission"
           "/var/lib/tautulli"
+          "/var/lib/plexpy"
+          "/var/lib/ombi"
+          "/var/lib/mosquitto"
+          "/var/lib/pihole"
+          "/var/lib/zigbee2mqtt"
           "/var/www"
         ];
 
