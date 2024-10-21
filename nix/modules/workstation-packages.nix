@@ -3,7 +3,7 @@
   environment.systemPackages = with pkgs; [
     # Browser
     # firefox # configured with programs.firefox below
-    # google-chrome
+    google-chrome
     microsoft-edge
 
     # Mail
