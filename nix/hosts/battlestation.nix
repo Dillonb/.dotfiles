@@ -47,7 +47,7 @@ in
       device = "nodev";
       default = "saved";
       theme = pkgs.sleek-grub-theme.override {
-        withBanner = "battlestation";
+        withBanner = config.networking.hostName;
         withStyle = "dark";
       };
     };

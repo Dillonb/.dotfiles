@@ -195,6 +195,25 @@ require("lazy").setup({
         if vim.fn.executable("OmniSharp") then
           lspconfig.omnisharp.setup(lsp_capabilities)
         end
+
+        if vim.fn.executable("bash-language-server") then
+          lspconfig.bashls.setup(lsp_capabilities)
+        end
+
+        if vim.fn.executable("azure-pipelines-language-server") then
+          local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
+          lsp_capabilities.settings = {
+            yaml = {
+              schemas = {
+                ["https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/master/service-schema.json"] = {
+                  "/*OneBranch*.yml",
+                },
+              },
+            }
+          }
+          lspconfig.azure_pipelines_ls.setup(lsp_capabilities)
+        end
+
       end,
     },
 

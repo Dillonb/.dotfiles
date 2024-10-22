@@ -1,8 +1,13 @@
-{ pkgs, inputs, ... }:
+{ pkgs, system, inputs, ... }:
 let
   optionals = pkgs.lib.optionals;
   isLinux = pkgs.stdenv.isLinux;
   isDarwin = pkgs.stdenv.isDarwin;
+
+  custom-node-pkgs = import ../packages/node-packages {
+    inherit pkgs system;
+  };
+
   linuxPkgs = optionals isLinux (with pkgs; [
     # Dev
     valgrind
@@ -38,8 +43,10 @@ let
     fd
     cmake-language-server
     clang-tools # for clangd
-    stable.bear
+    bear
     cachix
+    bash-language-server
+    custom-node-pkgs.azure-pipelines-language-server
 
     # System status
     htop
@@ -78,6 +85,7 @@ let
     chezmoi
     unstable.yt-dlp
     mediainfo
+    node2nix
 
     # Fun
     fortune
