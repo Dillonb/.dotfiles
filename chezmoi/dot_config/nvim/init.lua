@@ -200,18 +200,8 @@ require("lazy").setup({
           lspconfig.bashls.setup(lsp_capabilities)
         end
 
-        if vim.fn.executable("azure-pipelines-language-server") then
-          local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
-          lsp_capabilities.settings = {
-            yaml = {
-              schemas = {
-                ["https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/master/service-schema.json"] = {
-                  "/*OneBranch*.yml",
-                },
-              },
-            }
-          }
-          lspconfig.azure_pipelines_ls.setup(lsp_capabilities)
+        if vim.fn.executable("kulala-ls") then
+          lspconfig.kulala_ls.setup(lsp_capabilities)
         end
 
       end,
