@@ -4,6 +4,15 @@
 
 let
   sources = {
+    "@mistweaverco/tree-sitter-kulala-1.0.12" = {
+      name = "_at_mistweaverco_slash_tree-sitter-kulala";
+      packageName = "@mistweaverco/tree-sitter-kulala";
+      version = "1.0.12";
+      src = fetchurl {
+        url = "https://registry.npmjs.org/@mistweaverco/tree-sitter-kulala/-/tree-sitter-kulala-1.0.12.tgz";
+        sha512 = "Tip/iIhfTYIrnVgsrw+S9TXeAKQfdr0vJcuShW6Q2E15nb57voR83ZLoLFZTN0nSH8fg325NDZoxY16g408pjg==";
+      };
+    };
     "agent-base-4.3.0" = {
       name = "agent-base";
       packageName = "agent-base";
@@ -121,6 +130,24 @@ let
         sha512 = "Tpp60P6IUJDTuOq/5Z8cdskzJujfwqfOTkrwIwj7IRISpnkJnT6SyJ4PCPnGMoFjC9ddhal5KVIYtAt97ix05A==";
       };
     };
+    "node-addon-api-8.1.0" = {
+      name = "node-addon-api";
+      packageName = "node-addon-api";
+      version = "8.1.0";
+      src = fetchurl {
+        url = "https://registry.npmjs.org/node-addon-api/-/node-addon-api-8.1.0.tgz";
+        sha512 = "yBY+qqWSv3dWKGODD6OGE6GnTX7Q2r+4+DfpqxHSHh8x0B4EKP9+wVGLS6U/AM1vxSNNmUEuIV5EGhYwPpfOwQ==";
+      };
+    };
+    "node-gyp-build-4.8.2" = {
+      name = "node-gyp-build";
+      packageName = "node-gyp-build";
+      version = "4.8.2";
+      src = fetchurl {
+        url = "https://registry.npmjs.org/node-gyp-build/-/node-gyp-build-4.8.2.tgz";
+        sha512 = "IRUxE4BVsHWXkV/SFOut4qTlagw2aM8T5/vnTsmrHJvVoKueJHRc/JaFND7QDDc61kLYUJ6qlZM3sqTSyx2dTw==";
+      };
+    };
     "request-light-0.4.0" = {
       name = "request-light";
       packageName = "request-light";
@@ -137,6 +164,15 @@ let
       src = fetchurl {
         url = "https://registry.npmjs.org/sprintf-js/-/sprintf-js-1.0.3.tgz";
         sha512 = "D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==";
+      };
+    };
+    "tree-sitter-0.21.1" = {
+      name = "tree-sitter";
+      packageName = "tree-sitter";
+      version = "0.21.1";
+      src = fetchurl {
+        url = "https://registry.npmjs.org/tree-sitter/-/tree-sitter-0.21.1.tgz";
+        sha512 = "7dxoA6kYvtgWw80265MyqJlkRl4yawIjO7S5MigytjELkX43fV2WsAXzsNfO7sBpPPCF5Gp0+XzHk0DwLCq3xQ==";
       };
     };
     "vscode-json-languageservice-4.2.1" = {
@@ -291,6 +327,29 @@ in
       description = "Azure Pipelines language server";
       homepage = "https://github.com/microsoft/azure-pipelines-language-server#readme";
       license = "MIT";
+    };
+    production = true;
+    bypassCache = true;
+    reconstructLock = true;
+  };
+  "@mistweaverco/kulala-ls" = nodeEnv.buildNodePackage {
+    name = "_at_mistweaverco_slash_kulala-ls";
+    packageName = "@mistweaverco/kulala-ls";
+    version = "1.0.12";
+    src = fetchurl {
+      url = "https://registry.npmjs.org/@mistweaverco/kulala-ls/-/kulala-ls-1.0.12.tgz";
+      sha512 = "+v17jTfEtg7n4f5uDqAsQfTUpdjFwpB/n8sLCKzzu15BzqCxN1zZokRXRrc+BXKX8KE6pyAgk0y9Cm2H3/Nalg==";
+    };
+    dependencies = [
+      sources."@mistweaverco/tree-sitter-kulala-1.0.12"
+      sources."node-addon-api-8.1.0"
+      sources."node-gyp-build-4.8.2"
+      sources."tree-sitter-0.21.1"
+    ];
+    buildInputs = globalBuildInputs;
+    meta = {
+      description = "A minimal language server for HTTP syntax.";
+      homepage = "https://github.com/mistweaverco/kulala-ls";
     };
     production = true;
     bypassCache = true;

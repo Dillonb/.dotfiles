@@ -1,1 +1,4 @@
-["azure-pipelines-language-server"]
+[
+  "azure-pipelines-language-server",
+  "@mistweaverco/kulala-ls"
+]

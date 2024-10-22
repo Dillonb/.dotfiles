@@ -47,6 +47,7 @@ let
     cachix
     bash-language-server
     custom-node-pkgs.azure-pipelines-language-server
+    custom-node-pkgs."@mistweaverco/kulala-ls"
 
     # System status
     htop
