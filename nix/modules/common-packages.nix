@@ -45,7 +45,7 @@ let
     clang-tools # for clangd
     bear
     cachix
-    bash-language-server
+    unstable.bash-language-server
     custom-node-pkgs.azure-pipelines-language-server
     custom-node-pkgs."@mistweaverco/kulala-ls"
 
