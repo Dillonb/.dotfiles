@@ -5,7 +5,6 @@
     terminus_font
     dejavu_fonts
     hack-font
-    noto-fonts-cjk
     noto-fonts-cjk-sans
     cascadia-code
     noto-fonts-color-emoji
