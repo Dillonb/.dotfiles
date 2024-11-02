@@ -57,7 +57,7 @@ in
 
   services.transmission = {
     enable = true;
-    package = pkgs.unstable.transmission;
+    package = pkgs.unstable.transmission_3;
     user = "dillon";
     settings = {
       incomplete-dir = "/zpool/transmission/incomplete";
