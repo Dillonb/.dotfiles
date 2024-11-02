@@ -1,2 +1,2 @@
-#!/bin/bash
-open https://en.wiktionary.org/wiki/$1#Latin
+#!/usr/bin/env bash
+open "https://en.wiktionary.org/wiki/$1#Latin"
