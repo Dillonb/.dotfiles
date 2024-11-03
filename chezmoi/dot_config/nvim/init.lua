@@ -494,7 +494,13 @@ require("lazy").setup({
   -- Changes made in a quickfix window are reflected in the actual file
   {
     "stefandtw/quickfix-reflector.vim"
-  }
+  },
+
+  -- Find unmapped keys easily
+  {
+    "meznaric/key-analyzer.nvim",
+    opts = {}
+  },
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {
