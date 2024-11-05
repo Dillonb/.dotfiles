@@ -163,7 +163,9 @@ require("lazy").setup({
         end
 
         if vim.fn.executable("clangd") then
-          lspconfig.clangd.setup(lsp_capabilities)
+          local opts = lsp_capabilities
+          opts.cmd = {"clangd", "--header-insertion=never"}
+          lspconfig.clangd.setup(opts)
         end
 
         if vim.fn.executable("rust-analyzer") then
