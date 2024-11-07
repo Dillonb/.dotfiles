@@ -6,6 +6,16 @@
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
 
+    nvidia-patch-stable = {
+      url = "github:icewind1991/nvidia-patch-nixos";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
+    };
+
+    nvidia-patch-unstable = {
+      url = "github:icewind1991/nvidia-patch-nixos";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
     agenix.url = "github:ryantm/agenix";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
@@ -32,7 +42,7 @@
     detectcharset.url = "github:Dillonb/detectcharset";
   };
 
-  outputs = { nixpkgs-stable, nixpkgs-unstable, nixpkgs-master, nixos-hardware, home-manager-stable, home-manager-unstable, agenix, nixos-wsl, darwin, ... }@inputs:
+  outputs = { nixpkgs-stable, nixpkgs-unstable, nixpkgs-master, nixos-hardware, nvidia-patch-stable, nvidia-patch-unstable, home-manager-stable, home-manager-unstable, agenix, nixos-wsl, darwin, ... }@inputs:
     let
       nixpkgs-config-base = {
         allowUnfree = true;
@@ -93,8 +103,14 @@
             unstable = home-manager-unstable;
           };
 
+          nvidia-patch-by-channel = {
+            stable = nvidia-patch-stable;
+            unstable = nvidia-patch-unstable;
+          };
+
           nixpkgs = nixpkgs-by-channel."${channel}";
           home-manager = home-manager-by-channel."${channel}";
+          nvidia-patch = nvidia-patch-by-channel."${channel}";
 
           overlay-no-cuda = final: prev: {
             no-cuda = import nixpkgs {
@@ -124,13 +140,15 @@
             };
           };
 
+          overlay-nvidia-patch = nvidia-patch.overlays.default;
+
           overlay-missing-modules-okay = (final: super: {
             makeModulesClosure = x:
               super.makeModulesClosure (x // { allowMissing = true; });
           });
 
           overlays = ({ ... }: {
-            nixpkgs.overlays = [ overlay-stable overlay-unstable overlay-master overlay-missing-modules-okay overlay-no-cuda ];
+            nixpkgs.overlays = [ overlay-stable overlay-unstable overlay-master overlay-nvidia-patch overlay-missing-modules-okay overlay-no-cuda ];
             nixpkgs.config = nixpkgs-config;
           });
           agenix-modules = [
