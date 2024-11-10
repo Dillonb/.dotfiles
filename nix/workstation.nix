@@ -91,7 +91,7 @@
     keybase.enable = true;
     kbfs.enable = true;
     # "discouraged" to turn this off, but Steam downloads are very slow with this on.
-    nscd.enableNsncd = false;
+    # nscd.enableNsncd = false;
     avahi = {
       enable = true;
       publish.userServices = true;
