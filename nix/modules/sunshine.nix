@@ -32,9 +32,9 @@ let
       ];
     buildInputs =
       old.buildInputs
-        ++ [
-          pkgs.libsysprof-capture
-          pkgs.lerc
+      ++ [
+        pkgs.libsysprof-capture
+        pkgs.lerc
       ];
   });
 in
