@@ -1,6 +1,42 @@
 { config, pkgs, ... }:
 
-let sunshine = pkgs.sunshine.override { cudaSupport = true; };
+let
+  lib = pkgs.lib;
+  cudaPackages = pkgs.cudaPackages;
+  sunshine = (pkgs.sunshine.override {
+    cudaSupport = true;
+    cudaPackages = cudaPackages;
+    boost = pkgs.boost186;
+  }).overrideAttrs (old: {
+    version = "git";
+    src = pkgs.fetchFromGitHub {
+      owner = "LizardByte";
+      repo = "Sunshine";
+      rev = "fc5314b1b65f424865d3378a5ebdc0c25ccb2c49";
+      hash = "sha256-/1HeLe9ReVACS1JmvZM7SX5iW7aX09iMiCZlaZdPn2c=";
+      fetchSubmodules = true;
+    };
+    patches = [ ];
+    cmakeFlags = old.cmakeFlags ++ [
+      "-DBOOST_USE_STATIC=Off"
+      "-DCMAKE_CUDA_COMPILER=${(lib.getExe cudaPackages.cuda_nvcc)}"
+    ];
+    nativeBuildInputs =
+      old.nativeBuildInputs
+      ++ [
+        cudaPackages.cuda_nvcc
+        (lib.getDev cudaPackages.cuda_cudart)
+        pkgs.nodejs
+        pkgs.doxygen
+        pkgs.graphviz
+      ];
+    buildInputs =
+      old.buildInputs
+        ++ [
+          pkgs.libsysprof-capture
+          pkgs.lerc
+      ];
+  });
 in
 {
   environment.systemPackages = [
