@@ -13,5 +13,7 @@ if (Test-Path -Path $PROFILE) {
   }
 } else {
   Write-Host "Writing loader script to $PROFILE"
+  $containingDir = Split-Path -Parent $PROFILE
+  mkdir -Force $containingDir
   $loader_script | Out-File -FilePath $PROFILE
 }
