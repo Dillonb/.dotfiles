@@ -163,7 +163,7 @@ require("lazy").setup({
         end
 
         if vim.fn.executable("clangd") then
-          local opts = lsp_capabilities
+          local opts = require('cmp_nvim_lsp').default_capabilities()
           opts.cmd = {"clangd", "--header-insertion=never"}
           lspconfig.clangd.setup(opts)
         end
