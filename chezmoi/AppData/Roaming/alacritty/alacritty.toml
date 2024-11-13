@@ -1,3 +1,7 @@
+[window.dimensions]
+lines = 30
+columns = 120
+
 [font]
 size = 14
 
@@ -13,3 +17,5 @@ style = "Italic"
 family = "CaskaydiaCove Nerd Font"
 style = "Regular"
 
+[shell]
+program = "pwsh"
