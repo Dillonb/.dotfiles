@@ -175,7 +175,7 @@ in
 
   programs.alvr = {
     enable = true;
-    package = (pkgs.callPackage ../packages/alvr { });
+    package = pkgs.master.alvr;
     openFirewall = true;
   };
 }
