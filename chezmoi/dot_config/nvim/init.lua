@@ -274,7 +274,12 @@ require("lazy").setup({
     },
 
     -- Show git changes on the left side of the window
-    'airblade/vim-gitgutter',
+    {
+      "lewis6991/gitsigns.nvim",
+      init = function()
+        require('gitsigns').setup()
+      end
+    },
 
     -- Autodetect indentation settings
     {'tpope/vim-sleuth', lazy = false},
@@ -503,6 +508,19 @@ require("lazy").setup({
     "meznaric/key-analyzer.nvim",
     opts = {}
   },
+
+  -- Misc mini plugins
+  {
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
+    opts = {
+      quickfile = { enabled = true },
+      bigfile = { enabled = true },
+      statuscolumn = { enabled = true },
+      words = { enabled = true }
+    }
+  }
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {
