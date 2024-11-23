@@ -1,6 +1,10 @@
 { pkgs, ... }:
-{
-  environment.systemPackages = with pkgs; [
+let
+  optionals = pkgs.lib.optionals;
+  isLinux = pkgs.stdenv.isLinux;
+  # isDarwin = pkgs.stdenv.isDarwin;
+
+  linuxPackages = optionals isLinux (with pkgs; [
     # Browser
     # firefox # configured with programs.firefox below
     google-chrome
@@ -87,15 +91,6 @@
     nextcloud-client
     protonvpn-gui
 
-    # System status
-    htop
-    btop
-    ncdu
-    neofetch
-    iotop
-    nethogs
-    nload
-
     # Editor
     vim-full # vim-full includes gvim compared to the regular vim package
     unstable.neovim-qt
@@ -109,5 +104,12 @@
     mitmproxy
     pavucontrol
     distrobox
+  ]);
+
+  commonPackages = with pkgs; [
   ];
+
+in
+{
+  environment.systemPackages = linuxPackages ++ commonPackages;
 }

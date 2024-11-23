@@ -85,6 +85,7 @@
             ./nix/hosts/${hostname}.nix
             ./nix/modules/osx.nix
             ./nix/modules/common-packages.nix
+            ./nix/modules/workstation-packages.nix
             overlays
           ];
         };

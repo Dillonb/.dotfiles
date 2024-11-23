@@ -2,16 +2,18 @@
 let
   optionals = pkgs.lib.optionals;
   isLinux = pkgs.stdenv.isLinux;
-  isDarwin = pkgs.stdenv.isDarwin;
+  # isDarwin = pkgs.stdenv.isDarwin;
 
   custom-node-pkgs = import ../packages/node-packages {
     inherit pkgs system;
   };
 
+  # Linux specific
   linuxPkgs = optionals isLinux (with pkgs; [
     # Dev
     valgrind
     gdb
+    cmake-language-server # broken on macos
 
     # System status
     iotop
@@ -25,9 +27,8 @@ let
     nvme-cli
     smartmontools
   ]);
-  macPkgs = optionals isDarwin (with pkgs; [
-    # nothing yet
-  ]);
+
+  # Linux and Mac
   commonPkgs = with pkgs; [
     # Dev
     unstable.nixd # nix language server
@@ -41,7 +42,6 @@ let
     lua-language-server
     ripgrep
     fd
-    cmake-language-server
     clang-tools # for clangd
     bear
     cachix
@@ -95,5 +95,5 @@ let
   ];
 in
 {
-  environment.systemPackages = linuxPkgs ++ macPkgs ++ commonPkgs;
+  environment.systemPackages = linuxPkgs ++ commonPkgs;
 }

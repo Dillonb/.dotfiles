@@ -1,4 +1,11 @@
 { pkgs, ... }:
+let
+  isLinux = pkgs.stdenv.isLinux;
+  optionals = pkgs.lib.optionals;
+  linuxFonts = optionals isLinux (with pkgs; [
+    noto-fonts-color-emoji # don't need these on darwin
+  ]);
+in
 {
   fonts.packages = with pkgs; [
     hasklig
@@ -7,7 +14,6 @@
     hack-font
     noto-fonts-cjk-sans
     cascadia-code
-    noto-fonts-color-emoji
     (nerdfonts.override { fonts = [ "CascadiaCode" ]; })
-  ];
+  ] ++ linuxFonts;
 }
