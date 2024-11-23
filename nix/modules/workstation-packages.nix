@@ -36,10 +36,6 @@ let
     # lutris
     moonlight-qt
 
-    # Terminal
-    alacritty
-    # kitty
-
     # Chat
     unstable.discord
     unstable.vesktop
@@ -92,9 +88,7 @@ let
     protonvpn-gui
 
     # Editor
-    vim-full # vim-full includes gvim compared to the regular vim package
     unstable.neovim-qt
-    unstable.neovide
 
     # Misc utils
     xorg.xkill
@@ -107,6 +101,13 @@ let
   ]);
 
   commonPackages = with pkgs; [
+    # Terminal
+    alacritty
+    # kitty
+
+    # Editor
+    vim-full # vim-full includes gvim compared to the regular vim package
+    unstable.neovide
   ];
 
 in
