@@ -537,7 +537,7 @@ require("lazy").setup({
               pane = 2,
               enabled = vim.fn.executable("colorscript") == 1,
               section = "terminal",
-              cmd = "colorscript -e tiefighter1row",
+              cmd = "colorscript -e square",
               height = 5,
               padding = 1,
             },

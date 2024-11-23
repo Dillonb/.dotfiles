@@ -38,7 +38,8 @@ let
     pipenv
     python3
     mypy
-    gh
+    gh # github cli
+    hub # another github cli
     lua-language-server
     ripgrep
     fd
@@ -90,6 +91,7 @@ let
 
     # Fun
     fortune
+    dwt1-shell-color-scripts
   ] ++ [
     inputs.detectcharset.packages."${pkgs.system}".default
   ];
