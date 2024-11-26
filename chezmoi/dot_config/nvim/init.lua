@@ -158,51 +158,51 @@ require("lazy").setup({
 
         local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-        if vim.fn.executable("pyright") then
+        if vim.fn.executable("pyright") == 1 then
           lspconfig.pyright.setup(lsp_capabilities)
         end
 
-        if vim.fn.executable("clangd") then
+        if vim.fn.executable("clangd") == 1 then
           local opts = require('cmp_nvim_lsp').default_capabilities()
           opts.cmd = {"clangd", "--header-insertion=never"}
           lspconfig.clangd.setup(opts)
         end
 
-        if vim.fn.executable("rust-analyzer") then
+        if vim.fn.executable("rust-analyzer") == 1 then
           lspconfig.rust_analyzer.setup(lsp_capabilities)
         end
 
-        if vim.fn.executable("nixd") then
+        if vim.fn.executable("nixd") == 1 then
           lspconfig.nixd.setup(lsp_capabilities)
-        elseif vim.fn.executable("nil") then
+        elseif vim.fn.executable("nil") == 1 then
           lspconfig.nil_ls.setup(lsp_capabilities)
         end
 
-        if vim.fn.executable("jdtls") then
+        if vim.fn.executable("jdtls") == 1 then
           lspconfig.jdtls.setup(lsp_capabilities)
         end
 
-        if vim.fn.executable("ocamllsp") then
+        if vim.fn.executable("ocamllsp") == 1 then
           lspconfig.ocamllsp.setup(lsp_capabilities)
         end
 
-        if vim.fn.executable("cmake-language-server") then
+        if vim.fn.executable("cmake-language-server") == 1 then
           lspconfig.cmake.setup(lsp_capabilities)
         end
 
-        if vim.fn.executable("terraform-ls") then
+        if vim.fn.executable("terraform-ls") == 1 then
           lspconfig.terraformls.setup(lsp_capabilities)
         end
 
-        if vim.fn.executable("OmniSharp") then
+        if vim.fn.executable("OmniSharp") == 1 then
           lspconfig.omnisharp.setup(lsp_capabilities)
         end
 
-        if vim.fn.executable("bash-language-server") then
+        if vim.fn.executable("bash-language-server") == 1 then
           lspconfig.bashls.setup(lsp_capabilities)
         end
 
-        if vim.fn.executable("kulala-ls") then
+        if vim.fn.executable("kulala-ls") == 1 then
           lspconfig.kulala_ls.setup(lsp_capabilities)
         end
 
