@@ -516,6 +516,7 @@ require("lazy").setup({
         bigfile = { enabled = true },
         statuscolumn = { enabled = true },
         words = { enabled = true },
+        lazygit = { enabled = true },
         dashboard = {
           enabled = true,
           preset = {
@@ -557,7 +558,10 @@ require("lazy").setup({
             { section = "startup" },
           },
         }
-      }
+      },
+      init = function()
+        vim.keymap.set('n', '<leader>g', require("snacks").lazygit.open)
+      end
     },
 
     -- Nicer UI for selections
