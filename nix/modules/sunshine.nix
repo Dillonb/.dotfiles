@@ -12,7 +12,7 @@ let
     src = pkgs.fetchFromGitHub {
       owner = "LizardByte";
       repo = "Sunshine";
-      rev = "fc5314b1b65f424865d3378a5ebdc0c25ccb2c49";
+      rev = "fc5314b1b65f424865d3378a5ebdc0c25ccb2c49"; # 2024-11-03
       hash = "sha256-/1HeLe9ReVACS1JmvZM7SX5iW7aX09iMiCZlaZdPn2c=";
       fetchSubmodules = true;
     };
