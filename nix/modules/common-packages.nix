@@ -48,7 +48,7 @@ let
     cachix
     unstable.bash-language-server
     lazygit
-    custom-node-pkgs.azure-pipelines-language-server
+    # custom-node-pkgs.azure-pipelines-language-server
     custom-node-pkgs."@mistweaverco/kulala-ls"
 
     # System status
