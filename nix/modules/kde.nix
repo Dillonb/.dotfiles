@@ -22,4 +22,6 @@
     xkb.options = "caps:ctrl_modifier"; # Caps lock is also control
   };
   console.useXkbConfig = true; # Use xserver keyboard settings in virtual terminals
+
+  programs.kde-pim.kmail = true;
 }
