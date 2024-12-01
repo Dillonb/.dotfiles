@@ -14,6 +14,7 @@ in
     hack-font
     noto-fonts-cjk-sans
     cascadia-code
-    (nerdfonts.override { fonts = [ "CascadiaCode" ]; })
+    # (nerdfonts.override { fonts = [ "CascadiaCode" ]; })
+    nerd-fonts.caskaydia-mono
   ] ++ linuxFonts;
 }

@@ -42,7 +42,7 @@ let
     moonlight-qt
 
     # Chat
-    master.discord
+    unstable.discord
     unstable.vesktop
     signal-desktop
     keybase-gui
