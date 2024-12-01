@@ -266,8 +266,7 @@ require("lazy").setup({
           extensions = {
             'quickfix',
             'fugitive',
-            'nvim-dap-ui',
-            'toggleterm'
+            'nvim-dap-ui'
           }
         }
       end
@@ -406,16 +405,6 @@ require("lazy").setup({
       end
     },
 
-    -- Embedded toggleable terminal
-    {
-      'akinsho/toggleterm.nvim',
-      version = "*",
-      config = true,
-      init = function()
-        vim.keymap.set('n', '<leader>t', ':ToggleTerm<CR>');
-      end
-    },
-
     -- Task runner
     {
       'stevearc/overseer.nvim',
@@ -517,6 +506,7 @@ require("lazy").setup({
         statuscolumn = { enabled = true },
         words = { enabled = true },
         lazygit = { enabled = true },
+        terminal = { enabled = true },
         dashboard = {
           enabled = true,
           preset = {
@@ -561,6 +551,7 @@ require("lazy").setup({
       },
       init = function()
         vim.keymap.set('n', '<leader>g', require("snacks").lazygit.open)
+        vim.keymap.set('n', '<leader>t', require("snacks").terminal.toggle);
       end
     },
 
