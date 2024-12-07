@@ -55,7 +55,7 @@
   nixpkgs.config.permittedInsecurePackages = [
     "aspnetcore-runtime-6.0.36"
   ];
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
       intel-media-driver
@@ -69,18 +69,17 @@
 
   services.samba = {
     enable = true;
-    securityType = "user";
     openFirewall = true;
 
-    settings.global = {
-      "workgroup" = "DGB";
-      "server string" = "smbnix";
-      "netbios name" = "smbnix";
-      "server role" = "standalone server";
-      "map to guest" = "bad user";
-    };
-
-    shares = {
+    settings = {
+      global = {
+        security = "user";
+        "workgroup" = "DGB";
+        "server string" = "smbnix";
+        "netbios name" = "smbnix";
+        "server role" = "standalone server";
+        "map to guest" = "bad user";
+      };
       zpool = {
         path = "/zpool";
         browseable = "yes";
