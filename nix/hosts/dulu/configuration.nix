@@ -52,6 +52,9 @@
   nixpkgs.config.packageOverrides = pkgs: {
     vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
   };
+  nixpkgs.config.permittedInsecurePackages = [
+    "aspnetcore-runtime-6.0.36"
+  ];
   hardware.opengl = {
     enable = true;
     extraPackages = with pkgs; [
@@ -69,13 +72,13 @@
     securityType = "user";
     openFirewall = true;
 
-    extraConfig = ''
-      workgroup = DGB
-      server string = smbnix
-      netbios name = smbnix
-      server role = standalone server
-      map to guest = bad user
-    '';
+    settings.global = {
+      "workgroup" = "DGB";
+      "server string" = "smbnix";
+      "netbios name" = "smbnix";
+      "server role" = "standalone server";
+      "map to guest" = "bad user";
+    };
 
     shares = {
       zpool = {

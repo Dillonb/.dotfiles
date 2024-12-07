@@ -40,7 +40,7 @@ in
 
   services.sonarr = {
     enable = true;
-    package = pkgs.unstable.sonarr;
+    package = pkgs.master.sonarr;
     user = "dillon";
   };
 
