@@ -2,7 +2,7 @@
   description = "Dillon's NixOS configuration";
 
   inputs = {
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.05";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
 
@@ -28,7 +28,7 @@
     };
 
     home-manager-stable = {
-      url = "github:nix-community/home-manager/release-24.05";
+      url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
@@ -47,6 +47,12 @@
       nixpkgs-config-base = {
         allowUnfree = true;
         nvidia.acceptLicense = true;
+        permittedInsecurePackages = [
+          "aspnetcore-runtime-wrapped-6.0.36"
+          "aspnetcore-runtime-6.0.36"
+          "dotnet-sdk-wrapped-6.0.428"
+          "dotnet-sdk-6.0.428"
+        ];
       };
       systems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
       forEachSystem = f: nixpkgs-stable.lib.genAttrs systems (system: f {
