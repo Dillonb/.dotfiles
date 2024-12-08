@@ -1,9 +1,7 @@
 # Configuration specific to my desktop PC
 { config, lib, modulesPath, pkgs, ... }:
 let
-  # unpatched-nvidia-driver = config.boot.kernelPackages.nvidiaPackages.latest;
-  unpatched-nvidia-driver = config.boot.kernelPackages.nvidiaPackages.beta;
-  nvidia-driver = pkgs.nvidia-patch.patch-nvenc (pkgs.nvidia-patch.patch-fbc unpatched-nvidia-driver);
+  nvidia-driver = config.boot.kernelPackages.nvidiaPackages.latest;
 in
 
 {
