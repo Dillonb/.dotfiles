@@ -1,94 +1,115 @@
 {
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "transient_prompt": {
+    "template": "$ ",
+    "foreground": "lightRed",
+    "type": "text",
+    "style": "plain"
+  },
   "blocks": [
     {
+      "type": "prompt",
       "alignment": "left",
       "segments": [
         {
-          "foreground": "white",
           "properties": {
+            "cache_duration": "none",
             "fetch_version": false
           },
-          "style": "plain",
           "template": "({{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }})",
-          "type": "python"
+          "foreground": "white",
+          "type": "python",
+          "style": "plain"
         }
-      ],
-      "type": "prompt"
+      ]
     },
     {
+      "type": "prompt",
       "alignment": "left",
-      "newline": true,
       "segments": [
         {
-          "foreground": "lightBlue",
-          "style": "plain",
-          "template": "# ",
-          "type": "text"
-        },
-        {
-          "foreground": "red",
-          "style": "plain",
-          "template": " % ",
-          "type": "root"
-        },
-        {
-          "style": "plain",
-          "template": "<cyan>{{ .UserName }}</> <darkGray>@</> <green>{{ .HostName }}</> ",
-          "type": "session"
-        },
-        {
-          "foreground": "lightYellow",
           "properties": {
+            "cache_duration": "none"
+          },
+          "template": "# ",
+          "foreground": "lightBlue",
+          "type": "text",
+          "style": "plain"
+        },
+        {
+          "properties": {
+            "cache_duration": "none"
+          },
+          "template": " % ",
+          "foreground": "red",
+          "type": "root",
+          "style": "plain"
+        },
+        {
+          "properties": {
+            "cache_duration": "none"
+          },
+          "template": "<cyan>{{ .UserName }}</> <darkGray>@</> <green>{{ .HostName }}</> ",
+          "type": "session",
+          "style": "plain"
+        },
+        {
+          "properties": {
+            "cache_duration": "none",
             "style": "full"
           },
-          "style": "plain",
           "template": "<darkGray>in </>{{ .Path }} ",
-          "type": "path"
+          "foreground": "lightYellow",
+          "type": "path",
+          "style": "plain"
         },
         {
-          "style": "plain",
+          "properties": {
+            "cache_duration": "none",
+            "fetch_status": true
+          },
           "template": "<darkGray>on</> <white>git:</><cyan>{{ .HEAD }}</>{{ if .Working.Changed }}<red> x</>{{ end }} ",
           "type": "git",
+          "style": "plain"
+        },
+        {
           "properties": {
-            "fetch_status": true
-          }
-        },
-        {
-          "foreground": "darkGray",
-          "style": "plain",
+            "cache_duration": "none"
+          },
           "template": "[{{ .CurrentDate | date .Format }}]",
-          "type": "time"
+          "foreground": "darkGray",
+          "type": "time",
+          "style": "plain"
         },
         {
-          "foreground": "red",
-          "style": "plain",
+          "properties": {
+            "cache_duration": "none"
+          },
           "template": " C:{{ if gt .Code 0 }}{{ .Code }}{{ end }} ",
-          "type": "status"
+          "foreground": "red",
+          "type": "status",
+          "style": "plain"
         }
       ],
-      "type": "prompt"
+      "newline": true
     },
     {
+      "type": "prompt",
       "alignment": "left",
-      "newline": true,
       "segments": [
         {
-          "foreground": "lightRed",
-          "style": "plain",
+          "properties": {
+            "cache_duration": "none"
+          },
           "template": "$",
-          "type": "text"
+          "foreground": "lightRed",
+          "type": "text",
+          "style": "plain"
         }
       ],
-      "type": "prompt"
+      "newline": true
     }
   ],
-  "final_space": true,
-  "version": 2,
-  "transient_prompt": {
-    "foreground": "lightRed",
-    "style": "plain",
-    "template": "$ ",
-    "type": "text"
-  }
+  "version": 3,
+  "final_space": true
 }
