@@ -14,9 +14,9 @@ in
     useDHCP = lib.mkDefault true;
     wireless = {
       enable = true;
-      environmentFile = config.age.secrets."wireless.env".path;
+      secretsFile = config.age.secrets."wireless.env".path;
       networks = {
-        dgb.psk = "@DGB_PSK@";
+        dgb.pskRaw = "ext:DGB_PSK";
       };
     };
   };
