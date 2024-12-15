@@ -92,6 +92,7 @@
     kbfs.enable = true;
     # "discouraged" to turn this off, but Steam downloads are very slow with this on.
     # nscd.enableNsncd = false;
+    resolved.enable = true;
     avahi = {
       enable = true;
       publish.userServices = true;
