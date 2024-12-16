@@ -164,7 +164,7 @@ in
   };
 
   environment.systemPackages = with pkgs; [
-    master.r2modman
+    r2modman
     # obs-studio
     prismlauncher
   ];
