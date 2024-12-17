@@ -64,7 +64,7 @@
     "darwin_2": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs-stable"
+          "nixpkgs-unstable"
         ]
       },
       "locked": {
