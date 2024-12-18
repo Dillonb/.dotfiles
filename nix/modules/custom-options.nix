@@ -1,6 +1,12 @@
 { pkgs, lib, ... }:
 {
   options.dgbCustom = {
+    username = lib.mkOption {
+      type = with pkgs.lib; types.str;
+      default = "dillon";
+      description = "My username";
+    };
+
     alacritty = {
 
       fontSize = lib.mkOption {
