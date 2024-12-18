@@ -53,6 +53,18 @@ vim.opt.scrolloff = 5
 -- Use system clipboard
 vim.cmd [[ set clipboard+=unnamedplus ]]
 
+-- When entering a terminal buffer, auto switch to insert mode
+vim.api.nvim_create_autocmd({"BufEnter"},
+{
+    group = group,
+    pattern = {"*"},
+    callback = function()
+        if vim.opt.buftype:get() == "terminal" then
+            vim.cmd(":startinsert")
+        end
+    end
+})
+
 if vim.g.neovide then
   -- Fun little shadow under floating windows
   vim.g.neovide_floating_shadow = true
@@ -465,23 +477,20 @@ require("lazy").setup({
       end
     },
 
-    -- Integration with tmux
+    -- Integration with tmux, nicer split navigation
     {
-      "christoomey/vim-tmux-navigator",
-      cmd = {
-        "TmuxNavigateLeft",
-        "TmuxNavigateDown",
-        "TmuxNavigateUp",
-        "TmuxNavigateRight",
-        "TmuxNavigatePrevious",
-      },
-      keys = {
-        { "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
-        { "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
-        { "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
-        { "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
-        { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
-      },
+      'mrjones2014/smart-splits.nvim',
+      init = function()
+        vim.keymap.set('n', '<C-h>', require('smart-splits').move_cursor_left)
+        vim.keymap.set('n', '<C-j>', require('smart-splits').move_cursor_down)
+        vim.keymap.set('n', '<C-k>', require('smart-splits').move_cursor_up)
+        vim.keymap.set('n', '<C-l>', require('smart-splits').move_cursor_right)
+
+        vim.keymap.set('t', '<C-h>', require('smart-splits').move_cursor_left)
+        vim.keymap.set('t', '<C-j>', require('smart-splits').move_cursor_down)
+        vim.keymap.set('t', '<C-k>', require('smart-splits').move_cursor_up)
+        vim.keymap.set('t', '<C-l>', require('smart-splits').move_cursor_right)
+      end
     },
 
     -- Changes made in a quickfix window are reflected in the actual file
