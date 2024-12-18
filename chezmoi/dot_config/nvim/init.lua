@@ -231,7 +231,7 @@ require("lazy").setup({
           -- Also show text from this plugin, but only on the current line
           virtual_lines = { only_current_line = true }
         })
-        vim.keymap.set("n", "<Leader>l", require("lsp_lines").toggle, { desc = "Toggle lsp_lines" })
+        vim.keymap.set("n", "<Leader>e", require("lsp_lines").toggle, { desc = "Toggle lsp_lines" })
       end,
     },
 
