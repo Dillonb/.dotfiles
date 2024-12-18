@@ -228,8 +228,8 @@ require("lazy").setup({
         vim.diagnostic.config({
           -- Still show builtin LSP error text
           virtual_text = true,
-          -- Also show text from this plugin, but only on the current line
-          virtual_lines = { only_current_line = true }
+          -- Also show text from this plugin, but disabled by default
+          virtual_lines = false
         })
         vim.keymap.set("n", "<Leader>e", require("lsp_lines").toggle, { desc = "Toggle lsp_lines" })
       end,
