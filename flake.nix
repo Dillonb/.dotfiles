@@ -82,6 +82,7 @@
             ./nix/modules/osx.nix
             ./nix/modules/common-packages.nix
             ./nix/modules/workstation-packages.nix
+            ./nix/modules/custom-options.nix
             overlays
           ];
         };
@@ -275,6 +276,14 @@
           system = "aarch64-darwin";
           modules = [
             ./nix/modules/fonts.nix
+            home-manager-unstable.darwinModules.home-manager
+            ./nix/modules/home-manager.nix
+            {
+              users.users.dillon = {
+                name = "dillon";
+                home = "/Users/dillon";
+              };
+            }
           ];
         };
       };

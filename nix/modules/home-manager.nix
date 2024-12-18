@@ -6,10 +6,16 @@ in
   home-manager = {
     useGlobalPkgs = true;
     backupFileExtension = "home-manager-backup";
-    users.dillon = { pkgs, config, ... }: {
+    users.dillon = { pkgs, config, ... }:
+    let
+    inherit (pkgs) stdenv;
+    inherit (lib) mkIf;
+    linuxOnly = mkIf stdenv.isLinux;
+    in
+    {
       home.stateVersion = "23.11";
 
-      gtk = {
+      gtk = linuxOnly {
         enable = true;
         theme = {
           name = "Breeze-Dark";
@@ -37,7 +43,7 @@ in
       programs.alacritty = {
         enable = true;
         settings = {
-          keyboard.bindings = [
+          keyboard.bindings = linuxOnly [
             {
               key = "T";
               mods = "Control|Shift";
@@ -58,23 +64,25 @@ in
         };
       };
 
-      systemd.user.services = {
-        _1password = {
-          Unit = {
-            Description = "1password gui";
-            Requires = "graphical-session.target";
-            After = "graphical-session.target";
-          };
+      systemd = linuxOnly {
+        user.services = {
+          _1password = {
+            Unit = {
+              Description = "1password gui";
+              Requires = "graphical-session.target";
+              After = "graphical-session.target";
+            };
 
-          Install = {
-            Alias = "1password.service";
-            WantedBy = [ "graphical-session.target" ];
-          };
+            Install = {
+              Alias = "1password.service";
+              WantedBy = [ "graphical-session.target" ];
+            };
 
-          Service = {
-            ExecStart = "${lib.getExe pkgs._1password-gui} --silent";
-            Type = "exec";
-            Restart = "always";
+            Service = {
+              ExecStart = "${lib.getExe pkgs._1password-gui} --silent";
+              Type = "exec";
+              Restart = "always";
+            };
           };
         };
       };
