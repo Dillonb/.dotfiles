@@ -2,7 +2,7 @@
 let
   optionals = pkgs.lib.optionals;
   isLinux = pkgs.stdenv.isLinux;
-  # isDarwin = pkgs.stdenv.isDarwin;
+  isDarwin = pkgs.stdenv.isDarwin;
 
   custom-node-pkgs = import ../packages/node-packages {
     inherit pkgs system;
@@ -26,6 +26,13 @@ let
     pciutils # for lspci
     nvme-cli
     smartmontools
+  ]);
+
+  # Mac specific
+  darwinPkgs = optionals isDarwin (with pkgs; [
+    # git is installed through programs.git.enable on Linux, but that is unavailable on Darwin, so install manually
+    git
+    git-lfs
   ]);
 
   # Linux and Mac
@@ -98,5 +105,5 @@ let
   ];
 in
 {
-  environment.systemPackages = linuxPkgs ++ commonPkgs;
+  environment.systemPackages = linuxPkgs ++ darwinPkgs ++ commonPkgs;
 }
