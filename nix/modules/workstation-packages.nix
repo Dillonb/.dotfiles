@@ -82,7 +82,6 @@ let
     spotify
     spotify-qt
     unstable.plex-desktop
-    mpv
     no-cuda.gimp
     audacity
     # gnuradio
@@ -113,6 +112,9 @@ let
     # Editor
     vim-full # vim-full includes gvim compared to the regular vim package
     unstable.neovide
+
+    # Misc/Media
+    mpv
   ];
 
 in
