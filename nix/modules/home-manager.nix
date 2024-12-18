@@ -37,8 +37,10 @@ in
         };
       };
 
-      # Force home-manager to overwrite ~/.gtkrc-2.0 file
-      home.file.${config.gtk.gtk2.configLocation}.force = true;
+      home.file = {
+        # Force home-manager to overwrite ~/.gtkrc-2.0 file
+        ${config.gtk.gtk2.configLocation} = linuxOnly { force = true; };
+      };
 
       programs.alacritty = {
         enable = true;
