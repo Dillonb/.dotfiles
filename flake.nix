@@ -286,6 +286,23 @@
             }
           ];
         };
+
+        dgb-workmbp = mac {
+          hostname = "dgbmbp";
+          system = "aarch64-darwin";
+          modules = [
+            ./nix/modules/fonts.nix
+            home-manager-unstable.darwinModules.home-manager
+            ./nix/modules/home-manager.nix
+            {
+              dgbCustom.username = "dbeliveau";
+              users.users.dbeliveau = {
+                name = "dbeliveau";
+                home = "/Users/dbeliveau";
+              };
+            }
+          ];
+        };
       };
 
       devShells = forEachSystem ({ pkgs }: {

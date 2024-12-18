@@ -6,7 +6,7 @@ in
   home-manager = {
     useGlobalPkgs = true;
     backupFileExtension = "home-manager-backup";
-    users.dillon = { pkgs, config, ... }:
+    users.${dgbCustom.username} = { pkgs, config, ... }:
     let
     inherit (pkgs) stdenv;
     inherit (lib) mkIf;
