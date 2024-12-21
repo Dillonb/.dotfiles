@@ -30,9 +30,10 @@ let
 
   # Mac specific
   darwinPkgs = optionals isDarwin (with pkgs; [
-    # git is installed through programs.git.enable on Linux, but that is unavailable on Darwin, so install manually
+    # these programs are installed through programs.whatever.enable on Linux, but that is unavailable on Darwin, so install manually
     git
     git-lfs
+    mosh
   ]);
 
   # Linux and Mac
@@ -57,15 +58,16 @@ let
     lazygit
     # custom-node-pkgs.azure-pipelines-language-server
     custom-node-pkgs."@mistweaverco/kulala-ls"
+    unstable.neovim
+
+    # Theming
+    unstable.oh-my-posh
 
     # System status
     htop
     btop
     neofetch
     nload
-
-    # Editor
-    unstable.neovim
 
     # Misc utils
     wget
@@ -74,7 +76,6 @@ let
     silver-searcher
     bat
     dos2unix
-    # mosh # installed through programs.mosh.enable
     jq
     killall
     nix-search-cli
