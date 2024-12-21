@@ -34,7 +34,6 @@ let
     gruvbox-dark-gtk
     # unstable.gruvbox-plus-icons
     capitaine-cursors-themed
-    unstable.oh-my-posh
 
     # Gaming
     unstable.chiaki-ng # ps5 remote play
@@ -55,7 +54,6 @@ let
     master.vscode-fhs
     master.ghidra
     master.sublime-merge
-    unstable.imhex
     renderdoc
     zeal
     ocaml
@@ -109,9 +107,10 @@ let
     alacritty
     # kitty
 
-    # Editor
+    # Dev/Editor
     vim-full # vim-full includes gvim compared to the regular vim package
     unstable.neovide
+    unstable.imhex
 
     # Misc/Media
     mpv
