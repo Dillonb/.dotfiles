@@ -87,6 +87,12 @@
         "read only" = "no";
         "create mask" = "755";
       };
+      homes = {
+        browseable = "yes";
+        "valid users" = "%S";
+        writable = "yes";
+        "read only" = "no";
+      };
     };
   };
 
