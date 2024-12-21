@@ -19,7 +19,6 @@ let
     iotop
     nethogs
     sysstat
-    ncdu
 
     # Misc utils
     usbutils # for lsusb
@@ -68,6 +67,7 @@ let
     btop
     neofetch
     nload
+    ncdu
 
     # Misc utils
     wget
