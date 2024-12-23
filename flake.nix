@@ -17,6 +17,11 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
+    nh = {
+      url = "github:viperML/nh";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
     home-manager-stable = {
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs-stable";

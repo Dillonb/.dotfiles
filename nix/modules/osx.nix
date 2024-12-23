@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ lib, config, inputs, ... }:
 {
   services.nix-daemon.enable = true;
 
@@ -16,6 +16,10 @@
   };
 
   security.pam.enableSudoTouchIdAuth = true;
+
+  environment.systemPackages = [
+    inputs.nh.packages.${config.nixpkgs.system}.nh
+  ];
 
 
   system.activationScripts.applications.text = lib.mkForce /*sh*/ ''
