@@ -89,8 +89,14 @@ if command -v fdfind &>/dev/null; then
 fi
 
 if command -v nh &>/dev/null; then
-    export FLAKE=$(readlink -f ~/.dotfiles)
-    eval "$(nh completions --shell zsh)"
+    # Darwin is on a beta version of nh, update when everything is on 4.x
+    if [ `uname` = "Darwin" ]; then
+        export NH_FLAKE=$(readlink -f ~/.dotfiles)
+        eval "$(nh completions zsh)"
+    else
+        export FLAKE=$(readlink -f ~/.dotfiles)
+        eval "$(nh completions --shell zsh)"
+    fi
 fi
 
 alias arch-fastestmirrors="curl -s \"https://archlinux.org/mirrorlist/?country=US&country=CA&protocol=https&use_mirror_status=on\" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 -"
