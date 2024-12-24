@@ -2,7 +2,7 @@
 let
   optionals = pkgs.lib.optionals;
   isLinux = pkgs.stdenv.isLinux;
-  # isDarwin = pkgs.stdenv.isDarwin;
+  isDarwin = pkgs.stdenv.isDarwin;
 
   linuxPackages = optionals isLinux (with pkgs; [
     # Browser
@@ -88,6 +88,7 @@ let
     teamspeak5_client
     nextcloud-client
     protonvpn-gui
+    mpv
 
     # Editor
     unstable.neovim-qt
@@ -102,6 +103,10 @@ let
     distrobox
   ]);
 
+  darwinPackages = optionals isDarwin (with pkgs; [
+    mpv-unwrapped # mpv has a broken .app bundle
+  ]);
+
   commonPackages = with pkgs; [
     # Terminal
     alacritty
@@ -111,12 +116,9 @@ let
     vim-full # vim-full includes gvim compared to the regular vim package
     unstable.neovide
     unstable.imhex
-
-    # Misc/Media
-    mpv
   ];
 
 in
 {
-  environment.systemPackages = linuxPackages ++ commonPackages;
+  environment.systemPackages = linuxPackages ++ darwinPackages ++ commonPackages;
 }
