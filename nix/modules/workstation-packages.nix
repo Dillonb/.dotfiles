@@ -22,7 +22,7 @@ let
     # Util
     scrot
     feh
-    # keymapp # flashing ZSA keyboards
+    keymapp # flashing ZSA keyboards
     wally-cli # also for flashing ZSA keyboards (cli tool)
     master.freerdp3
     wl-clipboard # Wayland clipboard from cli
