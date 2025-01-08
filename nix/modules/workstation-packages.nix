@@ -97,7 +97,7 @@ let
     xorg.xkill
     iodine
     networkmanager-iodine
-    tsocks
+    stable.tsocks
     mitmproxy
     pavucontrol
     distrobox
