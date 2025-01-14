@@ -17,5 +17,7 @@ style = "Italic"
 family = "CaskaydiaCove Nerd Font"
 style = "Regular"
 
-[shell]
+[terminal]
+
+[terminal.shell]
 program = "pwsh"
