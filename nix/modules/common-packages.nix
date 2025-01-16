@@ -19,6 +19,7 @@ let
     iotop
     nethogs
     sysstat
+    lm_sensors
 
     # Misc utils
     usbutils # for lsusb
