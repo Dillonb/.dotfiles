@@ -44,7 +44,6 @@ let
     unstable.discord
     unstable.vesktop
     signal-desktop
-    keybase-gui
     hexchat
     element-desktop
     slack
