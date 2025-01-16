@@ -105,6 +105,7 @@ in
 
   # VMWare
   virtualisation.vmware.host.enable = true;
+  virtualisation.vmware.host.package = pkgs.stable.vmware-workstation;
 
   # KDE Connect
   programs.kdeconnect.enable = true;
