@@ -51,7 +51,7 @@ let
     # Dev
     docker-compose
     master.vscode-fhs
-    master.ghidra
+    stable.ghidra
     master.sublime-merge
     renderdoc
     zeal
