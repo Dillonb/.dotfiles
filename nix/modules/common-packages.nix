@@ -59,6 +59,8 @@ let
     # custom-node-pkgs.azure-pipelines-language-server
     custom-node-pkgs."@mistweaverco/kulala-ls"
     unstable.neovim
+    nuget
+    powershell
 
     # Theming
     unstable.oh-my-posh
