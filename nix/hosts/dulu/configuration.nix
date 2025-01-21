@@ -75,8 +75,8 @@
       global = {
         security = "user";
         "workgroup" = "DGB";
-        "server string" = "smbnix";
-        "netbios name" = "smbnix";
+        "server string" = "dulu";
+        "netbios name" = "dulu";
         "server role" = "standalone server";
         "map to guest" = "bad user";
       };
