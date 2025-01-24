@@ -38,7 +38,6 @@ let
     # Gaming
     unstable.chiaki-ng # ps5 remote play
     # lutris
-    moonlight-qt
 
     # Chat
     unstable.discord
@@ -115,6 +114,9 @@ let
     vim-full # vim-full includes gvim compared to the regular vim package
     unstable.neovide
     unstable.imhex
+
+    # Gaming
+    moonlight-qt
   ];
 
 in
