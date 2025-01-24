@@ -263,6 +263,7 @@
             nixos-hardware.nixosModules.raspberry-pi-4
             ./nix/modules/bluetooth.nix
             ./nix/modules/syncthing.nix
+            ./nix/modules/netdata.nix
           ];
         };
 
