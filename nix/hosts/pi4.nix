@@ -42,6 +42,19 @@ in
     };
   };
 
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    nssmdns6 = true;
+    publish = {
+      enable = true;
+      addresses = true;
+      domain = true;
+      hinfo = true;
+      userServices = true;
+    };
+  };
+
   fileSystems."/" =
     {
       device = "/dev/disk/by-uuid/44444444-4444-4444-8888-888888888888";
