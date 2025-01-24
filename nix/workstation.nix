@@ -94,7 +94,16 @@
     resolved.enable = true;
     avahi = {
       enable = true;
-      publish.userServices = true;
+      nssmdns4 = true;
+      nssmdns6 = true;
+      publish = {
+        enable = true;
+        addresses = true;
+        domain = true;
+        hinfo = true;
+        userServices = true;
+        workstation = true;
+      };
     };
   };
 
