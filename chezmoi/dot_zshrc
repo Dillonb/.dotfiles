@@ -150,3 +150,9 @@ if [[ "$(uname)" == "Darwin" ]]; then
         alias nix-switch="darwin-rebuild switch --flake ~/.dotfiles"
     fi
 fi
+
+if ! command -v tailscale &>/dev/null; then
+    if [[ -f /Applications/Tailscale.app/Contents/MacOS/Tailscale ]]; then
+        alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+    fi
+fi
