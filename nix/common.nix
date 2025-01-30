@@ -71,12 +71,9 @@
 
   services = {
     openssh.enable = true;
-    # lorri.enable = true;
     locate = {
       enable = true;
       package = pkgs.plocate;
-      # mlocate and plocate don't support this option - set it to null to silence a warning.
-      localuser = null;
     };
     tailscale.enable = true;
   };
