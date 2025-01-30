@@ -436,6 +436,11 @@ require("lazy").setup({
           command = "gdb",
           args = { "-i", "dap" }
         }
+        dap.adapters.lldb = {
+          type = "executable",
+          command = "lldb-dap",
+          name = "lldb",
+        }
       end
     },
 
