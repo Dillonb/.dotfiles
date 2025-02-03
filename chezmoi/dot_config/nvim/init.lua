@@ -457,6 +457,7 @@ require("lazy").setup({
         -- vim.keymap.set('n', '<leader>d', dap.toggle);
         vim.cmd.amenu([[PopUp.Debug\ UI <Cmd>lua require("dapui").toggle()<CR>]])
         vim.cmd.amenu([[PopUp.Toggle\ Breakpoint <Cmd>lua require("dap").toggle_breakpoint()<CR>]])
+        vim.keymap.set('n', '<leader>bp', require("dap").toggle_breakpoint);
       end
     },
 
