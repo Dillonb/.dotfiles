@@ -41,7 +41,7 @@ let
 
     # Chat
     unstable.discord
-    # unstable.vesktop
+    unstable.vesktop
     signal-desktop
     hexchat
     element-desktop
