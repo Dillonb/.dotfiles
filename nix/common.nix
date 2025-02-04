@@ -23,7 +23,7 @@
       experimental-features = [ "nix-command" "flakes" ];
       auto-optimise-store = true;
     };
-    package = pkgs.lix;
+    # package = pkgs.lix;
   };
 
   users = {
