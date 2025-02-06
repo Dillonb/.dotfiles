@@ -617,8 +617,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set('n', '<leader>s', ':Telescope lsp_dynamic_workspace_symbols<CR>')
 
     -- enable clangd inlay hints
-    require("clangd_extensions.inlay_hints").setup_autocmd()
-    require("clangd_extensions.inlay_hints").set_inlay_hints()
+    -- commented out since clangd_extensions got rid of it, not deleting it so I someday remember to setup the builtin nvim inlay hints support from 0.10+
+    -- require("clangd_extensions.inlay_hints").setup_autocmd()
+    -- require("clangd_extensions.inlay_hints").set_inlay_hints()
 
     -- I don't know if this is necessary - hook completion and tags up to the LSP manually
     local client = vim.lsp.get_client_by_id(args.data.client_id)
