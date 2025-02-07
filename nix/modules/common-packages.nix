@@ -3,6 +3,7 @@ let
   optionals = pkgs.lib.optionals;
   isLinux = pkgs.stdenv.isLinux;
   isDarwin = pkgs.stdenv.isDarwin;
+  isX64 = pkgs.stdenv.isx86_64;
 
   custom-node-pkgs = import ../packages/node-packages {
     inherit pkgs system;
@@ -108,7 +109,13 @@ let
     dwt1-shell-color-scripts
   ] ++ [
     inputs.detectcharset.packages."${pkgs.system}".default
-  ];
+  ] ++ (optionals isX64 [
+    (asmrepl.override {
+      bundlerApp = bundlerApp.override {
+        ruby = ruby_3_2;
+      };
+    })
+  ]);
 in
 {
   environment.systemPackages = linuxPkgs ++ darwinPkgs ++ commonPkgs;
