@@ -13,8 +13,8 @@ let
     # Mail
     (unstable.mailspring.overrideAttrs (old: {
       postFixup = ''
-      substituteInPlace $out/share/applications/Mailspring.desktop \
-        --replace-fail Exec=mailspring "Exec=$out/bin/mailspring --password-store=\"kwallet5\""
+        substituteInPlace $out/share/applications/Mailspring.desktop \
+          --replace-fail Exec=mailspring "Exec=$out/bin/mailspring --password-store=\"kwallet5\""
       '';
     }))
     protonmail-desktop
