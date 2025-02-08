@@ -289,6 +289,7 @@
                 name = "dillon";
                 home = "/Users/dillon";
               };
+              dgbCustom.alacritty.fontSize = 18;
             }
           ];
         };
@@ -302,6 +303,7 @@
             ./nix/modules/home-manager.nix
             {
               dgbCustom.username = "dbeliveau";
+              dgbCustom.alacritty.fontSize = 18;
               users.users.dbeliveau = {
                 name = "dbeliveau";
                 home = "/Users/dbeliveau";
