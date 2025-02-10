@@ -62,6 +62,7 @@ let
     unstable.neovim
     nuget
     powershell
+    nodejs
 
     # Theming
     unstable.oh-my-posh

@@ -574,6 +574,10 @@ require("lazy").setup({
     -- Nicer UI for selections
     {
       "stevearc/dressing.nvim"
+    },
+
+    {
+      "https://github.com/github/copilot.vim.git"
     }
 })
 
