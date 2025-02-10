@@ -24,7 +24,9 @@
       permit_join = false;
       serial = {
         # port = "tcp://slzb-06m.local:6638";
-        port = "tcp://192.168.0.25:6638";
+        # port = "tcp://192.168.0.25:6638";
+        # port = "mdns://slzb-06m";
+        port = "tcp://192.168.0.43:6638";
         baudrate = 115200;
         adapter = "ember";
         disable_led = false;
