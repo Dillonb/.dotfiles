@@ -23,10 +23,14 @@
       homeassistant = true;
       permit_join = false;
       serial = {
+        # TODO: can't get mDNS working inside the systemd unit.
         # port = "tcp://slzb-06m.local:6638";
-        # port = "tcp://192.168.0.25:6638";
-        # port = "mdns://slzb-06m";
+        # port = "mdns://slzb-06";
+
+        # $ avahi-resolve --name slzb-06m.local
         port = "tcp://192.168.0.43:6638";
+        # port = "tcp://192.168.0.25:6638";
+
         baudrate = 115200;
         adapter = "ember";
         disable_led = false;
