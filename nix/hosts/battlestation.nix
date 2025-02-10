@@ -17,7 +17,7 @@ in
   boot.extraModulePackages = [ ];
   boot.loader = {
     efi.canTouchEfiVariables = false;
-    timeout = null; # No timeout, wait forever
+    # timeout = null; # No timeout, wait forever
     grub = {
       efiSupport = true;
       efiInstallAsRemovable = true;
