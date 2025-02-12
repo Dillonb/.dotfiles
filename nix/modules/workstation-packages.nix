@@ -57,7 +57,6 @@ let
     ocaml
     opam
     gdb
-    lldb
     cargo
     qtcreator
 
