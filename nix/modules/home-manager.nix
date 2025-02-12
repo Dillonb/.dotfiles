@@ -1,6 +1,8 @@
-{ config, lib, ... }:
+{ pkgs, config, lib, ... }:
 let
   dgbCustom = config.dgbCustom;
+  isLinux = pkgs.stdenv.isLinux;
+  stateVersion = "23.11";
 in
 {
   home-manager = {
@@ -12,39 +14,8 @@ in
         inherit (lib) mkIf;
         linuxOnly = mkIf stdenv.isLinux;
       in
-      {
-        home.stateVersion = "23.11";
-
-        gtk = linuxOnly {
-          enable = true;
-          theme = {
-            name = "Breeze-Dark";
-            package = pkgs.libsForQt5.breeze-gtk;
-          };
-          cursorTheme = {
-            name = "breeze_cursors";
-            size = 24;
-            package = pkgs.libsForQt5.breeze-gtk;
-          };
-          iconTheme = {
-            name = "breeze-dark";
-            package = pkgs.libsForQt5.breeze-gtk;
-          };
-          font = {
-            name = "Noto Sans";
-            size = 10;
-            package = pkgs.noto-fonts;
-          };
-        };
-
-        stylix = linuxOnly {
-          targets.kde.enable = true;
-        };
-
-        home.file = {
-          # Force home-manager to overwrite ~/.gtkrc-2.0 file
-          ${config.gtk.gtk2.configLocation} = linuxOnly { force = true; };
-        };
+      ({
+        home.stateVersion = stateVersion;
 
         programs.alacritty = {
           enable = true;
@@ -70,7 +41,41 @@ in
           };
         };
 
-        systemd = linuxOnly {
+      } // lib.optionalAttrs isLinux {
+        home.stateVersion = stateVersion;
+
+        stylix = {
+          targets.kde.enable = true;
+        };
+
+        gtk = {
+          enable = true;
+          theme = {
+            name = "Breeze-Dark";
+            package = pkgs.libsForQt5.breeze-gtk;
+          };
+          cursorTheme = {
+            name = "breeze_cursors";
+            size = 24;
+            package = pkgs.libsForQt5.breeze-gtk;
+          };
+          iconTheme = {
+            name = "breeze-dark";
+            package = pkgs.libsForQt5.breeze-gtk;
+          };
+          font = {
+            name = "Noto Sans";
+            size = 10;
+            package = pkgs.noto-fonts;
+          };
+        };
+
+        home.file = {
+          # Force home-manager to overwrite ~/.gtkrc-2.0 file
+          ${config.gtk.gtk2.configLocation}.force = true;
+        };
+
+        systemd = {
           user.services = {
             _1password = {
               Unit = {
@@ -92,6 +97,6 @@ in
             };
           };
         };
-      };
+      });
   };
 }
