@@ -235,13 +235,11 @@ require("lazy").setup({
       end,
     },
 
-    -- Gruvbox my beloved
     {
-      "ellisonleao/gruvbox.nvim",
+      "folke/tokyonight.nvim",
       priority = 1000,
-      config = true,
       config = function()
-        vim.cmd [[colorscheme gruvbox]]
+        vim.cmd [[colorscheme tokyonight-storm]]
       end,
     },
 
@@ -262,9 +260,6 @@ require("lazy").setup({
         local git_blame = require('gitblame')
         vim.g.gitblame_display_virtual_text = false;
         require('lualine').setup {
-          options = {
-            theme = 'gruvbox_dark';
-          },
           sections = {
             lualine_c = {
               {
