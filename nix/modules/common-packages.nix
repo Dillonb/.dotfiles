@@ -52,7 +52,6 @@ let
     lua-language-server
     ripgrep
     fd
-    clang-tools # for clangd
     bear
     cachix
     unstable.bash-language-server
