@@ -5,9 +5,9 @@ let
   isDarwin = pkgs.stdenv.isDarwin;
   isX64 = pkgs.stdenv.isx86_64;
 
-  custom-node-pkgs = import ../packages/node-packages {
-    inherit pkgs system;
-  };
+  # custom-node-pkgs = import ../packages/node-packages {
+  #  inherit pkgs system;
+  # };
 
   # Linux specific
   linuxPkgs = optionals isLinux (with pkgs; [
@@ -57,7 +57,7 @@ let
     unstable.bash-language-server
     lazygit
     # custom-node-pkgs.azure-pipelines-language-server
-    custom-node-pkgs."@mistweaverco/kulala-ls"
+    # custom-node-pkgs."@mistweaverco/kulala-ls"
     unstable.neovim
     nuget
     powershell
