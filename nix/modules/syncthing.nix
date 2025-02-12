@@ -40,7 +40,7 @@ in
 
         "binary-ninja" = {
           path = "${syncthing-data}/binary-ninja";
-          devices = [ "teamspeak-server" "mini" "battlestation" "dulu" ];
+          devices = [ "mini" "battlestation" "dulu" ];
         };
 
         "syncthing" = {
