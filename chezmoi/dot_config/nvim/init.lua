@@ -168,54 +168,68 @@ require("lazy").setup({
           preselect = cmp.PreselectMode.None
         })
 
-        local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
-
         if vim.fn.executable("pyright") == 1 then
-          lspconfig.pyright.setup(lsp_capabilities)
+          lspconfig.pyright.setup(require('cmp_nvim_lsp').default_capabilities())
         end
 
         if vim.fn.executable("clangd") == 1 then
           local opts = require('cmp_nvim_lsp').default_capabilities()
           opts.cmd = {"clangd", "--header-insertion=never"}
+          opts.on_attach = function(client, bufnr)
+            vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+          end
           lspconfig.clangd.setup(opts)
         end
 
         if vim.fn.executable("rust-analyzer") == 1 then
-          lspconfig.rust_analyzer.setup(lsp_capabilities)
+          local opts = require('cmp_nvim_lsp').default_capabilities()
+          opts.on_attach = function(client, bufnr)
+            vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+          end
+          lspconfig.rust_analyzer.setup(opts)
         end
 
         if vim.fn.executable("nixd") == 1 then
-          lspconfig.nixd.setup(lsp_capabilities)
+          local opts = require('cmp_nvim_lsp').default_capabilities()
+          lspconfig.nixd.setup(opts)
         elseif vim.fn.executable("nil") == 1 then
-          lspconfig.nil_ls.setup(lsp_capabilities)
+          local opts = require('cmp_nvim_lsp').default_capabilities()
+          lspconfig.nil_ls.setup(opts)
         end
 
         if vim.fn.executable("jdtls") == 1 then
-          lspconfig.jdtls.setup(lsp_capabilities)
+          local opts = require('cmp_nvim_lsp').default_capabilities()
+          lspconfig.jdtls.setup(opts)
         end
 
         if vim.fn.executable("ocamllsp") == 1 then
-          lspconfig.ocamllsp.setup(lsp_capabilities)
+          local opts = require('cmp_nvim_lsp').default_capabilities()
+          lspconfig.ocamllsp.setup(opts)
         end
 
         if vim.fn.executable("cmake-language-server") == 1 then
-          lspconfig.cmake.setup(lsp_capabilities)
+          local opts = require('cmp_nvim_lsp').default_capabilities()
+          lspconfig.cmake.setup(opts)
         end
 
         if vim.fn.executable("terraform-ls") == 1 then
-          lspconfig.terraformls.setup(lsp_capabilities)
+          local opts = require('cmp_nvim_lsp').default_capabilities()
+          lspconfig.terraformls.setup(opts)
         end
 
         if vim.fn.executable("OmniSharp") == 1 then
-          lspconfig.omnisharp.setup(lsp_capabilities)
+          local opts = require('cmp_nvim_lsp').default_capabilities()
+          lspconfig.omnisharp.setup(opts)
         end
 
         if vim.fn.executable("bash-language-server") == 1 then
-          lspconfig.bashls.setup(lsp_capabilities)
+          local opts = require('cmp_nvim_lsp').default_capabilities()
+          lspconfig.bashls.setup(opts)
         end
 
         if vim.fn.executable("kulala-ls") == 1 then
-          lspconfig.kulala_ls.setup(lsp_capabilities)
+          local opts = require('cmp_nvim_lsp').default_capabilities()
+          lspconfig.kulala_ls.setup(opts)
         end
 
       end,
@@ -614,11 +628,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     -- Search for symbols in project
     vim.keymap.set('n', '<leader>s', ':Telescope lsp_dynamic_workspace_symbols<CR>')
-
-    -- enable clangd inlay hints
-    -- commented out since clangd_extensions got rid of it, not deleting it so I someday remember to setup the builtin nvim inlay hints support from 0.10+
-    -- require("clangd_extensions.inlay_hints").setup_autocmd()
-    -- require("clangd_extensions.inlay_hints").set_inlay_hints()
 
     -- I don't know if this is necessary - hook completion and tags up to the LSP manually
     local client = vim.lsp.get_client_by_id(args.data.client_id)
