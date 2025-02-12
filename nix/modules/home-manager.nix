@@ -37,6 +37,10 @@ in
           };
         };
 
+        stylix = linuxOnly {
+          targets.kde.enable = true;
+        };
+
         home.file = {
           # Force home-manager to overwrite ~/.gtkrc-2.0 file
           ${config.gtk.gtk2.configLocation} = linuxOnly { force = true; };
