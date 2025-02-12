@@ -35,9 +35,10 @@
     ts3status.url = "github:Dillonb/ts3status";
     ble-scale.url = "github:Dillonb/ble-scale";
     detectcharset.url = "github:Dillonb/detectcharset";
+    stylix.url = "github:danth/stylix";
   };
 
-  outputs = { nixpkgs-stable, nixpkgs-unstable, nixpkgs-master, nixos-hardware, home-manager-stable, home-manager-unstable, agenix, nixos-wsl, darwin, ... }@inputs:
+  outputs = { nixpkgs-stable, nixpkgs-unstable, nixpkgs-master, nixos-hardware, home-manager-stable, home-manager-unstable, agenix, nixos-wsl, darwin, stylix, ... }@inputs:
     let
       nixpkgs-config-base = {
         allowUnfree = true;
@@ -169,6 +170,7 @@
               ./nix/modules/common-packages.nix
               ./nix/modules/appimage-support.nix
               ./nix/modules/libreoffice.nix
+              stylix.nixosModules.stylix
             ] ++ agenix-modules;
 
             server = [

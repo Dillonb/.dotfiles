@@ -29,12 +29,6 @@ let
     xclip # X11 clipboard from cli
     parsec-bin
 
-    # themes
-    kde-gruvbox
-    gruvbox-dark-gtk
-    # unstable.gruvbox-plus-icons
-    capitaine-cursors-themed
-
     # Gaming
     unstable.chiaki-ng # ps5 remote play
     # lutris

@@ -24,4 +24,15 @@
   console.useXkbConfig = true; # Use xserver keyboard settings in virtual terminals
 
   programs.kde-pim.kmail = true;
+
+  # Additional stylix config in home-manager.nix
+  stylix = {
+    enable = true;
+    autoEnable = false; # Only enable what I explicitly enable
+    image = pkgs.fetchurl {
+      url = "https://raw.githubusercontent.com/AngelJumbo/gruvbox-wallpapers/refs/heads/main/wallpapers/minimalistic/gruvbox_astro.jpg";
+      sha256 = "sha256-YTxyI+vaC5CGQzqMm1enfPh9/1YoqNXAX7TmAscz1U0=";
+    };
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-storm.yaml";
+  };
 }
