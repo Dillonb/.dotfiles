@@ -1,6 +1,7 @@
 { config, lib, ... }:
 let
   allDevices = builtins.attrNames config.services.syncthing.settings.devices;
+  nixos-devices = [ "mini" "battlestation" "dulu" "teamspeak-server" "pi4" ];
   syncthing-data = "/var/lib/syncthing-data";
 in
 {
@@ -31,12 +32,12 @@ in
       folders = lib.attrsets.filterAttrs (n: v: builtins.elem config.networking.hostName v.devices) {
         "rclone-config" = {
           path = "${syncthing-data}/rclone-config";
-          devices = allDevices;
+          devices = nixos-devices;
         };
 
         "ble-scale-data" = {
           path = "${syncthing-data}/ble-scale-data";
-          devices = allDevices;
+          devices = nixos-devices;
         };
 
         "binary-ninja" = {
