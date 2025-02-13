@@ -436,14 +436,6 @@ require("lazy").setup({
       end
     },
 
-    -- Task runner
-    {
-      'stevearc/overseer.nvim',
-      init = function()
-        require('overseer').setup()
-      end
-    },
-
     -- Debugger
     {
       'mfussenegger/nvim-dap',
