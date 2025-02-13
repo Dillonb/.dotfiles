@@ -25,6 +25,7 @@ in
         "battlestation" = { id = "GVFGK6Z-NLFR24N-NJJ7GMR-RH2W2SO-D5I5DUD-ZAJHUKR-LU2JJMU-VSMOIQI"; };
         "dulu" = { id = "3HS7WI5-AAIUDOL-XFPAECF-JB5QSMU-2HIBG44-MBDQSXI-T53BGPG-ADKSRQP"; };
         "pi4" = { id = "QZOWDVT-6SYXCXP-5IEM3EM-VZO3ZKQ-N7X6GGS-YG4U7WD-QOFVEMF-3ALABAU"; };
+        "dgbmbp" = { id = "4UEJ4VX-OZLXBTQ-GHSJN7N-SIPL5ZF-JJ6NX2W-TY3KAYT-L5IE2FI-DBZOJAE"; };
       };
       # Just folders that have this device in `devices`
       folders = lib.attrsets.filterAttrs (n: v: builtins.elem config.networking.hostName v.devices) {
@@ -45,7 +46,7 @@ in
 
         "syncthing" = {
           path = "/home/dillon/Syncthing";
-          devices = [ "mini" "battlestation" "dulu" ];
+          devices = [ "mini" "battlestation" "dulu" "dgbmbp" ];
         };
       };
     };
