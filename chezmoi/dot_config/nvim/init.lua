@@ -237,6 +237,7 @@ require("lazy").setup({
 
     {
       "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+      lazy = true,
       config = function()
         require("lsp_lines").setup()
         vim.diagnostic.config({
@@ -245,13 +246,15 @@ require("lazy").setup({
           -- Also show text from this plugin, but disabled by default
           virtual_lines = false
         })
-        vim.keymap.set("n", "<Leader>e", require("lsp_lines").toggle, { desc = "Toggle lsp_lines" })
       end,
+      keys = {
+        { "<Leader>e", ':lua require"lsp_lines".toggle()<CR>', desc = "Toggle lsp_lines" }
+      }
     },
 
     {
       "folke/tokyonight.nvim",
-      priority = 1000,
+      priority = 1000, -- Ensure this is loaded before any other plugins
       config = function()
         vim.cmd [[colorscheme tokyonight-storm]]
       end,
@@ -332,6 +335,8 @@ require("lazy").setup({
         "nvim-tree/nvim-web-devicons",
         "MunifTanjim/nui.nvim",
       },
+      lazy = true,
+      cmd = "Neotree",
       config = function()
         require("neo-tree").setup({
           close_if_last_window = true,
@@ -352,19 +357,6 @@ require("lazy").setup({
       branch = '0.1.x',
       dependencies = { 'nvim-lua/plenary.nvim' },
       config = function()
-        -- Find files by filename
-        -- vim.keymap.set('n', '<leader>o', ':Telescope find_files<CR>');
-        vim.keymap.set('n', '<leader>o', ':lua require"telescope.builtin".find_files({ hidden = true })<CR>', {noremap = true, silent = true})
-        -- vim.keymap.set('n', '<C-p>', ':Telescope find_files<CR>');
-        vim.keymap.set('n', '<C-p>', ':lua require"telescope.builtin".find_files({ hidden = true })<CR>', {noremap = true, silent = true})
-
-
-        -- Find currently open files by filename
-        vim.keymap.set('n', '<leader>p', ':Telescope buffers<CR>');
-
-        -- Search in all files
-        vim.keymap.set('n', '<C-f>', ':Telescope live_grep<CR>');
-
         require("telescope").setup {
           defaults = {
             file_ignore_patterns = {
@@ -374,6 +366,15 @@ require("lazy").setup({
           }
         }
       end,
+      keys = {
+        -- Find files by filename
+        { '<leader>o', ':lua require"telescope.builtin".find_files({ hidden = true })<CR>', noremap = true, silent = true},
+        { '<C-p>',     ':lua require"telescope.builtin".find_files({ hidden = true })<CR>', noremap = true, silent = true},
+        -- Find currently open files by filename
+        { '<leader>p', ':Telescope buffers<CR>'},
+        -- Search in all files
+        { '<C-f>', ':Telescope live_grep<CR>' }
+      }
     },
 
     -- show a lightbulb emoji when LSP code actions are available
@@ -409,7 +410,6 @@ require("lazy").setup({
     -- Commenting
     {
       'tpope/vim-commentary',
-      lazy = false,
       init = function()
         -- map ctrl-/ to toggle comments
         -- Some terminals will send ctrl-/ as ctrl-_
@@ -483,6 +483,8 @@ require("lazy").setup({
     {
       'mistweaverco/kulala.nvim',
       opts = {},
+      ft = "http",
+      lazy = true,
       init = function()
         -- Associate .http files with this plugin
         vim.filetype.add({
