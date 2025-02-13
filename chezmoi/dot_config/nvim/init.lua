@@ -100,7 +100,8 @@ require("lazy").setup({
     -- LSP
     {
       "neovim/nvim-lspconfig",
-      lazy = false,
+      lazy = true,
+      event = { 'BufReadPre', 'BufNewFile' },
       dependencies = {
         {
           "hrsh7th/nvim-cmp",
@@ -269,6 +270,8 @@ require("lazy").setup({
     -- Nicer status line
     {
       'nvim-lualine/lualine.nvim',
+      lazy = true,
+      event = { 'BufReadPre', 'BufNewFile' },
       dependencies = {
         'nvim-tree/nvim-web-devicons',
         'f-person/git-blame.nvim'
@@ -311,6 +314,8 @@ require("lazy").setup({
     -- Tabs
     {
       'romgrk/barbar.nvim',
+      lazy = true,
+      event = { 'BufReadPre', 'BufNewFile' },
       dependencies = {
         -- Filetype icons
         'nvim-tree/nvim-web-devicons',
@@ -380,6 +385,8 @@ require("lazy").setup({
     -- show a lightbulb emoji when LSP code actions are available
     {
       'kosayoda/nvim-lightbulb',
+      lazy = true,
+      event = { 'BufReadPre', 'BufNewFile' },
       init = function()
         require("nvim-lightbulb").setup({
           autocmd = { enabled = true }
@@ -422,6 +429,8 @@ require("lazy").setup({
     -- Automatically close braces, parens, etc, and allows you to type "through" 
     {
       'windwp/nvim-autopairs',
+      lazy = true,
+      event = { 'BufReadPre', 'BufNewFile' },
       init = function()
         require("nvim-autopairs").setup()
       end
@@ -519,7 +528,8 @@ require("lazy").setup({
     -- Find unmapped keys easily
     {
       "meznaric/key-analyzer.nvim",
-      opts = {}
+      opts = {},
+      cmd = "KeyAnalyzer",
     },
 
     -- Misc mini plugins
