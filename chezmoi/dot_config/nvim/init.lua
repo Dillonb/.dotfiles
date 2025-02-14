@@ -53,6 +53,9 @@ vim.opt.scrolloff = 5
 -- Use system clipboard
 vim.cmd [[ set clipboard+=unnamedplus ]]
 
+-- Create bicep filetype
+vim.cmd [[ autocmd BufNewFile,BufRead *.bicep set filetype=bicep ]]
+
 -- When entering a terminal buffer, auto switch to insert mode
 vim.api.nvim_create_autocmd({"BufEnter"},
 {
@@ -231,6 +234,12 @@ require("lazy").setup({
         if vim.fn.executable("kulala-ls") == 1 then
           local opts = require('cmp_nvim_lsp').default_capabilities()
           lspconfig.kulala_ls.setup(opts)
+        end
+
+        if vim.fn.executable("Bicep.LangServer") == 1 then
+          local opts = require('cmp_nvim_lsp').default_capabilities()
+          opts.cmd = { "Bicep.LangServer" }
+          lspconfig.bicep.setup(opts)
         end
 
       end,
