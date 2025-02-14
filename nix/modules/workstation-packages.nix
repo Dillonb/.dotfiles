@@ -1,8 +1,11 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 let
   optionals = pkgs.lib.optionals;
   isLinux = pkgs.stdenv.isLinux;
   isDarwin = pkgs.stdenv.isDarwin;
+
+  pwndbg = inputs.pwndbg.packages."${pkgs.system}".default;
+  pwndbg-lldb = inputs.pwndbg.packages."${pkgs.system}".pwndbg-lldb;
 
   linuxPackages = optionals isLinux (with pkgs; [
     # Browser
@@ -62,6 +65,7 @@ let
     hashcat
     proxmark3
     pwndbg
+    pwndbg-lldb
     pwntools
 
     # Notes
