@@ -7,6 +7,8 @@ let
   pwndbg = inputs.pwndbg.packages."${pkgs.system}".default;
   pwndbg-lldb = inputs.pwndbg.packages."${pkgs.system}".pwndbg-lldb;
 
+  bicep-langserver = pkgs.callPackage ../packages/bicep-langserver {};
+
   linuxPackages = optionals isLinux (with pkgs; [
     # Browser
     # firefox # configured with programs.firefox below
@@ -111,6 +113,7 @@ let
     vim-full # vim-full includes gvim compared to the regular vim package
     unstable.neovide
     unstable.imhex
+    bicep-langserver
 
     # Gaming
     moonlight-qt
