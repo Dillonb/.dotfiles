@@ -36,9 +36,10 @@
     ble-scale.url = "github:Dillonb/ble-scale";
     detectcharset.url = "github:Dillonb/detectcharset";
     stylix.url = "github:danth/stylix";
+    pwndbg.url = "github:pwndbg/pwndbg";
   };
 
-  outputs = { nixpkgs-stable, nixpkgs-unstable, nixpkgs-master, nixos-hardware, home-manager-stable, home-manager-unstable, agenix, nixos-wsl, darwin, stylix, ... }@inputs:
+  outputs = { nixpkgs-stable, nixpkgs-unstable, nixpkgs-master, nixos-hardware, home-manager-stable, home-manager-unstable, agenix, nixos-wsl, darwin, stylix, pwndbg, ... }@inputs:
     let
       nixpkgs-config-base = {
         allowUnfree = true;
