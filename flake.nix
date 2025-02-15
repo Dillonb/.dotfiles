@@ -241,6 +241,9 @@
           channel = "unstable";
           modules = [
             nixos-hardware.nixosModules.pine64-pinebook-pro
+            {
+              dgbCustom.enableGaming = false;
+            }
           ];
         };
 

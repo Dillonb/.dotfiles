@@ -7,6 +7,12 @@
       description = "My username";
     };
 
+    enableGaming = lib.mkOption {
+      type = with pkgs.lib; types.bool;
+      default = true;
+      description = "Enable gaming";
+    };
+
     alacritty = {
 
       fontSize = lib.mkOption {
