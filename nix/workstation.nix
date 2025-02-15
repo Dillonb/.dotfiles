@@ -53,7 +53,7 @@
       polkitPolicyOwners = [ "dillon" ];
     };
 
-    steam = pkgs.lib.mkIf config.dgbCustom.enableGaming {
+    steam = pkgs.lib.mkIf (config.dgbCustom.enableGaming && pkgs.stdenv.hostPlatform.isx86_64) {
       enable = true;
       remotePlay.openFirewall = true;
       localNetworkGameTransfers.openFirewall = true;
