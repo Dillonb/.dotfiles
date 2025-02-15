@@ -383,7 +383,6 @@ require("lazy").setup({
       keys = {
         -- Find files by filename
         { '<leader>o', ':lua require"telescope.builtin".find_files({ hidden = true })<CR>', noremap = true, silent = true},
-        { '<C-p>',     ':lua require"telescope.builtin".find_files({ hidden = true })<CR>', noremap = true, silent = true},
         -- Find currently open files by filename
         { '<leader>p', ':Telescope buffers<CR>'},
         -- Search in all files
@@ -631,7 +630,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set('i', '<C-p>', vim.lsp.buf.signature_help, opts)
 
     -- Search for symbols in project
-    vim.keymap.set('n', '<leader>s', ':Telescope lsp_dynamic_workspace_symbols<CR>')
+    vim.keymap.set('n', '<C-p>', ':lua require"telescope.builtin".lsp_dynamic_workspace_symbols{}<CR>')
 
     -- I don't know if this is necessary - hook completion and tags up to the LSP manually
     local client = vim.lsp.get_client_by_id(args.data.client_id)
