@@ -180,11 +180,6 @@
               ./nix/modules/common-packages.nix
             ] ++ agenix-modules;
 
-            pinebook-temp = [
-              ./nix/common.nix
-              ./nix/modules/common-packages.nix
-            ];
-
             wsl = [
               ./nix/common.nix
               ./nix/modules/common-packages.nix
@@ -278,7 +273,7 @@
         pbp = nixos {
           hostname = "pbp";
           system = "aarch64-linux";
-          role = "pinebook-temp";
+          role = "workstation";
           channel = "unstable";
           modules = [
             nixos-hardware.nixosModules.pine64-pinebook-pro

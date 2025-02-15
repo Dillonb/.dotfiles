@@ -13,11 +13,10 @@
 
   networking.networkmanager.enable = true;
 
-  # dgbCustom.enableGaming = false;
+  dgbCustom.enableGaming = false;
 
   boot.loader = {
     efi.canTouchEfiVariables = false;
-    # timeout = null; # No timeout, wait forever
     grub = {
       efiSupport = true;
       efiInstallAsRemovable = true;
