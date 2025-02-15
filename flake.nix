@@ -234,19 +234,6 @@
           ];
         };
 
-        pbp = nixos {
-          hostname = "mini";
-          system = "aarch64-linux";
-          role = "workstation";
-          channel = "unstable";
-          modules = [
-            nixos-hardware.nixosModules.pine64-pinebook-pro
-            {
-              dgbCustom.enableGaming = false;
-            }
-          ];
-        };
-
         teamspeak-server = nixos {
           hostname = "teamspeak-server";
           system = "x86_64-linux";
@@ -282,6 +269,20 @@
             ./nix/modules/netdata.nix
           ];
         };
+
+        pbp = nixos {
+          hostname = "pbp";
+          system = "aarch64-linux";
+          role = "workstation";
+          channel = "unstable";
+          modules = [
+            nixos-hardware.nixosModules.pine64-pinebook-pro
+            {
+              dgbCustom.enableGaming = false;
+            }
+          ];
+        };
+
 
         wsl = nixos {
           hostname = "wsl";

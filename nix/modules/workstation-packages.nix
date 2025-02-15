@@ -11,13 +11,6 @@ let
   bicep-langserver = pkgs.callPackage ../packages/bicep-langserver { };
 
   linuxPackages = (optionals isLinux (with pkgs; [
-    # Browser
-    # firefox # configured with programs.firefox below
-    google-chrome
-    microsoft-edge
-
-    protonmail-desktop
-
     # Util
     scrot
     feh
@@ -37,14 +30,12 @@ let
     signal-desktop
     hexchat
     element-desktop
-    slack
 
     # Dev
     docker-compose
     master.vscode-fhs
     stable.ghidra
     master.sublime-merge
-    renderdoc
     zeal
     ocaml
     opam
@@ -67,14 +58,11 @@ let
     unstable.obsidian
 
     # Misc/Media
-    spotify
     spotify-qt
     no-cuda.gimp
     audacity
     # gnuradio
     simplescreenrecorder
-    teamspeak_client
-    teamspeak5_client
     nextcloud-client
     protonvpn-gui
     mpv
@@ -90,18 +78,28 @@ let
     mitmproxy
     pavucontrol
     distrobox
-  ] ++ (optionals isLinuxX64 (with pkgs; [
-    # X64 only
-    unstable.discord
-    unstable.plex-desktop
+  ]));
+
+  linuxX64Packages = (optionals isLinuxX64 (with pkgs; [
+    # Mail
+    protonmail-desktop
     (unstable.mailspring.overrideAttrs (old: {
       postFixup = ''
         substituteInPlace $out/share/applications/Mailspring.desktop \
           --replace-fail Exec=mailspring "Exec=$out/bin/mailspring --password-store=\"kwallet5\""
       '';
     }))
-  ]))
-  ));
+
+    google-chrome
+    microsoft-edge
+    unstable.discord
+    unstable.plex-desktop
+    slack
+    renderdoc
+    spotify
+    teamspeak_client
+    teamspeak5_client
+  ]));
 
   darwinPackages = optionals isDarwin (with pkgs; [
     mpv-unwrapped # mpv has a broken .app bundle
@@ -124,5 +122,5 @@ let
 
 in
 {
-  environment.systemPackages = linuxPackages ++ darwinPackages ++ commonPackages;
+  environment.systemPackages = linuxPackages ++ linuxX64Packages ++ darwinPackages ++ commonPackages;
 }
