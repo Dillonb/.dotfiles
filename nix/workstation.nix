@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
   # Configure network proxy if necessary
@@ -53,7 +53,7 @@
       polkitPolicyOwners = [ "dillon" ];
     };
 
-    steam = {
+    steam = pkgs.lib.mkIf config.dgbCustom.enableGaming {
       enable = true;
       remotePlay.openFirewall = true;
       localNetworkGameTransfers.openFirewall = true;
