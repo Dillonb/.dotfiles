@@ -273,13 +273,10 @@
         pbp = nixos {
           hostname = "pbp";
           system = "aarch64-linux";
-          role = "workstation";
+          role = "server";
           channel = "unstable";
           modules = [
             nixos-hardware.nixosModules.pine64-pinebook-pro
-            {
-              dgbCustom.enableGaming = false;
-            }
           ];
         };
 
