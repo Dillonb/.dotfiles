@@ -5,6 +5,15 @@
       device = "/dev/mmcblk0p1";
       fsType = "ext4";
     };
+  fileSystems."/boot" =
+    {
+      device = "/dev/mmcblk0p2";
+      fsType = "vfat";
+    };
+
+  networking.networkmanager.enable = true;
+
+  dgbCustom.enableGaming = false;
 
   boot.loader = {
     efi.canTouchEfiVariables = false;
