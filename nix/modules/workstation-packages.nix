@@ -2,7 +2,7 @@
 let
   optionals = pkgs.lib.optionals;
   isLinux = pkgs.stdenv.isLinux;
-  isLinuxX64 = pkgs.stdenv.hostPlatform.isx86_64;
+  isLinuxX64 = isLinux && pkgs.stdenv.hostPlatform.isx86_64;
   isDarwin = pkgs.stdenv.isDarwin;
 
   pwndbg = inputs.pwndbg.packages."${pkgs.system}".default;
@@ -33,7 +33,6 @@ let
     # lutris
 
     # Chat
-    unstable.discord
     unstable.vesktop
     signal-desktop
     hexchat
@@ -70,7 +69,6 @@ let
     # Misc/Media
     spotify
     spotify-qt
-    unstable.plex-desktop
     no-cuda.gimp
     audacity
     # gnuradio
@@ -93,8 +91,9 @@ let
     pavucontrol
     distrobox
   ] ++ (optionals isLinuxX64 (with pkgs; [
-
-    # Mail
+    # X64 only
+    unstable.discord
+    unstable.plex-desktop
     (unstable.mailspring.overrideAttrs (old: {
       postFixup = ''
         substituteInPlace $out/share/applications/Mailspring.desktop \
