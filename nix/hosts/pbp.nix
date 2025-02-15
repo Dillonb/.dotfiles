@@ -2,12 +2,12 @@
 {
   fileSystems."/" =
     {
-      device = "/dev/mmcblk0p2";
+      device = "/dev/disk/by-uuid/1f2c0e78-6e81-443d-b767-f336207369aa";
       fsType = "ext4";
     };
   fileSystems."/boot" =
     {
-      device = "/dev/mmcblk0p1";
+      device = "/dev/disk/by-uuid/E539-193F";
       fsType = "vfat";
     };
 
