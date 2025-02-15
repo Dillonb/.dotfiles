@@ -3,6 +3,7 @@ let
   optionals = pkgs.lib.optionals;
   isLinux = pkgs.stdenv.isLinux;
   isLinuxX64 = isLinux && pkgs.stdenv.hostPlatform.isx86_64;
+  isLinuxArm64 = isLinux && pkgs.stdenv.hostPlatform.isAarch64;
   isDarwin = pkgs.stdenv.isDarwin;
 
   pwndbg = inputs.pwndbg.packages."${pkgs.system}".default;
@@ -114,11 +115,13 @@ let
     vim-full # vim-full includes gvim compared to the regular vim package
     unstable.neovide
     unstable.imhex
-    bicep-langserver
 
     # Gaming
     moonlight-qt
-  ];
+  ] ++ (optionals (!isLinuxArm64) [
+    # Packages not on arm64 linux
+    bicep-langserver
+  ]);
 
 in
 {
