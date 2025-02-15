@@ -2,26 +2,20 @@
 let
   optionals = pkgs.lib.optionals;
   isLinux = pkgs.stdenv.isLinux;
+  isLinuxX64 = pkgs.stdenv.hostPlatform.isx86_64;
   isDarwin = pkgs.stdenv.isDarwin;
 
   pwndbg = inputs.pwndbg.packages."${pkgs.system}".default;
   pwndbg-lldb = inputs.pwndbg.packages."${pkgs.system}".pwndbg-lldb;
 
-  bicep-langserver = pkgs.callPackage ../packages/bicep-langserver {};
+  bicep-langserver = pkgs.callPackage ../packages/bicep-langserver { };
 
-  linuxPackages = optionals isLinux (with pkgs; [
+  linuxPackages = (optionals isLinux (with pkgs; [
     # Browser
     # firefox # configured with programs.firefox below
     google-chrome
     microsoft-edge
 
-    # Mail
-    (unstable.mailspring.overrideAttrs (old: {
-      postFixup = ''
-        substituteInPlace $out/share/applications/Mailspring.desktop \
-          --replace-fail Exec=mailspring "Exec=$out/bin/mailspring --password-store=\"kwallet5\""
-      '';
-    }))
     protonmail-desktop
 
     # Util
@@ -98,7 +92,17 @@ let
     mitmproxy
     pavucontrol
     distrobox
-  ]);
+  ] ++ (optionals isLinuxX64 (with pkgs; [
+
+    # Mail
+    (unstable.mailspring.overrideAttrs (old: {
+      postFixup = ''
+        substituteInPlace $out/share/applications/Mailspring.desktop \
+          --replace-fail Exec=mailspring "Exec=$out/bin/mailspring --password-store=\"kwallet5\""
+      '';
+    }))
+  ]))
+  ));
 
   darwinPackages = optionals isDarwin (with pkgs; [
     mpv-unwrapped # mpv has a broken .app bundle
