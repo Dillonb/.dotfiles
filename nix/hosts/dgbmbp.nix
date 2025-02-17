@@ -1,11 +1,7 @@
-{ ... }:
+{ pkgs, ... }:
 {
-  users = {
-    users.dbeliveau = {
-      name = "dbeliveau";
-      home = "/Users/dbeliveau";
-    };
-  };
-
+  environment.systemPackages = with pkgs; [
+    gnuradio
+  ];
   system.stateVersion = 5;
 }
