@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
   networking.firewall.allowedTCPPorts = [
     # home assistant
@@ -43,5 +43,10 @@
         port = 8099;
       };
     };
+  };
+
+  systemd.services.zigbee2mqtt.serviceConfig = {
+    Restart = lib.mkForce "always";
+    RestartSec = "10";
   };
 }
