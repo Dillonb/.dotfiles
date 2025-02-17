@@ -317,7 +317,7 @@
         };
 
         dgb-workmbp = mac {
-          hostname = "dgbmbp";
+          hostname = "dgb-workmbp";
           system = "aarch64-darwin";
           modules = [
             ./nix/modules/fonts.nix
