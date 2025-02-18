@@ -3,7 +3,7 @@
   virtualisation.oci-containers = {
     backend = "docker";
     containers.pihole = {
-      image = "pihole/pihole:2024.07.0";
+      image = "pihole/pihole:2025.02.0";
 
       ports = [
         "53:53/tcp"
