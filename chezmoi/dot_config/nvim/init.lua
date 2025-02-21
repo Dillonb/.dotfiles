@@ -283,23 +283,9 @@ require("lazy").setup({
       event = { 'BufReadPre', 'BufNewFile' },
       dependencies = {
         'nvim-tree/nvim-web-devicons',
-        'f-person/git-blame.nvim'
       },
       init = function()
-        local git_blame = require('gitblame')
-        vim.g.gitblame_display_virtual_text = false;
         require('lualine').setup {
-          sections = {
-            lualine_c = {
-              {
-                git_blame.get_current_blame_text,
-                cond = git_blame.is_blame_text_available,
-                on_click = function(num_clicks, button, modifiers)
-                  vim.cmd [[ :GitBlameOpenFileURL ]]
-                end
-              }
-            }
-          },
           extensions = {
             'quickfix',
             'fugitive',
@@ -307,6 +293,23 @@ require("lazy").setup({
           }
         }
       end
+    },
+
+    {
+      'f-person/git-blame.nvim',
+      lazy = true,
+      init = function()
+        vim.g.gitblame_enabled = 0 -- Disabled by default, so when the plugin is loaded by hitting <leader>b to execute :GitBlameToggle, it'll also be turned on
+        vim.g.gitblame_virtual_text_column = 160
+        vim.g.gitblame_delay = 0
+      end,
+      keys = {
+        { '<leader>b', ':GitBlameToggle<CR>' }
+      },
+      cmd = {
+        "GitBlameToggle",
+        "GitBlameOpenFileURL"
+      }
     },
 
     -- Show git changes on the left side of the window
