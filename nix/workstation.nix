@@ -35,7 +35,6 @@
       dockerCompat = true;
       defaultNetwork.settings.dns_enabled = true;
     };
-    waydroid.enable = true;
   };
 
   programs = {
