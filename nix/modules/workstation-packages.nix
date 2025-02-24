@@ -10,6 +10,8 @@ let
   pwndbg-lldb = inputs.pwndbg.packages."${pkgs.system}".pwndbg-lldb;
 
   linuxPackages = (optionals isLinux (with pkgs; [
+    # Terminal
+    ghostty
     # Util
     scrot
     feh
