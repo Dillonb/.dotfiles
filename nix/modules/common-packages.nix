@@ -35,6 +35,7 @@ let
     git
     git-lfs
     mosh
+    unstable.neovim
   ]);
 
   # Linux and Mac
@@ -56,9 +57,6 @@ let
     cachix
     unstable.bash-language-server
     lazygit
-    # custom-node-pkgs.azure-pipelines-language-server
-    # custom-node-pkgs."@mistweaverco/kulala-ls"
-    unstable.neovim
     nuget
     powershell
     nodejs
