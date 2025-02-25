@@ -33,6 +33,7 @@ let
     element-desktop
 
     # Dev
+    cachix
     docker-compose
     master.vscode-fhs
     stable.ghidra

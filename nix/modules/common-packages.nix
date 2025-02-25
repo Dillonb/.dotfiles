@@ -54,7 +54,6 @@ let
     ripgrep
     fd
     bear
-    cachix
     unstable.bash-language-server
     lazygit
     nuget
