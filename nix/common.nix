@@ -67,6 +67,21 @@
       openFirewall = true;
     };
     bandwhich.enable = true;
+
+    neovim = {
+      enable = true;
+      package = pkgs.unstable.neovim-unwrapped;
+      defaultEditor = true;
+
+      # Tell nvim where GCC is. Needed so it can compile the treesitter parsers.
+      # Then load the normal init.lua file
+      configure = {
+        customRC = ''
+          let g:gcc_bin_path = '${pkgs.lib.getExe pkgs.gcc}'
+          luafile ~/.config/nvim/init.lua
+        '';
+      };
+    };
   };
 
   services = {

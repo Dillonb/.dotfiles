@@ -105,6 +105,11 @@ require("lazy").setup({
       "nvim-treesitter/nvim-treesitter",
       build = ":TSUpdate",
       config = function ()
+
+        if vim.g.gcc_bin_path ~= nil then
+          require("nvim-treesitter.install").compilers = { vim.g.gcc_bin_path }
+        end
+
         local configs = require("nvim-treesitter.configs")
 
         configs.setup({
