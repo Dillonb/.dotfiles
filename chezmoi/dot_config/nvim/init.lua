@@ -100,6 +100,51 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Install and setup plugins
 require("lazy").setup({
+    -- Parser dependency used by many plugins
+    {
+      "nvim-treesitter/nvim-treesitter",
+      build = ":TSUpdate",
+      config = function ()
+        local configs = require("nvim-treesitter.configs")
+
+        configs.setup({
+          ensure_installed = {
+            "c",
+            "cpp",
+            "rust",
+            "lua",
+            "vim",
+            "vimdoc",
+            "bash",
+            "bicep",
+            "c_sharp",
+            "java",
+            "cmake",
+            "clojure",
+            "dockerfile",
+            "gitignore",
+            "git_config",
+            "git_rebase",
+            "gitcommit",
+            "glsl",
+            "ini",
+            "javascript",
+            "json",
+            "make",
+            "nix",
+            "ocaml",
+            "ocaml_interface",
+            "powershell",
+            "python",
+            "yaml",
+          },
+          sync_install = false,
+          highlight = { enable = true },
+          indent = { enable = true },
+        })
+      end
+    },
+
     -- LSP
     {
       "neovim/nvim-lspconfig",
@@ -590,6 +635,15 @@ require("lazy").setup({
     -- Nicer UI for selections
     {
       "stevearc/dressing.nvim"
+    },
+
+    -- Show the first line of the function, class, etc, at the top of the screen
+    {
+      "nvim-treesitter/nvim-treesitter-context",
+      dependencies = {
+        "nvim-treesitter/nvim-treesitter",
+      },
+      event = { "BufReadPre", "BufNewFile" },
     },
 
     {
