@@ -645,6 +645,12 @@ require("lazy").setup({
     -- Show the first line of the function, class, etc, at the top of the screen
     {
       "nvim-treesitter/nvim-treesitter-context",
+      config = function()
+        require'treesitter-context'.setup{
+          enable = true,
+          mode = 'topline'
+        }
+      end,
       dependencies = {
         "nvim-treesitter/nvim-treesitter",
       },
