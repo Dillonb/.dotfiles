@@ -1,13 +1,9 @@
-{ pkgs, system, inputs, ... }:
+{ pkgs, config, inputs, ... }:
 let
   optionals = pkgs.lib.optionals;
   isLinux = pkgs.stdenv.isLinux;
   isDarwin = pkgs.stdenv.isDarwin;
   isX64 = pkgs.stdenv.isx86_64;
-
-  # custom-node-pkgs = import ../packages/node-packages {
-  #  inherit pkgs system;
-  # };
 
   # Linux specific
   linuxPkgs = optionals isLinux (with pkgs; [
