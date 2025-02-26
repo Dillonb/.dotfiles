@@ -1,10 +1,13 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, config, ... }:
 let
   optionals = pkgs.lib.optionals;
   isLinux = pkgs.stdenv.isLinux;
   isLinuxX64 = isLinux && pkgs.stdenv.hostPlatform.isx86_64;
   isLinuxArm64 = isLinux && pkgs.stdenv.hostPlatform.isAarch64;
   isDarwin = pkgs.stdenv.isDarwin;
+
+  isMinimalSystem = config.dgbCustom.minimal;
+  big = package: if isMinimalSystem then null else package;
 
   pwndbg = inputs.pwndbg.packages."${pkgs.system}".default;
   pwndbg-lldb = inputs.pwndbg.packages."${pkgs.system}".pwndbg-lldb;
@@ -36,25 +39,25 @@ let
     cachix
     docker-compose
     master.vscode-fhs
-    stable.ghidra
+    (big stable.ghidra)
     master.sublime-merge
     zeal
     ocaml
     opam
     gdb
-    cargo
-    qtcreator
+    (big cargo)
+    (big qtcreator)
 
     # Sec
     tcpdump
     nmap
-    burpsuite
+    (big burpsuite)
     foremost
     hashcat
     proxmark3
-    pwndbg
-    pwndbg-lldb
-    pwntools
+    (big pwndbg)
+    (big pwndbg-lldb)
+    (big pwntools)
 
     # Notes
     unstable.obsidian
@@ -84,20 +87,20 @@ let
 
   linuxX64Packages = (optionals isLinuxX64 (with pkgs; [
     # Mail
-    protonmail-desktop
-    (unstable.mailspring.overrideAttrs (old: {
+    (big protonmail-desktop)
+    (big (unstable.mailspring.overrideAttrs (old: {
       postFixup = ''
         substituteInPlace $out/share/applications/Mailspring.desktop \
           --replace-fail Exec=mailspring "Exec=$out/bin/mailspring --password-store=\"kwallet5\""
       '';
-    }))
+    })))
 
-    google-chrome
-    microsoft-edge
+    (big google-chrome)
+    (big microsoft-edge)
     unstable.discord
-    unstable.plex-desktop
-    slack
-    renderdoc
+    (big unstable.plex-desktop)
+    (big slack)
+    (big renderdoc)
     spotify
     teamspeak_client
     teamspeak5_client
@@ -125,5 +128,5 @@ let
 
 in
 {
-  environment.systemPackages = linuxPackages ++ linuxX64Packages ++ darwinPackages ++ commonPackages;
+  environment.systemPackages = builtins.filter (pkg: pkg != null) (linuxPackages ++ linuxX64Packages ++ darwinPackages ++ commonPackages);
 }

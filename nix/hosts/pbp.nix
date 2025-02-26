@@ -13,7 +13,10 @@
 
   networking.networkmanager.enable = true;
 
-  dgbCustom.enableGaming = false;
+  dgbCustom = {
+    enableGaming = false;
+    minimal = true;
+  };
 
   boot.loader = {
     efi.canTouchEfiVariables = false;

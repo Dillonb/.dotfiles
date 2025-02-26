@@ -13,8 +13,13 @@
       description = "Enable gaming";
     };
 
-    alacritty = {
+    minimal = lib.mkOption {
+      type = with pkgs.lib; types.bool;
+      default = false;
+      description = "Don't install heavier packages";
+    };
 
+    alacritty = {
       fontSize = lib.mkOption {
         type = with pkgs.lib; types.int;
         default = 14;
@@ -26,7 +31,6 @@
         default = "CaskaydiaMono Nerd Font";
         description = "The font family for Alacritty";
       };
-
     };
   };
 }
