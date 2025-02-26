@@ -280,6 +280,17 @@
           ];
         };
 
+        dgbsp7 = nixos {
+          hostname = "dgbsp7";
+          system = "x86_64-linux";
+          role = "workstation";
+          channel = "unstable";
+          modules = [
+            nixos-hardware.nixosModules.microsoft-surface-pro-intel
+            ./nix/modules/ssd.nix
+          ];
+        };
+
         dgbmbp-nixos-vm = nixos {
           hostname = "dgbmbp-nixos-vm";
           system = "aarch64-linux";
