@@ -648,7 +648,9 @@ require("lazy").setup({
       config = function()
         require'treesitter-context'.setup{
           enable = true,
-          mode = 'topline'
+          mode = 'topline',
+          max_lines = 4,
+          trim_scope = 'inner'
         }
       end,
       dependencies = {
