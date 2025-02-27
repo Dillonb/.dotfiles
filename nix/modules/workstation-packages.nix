@@ -14,7 +14,10 @@ let
 
   linuxPackages = (optionals isLinux (with pkgs; [
     # Terminal
+    alacritty
+    # kitty
     ghostty
+
     # Util
     scrot
     feh
@@ -112,10 +115,6 @@ let
   ]);
 
   commonPackages = with pkgs; [
-    # Terminal
-    alacritty
-    # kitty
-
     # Dev/Editor
     vim-full # vim-full includes gvim compared to the regular vim package
     unstable.neovide
