@@ -34,7 +34,7 @@
   virtualisation.waydroid.enable = true;
 
   dgbCustom = {
-    enableGaming = false;
+    enableGaming = true;
     minimal = true;
   };
 }
