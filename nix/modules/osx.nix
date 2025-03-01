@@ -13,7 +13,7 @@
     direnv.enable = true;
   };
 
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
 
   environment.systemPackages = [
     inputs.nh.packages.${config.nixpkgs.system}.nh
