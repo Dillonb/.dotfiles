@@ -304,21 +304,15 @@ require("lazy").setup({
 
             client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
               runtime = {
-                -- Tell the language server which version of Lua you're using
-                -- (most likely LuaJIT in the case of Neovim)
                 version = 'LuaJIT'
               },
               -- Make the server aware of Neovim runtime files
               workspace = {
                 checkThirdParty = false,
                 library = {
-                  vim.env.VIMRUNTIME
-                  -- Depending on the usage, you might want to add additional paths here.
-                  -- "${3rd}/luv/library"
-                  -- "${3rd}/busted/library",
+                  vim.env.VIMRUNTIME,
+                  "${3rd}/luv/library"
                 }
-                -- or pull in all of 'runtimepath'. NOTE: this is a lot slower and will cause issues when working on your own configuration (see https://github.com/neovim/nvim-lspconfig/issues/3189)
-                -- library = vim.api.nvim_get_runtime_file("", true)
               }
             })
           end,
@@ -520,8 +514,8 @@ require("lazy").setup({
       -- map ctrl-/ to toggle comments
       -- Some terminals will send ctrl-/ as ctrl-_
       -- but some (newer?) will send it correctly, so map both
-      vim.keymap.set({'n', 'v'}, '<C-_>', ":Commentary<CR>", opts)
-      vim.keymap.set({'n', 'v'}, '<C-/>', ":Commentary<CR>", opts)
+      vim.keymap.set({'n', 'v'}, '<C-_>', ":Commentary<CR>")
+      vim.keymap.set({'n', 'v'}, '<C-/>', ":Commentary<CR>")
     end,
   },
 
@@ -742,11 +736,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     -- I don't know if this is necessary - hook completion and tags up to the LSP manually
     local client = vim.lsp.get_client_by_id(args.data.client_id)
-    if client.supports_method("textDocument/completion") then
-      vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
-    end
-    if client.supports_method("textDocument/definition") then
-      vim.bo[bufnr].tagfunc = "v:lua.vim.lsp.tagfunc"
+    if client ~= nil then
+      if client.supports_method("textDocument/completion") then
+        vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
+      end
+      if client.supports_method("textDocument/definition") then
+        vim.bo[bufnr].tagfunc = "v:lua.vim.lsp.tagfunc"
+      end
     end
   end,
 })
