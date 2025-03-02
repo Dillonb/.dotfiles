@@ -53,6 +53,7 @@ in
   services.sabnzbd = {
     enable = true;
     user = "dillon";
+    package = pkgs.unstable.sabnzbd;
   };
 
   services.transmission = {
@@ -108,5 +109,6 @@ in
   services.ombi = {
     enable = true;
     user = "dillon";
+    package = pkgs.unstable.ombi;
   };
 }
