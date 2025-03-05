@@ -67,34 +67,66 @@
     ];
   };
 
-  services.samba = {
-    enable = true;
-    openFirewall = true;
-
-    settings = {
-      global = {
-        security = "user";
-        "workgroup" = "DGB";
-        "server string" = "dulu";
-        "netbios name" = "dulu";
-        "server role" = "standalone server";
-        "map to guest" = "bad user";
-      };
-      zpool = {
-        path = "/zpool";
+  services.samba =
+    let
+      shareTemplate = {
         browseable = "yes";
-        "guest ok" = "no";
-        "read only" = "no";
-        "create mask" = "755";
-      };
-      homes = {
-        browseable = "yes";
-        "valid users" = "%S";
         writable = "yes";
         "read only" = "no";
+        "guest ok" = "no";
+        "force group" = "users";
+        "valid users" = "dillon";
+        "create mask" = "0664";
+        "directory mask" = "0775";
+      };
+    in
+    {
+      package = pkgs.samba4Full; # samba4Full has avahi, ldap, AD, etc, needed so Samba can register mDNS records
+      enable = true;
+      openFirewall = true;
+
+      settings = {
+        global = {
+          security = "user";
+          "workgroup" = "DGB";
+          "server string" = "dulu";
+          "netbios name" = "dulu";
+          "server role" = "standalone server";
+          "map to guest" = "bad user";
+          "server min protocol" = "SMB3";
+
+          # Needed for Time Machine
+          "vfs objects" = "catia fruit streams_xattr";
+          "fruit:aapl" = "yes";
+          "fruit:nfs_aces" = "no";
+          "fruit:model" = "TimeCapsule8,119";
+          "fruit:resource" = "xattr";
+          "fruit:metadata" = "stream";
+          "fruit:veto_appledouble" = "no";
+          "fruit:posix_rename" = "yes";
+          "fruit:zero_file_id" = "yes";
+          "fruit:wipe_intentionally_left_blank_rfork" = "yes";
+          "fruit:delete_empty_adfiles" = "yes";
+          "fruit:encoding" = "native";
+          "readdir_attr:aapl_finder_info" = "no";
+          "readdir_attr:aapl_rsize" = "no";
+
+        };
+        zpool = shareTemplate // {
+          path = "/zpool";
+        };
+        "TimeMachine" = shareTemplate // {
+          path = "/zpool/timemachine";
+          "fruit:time machine" = "yes";
+        };
+        homes = {
+          browseable = "yes";
+          "valid users" = "%S";
+          writable = "yes";
+          "read only" = "no";
+        };
       };
     };
-  };
 
   services.avahi = {
     enable = true;
