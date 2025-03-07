@@ -1,3 +1,8 @@
+[general]
+import = [
+  "tinted-terminal/themes/alacritty/base16-tokyo-night-storm.toml"
+]
+
 [window.dimensions]
 lines = 30
 columns = 120
