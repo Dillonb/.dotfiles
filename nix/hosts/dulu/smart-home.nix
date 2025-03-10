@@ -16,9 +16,13 @@
     ];
   };
 
+  # TODO: remove this next line when I upgrade to 25.04
+  # See: https://github.com/NixOS/nixpkgs/commit/99eabc0ab3dab1634eadc0092fb2efad8321d9c3#diff-ae914e83933020486ee71b87a797531d86925ecb8d2d4544b028b23e2fc2c8b7
+  systemd.services.zigbee2mqtt.serviceConfig.SystemCallFilter = [ "@chown" ];
+
   services.zigbee2mqtt = {
     enable = true;
-    package = pkgs.unstable.zigbee2mqtt;
+    package = pkgs.unstable.zigbee2mqtt_2;
     settings = {
       homeassistant = true;
       permit_join = false;
