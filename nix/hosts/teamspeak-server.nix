@@ -8,6 +8,8 @@
 
   virtualisation.docker.enable = true;
 
+  dgbCustom.minimal = true;
+
   services.teamspeak3 = {
     enable = true;
     openFirewall = true;
