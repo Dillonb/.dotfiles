@@ -176,6 +176,7 @@
 
             server = [
               ./nix/common.nix
+              ./nix/modules/custom-options.nix
               ./nix/modules/server-packages.nix
               ./nix/modules/common-packages.nix
             ] ++ agenix-modules;
