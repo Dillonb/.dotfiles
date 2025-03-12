@@ -40,7 +40,7 @@ in
 
   services.sonarr = {
     enable = true;
-    package = pkgs.master.sonarr;
+    package = pkgs.unstable.sonarr;
     user = "dillon";
   };
 
@@ -97,7 +97,7 @@ in
     enable = true;
     openFirewall = true;
     user = "dillon";
-    package = pkgs.master.jellyfin;
+    package = pkgs.unstable.jellyfin;
   };
 
   nixpkgs.overlays = [

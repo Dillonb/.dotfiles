@@ -23,7 +23,7 @@ let
     feh
     keymapp # flashing ZSA keyboards
     wally-cli # also for flashing ZSA keyboards (cli tool)
-    master.freerdp3
+    unstable.freerdp3
     wl-clipboard # Wayland clipboard from cli
     xclip # X11 clipboard from cli
     parsec-bin
@@ -41,9 +41,9 @@ let
     # Dev
     cachix
     docker-compose
-    master.vscode-fhs
+    unstable.vscode-fhs
     (big stable.ghidra)
-    master.sublime-merge
+    unstable.sublime-merge
     zeal
     ocaml
     opam

@@ -4,7 +4,6 @@
   inputs = {
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-master.url = "github:NixOS/nixpkgs/master";
 
     agenix.url = "github:ryantm/agenix";
 
@@ -39,7 +38,7 @@
     pwndbg.url = "github:pwndbg/pwndbg";
   };
 
-  outputs = { nixpkgs-stable, nixpkgs-unstable, nixpkgs-master, nixos-hardware, home-manager-stable, home-manager-unstable, agenix, nixos-wsl, darwin, stylix, pwndbg, ... }@inputs:
+  outputs = { nixpkgs-stable, nixpkgs-unstable, nixos-hardware, home-manager-stable, home-manager-unstable, agenix, nixos-wsl, darwin, stylix, pwndbg, ... }@inputs:
     let
       nixpkgs-config-base = {
         allowUnfree = true;
@@ -70,14 +69,8 @@
               config = nixpkgs-config;
             };
           };
-          overlay-master = final: prev: {
-            master = import nixpkgs-master {
-              system = system;
-              config = nixpkgs-config;
-            };
-          };
           overlays = ({ ... }: {
-            nixpkgs.overlays = [ overlay-unstable overlay-master overlay-stable ];
+            nixpkgs.overlays = [ overlay-unstable overlay-stable ];
             nixpkgs.config = nixpkgs-config;
           });
         in
@@ -132,20 +125,13 @@
             };
           };
 
-          overlay-master = final: prev: {
-            master = import nixpkgs-master {
-              system = system;
-              config = nixpkgs-config;
-            };
-          };
-
           overlay-missing-modules-okay = (final: super: {
             makeModulesClosure = x:
               super.makeModulesClosure (x // { allowMissing = true; });
           });
 
           overlays = ({ ... }: {
-            nixpkgs.overlays = [ overlay-stable overlay-unstable overlay-master overlay-missing-modules-okay overlay-no-cuda ];
+            nixpkgs.overlays = [ overlay-stable overlay-unstable overlay-missing-modules-okay overlay-no-cuda ];
             nixpkgs.config = nixpkgs-config;
           });
           agenix-modules = [
