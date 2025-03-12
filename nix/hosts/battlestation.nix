@@ -174,7 +174,7 @@ in
 
   programs.alvr = {
     enable = true;
-    package = pkgs.master.alvr;
+    package = pkgs.unstable.alvr;
     openFirewall = true;
   };
 }
