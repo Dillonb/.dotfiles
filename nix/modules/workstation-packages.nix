@@ -57,7 +57,7 @@ let
     (big burpsuite)
     foremost
     hashcat
-    proxmark3
+    (big proxmark3)
     (big pwndbg)
     (big pwndbg-lldb)
     (big pwntools)
@@ -86,6 +86,7 @@ let
     mitmproxy
     pavucontrol
     distrobox
+    unstable.posting
   ]));
 
   linuxX64Packages = (optionals isLinuxX64 (with pkgs; [
