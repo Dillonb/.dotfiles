@@ -43,6 +43,8 @@ let
     "pi4-syncthing.cert.pem"
 
     "netdata-discord.conf"
+
+    "nix-cache-priv-key.pem"
   ];
 
   secretsAttrList = map
