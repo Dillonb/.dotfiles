@@ -2,7 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
   imports =
@@ -141,5 +141,10 @@
     };
   };
 
+  services.nix-serve = {
+    enable = true;
+    secretKeyFile = config.age.secrets."nix-cache-priv-key.pem".path;
+    port = 5001;
+  };
 }
 
