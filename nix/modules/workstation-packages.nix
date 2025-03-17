@@ -39,7 +39,6 @@ let
     element-desktop
 
     # Dev
-    cachix
     docker-compose
     unstable.vscode-fhs
     (big stable.ghidra)
