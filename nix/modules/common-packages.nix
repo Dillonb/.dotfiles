@@ -23,6 +23,7 @@ let
     pciutils # for lspci
     nvme-cli
     smartmontools
+    vtm
   ]);
 
   # Mac specific
