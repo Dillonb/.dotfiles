@@ -26,3 +26,13 @@ style = "Regular"
 
 [terminal.shell]
 program = "pwsh"
+
+[[keyboard.bindings]]
+key = "T"
+mods = "Control|Shift"
+action = "SpawnNewInstance"
+
+[[keyboard.bindings]]
+key = "N"
+mods = "Control|Shift"
+action = "SpawnNewInstance"
