@@ -224,6 +224,15 @@
         };
       };
 
+      "hydra.nix.dgb.sh" = {
+        forceSSL = true;
+        enableACME = true;
+        locations."/" = {
+          # proxyPass = "http://${toString config.services.hydra.listenHost}:${toString config.services.hydra.port}";
+          proxyPass = "http://localhost:3000";
+        };
+      };
+
       "home.dgb.sh" = {
         forceSSL = true;
 

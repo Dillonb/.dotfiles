@@ -26,6 +26,8 @@
           "/var/lib/mosquitto"
           "/var/lib/pihole"
           "/var/lib/zigbee2mqtt"
+          "/var/lib/postgresql"
+          "/var/lib/hydra"
           "/var/www"
         ];
 
