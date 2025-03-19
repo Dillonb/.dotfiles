@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 derivation=$1
 profile=/nix/var/nix/profiles/system
+operation="boot"
 
 echo "Switch $(hostname) to $derivation"
 echo ""
@@ -14,7 +15,7 @@ case "$response" in
 
         sudo nix-env -p $profile --set "$derivation"
         echo "Added to system profile. Switching to it:"
-        sudo "$derivation"/bin/switch-to-configuration switch
+        sudo $derivation/bin/switch-to-configuration $operation
         ;;
     *)
         echo "Exiting."
