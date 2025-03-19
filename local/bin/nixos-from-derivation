@@ -15,7 +15,7 @@ read -r -p "Are you sure? [y/N] " response
 case "$response" in
     [yY][eE][sS]|[yY])
         echo "Realizing derivation"
-        nix-store --realise "$derivation"
+        nix-store --realise "$derivation" --log-format bar-with-logs
         echo "Updating $profile"
         echo "Adding $derivation"
 
