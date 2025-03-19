@@ -3,20 +3,20 @@ derivation=$1
 profile=/nix/var/nix/profiles/system
 
 if [ -z "$2" ]; then
-    echo "Usage: $0 <derivation> [switch|boot|build]"
+    echo "Usage: $0 <derivation> [check|switch|boot|test|dry-activate]"
     exit 1
 else
     operation="$2"
 fi
 
-echo "Update $(hostname) to $derivation: $operation"
-echo ""
+nix-store --realise "$derivation" --log-format bar-with-logs
+
 nvd diff /nix/var/nix/profiles/system "$derivation"
 echo ""
+echo "Update $(hostname) to $derivation: $operation"
 read -r -p "Are you sure? [y/N] " response
 case "$response" in
     [yY][eE][sS]|[yY])
-        nix-store --realise "$derivation" --log-format bar-with-logs
         sudo nix-env -p $profile --set "$derivation"
         sudo "$derivation/bin/switch-to-configuration" "$operation"
         ;;
