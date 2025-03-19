@@ -3,6 +3,12 @@ derivation=$1
 profile=/nix/var/nix/profiles/system
 operation="boot"
 
+if [ -z "$2" ]; then
+    operation="boot"
+else
+    operation="$2"
+fi
+
 echo "Switch $(hostname) to $derivation"
 echo ""
 read -r -p "Are you sure? [y/N] " response
