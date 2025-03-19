@@ -97,6 +97,7 @@ let
     node2nix
     unstable.nix-search-tv
     television
+    nvd
 
     # Fun
     fortune
