@@ -13,6 +13,8 @@ nix-store --realise "$derivation" --log-format bar-with-logs
 
 nvd diff /nix/var/nix/profiles/system "$derivation"
 echo ""
+sudo "$derivation/bin/switch-to-configuration" dry-activate
+echo ""
 echo "Update $(hostname) to $derivation: $operation"
 read -r -p "Are you sure? [y/N] " response
 case "$response" in
