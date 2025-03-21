@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+if [ -z "$1" ]; then
+    echo "Usage: $0 [check|switch|boot|test|dry-activate]"
+    exit 1
+else
+    operation="$1"
+fi
+
+derivation=$(ssh dgb.sh readlink -f other-systems-gcroots/battlestation/result)
+
+nixos-from-derivation $derivation $operation
