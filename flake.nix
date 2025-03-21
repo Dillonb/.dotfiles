@@ -38,7 +38,7 @@
     pwndbg.url = "github:pwndbg/pwndbg";
   };
 
-  outputs = { nixpkgs-stable, nixpkgs-unstable, nixos-hardware, home-manager-stable, home-manager-unstable, agenix, nixos-wsl, darwin, stylix, pwndbg, ... }@inputs:
+  outputs = { self, nixpkgs-stable, nixpkgs-unstable, nixos-hardware, home-manager-stable, home-manager-unstable, agenix, nixos-wsl, darwin, stylix, pwndbg, ... }@inputs:
     let
       nixpkgs-config-base = {
         allowUnfree = true;
@@ -332,6 +332,22 @@
           ];
         };
       };
+
+      packages = forEachSystem ({pkgs}: {
+        default = pkgs.stdenv.mkDerivation {
+          name = "all-systems";
+          phases = ["installPhase" "fixupPhase"];
+          installPhase = let
+            systems = builtins.attrNames self.nixosConfigurations;
+            link_commands_list = builtins.map (system: "ln -s ${self.nixosConfigurations.${system}.config.system.build.toplevel} $out/${system}") systems;
+            link_commands = builtins.concatStringsSep "\n" link_commands_list;
+          in
+            ''
+            mkdir -p $out
+            ${link_commands}
+          '';
+        };
+      });
 
       devShells = forEachSystem ({ pkgs }: {
         default = pkgs.mkShell {
