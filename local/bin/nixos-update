@@ -7,6 +7,6 @@ else
     operation="$1"
 fi
 
-derivation=$(ssh dgb.sh readlink -f other-systems-gcroots/battlestation/result)
+derivation=$(ssh dgb.sh readlink -f other-systems-gcroots/$(hostname)/result)
 
 nixos-from-derivation $derivation $operation
