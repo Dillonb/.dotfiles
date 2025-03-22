@@ -13,5 +13,5 @@ jobs:
 
       - name: Build all systems
         run: |
-           nix build .#packages.x86_64-linux.all-nixos-systems
+           nix build .#packages.x86_64-linux.all-nixos-systems --out-link /tmp/all-nixos-systems-gcroot
 
