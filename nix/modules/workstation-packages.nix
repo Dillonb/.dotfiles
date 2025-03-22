@@ -112,6 +112,7 @@ let
   darwinPackages = optionals isDarwin (with pkgs; [
     mpv-unwrapped # mpv has a broken .app bundle
     pwndbg-lldb
+    nowplaying-cli
   ]);
 
   commonPackages = with pkgs; [
