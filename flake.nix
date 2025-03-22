@@ -334,8 +334,8 @@
       };
 
       packages = forEachSystem ({pkgs}: {
-        default = pkgs.stdenv.mkDerivation {
-          name = "all-systems";
+        all-nixos-systems = pkgs.stdenv.mkDerivation {
+          name = "all-nixos-systems";
           phases = ["installPhase" "fixupPhase"];
           installPhase = let
             systems = builtins.attrNames self.nixosConfigurations;
