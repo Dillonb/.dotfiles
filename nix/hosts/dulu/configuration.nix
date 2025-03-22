@@ -15,6 +15,7 @@
       ./dns.nix
       ./pihole.nix
       ./smart-home.nix
+      ./github-runner.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
