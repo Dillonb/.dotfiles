@@ -1,0 +1,17 @@
+name: Build all systems
+
+on:
+  push:
+    branches: [ "master" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build all systems
+        run: |
+           nix build .#packages.x86_64-linux.all-nixos-systems
+
