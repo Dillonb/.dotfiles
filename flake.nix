@@ -339,11 +339,16 @@
           phases = ["installPhase" "fixupPhase"];
           installPhase = let
             systems = builtins.attrNames self.nixosConfigurations;
-            link_commands_list = builtins.map (system: "ln -s ${self.nixosConfigurations.${system}.config.system.build.toplevel} $out/${system}") systems;
+            systems_to_derivations = builtins.listToAttrs (map (system: {
+              name = system;
+              value = self.nixosConfigurations.${system}.config.system.build.toplevel;
+            }) systems);
+            link_commands_list = pkgs.lib.mapAttrsToList (system: derivation: "ln -s ${derivation} $out/systems/${system}") systems_to_derivations;
             link_commands = builtins.concatStringsSep "\n" link_commands_list;
           in
             ''
-            mkdir -p $out
+            mkdir -p $out/systems
+            echo '${builtins.toJSON systems_to_derivations}' >> $out/systems.json
             ${link_commands}
           '';
         };
