@@ -45,6 +45,8 @@ let
     "netdata-discord.conf"
 
     "nix-cache-priv-key.pem"
+
+    "dotfiles-github-actions-token"
   ];
 
   secretsAttrList = map
