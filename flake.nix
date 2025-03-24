@@ -335,21 +335,13 @@
 
       packages = forEachSystem ({pkgs}: {
         all-nixos-systems = pkgs.stdenv.mkDerivation {
-          name = "all-nixos-systems";
+          name = "all-nixos-systems.json";
           phases = ["installPhase" "fixupPhase"];
           installPhase = let
             systems = builtins.attrNames self.nixosConfigurations;
-            systems_to_derivations = builtins.listToAttrs (map (system: {
-              name = system;
-              value = self.nixosConfigurations.${system}.config.system.build.toplevel;
-            }) systems);
-            link_commands_list = pkgs.lib.mapAttrsToList (system: derivation: "ln -s ${derivation} $out/systems/${system}") systems_to_derivations;
-            link_commands = builtins.concatStringsSep "\n" link_commands_list;
           in
             ''
-            mkdir -p $out/systems
-            echo '${builtins.toJSON systems_to_derivations}' >> $out/systems.json
-            ${link_commands}
+            echo '${builtins.toJSON systems}' > $out
           '';
         };
       });
