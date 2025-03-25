@@ -9,5 +9,5 @@ mkdir -p systems-gcroots
 
 jq -r -c '.[]' all-nixos-systems.json | while read -r i; do
     toilet -f future "$i"
-    nix build ..#nixosConfigurations."$i".config.system.build.toplevel --out-link systems-gcroots/"$i"
+    nix build --cores 1 ..#nixosConfigurations."$i".config.system.build.toplevel --out-link systems-gcroots/"$i"
 done
