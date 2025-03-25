@@ -1,5 +1,5 @@
-#!/usr/bin/env bash
-set -e
+#!/usr/bin/env nix-shell
+#! nix-shell -i bash -p jq toilet
 
 # Generate the JSON list of all derivations
 nix build ..#packages.x86_64-linux.all-nixos-systems --out-link all-nixos-systems.json
