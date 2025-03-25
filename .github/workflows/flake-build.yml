@@ -14,5 +14,5 @@ jobs:
       - name: Build all systems
         run: |
           cd build
-          ./build-all-nixos-systems.sh
+          ./ci-build-all-nixos-systems.sh
 
