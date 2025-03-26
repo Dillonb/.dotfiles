@@ -147,16 +147,5 @@
     secretKeyFile = config.age.secrets."nix-cache-priv-key.pem".path;
     port = 5001;
   };
-
-  services.hydra = {
-    enable = true;
-    listenHost = "localhost";
-    hydraURL = "https://hydra.nix.dgb.sh/"; # externally visible URL
-    notificationSender = "hydra@localhost"; # e-mail of hydra service
-    # a standalone hydra will require you to unset the buildMachinesFiles list to avoid using a nonexistant /etc/nix/machines
-    buildMachinesFiles = [];
-    # you will probably also want, otherwise *everything* will be built from scratch
-    useSubstitutes = true;
-  };
 }
 
