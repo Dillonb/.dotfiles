@@ -27,6 +27,7 @@
           "/var/lib/pihole"
           "/var/lib/zigbee2mqtt"
           "/var/lib/postgresql"
+          "/var/lib/anki-sync-server"
           "/var/www"
         ];
 

@@ -47,6 +47,8 @@ let
     "nix-cache-priv-key.pem"
 
     "dotfiles-github-actions-token"
+
+    "anki-password"
   ];
 
   secretsAttrList = map

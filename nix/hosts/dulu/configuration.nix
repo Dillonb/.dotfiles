@@ -147,5 +147,17 @@
     secretKeyFile = config.age.secrets."nix-cache-priv-key.pem".path;
     port = 5001;
   };
+
+  services.anki-sync-server = {
+    enable = true;
+    openFirewall = true;
+    address = "0.0.0.0";
+    users = [
+      {
+        username = "dgb";
+        passwordFile = config.age.secrets."anki-password".path;
+      }
+    ];
+  };
 }
 
