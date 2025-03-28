@@ -69,9 +69,15 @@ vim.api.nvim_create_autocmd({"BufEnter"},
   })
 
 if vim.fn.exists('g:os') == 0 then
-    local is_windows = vim.fn.has("win64") == 1 or vim.fn.has("win32") == 1 or vim.fn.has("win16") == 1
-    if is_windows then
+  local is_windows = vim.fn.has("win64") == 1 or vim.fn.has("win32") == 1 or vim.fn.has("win16") == 1
+  if is_windows then
+    if vim.fn.executable("pwsh") == 1 then
       vim.opt.shell = "pwsh"
+    elseif vim.fn.executable("powershell") == 1 then
+      vim.opt.shell = "powershell"
+    else
+      vim.opt.shell = "cmd"
+    end
   end
 end
 
