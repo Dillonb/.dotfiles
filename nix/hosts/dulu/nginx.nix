@@ -224,6 +224,14 @@
         };
       };
 
+      "anki.dgb.sh" = {
+        forceSSL = true;
+        enableACME = true;
+        locations."/" = {
+          proxyPass = "http://localhost:${toString config.services.anki-sync-server.port}";
+        };
+      };
+
       "home.dgb.sh" = {
         forceSSL = true;
 
