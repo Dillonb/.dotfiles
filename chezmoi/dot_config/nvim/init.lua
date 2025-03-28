@@ -68,6 +68,13 @@ vim.api.nvim_create_autocmd({"BufEnter"},
     end
   })
 
+if vim.fn.exists('g:os') == 0 then
+    local is_windows = vim.fn.has("win64") == 1 or vim.fn.has("win32") == 1 or vim.fn.has("win16") == 1
+    if is_windows then
+      vim.opt.shell = "pwsh"
+  end
+end
+
 if vim.g.neovide then
   -- Fun little shadow under floating windows
   vim.g.neovide_floating_shadow = true
