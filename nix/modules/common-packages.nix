@@ -98,6 +98,7 @@ let
     unstable.nix-search-tv
     television
     nvd
+    fend
 
     # Fun
     fortune
