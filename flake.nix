@@ -333,16 +333,17 @@
         };
       };
 
-      packages = forEachSystem ({pkgs}: {
+      packages = forEachSystem ({ pkgs }: {
         all-nixos-systems = pkgs.stdenv.mkDerivation {
           name = "all-nixos-systems.json";
-          phases = ["installPhase" "fixupPhase"];
-          installPhase = let
-            systems = builtins.attrNames self.nixosConfigurations;
-          in
+          phases = [ "installPhase" "fixupPhase" ];
+          installPhase =
+            let
+              systems = builtins.attrNames self.nixosConfigurations;
+            in
             ''
-            echo '${builtins.toJSON systems}' > $out
-          '';
+              echo '${builtins.toJSON systems}' > $out
+            '';
         };
       });
 
