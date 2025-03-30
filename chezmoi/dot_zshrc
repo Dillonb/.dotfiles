@@ -96,6 +96,10 @@ if command -v fdfind &>/dev/null; then
     alias fd="fdfind"
 fi
 
+if command -v bat &>/dev/null; then
+    alias cat="bat --plain --no-pager"
+fi
+
 if command -v nh &>/dev/null; then
     # Darwin is on a beta version of nh, update when everything is on 4.x
     if [ `uname` = "Darwin" ]; then
