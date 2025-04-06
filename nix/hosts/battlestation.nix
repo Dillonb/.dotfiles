@@ -25,10 +25,10 @@ in
       useOSProber = true;
       device = "nodev";
       default = "saved";
-      theme = pkgs.sleek-grub-theme.override {
-        withBanner = config.networking.hostName;
-        withStyle = "dark";
-      };
+      # theme = pkgs.sleek-grub-theme.override {
+      #   withBanner = config.networking.hostName;
+      #   withStyle = "dark";
+      # };
     };
   };
 
