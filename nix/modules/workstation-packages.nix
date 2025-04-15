@@ -113,6 +113,7 @@ let
     mpv-unwrapped # mpv has a broken .app bundle
     pwndbg-lldb
     nowplaying-cli
+    sqlitebrowser
   ]);
 
   commonPackages = with pkgs; [
