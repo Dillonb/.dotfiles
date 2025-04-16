@@ -91,7 +91,7 @@
           let g:gcc_bin_path = '${pkgs.lib.getExe pkgs.gcc}'
 
           " Set a variable so we know we're in NixOS
-          let g:os_is_nixos = 1
+          let g:os_is_nixos = v:true
 
           " Now, load the normal init.lua file
           luafile ~/.config/nvim/init.lua
