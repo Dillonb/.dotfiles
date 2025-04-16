@@ -85,11 +85,15 @@
       package = pkgs.unstable.neovim-unwrapped;
       defaultEditor = true;
 
-      # Tell nvim where GCC is. Needed so it can compile the treesitter parsers.
-      # Then load the normal init.lua file
       configure = {
         customRC = ''
+          " Tell nvim where GCC is. Needed so it can compile the treesitter parsers.
           let g:gcc_bin_path = '${pkgs.lib.getExe pkgs.gcc}'
+
+          " Set a variable so we know we're in NixOS
+          let g:os_is_nixos = 1
+
+          " Now, load the normal init.lua file
           luafile ~/.config/nvim/init.lua
         '';
       };
