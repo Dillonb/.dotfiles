@@ -65,7 +65,6 @@ let
     unstable.obsidian
 
     # Misc/Media
-    spotify-qt
     no-cuda.gimp
     audacity
     # gnuradio
