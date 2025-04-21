@@ -366,7 +366,13 @@ require("lazy").setup({
   },
 
   -- Rainbow brackets, etc
-  { "HiPhish/rainbow-delimiters.nvim", lazy = false },
+  {
+    "HiPhish/rainbow-delimiters.nvim",
+    -- "You can set up your plugin manager to ignore the submodules. They are only used for testing and development."
+    -- https://github.com/HiPhish/rainbow-delimiters.nvim/issues/173#issuecomment-2813808544
+    submodules = false,
+    lazy = false,
+  },
 
   -- Nice actions for editing surrounding text
   'tpope/vim-surround',
