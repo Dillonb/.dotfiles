@@ -70,7 +70,7 @@ let
     # gnuradio
     simplescreenrecorder
     nextcloud-client
-    protonvpn-gui
+    # protonvpn-gui
     mpv
 
     # Editor
