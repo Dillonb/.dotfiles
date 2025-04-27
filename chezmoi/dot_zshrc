@@ -102,7 +102,7 @@ fi
 
 if command -v nh &>/dev/null; then
     # Darwin is on a beta version of nh, update when everything is on 4.x
-    if [ `uname` = "Darwin" ]; then
+    if nh --version | grep "^nh 4" &>/dev/null; then
         export NH_FLAKE=$(readlink -f ~/.dotfiles)
         eval "$(nh completions zsh)"
     else
