@@ -69,6 +69,7 @@
   programs = {
     zsh.enable = true;
     nh.enable = true;
+    nh.package = pkgs.unstable.nh;
     direnv.enable = true;
     git = {
       enable = true;
