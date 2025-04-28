@@ -1,4 +1,4 @@
-{ lib, config, inputs, ... }:
+{ lib, config, pkgs, ... }:
 {
   nix = {
     settings = {
@@ -15,7 +15,7 @@
 
   security.pam.services.sudo_local.touchIdAuth = true;
 
-  environment.systemPackages = [
+  environment.systemPackages = with pkgs; [
     nh
   ];
 
