@@ -94,7 +94,6 @@ let
     chezmoi
     unstable.yt-dlp
     mediainfo
-    node2nix
     unstable.nix-search-tv
     television
     nvd
