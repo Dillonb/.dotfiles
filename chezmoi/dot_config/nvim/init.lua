@@ -477,6 +477,16 @@ require("lazy").setup({
     config = function()
       require("telescope").setup {
         defaults = {
+          vimgrep_arguments = {
+            "rg",
+            "--color=never",
+            "--hidden",
+            "--no-heading",
+            "--with-filename",
+            "--line-number",
+            "--column",
+            "--smart-case"
+          },
           file_ignore_patterns = {
             "node_modules",
             "^.git/"
