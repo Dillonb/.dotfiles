@@ -29,7 +29,7 @@ let
     parsec-bin
 
     # Gaming
-    unstable.chiaki-ng # ps5 remote play
+    # unstable.chiaki-ng # ps5 remote play - Broken, see: https://github.com/NixOS/nixpkgs/pull/404622
     # lutris
 
     # Chat
