@@ -299,11 +299,6 @@ require("lazy").setup({
         lspconfig.bashls.setup(opts)
       end
 
-      if vim.fn.executable("kulala-ls") == 1 then
-        local opts = require('cmp_nvim_lsp').default_capabilities()
-        lspconfig.kulala_ls.setup(opts)
-      end
-
       if vim.fn.executable("Bicep.LangServer") == 1 then
         local opts = require('cmp_nvim_lsp').default_capabilities()
         opts.cmd = { "Bicep.LangServer" }
@@ -606,22 +601,6 @@ require("lazy").setup({
     opts = {
       -- add any custom options here
     }
-  },
-
-  -- HTTP Client
-  {
-    'mistweaverco/kulala.nvim',
-    opts = {},
-    ft = "http",
-    lazy = true,
-    init = function()
-      -- Associate .http files with this plugin
-      vim.filetype.add({
-        extension = {
-          ['http'] = 'http',
-        },
-      })
-    end
   },
 
   -- Integration with tmux, nicer split navigation
