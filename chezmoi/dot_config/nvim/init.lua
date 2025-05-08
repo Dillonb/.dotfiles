@@ -111,8 +111,21 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-pick_file = function()
+Pick_file = function()
   require"telescope.builtin".find_files({ hidden = true })
+end
+
+
+Copilot_toggle = function()
+  if vim.g.copilot_enabled then
+    vim.cmd [[ Copilot disable ]]
+    vim.g.copilot_enabled = false
+    vim.notify("Copilot disabled", vim.log.levels.INFO, { title = "Copilot" })
+  else
+    vim.cmd [[ Copilot enable ]]
+    vim.g.copilot_enabled = true
+    vim.notify("Copilot enabled", vim.log.levels.INFO, { title = "Copilot" })
+  end
 end
 
 -- Install and setup plugins
@@ -496,8 +509,8 @@ require("lazy").setup({
     end,
     keys = {
       -- Find files by filename
-      { '<leader>o', ':lua pick_file()<CR>', noremap = true, silent = true},
-      { '<C-p>', ':lua pick_file()<CR>', noremap = true, silent = true},
+      { '<leader>o', ':lua Pick_file()<CR>', noremap = true, silent = true},
+      { '<C-p>', ':lua Pick_file()<CR>', noremap = true, silent = true},
       -- Find currently open files by filename
       { '<leader>p', ':Telescope buffers<CR>'},
       -- Search in all files
@@ -647,7 +660,7 @@ require("lazy").setup({
         enabled = true,
         preset = {
           keys = {
-            { icon = " ", key = "p", desc = "Find File", action = ":lua pick_file()" },
+            { icon = " ", key = "p", desc = "Find File", action = ":lua Pick_file()" },
             { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
             { icon = " ", key = "f", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
             { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
@@ -705,7 +718,11 @@ require("lazy").setup({
   },
 
   {
-    "https://github.com/github/copilot.vim.git"
+    "https://github.com/github/copilot.vim.git",
+    init = function()
+      vim.g.copilot_enabled = true
+      vim.keymap.set('n', '<leader>ct', Copilot_toggle)
+    end,
   }
 })
 
