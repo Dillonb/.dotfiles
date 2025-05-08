@@ -667,6 +667,7 @@ require("lazy").setup({
             { icon = " ", key = "c", desc = "Config", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})" },
             { icon = " ", key = "s", desc = "Restore Current Dir Session", section = "session" },
             { icon = "󰒲 ", key = "L", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
+            { icon = " ", key = "M", desc = "Mason", action = ":Mason" },
             { icon = " ", key = "q", desc = "Quit", action = ":qa" },
           },
         },
@@ -722,6 +723,28 @@ require("lazy").setup({
     init = function()
       vim.g.copilot_enabled = true
       vim.keymap.set('n', '<leader>ct', Copilot_toggle)
+    end,
+  },
+
+  {
+    "mason-org/mason.nvim",
+    lazy = false,
+    dependencies = {
+      "mason-org/mason-lspconfig.nvim"
+    },
+    init = function()
+      require("mason").setup({
+        ui = {
+          icons = {
+            package_installed = "✓",
+            package_pending = "➜",
+            package_uninstalled = "✗"
+          }
+        }
+      })
+      require("mason-lspconfig").setup({
+        automatic_enable = true,
+      })
     end,
   }
 })
