@@ -730,7 +730,8 @@ require("lazy").setup({
     "mason-org/mason.nvim",
     lazy = false,
     dependencies = {
-      "mason-org/mason-lspconfig.nvim"
+      "mason-org/mason-lspconfig.nvim",
+      "jay-babu/mason-nvim-dap.nvim",
     },
     init = function()
       require("mason").setup({
@@ -745,6 +746,7 @@ require("lazy").setup({
       require("mason-lspconfig").setup({
         automatic_enable = true,
       })
+      require("mason-nvim-dap").setup()
     end,
   }
 })
