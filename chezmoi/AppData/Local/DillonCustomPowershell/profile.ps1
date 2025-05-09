@@ -4,9 +4,8 @@ if (Get-Command oh-my-posh) {
   Write-Host "Please install oh-my-posh from the Windows Store"
 }
 
-Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
-Set-PSReadLineKeyHandler -Chord Tab -Function MenuComplete
 Set-PSReadLineOption -EditMode Emacs
+Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
 
 Set-Alias -Name vim -Value nvim
 
