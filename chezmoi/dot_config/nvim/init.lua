@@ -745,6 +745,11 @@ require("lazy").setup({
       })
       require("mason-lspconfig").setup({
         automatic_enable = true,
+        ensure_installed = {
+          "powershell_es",
+          "cmake",
+          "bashls"
+        }
       })
       require("mason-nvim-dap").setup()
     end,
