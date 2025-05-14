@@ -792,6 +792,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- ctrl-p in insert mode to get 'signature help' for the function call you're currently writing
     vim.keymap.set('i', '<C-p>', vim.lsp.buf.signature_help, opts)
 
+    -- Toggle inlay hints
+    vim.keymap.set('n', '<leader>ih', function()
+      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) 
+    end, opts)
+
     -- Search for symbols in project
     vim.keymap.set('n', '<leader>s', ':lua require"telescope.builtin".lsp_dynamic_workspace_symbols{}<CR>')
 
