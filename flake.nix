@@ -30,7 +30,7 @@
     ble-scale.url = "github:Dillonb/ble-scale";
     detectcharset.url = "github:Dillonb/detectcharset";
     stylix.url = "github:danth/stylix";
-    pwndbg.url = "github:pwndbg/pwndbg";
+    pwndbg.url = "github:pwndbg/pwndbg/2025.04.13";
   };
 
   outputs = { self, nixpkgs-stable, nixpkgs-unstable, nixos-hardware, home-manager-stable, home-manager-unstable, agenix, nixos-wsl, darwin, stylix, pwndbg, ... }@inputs:
