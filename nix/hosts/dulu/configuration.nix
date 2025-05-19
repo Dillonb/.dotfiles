@@ -2,8 +2,12 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ pkgs, config, ... }:
+{ pkgs, config, inputs, ... }:
 
+let
+  pwndbg = inputs.pwndbg.packages."${pkgs.system}".default;
+  pwndbg-lldb = inputs.pwndbg.packages."${pkgs.system}".pwndbg-lldb;
+in
 {
   imports =
     [
@@ -47,6 +51,8 @@
   environment.systemPackages = with pkgs; [
     weechat
     intel-gpu-tools
+    pwndbg
+    pwndbg-lldb
   ];
 
   # for QSV
