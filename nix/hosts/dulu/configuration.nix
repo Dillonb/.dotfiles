@@ -17,7 +17,7 @@ in
       ./media-server.nix
       ./nginx.nix
       ./dns.nix
-      ./pihole.nix
+      # ./pihole.nix
       ./smart-home.nix
       ./github-runner.nix
     ];
