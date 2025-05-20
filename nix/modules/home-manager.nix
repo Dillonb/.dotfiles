@@ -44,10 +44,6 @@ in
       } // lib.optionalAttrs isLinux {
         home.stateVersion = stateVersion;
 
-        stylix = {
-          targets.kde.enable = true;
-        };
-
         gtk = {
           enable = true;
           theme = {
