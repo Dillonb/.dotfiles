@@ -83,9 +83,7 @@
 
     neovim = {
       enable = true;
-      package = (pkgs.unstable.neovim-unwrapped.overrideAttrs (attrs: {
-        meta = attrs.meta or { } // { maintainers = [ "dillonb" ]; }; # Needed because we mix stable and unstable. The stable wrapper expects maintainers to be set
-      }));
+      package = pkgs.unstable.neovim-unwrapped;
 
       defaultEditor = true;
 

@@ -2,7 +2,7 @@
   description = "Dillon's NixOS configuration";
 
   inputs = {
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     agenix.url = "github:ryantm/agenix";
@@ -17,7 +17,7 @@
     };
 
     home-manager-stable = {
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
@@ -29,11 +29,10 @@
     ts3status.url = "github:Dillonb/ts3status";
     ble-scale.url = "github:Dillonb/ble-scale";
     detectcharset.url = "github:Dillonb/detectcharset";
-    stylix.url = "github:danth/stylix";
     pwndbg.url = "github:pwndbg/pwndbg/2025.04.13";
   };
 
-  outputs = { self, nixpkgs-stable, nixpkgs-unstable, nixos-hardware, home-manager-stable, home-manager-unstable, agenix, nixos-wsl, darwin, stylix, pwndbg, ... }@inputs:
+  outputs = { self, nixpkgs-stable, nixpkgs-unstable, nixos-hardware, home-manager-stable, home-manager-unstable, agenix, nixos-wsl, darwin, pwndbg, ... }@inputs:
     let
       nixpkgs-config-base = {
         allowUnfree = true;
@@ -152,7 +151,6 @@
               ./nix/modules/common-packages.nix
               ./nix/modules/appimage-support.nix
               ./nix/modules/libreoffice.nix
-              stylix.nixosModules.stylix
             ] ++ agenix-modules;
 
             server = [

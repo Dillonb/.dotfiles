@@ -1,6 +1,11 @@
 { modulesPath, config, pkgs, ... }:
 {
-  imports = [ "${modulesPath}/virtualisation/azure-common.nix" ];
+  imports = [
+    "${modulesPath}/virtualisation/azure-common.nix"
+    "${modulesPath}/virtualisation/azure-image.nix"
+  ];
+
+  virtualisation.azureImage.vmGeneration = "v1";
 
   services.openssh.settings.PasswordAuthentication = false;
 
