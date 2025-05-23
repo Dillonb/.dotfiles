@@ -68,7 +68,7 @@ in
 
         home.file = {
           # Force home-manager to overwrite ~/.gtkrc-2.0 file
-          ${config.gtk.gtk2.configLocation}.force = true;
+          ${config.gtk.gtk2.configLocation}.force = lib.mkForce true;
         };
 
         systemd = {

@@ -98,7 +98,7 @@ let
     })))
 
     (big google-chrome)
-    (big microsoft-edge)
+    # (big microsoft-edge) # Removed due to lack of maintenance
     unstable.discord
     (big unstable.plex-desktop)
     (big slack)
