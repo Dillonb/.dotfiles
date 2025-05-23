@@ -247,6 +247,7 @@
             ./nix/modules/bluetooth.nix
             ./nix/modules/syncthing.nix
             ./nix/modules/netdata.nix
+            ./nix/modules/my-wifi.nix
           ];
         };
 

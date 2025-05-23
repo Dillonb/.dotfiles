@@ -10,17 +10,6 @@ in
 
   hardware.raspberry-pi."4".bluetooth.enable = true;
 
-  networking = {
-    useDHCP = lib.mkDefault true;
-    wireless = {
-      enable = true;
-      secretsFile = config.age.secrets."wireless.env".path;
-      networks = {
-        dgb.pskRaw = "ext:DGB_PSK";
-      };
-    };
-  };
-
   nix.settings.trusted-users = [ "dillon" ];
 
   system.stateVersion = "24.05";
