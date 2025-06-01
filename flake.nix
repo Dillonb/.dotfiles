@@ -29,7 +29,7 @@
     ts3status.url = "github:Dillonb/ts3status";
     ble-scale.url = "github:Dillonb/ble-scale";
     detectcharset.url = "github:Dillonb/detectcharset";
-    pwndbg.url = "github:pwndbg/pwndbg/2025.04.13";
+    pwndbg.url = "github:pwndbg/pwndbg/2025.05.30";
   };
 
   outputs = { self, nixpkgs-stable, nixpkgs-unstable, nixos-hardware, home-manager-stable, home-manager-unstable, agenix, nixos-wsl, darwin, pwndbg, ... }@inputs:
