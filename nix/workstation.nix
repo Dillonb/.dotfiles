@@ -41,7 +41,7 @@
     nix-ld.enable = true;
 
     zsh.enable = true;
-    thefuck.enable = true;
+    pay-respects.enable = true;
 
     firefox.enable = true;
 

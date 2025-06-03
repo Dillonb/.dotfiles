@@ -137,8 +137,8 @@ if command -v fortune &>/dev/null; then
     fortune
 fi
 
-if command -v thefuck &>/dev/null; then
-    eval $(thefuck --alias)
+if command -v pay-respects &>/dev/null; then
+    eval $(pay-respects zsh --alias)
 fi
 
 if command -v oh-my-posh &>/dev/null; then
