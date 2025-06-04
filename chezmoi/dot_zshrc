@@ -137,10 +137,6 @@ if command -v fortune &>/dev/null; then
     fortune
 fi
 
-if command -v pay-respects &>/dev/null; then
-    eval $(pay-respects zsh --alias)
-fi
-
 if command -v oh-my-posh &>/dev/null; then
     # if oh-my-posh is available, use that for theming
     eval "$(oh-my-posh init zsh --config ~/.dotfiles/chezmoi/AppData/Local/DillonCustomPowershell/oh-my-posh/ys.omp.json)"
