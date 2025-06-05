@@ -272,6 +272,15 @@
           ];
         };
 
+        dgbmbp-nixos-vm = nixos {
+          hostname = "dgbmbp-nixos-vm";
+          system = "aarch64-linux";
+          role = "workstation";
+          channel = "unstable";
+          modules = [
+          ];
+        };
+
         wsl = nixos {
           hostname = "wsl";
           system = "x86_64-linux";
