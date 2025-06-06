@@ -61,6 +61,8 @@
         "agenix"
         # Access to syncthing data
         "syncthing"
+        # Access to set the CPU governor through gamemode
+        "gamemode"
       ];
     };
   };
