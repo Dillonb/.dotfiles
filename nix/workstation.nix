@@ -64,6 +64,10 @@
       ];
     };
 
+    gamemode = pkgs.lib.mkIf (config.dgbCustom.enableGaming && pkgs.stdenv.hostPlatform.isx86_64) {
+      enable = true;
+    };
+
     wireshark.enable = true;
     dconf.enable = true; # for home-manager
 
