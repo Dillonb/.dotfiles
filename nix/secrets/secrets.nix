@@ -15,6 +15,8 @@ let
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILOeEvZymnFYVFnwWj1a/ys2e4yGaOH9S/fLblbrJw7Z"
     # sp7
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA5wgX3l3kQSNJR9KI1tU0k/RSisYzMg71QEijXlHIrW"
+    # dgbmbp-nixos-vm
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAmfX8OldvzJt2ia6yVFdjtmA0i7hjw4XDFeKoTgluPJ"
   ];
 
   # Decrypted filename - this is how the secret will appear in /run/agenix/
