@@ -539,13 +539,13 @@ require("lazy").setup({
   },
 
   -- Set the working directory to the root of the project
-  {
-    'notjedi/nvim-rooter.lua',
-    lazy = false,
-    init = function()
-      require('nvim-rooter').setup()
-    end,
-  },
+  -- {
+  --   'notjedi/nvim-rooter.lua',
+  --   lazy = false,
+  --   init = function()
+  --     require('nvim-rooter').setup()
+  --   end,
+  -- },
 
   -- Git integration
   'tpope/vim-fugitive',
