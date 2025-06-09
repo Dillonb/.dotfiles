@@ -48,7 +48,7 @@ let
     opam
     gdb
     (big cargo)
-    (big qtcreator)
+    # (big qtcreator)
 
     # Sec
     tcpdump

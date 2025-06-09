@@ -150,7 +150,6 @@
               ./nix/modules/workstation-packages.nix
               ./nix/modules/common-packages.nix
               ./nix/modules/appimage-support.nix
-              ./nix/modules/libreoffice.nix
             ] ++ agenix-modules;
 
             server = [
@@ -195,6 +194,7 @@
           system = "x86_64-linux";
           cuda = true;
           modules = [
+            ./nix/modules/libreoffice.nix
             ./nix/modules/sunshine.nix
             ./nix/modules/restic.nix
             ./nix/modules/syncthing.nix
@@ -209,6 +209,7 @@
           channel = "unstable";
           modules = [
             nixos-hardware.nixosModules.dell-xps-13-9300
+            ./nix/modules/libreoffice.nix
             ./nix/modules/syncthing.nix
             ./nix/modules/ssd.nix
           ];
