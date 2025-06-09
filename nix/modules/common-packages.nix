@@ -24,6 +24,7 @@ let
     nvme-cli
     smartmontools
     vtm
+    nix-tree
   ]);
 
   # Mac specific
