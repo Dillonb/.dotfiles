@@ -161,6 +161,7 @@
 
             wsl = [
               ./nix/common.nix
+              ./nix/modules/custom-options.nix
               ./nix/modules/common-packages.nix
               ./nix/modules/wsl-packages.nix
               nixos-wsl.nixosModules.wsl
