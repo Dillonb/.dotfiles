@@ -11,8 +11,6 @@
 
   system.stateVersion = "24.05";
 
-  virtualisation.docker.enable = true;
-
   dgbCustom.minimal = true;
 
   services.teamspeak3 = {
