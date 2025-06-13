@@ -5,12 +5,15 @@ let
   isDarwin = pkgs.stdenv.isDarwin;
   isX64 = pkgs.stdenv.isx86_64;
 
+  isMinimalSystem = config.dgbCustom.minimal;
+  big = package: if isMinimalSystem then null else package;
+
   # Linux specific
   linuxPkgs = optionals isLinux (with pkgs; [
     # Dev
-    valgrind
-    gdb
-    cmake-language-server # broken on macos
+    (big valgrind)
+    (big gdb)
+    (big cmake-language-server) # broken on macos
 
     # System status
     iotop
@@ -39,7 +42,7 @@ let
   # Linux and Mac
   commonPkgs = with pkgs; [
     # Dev
-    unstable.nixd # nix language server
+    (big unstable.nixd) # nix language server
     nixpkgs-fmt
     nasm
     pyright # python language server
