@@ -1,4 +1,8 @@
-{ ... }:
+{ inputs, pkgs, ... }:
+let
+  pwndbg = inputs.pwndbg.packages."${pkgs.system}".default;
+  # pwndbg-lldb = inputs.pwndbg.packages."${pkgs.system}".pwndbg-lldb;
+in
 {
   fileSystems."/" =
     {
@@ -12,6 +16,11 @@
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
     };
+
+  environment.systemPackages = [
+    pwndbg
+    # pwndbg-lldb
+  ];
 
   virtualisation.vmware.guest.enable = true;
 
