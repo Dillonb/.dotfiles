@@ -21,8 +21,8 @@ let
     # Util
     scrot
     feh
-    keymapp # flashing ZSA keyboards
-    wally-cli # also for flashing ZSA keyboards (cli tool)
+    (big keymapp) # flashing ZSA keyboards
+    (big wally-cli) # also for flashing ZSA keyboards (cli tool)
     unstable.freerdp3
     wl-clipboard # Wayland clipboard from cli
     xclip # X11 clipboard from cli
@@ -33,10 +33,10 @@ let
     # lutris
 
     # Chat
-    unstable.vesktop
-    signal-desktop
+    (big unstable.vesktop)
+    (big signal-desktop)
     hexchat
-    element-desktop
+    (big element-desktop)
 
     # Dev
     docker-compose
@@ -44,8 +44,6 @@ let
     (big stable.ghidra)
     unstable.sublime-merge
     zeal
-    ocaml
-    opam
     gdb
     (big cargo)
     # (big qtcreator)
@@ -55,7 +53,6 @@ let
     nmap
     (big burpsuite)
     foremost
-    hashcat
     (big proxmark3)
     (big pwndbg)
     (big pwndbg-lldb)
@@ -65,11 +62,10 @@ let
     unstable.obsidian
 
     # Misc/Media
-    no-cuda.gimp
-    audacity
+    (big no-cuda.gimp)
+    (big audacity)
     # gnuradio
     simplescreenrecorder
-    nextcloud-client
     # protonvpn-gui
     mpv
 
@@ -103,9 +99,9 @@ let
     (big unstable.plex-desktop)
     (big slack)
     (big renderdoc)
-    spotify
-    teamspeak_client
-    teamspeak5_client
+    (big spotify)
+    (big teamspeak_client)
+    (big teamspeak5_client)
   ]));
 
   darwinPackages = optionals isDarwin (with pkgs; [

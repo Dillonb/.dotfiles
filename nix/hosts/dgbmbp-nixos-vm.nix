@@ -15,6 +15,8 @@
 
   virtualisation.vmware.guest.enable = true;
 
+  dgbCustom.minimal = true;
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 }
