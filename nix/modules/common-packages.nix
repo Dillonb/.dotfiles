@@ -117,5 +117,5 @@ let
   ]);
 in
 {
-  environment.systemPackages = linuxPkgs ++ darwinPkgs ++ commonPkgs;
+  environment.systemPackages = builtins.filter (pkg: pkg != null) (linuxPkgs ++ darwinPkgs ++ commonPkgs);
 }
