@@ -96,7 +96,7 @@ let
     (big google-chrome)
     # (big microsoft-edge) # Removed due to lack of maintenance
     unstable.discord
-    (big unstable.plex-desktop)
+    # (big unstable.plex-desktop) # broken and I'm trying to use plex less anyway
     (big slack)
     (big renderdoc)
     (big spotify)
