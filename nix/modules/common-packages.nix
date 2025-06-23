@@ -102,6 +102,7 @@ let
     television
     nvd
     fend
+    zoxide
 
     # Fun
     fortune

@@ -146,6 +146,10 @@ if command -v nix-your-shell > /dev/null; then
   nix-your-shell zsh | source /dev/stdin
 fi
 
+if command -v zoxide > /dev/null; then
+    eval "$(zoxide init zsh)"
+fi
+
 if [[ "$(uname)" == "Darwin" ]]; then
     if command -v darwin-rebuild > /dev/null; then
         alias nix-switch="darwin-rebuild switch --flake ~/.dotfiles"
