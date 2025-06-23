@@ -35,7 +35,7 @@ in
             font = {
               size = dgbCustom.alacritty.fontSize;
               normal = { family = dgbCustom.alacritty.fontFamily; style = "Regular"; };
-              bold = { family = dgbCustom.alacritty.fontFamily; style = "Bold"; };
+              bold   = { family = dgbCustom.alacritty.fontFamily; style = "Bold"; };
               italic = { family = dgbCustom.alacritty.fontFamily; style = "Italic"; };
             };
           };

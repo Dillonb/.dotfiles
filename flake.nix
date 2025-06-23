@@ -26,13 +26,18 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
+    nixGL = {
+      url = "github:nix-community/nixGL";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
     ts3status.url = "github:Dillonb/ts3status";
     ble-scale.url = "github:Dillonb/ble-scale";
     detectcharset.url = "github:Dillonb/detectcharset";
     pwndbg.url = "github:pwndbg/pwndbg/2025.05.30";
   };
 
-  outputs = { self, nixpkgs-stable, nixpkgs-unstable, nixos-hardware, home-manager-stable, home-manager-unstable, agenix, nixos-wsl, darwin, pwndbg, ... }@inputs:
+  outputs = { self, nixpkgs-stable, nixpkgs-unstable, nixos-hardware, home-manager-stable, home-manager-unstable, agenix, nixos-wsl, darwin, pwndbg, nixGL, ... }@inputs:
     let
       nixpkgs-config-base = {
         allowUnfree = true;
@@ -185,6 +190,16 @@
           ] ++ modules
           ++ role-modules.${role};
         };
+      home = { hostname, system, modules }:
+        home-manager-unstable.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs-unstable { inherit system; };
+          extraSpecialArgs = { inherit inputs; };
+          modules = [
+            ./nix/hosts/${hostname}.nix
+            ./nix/modules/custom-options.nix
+            # ./nix/modules/home-manager.nix
+          ] ++ modules;
+        };
     in
     {
       nixosConfigurations = {
@@ -326,6 +341,14 @@
               };
             }
           ];
+        };
+      };
+
+      homeConfigurations = {
+        steamdeck = home {
+          hostname = "steamdeck";
+          system = "x86_64-linux";
+          modules = [ ];
         };
       };
 
