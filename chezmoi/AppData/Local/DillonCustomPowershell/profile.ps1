@@ -1,7 +1,13 @@
 if (Get-Command oh-my-posh) {
   oh-my-posh init pwsh --config "~\AppData\Local\DillonCustomPowershell\oh-my-posh\ys.omp.json" | Invoke-Expression
 } else {
-  Write-Host "Please install oh-my-posh from the Windows Store"
+  Write-Host "Please run `winget install JanDeDobbeleer.OhMyPosh` to install oh-my-posh"
+}
+
+if (Get-Command zoxide) {
+  Invoke-Expression (& { (zoxide init powershell | Out-String) })
+} else {
+  Write-Host "Please run `winget install zoxide` to install zoxide"
 }
 
 Set-PSReadLineOption -EditMode Emacs
