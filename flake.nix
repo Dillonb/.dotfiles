@@ -370,7 +370,7 @@
         default = pkgs.mkShell {
           packages = with pkgs; [
             git
-            vim
+            neovim
             zsh
             wget
             nh
