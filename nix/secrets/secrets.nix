@@ -51,6 +51,8 @@ let
     "dotfiles-github-actions-token"
 
     "anki-password"
+
+    "plex-token"
   ];
 
   secretsAttrList = map

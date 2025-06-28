@@ -2,7 +2,9 @@
 #!nix-shell -i bash -p nix nix-prefetch curl jq
 CURRENT_PLEX_VER=`nix-instantiate --eval -E '(import ./plex.nix).version' | tr -d '"'`
 if [ -z "${1}" ]; then
-  PLEX_VER=`curl -s https://plex.tv/api/downloads/5.json | jq ".computer.Linux.version" -r`
+  TOKEN=$(cat /run/agenix/plex-token)
+  URL=$(curl -Ls -o /dev/null -w %{url_effective} https://plex.tv/downloads/latest/5\?channel\=8\&build\=linux-x86_64\&distro\=debian\&X-Plex-Token\=$TOKEN)
+  PLEX_VER=$(echo $URL | cut -d/ -f5)
 else
   PLEX_VER=$1
 fi
