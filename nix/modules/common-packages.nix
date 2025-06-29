@@ -56,7 +56,6 @@ let
     [
       # Dev
       (big unstable.nixd) # nix language server
-      nixpkgs-fmt
       nixfmt-rfc-style
       nasm
       pyright # python language server
