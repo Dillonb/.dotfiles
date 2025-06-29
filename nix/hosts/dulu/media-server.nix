@@ -12,31 +12,30 @@ let
   };
 in
 {
-  services.plex =
-    {
-      enable = true;
-      user = "dillon";
-      package = plex-package;
-      extraPlugins = [
-        (builtins.path {
-          name = "Hama.bundle";
-          path = pkgs.fetchFromGitHub {
-            owner = "ZeroQI";
-            repo = "Hama.bundle";
-            "rev" = "daa43001bc1ced67aa2f90de8c61e5a1d109e862";
-            sha256 = "tUzjbE4rNgocZFg9lCXBP9sAe/cPGInYj2P/RXvpbmM=";
-          };
-        })
-      ];
-      extraScanners = [
-        (pkgs.fetchFromGitHub {
+  services.plex = {
+    enable = true;
+    user = "dillon";
+    package = plex-package;
+    extraPlugins = [
+      (builtins.path {
+        name = "Hama.bundle";
+        path = pkgs.fetchFromGitHub {
           owner = "ZeroQI";
-          repo = "Absolute-Series-Scanner";
-          rev = "048e8001a525ba1c04afda2aa2005feb74709eb8";
-          sha256 = "+j4BiGjB3vAmMYjALI+4SNyj1zlriKE0qaCNQOlmpuY=";
-        })
-      ];
-    };
+          repo = "Hama.bundle";
+          "rev" = "daa43001bc1ced67aa2f90de8c61e5a1d109e862";
+          sha256 = "tUzjbE4rNgocZFg9lCXBP9sAe/cPGInYj2P/RXvpbmM=";
+        };
+      })
+    ];
+    extraScanners = [
+      (pkgs.fetchFromGitHub {
+        owner = "ZeroQI";
+        repo = "Absolute-Series-Scanner";
+        rev = "048e8001a525ba1c04afda2aa2005feb74709eb8";
+        sha256 = "+j4BiGjB3vAmMYjALI+4SNyj1zlriKE0qaCNQOlmpuY=";
+      })
+    ];
+  };
 
   services.sonarr = {
     enable = true;

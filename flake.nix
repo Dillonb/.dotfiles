@@ -37,7 +37,21 @@
     pwndbg.url = "github:pwndbg/pwndbg/2025.05.30";
   };
 
-  outputs = { self, nixpkgs-stable, nixpkgs-unstable, nixos-hardware, home-manager-stable, home-manager-unstable, agenix, nixos-wsl, darwin, pwndbg, nixGL, ... }@inputs:
+  outputs =
+    {
+      self,
+      nixpkgs-stable,
+      nixpkgs-unstable,
+      nixos-hardware,
+      home-manager-stable,
+      home-manager-unstable,
+      agenix,
+      nixos-wsl,
+      darwin,
+      pwndbg,
+      nixGL,
+      ...
+    }@inputs:
     let
       nixpkgs-config-base = {
         allowUnfree = true;
@@ -49,11 +63,26 @@
           "dotnet-sdk-6.0.428"
         ];
       };
-      systems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
-      forEachSystem = f: nixpkgs-stable.lib.genAttrs systems (system: f {
-        pkgs = import nixpkgs-stable { inherit system; };
-      });
-      mac = { hostname, system, modules }:
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "x86_64-darwin"
+        "aarch64-darwin"
+      ];
+      forEachSystem =
+        f:
+        nixpkgs-stable.lib.genAttrs systems (
+          system:
+          f {
+            pkgs = import nixpkgs-stable { inherit system; };
+          }
+        );
+      mac =
+        {
+          hostname,
+          system,
+          modules,
+        }:
         let
           nixpkgs-config = nixpkgs-config-base;
           overlay-stable = final: prev: {
@@ -68,10 +97,16 @@
               config = nixpkgs-config;
             };
           };
-          overlays = ({ ... }: {
-            nixpkgs.overlays = [ overlay-unstable overlay-stable ];
-            nixpkgs.config = nixpkgs-config;
-          });
+          overlays = (
+            { ... }:
+            {
+              nixpkgs.overlays = [
+                overlay-unstable
+                overlay-stable
+              ];
+              nixpkgs.config = nixpkgs-config;
+            }
+          );
         in
         darwin.lib.darwinSystem {
           inherit system;
@@ -85,10 +120,22 @@
             overlays
           ];
         };
-      nixos = { hostname, system, role, modules, channel ? "stable", cuda ? false }:
+      nixos =
+        {
+          hostname,
+          system,
+          role,
+          modules,
+          channel ? "stable",
+          cuda ? false,
+        }:
         let
-          nixpkgs-config = nixpkgs-config-base // { cudaSupport = cuda; };
-          nixpkgs-config-no-cuda = nixpkgs-config-base // { cudaSupport = false; };
+          nixpkgs-config = nixpkgs-config-base // {
+            cudaSupport = cuda;
+          };
+          nixpkgs-config-no-cuda = nixpkgs-config-base // {
+            cudaSupport = false;
+          };
 
           nixpkgs-by-channel = {
             stable = nixpkgs-stable;
@@ -124,15 +171,24 @@
             };
           };
 
-          overlay-missing-modules-okay = (final: super: {
-            makeModulesClosure = x:
-              super.makeModulesClosure (x // { allowMissing = true; });
-          });
+          overlay-missing-modules-okay = (
+            final: super: {
+              makeModulesClosure = x: super.makeModulesClosure (x // { allowMissing = true; });
+            }
+          );
 
-          overlays = ({ ... }: {
-            nixpkgs.overlays = [ overlay-stable overlay-unstable overlay-missing-modules-okay overlay-no-cuda ];
-            nixpkgs.config = nixpkgs-config;
-          });
+          overlays = (
+            { ... }:
+            {
+              nixpkgs.overlays = [
+                overlay-stable
+                overlay-unstable
+                overlay-missing-modules-okay
+                overlay-no-cuda
+              ];
+              nixpkgs.config = nixpkgs-config;
+            }
+          );
           agenix-modules = [
             agenix.nixosModules.default
             ./nix/secrets/load-secrets.nix
@@ -180,17 +236,24 @@
         nixpkgs.lib.nixosSystem {
           system = system;
           specialArgs = { inherit inputs; };
-          modules = [
-            {
-              networking.hostName = hostname;
-            }
-            ./nix/hosts/${hostname}.nix
-            home-manager.nixosModules.home-manager
-            overlays
-          ] ++ modules
-          ++ role-modules.${role};
+          modules =
+            [
+              {
+                networking.hostName = hostname;
+              }
+              ./nix/hosts/${hostname}.nix
+              home-manager.nixosModules.home-manager
+              overlays
+            ]
+            ++ modules
+            ++ role-modules.${role};
         };
-      home = { hostname, system, modules }:
+      home =
+        {
+          hostname,
+          system,
+          modules,
+        }:
         home-manager-unstable.lib.homeManagerConfiguration {
           pkgs = import nixpkgs-unstable { inherit system; };
           extraSpecialArgs = { inherit inputs; };
@@ -352,38 +415,47 @@
         };
       };
 
-      packages = forEachSystem ({ pkgs }: {
-        all-nixos-systems = pkgs.stdenv.mkDerivation {
-          name = "all-nixos-systems.json";
-          phases = [ "installPhase" "fixupPhase" ];
-          installPhase =
-            let
-              systems = builtins.attrNames self.nixosConfigurations;
-            in
-            ''
-              echo '${builtins.toJSON systems}' > $out
-            '';
-        };
-      });
+      packages = forEachSystem (
+        { pkgs }:
+        {
+          all-nixos-systems = pkgs.stdenv.mkDerivation {
+            name = "all-nixos-systems.json";
+            phases = [
+              "installPhase"
+              "fixupPhase"
+            ];
+            installPhase =
+              let
+                systems = builtins.attrNames self.nixosConfigurations;
+              in
+              ''
+                echo '${builtins.toJSON systems}' > $out
+              '';
+          };
+        }
+      );
 
-      devShells = forEachSystem ({ pkgs }: {
-        default = pkgs.mkShell {
-          packages = with pkgs; [
-            git
-            neovim
-            zsh
-            wget
-            nh
-            chezmoi
-            nix
-            nix-prefetch
-            curl
-            jq
-          ];
-          shellHook = ''
-            export FLAKE="`readlink -f ~/.dotfiles`"
-          '';
-        };
-      });
+      devShells = forEachSystem (
+        { pkgs }:
+        {
+          default = pkgs.mkShell {
+            packages = with pkgs; [
+              git
+              neovim
+              zsh
+              wget
+              nh
+              chezmoi
+              nix
+              nix-prefetch
+              curl
+              jq
+            ];
+            shellHook = ''
+              export FLAKE="`readlink -f ~/.dotfiles`"
+            '';
+          };
+        }
+      );
     };
 }

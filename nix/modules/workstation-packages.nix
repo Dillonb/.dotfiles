@@ -1,4 +1,9 @@
-{ pkgs, inputs, config, ... }:
+{
+  pkgs,
+  inputs,
+  config,
+  ...
+}:
 let
   optionals = pkgs.lib.optionals;
   isLinux = pkgs.stdenv.isLinux;
@@ -12,104 +17,119 @@ let
   pwndbg = inputs.pwndbg.packages."${pkgs.system}".default;
   pwndbg-lldb = inputs.pwndbg.packages."${pkgs.system}".pwndbg-lldb;
 
-  linuxPackages = (optionals isLinux (with pkgs; [
-    # Terminal
-    alacritty
-    # kitty
-    ghostty
+  linuxPackages = (
+    optionals isLinux (
+      with pkgs;
+      [
+        # Terminal
+        alacritty
+        # kitty
+        ghostty
 
-    # Util
-    scrot
-    feh
-    (big keymapp) # flashing ZSA keyboards
-    (big wally-cli) # also for flashing ZSA keyboards (cli tool)
-    unstable.freerdp3
-    wl-clipboard # Wayland clipboard from cli
-    xclip # X11 clipboard from cli
-    parsec-bin
+        # Util
+        scrot
+        feh
+        (big keymapp) # flashing ZSA keyboards
+        (big wally-cli) # also for flashing ZSA keyboards (cli tool)
+        unstable.freerdp3
+        wl-clipboard # Wayland clipboard from cli
+        xclip # X11 clipboard from cli
+        parsec-bin
 
-    # Gaming
-    # unstable.chiaki-ng # ps5 remote play - Broken, see: https://github.com/NixOS/nixpkgs/pull/404622
-    # lutris
+        # Gaming
+        # unstable.chiaki-ng # ps5 remote play - Broken, see: https://github.com/NixOS/nixpkgs/pull/404622
+        # lutris
 
-    # Chat
-    (big unstable.vesktop)
-    (big signal-desktop)
-    hexchat
-    (big element-desktop)
+        # Chat
+        (big unstable.vesktop)
+        (big signal-desktop)
+        hexchat
+        (big element-desktop)
 
-    # Dev
-    docker-compose
-    unstable.vscode-fhs
-    (big stable.ghidra)
-    unstable.sublime-merge
-    zeal
-    gdb
-    (big cargo)
-    # (big qtcreator)
+        # Dev
+        docker-compose
+        unstable.vscode-fhs
+        (big stable.ghidra)
+        unstable.sublime-merge
+        zeal
+        gdb
+        (big cargo)
+        # (big qtcreator)
 
-    # Sec
-    tcpdump
-    nmap
-    (big burpsuite)
-    foremost
-    (big proxmark3)
-    (big pwndbg)
-    (big pwndbg-lldb)
-    (big pwntools)
+        # Sec
+        tcpdump
+        nmap
+        (big burpsuite)
+        foremost
+        (big proxmark3)
+        (big pwndbg)
+        (big pwndbg-lldb)
+        (big pwntools)
 
-    # Notes
-    unstable.obsidian
+        # Notes
+        unstable.obsidian
 
-    # Misc/Media
-    (big no-cuda.gimp)
-    (big audacity)
-    # gnuradio
-    simplescreenrecorder
-    # protonvpn-gui
-    mpv
+        # Misc/Media
+        (big no-cuda.gimp)
+        (big audacity)
+        # gnuradio
+        simplescreenrecorder
+        # protonvpn-gui
+        mpv
 
-    # Editor
-    unstable.neovim-qt
+        # Editor
+        unstable.neovim-qt
 
-    # Misc utils
-    xorg.xkill
-    iodine
-    networkmanager-iodine
-    stable.tsocks
-    mitmproxy
-    pavucontrol
-    distrobox
-    unstable.posting
-  ]));
+        # Misc utils
+        xorg.xkill
+        iodine
+        networkmanager-iodine
+        stable.tsocks
+        mitmproxy
+        pavucontrol
+        distrobox
+        unstable.posting
+      ]
+    )
+  );
 
-  linuxX64Packages = (optionals isLinuxX64 (with pkgs; [
-    # Mail
-    (big protonmail-desktop)
-    (big (unstable.mailspring.overrideAttrs (old: {
-      postFixup = ''
-        substituteInPlace $out/share/applications/Mailspring.desktop \
-          --replace-fail Exec=mailspring "Exec=$out/bin/mailspring --password-store=\"kwallet5\""
-      '';
-    })))
+  linuxX64Packages = (
+    optionals isLinuxX64 (
+      with pkgs;
+      [
+        # Mail
+        (big protonmail-desktop)
+        (big (
+          unstable.mailspring.overrideAttrs (old: {
+            postFixup = ''
+              substituteInPlace $out/share/applications/Mailspring.desktop \
+                --replace-fail Exec=mailspring "Exec=$out/bin/mailspring --password-store=\"kwallet5\""
+            '';
+          })
+        ))
 
-    (big google-chrome)
-    # (big microsoft-edge) # Removed due to lack of maintenance
-    unstable.discord
-    # (big unstable.plex-desktop) # broken and I'm trying to use plex less anyway
-    (big slack)
-    (big renderdoc)
-    (big spotify)
-    (big teamspeak_client)
-    (big teamspeak5_client)
-  ]));
+        (big google-chrome)
+        # (big microsoft-edge) # Removed due to lack of maintenance
+        unstable.discord
+        # (big unstable.plex-desktop) # broken and I'm trying to use plex less anyway
+        (big slack)
+        (big renderdoc)
+        (big spotify)
+        (big teamspeak_client)
+        (big teamspeak5_client)
+      ]
+    )
+  );
 
-  darwinPackages = optionals isDarwin (with pkgs; [
-    mpv-unwrapped # mpv has a broken .app bundle
-    pwndbg-lldb
-    nowplaying-cli
-    sqlitebrowser
-  ]);
+  darwinPackages = optionals isDarwin (
+    with pkgs;
+    [
+      mpv-unwrapped # mpv has a broken .app bundle
+      pwndbg-lldb
+      nowplaying-cli
+      sqlitebrowser
+    ]
+  );
 
   commonPackages = with pkgs; [
     # Dev/Editor
@@ -124,5 +144,7 @@ let
 
 in
 {
-  environment.systemPackages = builtins.filter (pkg: pkg != null) (linuxPackages ++ linuxX64Packages ++ darwinPackages ++ commonPackages);
+  environment.systemPackages = builtins.filter (pkg: pkg != null) (
+    linuxPackages ++ linuxX64Packages ++ darwinPackages ++ commonPackages
+  );
 }

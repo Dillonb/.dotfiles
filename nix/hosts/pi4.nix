@@ -1,4 +1,10 @@
-{ config, pkgs, inputs, lib, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  lib,
+  ...
+}:
 let
   ble-scale = inputs.ble-scale.packages."${pkgs.system}".default;
 in
@@ -44,11 +50,10 @@ in
     };
   };
 
-  fileSystems."/" =
-    {
-      device = "/dev/disk/by-uuid/44444444-4444-4444-8888-888888888888";
-      fsType = "ext4";
-    };
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/44444444-4444-4444-8888-888888888888";
+    fsType = "ext4";
+  };
 
   dgbCustom.minimal = true;
 }

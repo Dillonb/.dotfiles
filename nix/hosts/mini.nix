@@ -1,15 +1,26 @@
 # Configuration specific to my laptop
-{ config, lib, pkgs, modulesPath, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}:
 
 {
-  imports =
-    [
-      (modulesPath + "/installer/scan/not-detected.nix")
-      # https://github.com/NixOS/nixos-hardware/tree/master/dell/xps/13-9300
-      # (import "${nixosHardware}/dell/xps/13-9300/default.nix")
-    ];
+  imports = [
+    (modulesPath + "/installer/scan/not-detected.nix")
+    # https://github.com/NixOS/nixos-hardware/tree/master/dell/xps/13-9300
+    # (import "${nixosHardware}/dell/xps/13-9300/default.nix")
+  ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
+  boot.initrd.availableKernelModules = [
+    "xhci_pci"
+    "nvme"
+    "usb_storage"
+    "sd_mod"
+    "rtsx_pci_sdmmc"
+  ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
@@ -32,9 +43,11 @@
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/DE9C-875E";
     fsType = "vfat";
-    options = [ "fmask=0022" "dmask=0022" ];
+    options = [
+      "fmask=0022"
+      "dmask=0022"
+    ];
   };
-
 
   swapDevices = [ ];
 
