@@ -375,6 +375,10 @@
             wget
             nh
             chezmoi
+            nix
+            nix-prefetch
+            curl
+            jq
           ];
           shellHook = ''
             export FLAKE="`readlink -f ~/.dotfiles`"

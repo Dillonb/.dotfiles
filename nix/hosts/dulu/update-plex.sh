@@ -1,5 +1,4 @@
-#!/usr/bin/env nix-shell
-#!nix-shell -i bash -p nix nix-prefetch curl jq
+#!/usr/bin/env bash
 CURRENT_PLEX_VER=`nix-instantiate --eval -E '(import ./plex.nix).version' | tr -d '"'`
 if [ -z "${1}" ]; then
   TOKEN=$(cat /run/agenix/plex-token)
