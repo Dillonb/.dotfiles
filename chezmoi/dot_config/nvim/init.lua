@@ -172,6 +172,7 @@ require("lazy").setup({
           "powershell",
           "python",
           "yaml",
+          "typst"
         },
         sync_install = false,
         highlight = { enable = true },
@@ -197,7 +198,6 @@ require("lazy").setup({
           "saadparwaiz1/cmp_luasnip",
         }
       },
-      --
       -- coq requires treesitter (does cmp?)
       "nvim-treesitter/nvim-treesitter",
       -- Extra features for clangd LSP
@@ -316,6 +316,11 @@ require("lazy").setup({
         local opts = require('cmp_nvim_lsp').default_capabilities()
         opts.cmd = { "Bicep.LangServer" }
         lspconfig.bicep.setup(opts)
+      end
+
+      if vim.fn.executable("tinymist") == 1 then
+        local opts = require('cmp_nvim_lsp').default_capabilities()
+        lspconfig.tinymist.setup(opts)
       end
 
       if vim.fn.executable("lua-language-server") == 1 then
