@@ -253,14 +253,6 @@ require("lazy").setup({
         preselect = cmp.PreselectMode.None
       })
 
-      if vim.fn.executable("rust-analyzer") == 1 then
-        local opts = require('cmp_nvim_lsp').default_capabilities()
-        opts.on_attach = function(client, bufnr)
-          vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-        end
-        lspconfig.rust_analyzer.setup(opts)
-      end
-
       vim.lsp.enable({
         'lua_ls',
         'clangd',
