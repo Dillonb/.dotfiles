@@ -57,10 +57,10 @@ vim.cmd [[ set clipboard+=unnamedplus ]]
 vim.cmd [[ autocmd BufNewFile,BufRead *.bicep set filetype=bicep ]]
 
 -- When entering a terminal buffer, auto switch to insert mode
-vim.api.nvim_create_autocmd({"BufEnter"},
+vim.api.nvim_create_autocmd({ "BufEnter" },
   {
     group = group,
-    pattern = {"*"},
+    pattern = { "*" },
     callback = function()
       if vim.opt.buftype:get() == "terminal" then
         vim.cmd(":startinsert")
@@ -112,7 +112,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 Pick_file = function()
-  require"telescope.builtin".find_files({ hidden = true })
+  require "telescope.builtin".find_files({ hidden = true })
 end
 
 
@@ -134,8 +134,7 @@ require("lazy").setup({
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
-    config = function ()
-
+    config = function()
       if vim.g.gcc_bin_path ~= nil then
         require("nvim-treesitter.install").compilers = { vim.g.gcc_bin_path }
       end
@@ -248,8 +247,8 @@ require("lazy").setup({
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
         }, {
-            { name = 'buffer' },
-          }),
+          { name = 'buffer' },
+        }),
         preselect = cmp.PreselectMode.None
       })
 
@@ -291,31 +290,31 @@ require("lazy").setup({
       })
 
       vim.lsp.config('lua_ls', {
-          on_init = function(client)
-            if client.workspace_folders then
-              local path = client.workspace_folders[1].name
-              if path ~= vim.fn.stdpath('config') and (vim.loop.fs_stat(path..'/.luarc.json') or vim.loop.fs_stat(path..'/.luarc.jsonc')) then
-                return
-              end
+        on_init = function(client)
+          if client.workspace_folders then
+            local path = client.workspace_folders[1].name
+            if path ~= vim.fn.stdpath('config') and (vim.loop.fs_stat(path .. '/.luarc.json') or vim.loop.fs_stat(path .. '/.luarc.jsonc')) then
+              return
             end
+          end
 
-            client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
-              runtime = {
-                version = 'LuaJIT'
-              },
-              -- Make the server aware of Neovim runtime files
-              workspace = {
-                checkThirdParty = false,
-                library = {
-                  vim.env.VIMRUNTIME,
-                  "${3rd}/luv/library"
-                }
+          client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+            runtime = {
+              version = 'LuaJIT'
+            },
+            -- Make the server aware of Neovim runtime files
+            workspace = {
+              checkThirdParty = false,
+              library = {
+                vim.env.VIMRUNTIME,
+                "${3rd}/luv/library"
               }
-            })
-          end,
-          settings = {
-            Lua = {}
-          }
+            }
+          })
+        end,
+        settings = {
+          Lua = {}
+        }
       })
     end,
   },
@@ -402,7 +401,7 @@ require("lazy").setup({
   },
 
   -- Autodetect indentation settings
-  {'tpope/vim-sleuth', lazy = false},
+  { 'tpope/vim-sleuth', lazy = false },
 
   -- Tabs
   {
@@ -477,12 +476,12 @@ require("lazy").setup({
     end,
     keys = {
       -- Find files by filename
-      { '<leader>o', ':lua Pick_file()<CR>', noremap = true, silent = true},
-      { '<C-p>', ':lua Pick_file()<CR>', noremap = true, silent = true},
+      { '<leader>o', ':lua Pick_file()<CR>',    noremap = true, silent = true },
+      { '<C-p>',     ':lua Pick_file()<CR>',    noremap = true, silent = true },
       -- Find currently open files by filename
-      { '<leader>p', ':Telescope buffers<CR>'},
+      { '<leader>p', ':Telescope buffers<CR>' },
       -- Search in all files
-      { '<C-f>', ':Telescope live_grep<CR>' }
+      { '<C-f>',     ':Telescope live_grep<CR>' }
     }
   },
 
@@ -502,7 +501,7 @@ require("lazy").setup({
   {
     'Dillonb/betterquit.nvim',
     init = function()
-      require("betterquit").setup{}
+      require("betterquit").setup {}
     end,
   },
 
@@ -525,12 +524,12 @@ require("lazy").setup({
       -- map ctrl-/ to toggle comments
       -- Some terminals will send ctrl-/ as ctrl-_
       -- but some (newer?) will send it correctly, so map both
-      vim.keymap.set({'n', 'v'}, '<C-_>', ":Commentary<CR>")
-      vim.keymap.set({'n', 'v'}, '<C-/>', ":Commentary<CR>")
+      vim.keymap.set({ 'n', 'v' }, '<C-_>', ":Commentary<CR>")
+      vim.keymap.set({ 'n', 'v' }, '<C-/>', ":Commentary<CR>")
     end,
   },
 
-  -- Automatically close braces, parens, etc, and allows you to type "through" 
+  -- Automatically close braces, parens, etc, and allows you to type "through"
   {
     'windwp/nvim-autopairs',
     lazy = true,
@@ -673,7 +672,7 @@ require("lazy").setup({
   {
     "nvim-treesitter/nvim-treesitter-context",
     config = function()
-      require'treesitter-context'.setup{
+      require 'treesitter-context'.setup {
         enable = true,
         mode = 'topline',
         max_lines = 4,
@@ -811,7 +810,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     -- Toggle inlay hints
     vim.keymap.set('n', '<leader>ih', function()
-      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) 
+      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
     end, opts)
 
     -- Search for symbols in project
