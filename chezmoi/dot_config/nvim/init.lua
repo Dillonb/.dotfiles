@@ -253,19 +253,6 @@ require("lazy").setup({
         preselect = cmp.PreselectMode.None
       })
 
-      if vim.fn.executable("pyright") == 1 then
-        lspconfig.pyright.setup(require('cmp_nvim_lsp').default_capabilities())
-      end
-
-      if vim.fn.executable("clangd") == 1 then
-        local opts = require('cmp_nvim_lsp').default_capabilities()
-        opts.cmd = {"clangd", "--header-insertion=never"}
-        opts.on_attach = function(client, bufnr)
-          vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-        end
-        lspconfig.clangd.setup(opts)
-      end
-
       if vim.fn.executable("rust-analyzer") == 1 then
         local opts = require('cmp_nvim_lsp').default_capabilities()
         opts.on_attach = function(client, bufnr)
@@ -274,57 +261,44 @@ require("lazy").setup({
         lspconfig.rust_analyzer.setup(opts)
       end
 
-      if vim.fn.executable("nixd") == 1 then
-        local opts = require('cmp_nvim_lsp').default_capabilities()
-        lspconfig.nixd.setup(opts)
-      elseif vim.fn.executable("nil") == 1 then
-        local opts = require('cmp_nvim_lsp').default_capabilities()
-        lspconfig.nil_ls.setup(opts)
-      end
+      vim.lsp.enable({
+        'lua_ls',
+        'clangd',
+        'rust_analyzer',
+        'tinymist',
+        'bicep',
+        'bashls',
+        'omnisharp',
+        'cmake',
+        'terraformls',
+        'ocamllsp',
+        'jdtls',
+        'nil_ls',
+        'nixd',
+        'rust_analyzer',
+        'pyright'
+      })
 
-      if vim.fn.executable("jdtls") == 1 then
-        local opts = require('cmp_nvim_lsp').default_capabilities()
-        lspconfig.jdtls.setup(opts)
-      end
+      -- Global config for all LSPs
+      vim.lsp.config('*', {
+        capabilities = require('cmp_nvim_lsp').default_capabilities()
+      })
 
-      if vim.fn.executable("ocamllsp") == 1 then
-        local opts = require('cmp_nvim_lsp').default_capabilities()
-        lspconfig.ocamllsp.setup(opts)
-      end
+      -- LSP specific config
+      vim.lsp.config('clangd', {
+        cmd = { "clangd", "--header-insertion=never" },
+        on_attach = function(client, bufnr)
+          vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+        end
+      })
 
-      if vim.fn.executable("cmake-language-server") == 1 then
-        local opts = require('cmp_nvim_lsp').default_capabilities()
-        lspconfig.cmake.setup(opts)
-      end
+      vim.lsp.config('rust_analyzer', {
+        on_attach = function(client, bufnr)
+          vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+        end
+      })
 
-      if vim.fn.executable("terraform-ls") == 1 then
-        local opts = require('cmp_nvim_lsp').default_capabilities()
-        lspconfig.terraformls.setup(opts)
-      end
-
-      if vim.fn.executable("OmniSharp") == 1 then
-        local opts = require('cmp_nvim_lsp').default_capabilities()
-        lspconfig.omnisharp.setup(opts)
-      end
-
-      if vim.fn.executable("bash-language-server") == 1 then
-        local opts = require('cmp_nvim_lsp').default_capabilities()
-        lspconfig.bashls.setup(opts)
-      end
-
-      if vim.fn.executable("Bicep.LangServer") == 1 then
-        local opts = require('cmp_nvim_lsp').default_capabilities()
-        opts.cmd = { "Bicep.LangServer" }
-        lspconfig.bicep.setup(opts)
-      end
-
-      if vim.fn.executable("tinymist") == 1 then
-        local opts = require('cmp_nvim_lsp').default_capabilities()
-        lspconfig.tinymist.setup(opts)
-      end
-
-      if vim.fn.executable("lua-language-server") == 1 then
-        local opts = vim.tbl_deep_extend('force', require('cmp_nvim_lsp').default_capabilities(), {
+      vim.lsp.config('lua_ls', {
           on_init = function(client)
             if client.workspace_folders then
               local path = client.workspace_folders[1].name
@@ -350,10 +324,7 @@ require("lazy").setup({
           settings = {
             Lua = {}
           }
-        })
-
-        lspconfig.lua_ls.setup(opts)
-      end
+      })
     end,
   },
 
