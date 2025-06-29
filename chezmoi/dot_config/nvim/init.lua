@@ -793,6 +793,7 @@ require("lazy").setup({
     opts = {
       formatters_by_ft = {
         rust = { "rustfmt" },
+        nix = { "nixpkgs_fmt" },
       },
       default_format_opts = {
         lsp_format = "fallback",
