@@ -1,4 +1,9 @@
-{ config, inputs, pkgs, ... }:
+{
+  config,
+  inputs,
+  pkgs,
+  ...
+}:
 let
   dataDir = "/var/lib/ts3status";
   configFile = config.age.secrets."ts3status.properties".path;

@@ -1,4 +1,9 @@
-{ pkgs, config, inputs, ... }:
+{
+  pkgs,
+  config,
+  inputs,
+  ...
+}:
 let
   optionals = pkgs.lib.optionals;
   isLinux = pkgs.stdenv.isLinux;
@@ -9,115 +14,127 @@ let
   big = package: if isMinimalSystem then null else package;
 
   # Linux specific
-  linuxPkgs = optionals isLinux (with pkgs; [
-    # Dev
-    (big valgrind)
-    (big gdb)
-    (big cmake-language-server) # broken on macos
+  linuxPkgs = optionals isLinux (
+    with pkgs;
+    [
+      # Dev
+      (big valgrind)
+      (big gdb)
+      (big cmake-language-server) # broken on macos
 
-    # System status
-    iotop
-    nethogs
-    sysstat
-    lm_sensors
+      # System status
+      iotop
+      nethogs
+      sysstat
+      lm_sensors
 
-    # Misc utils
-    usbutils # for lsusb
-    pciutils # for lspci
-    nvme-cli
-    smartmontools
-    vtm
-    nix-tree
-  ]);
+      # Misc utils
+      usbutils # for lsusb
+      pciutils # for lspci
+      nvme-cli
+      smartmontools
+      vtm
+      nix-tree
+    ]
+  );
 
   # Mac specific
-  darwinPkgs = optionals isDarwin (with pkgs; [
-    # these programs are installed through programs.whatever.enable on Linux, but that is unavailable on Darwin, so install manually
-    git
-    git-lfs
-    mosh
-    unstable.neovim
-  ]);
+  darwinPkgs = optionals isDarwin (
+    with pkgs;
+    [
+      # these programs are installed through programs.whatever.enable on Linux, but that is unavailable on Darwin, so install manually
+      git
+      git-lfs
+      mosh
+      unstable.neovim
+    ]
+  );
 
   # Linux and Mac
-  commonPkgs = with pkgs; [
-    # Dev
-    (big unstable.nixd) # nix language server
-    nixpkgs-fmt
-    nixfmt-rfc-style
-    nasm
-    pyright # python language server
-    pipenv
-    python3
-    mypy
-    gh # github cli
-    hub # another github cli
-    lua-language-server
-    ripgrep
-    fd
-    bear
-    unstable.bash-language-server
-    lazygit
-    nuget
-    powershell
-    nodejs
+  commonPkgs =
+    with pkgs;
+    [
+      # Dev
+      (big unstable.nixd) # nix language server
+      nixpkgs-fmt
+      nixfmt-rfc-style
+      nasm
+      pyright # python language server
+      pipenv
+      python3
+      mypy
+      gh # github cli
+      hub # another github cli
+      lua-language-server
+      ripgrep
+      fd
+      bear
+      unstable.bash-language-server
+      lazygit
+      nuget
+      powershell
+      nodejs
 
-    # Theming
-    unstable.oh-my-posh
+      # Theming
+      unstable.oh-my-posh
 
-    # System status
-    htop
-    btop
-    neofetch
-    nload
-    ncdu
+      # System status
+      htop
+      btop
+      neofetch
+      nload
+      ncdu
 
-    # Misc utils
-    wget
-    fzf
-    tmux
-    silver-searcher
-    bat
-    dos2unix
-    jq
-    killall
-    nix-search-cli
-    nix-index
-    nix-output-monitor
-    file
-    netcat-gnu
-    inetutils
-    asciinema
-    unzip
-    zip
-    p7zip
-    rclone
-    sqlite
-    sshfs
-    dig
-    nix-your-shell
-    chezmoi
-    unstable.yt-dlp
-    mediainfo
-    unstable.nix-search-tv
-    television
-    nvd
-    fend
-    zoxide
+      # Misc utils
+      wget
+      fzf
+      tmux
+      silver-searcher
+      bat
+      dos2unix
+      jq
+      killall
+      nix-search-cli
+      nix-index
+      nix-output-monitor
+      file
+      netcat-gnu
+      inetutils
+      asciinema
+      unzip
+      zip
+      p7zip
+      rclone
+      sqlite
+      sshfs
+      dig
+      nix-your-shell
+      chezmoi
+      unstable.yt-dlp
+      mediainfo
+      unstable.nix-search-tv
+      television
+      nvd
+      fend
+      zoxide
 
-    # Fun
-    fortune
-    dwt1-shell-color-scripts
-  ] ++ [
-    inputs.detectcharset.packages."${pkgs.system}".default
-  ] ++ (optionals isX64 [
-    (asmrepl.override {
-      bundlerApp = bundlerApp.override {
-        ruby = ruby_3_2;
-      };
-    })
-  ]);
+      # Fun
+      fortune
+      dwt1-shell-color-scripts
+    ]
+    ++ [
+      inputs.detectcharset.packages."${pkgs.system}".default
+    ]
+    ++ (optionals isX64 [
+      (asmrepl.override {
+        bundlerApp = bundlerApp.override {
+          ruby = ruby_3_2;
+        };
+      })
+    ]);
 in
 {
-  environment.systemPackages = builtins.filter (pkg: pkg != null) (linuxPkgs ++ darwinPkgs ++ commonPkgs);
+  environment.systemPackages = builtins.filter (pkg: pkg != null) (
+    linuxPkgs ++ darwinPkgs ++ commonPkgs
+  );
 }

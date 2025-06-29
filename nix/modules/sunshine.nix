@@ -3,11 +3,13 @@
 let
   lib = pkgs.lib;
   cudaPackages = pkgs.cudaPackages;
-  sunshine = (pkgs.unstable.sunshine.override {
-    cudaSupport = true;
-    cudaPackages = cudaPackages;
-    # boost = pkgs.boost186;
-  });
+  sunshine = (
+    pkgs.unstable.sunshine.override {
+      cudaSupport = true;
+      cudaPackages = cudaPackages;
+      # boost = pkgs.boost186;
+    }
+  );
 in
 {
   environment.systemPackages = [
@@ -23,9 +25,17 @@ in
   };
 
   networking.firewall = {
-    allowedTCPPorts = [ 47984 47989 47990 48010 ]; # Sunshine
+    allowedTCPPorts = [
+      47984
+      47989
+      47990
+      48010
+    ]; # Sunshine
     allowedUDPPortRanges = [
-      { from = 47998; to = 48000; } # Sunshine
+      {
+        from = 47998;
+        to = 48000;
+      } # Sunshine
     ];
   };
 

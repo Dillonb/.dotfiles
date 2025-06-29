@@ -1,4 +1,4 @@
-{pkgs, inputs, ...}: 
+{ pkgs, inputs, ... }:
 let
   nixGLPkgs = inputs.nixGL.packages.x86_64-linux;
 in

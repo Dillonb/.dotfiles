@@ -55,14 +55,12 @@ let
     "plex-token"
   ];
 
-  secretsAttrList = map
-    (filename: {
-      name = "${filename}.age";
-      value = {
-        publicKeys = keys;
-        decryptedFilename = filename;
-      };
-    })
-    secrets;
+  secretsAttrList = map (filename: {
+    name = "${filename}.age";
+    value = {
+      publicKeys = keys;
+      decryptedFilename = filename;
+    };
+  }) secrets;
 in
 builtins.listToAttrs secretsAttrList

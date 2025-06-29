@@ -1,4 +1,9 @@
-{ modulesPath, config, pkgs, ... }:
+{
+  modulesPath,
+  config,
+  pkgs,
+  ...
+}:
 {
   imports = [
     "${modulesPath}/virtualisation/azure-common.nix"
@@ -96,10 +101,12 @@
     description = "Parmesean McFlurry";
     shell = pkgs.bashInteractive;
     packages = with pkgs; [
-      (python312.withPackages (python-pkgs: with python-pkgs; [
-        discordpy
-        requests
-      ]))
+      (python312.withPackages (
+        python-pkgs: with python-pkgs; [
+          discordpy
+          requests
+        ]
+      ))
     ];
   };
 }

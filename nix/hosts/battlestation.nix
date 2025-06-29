@@ -1,17 +1,29 @@
 # Configuration specific to my desktop PC
-{ config, lib, modulesPath, pkgs, ... }:
+{
+  config,
+  lib,
+  modulesPath,
+  pkgs,
+  ...
+}:
 let
   nvidia-driver = config.boot.kernelPackages.nvidiaPackages.latest;
 in
 
 {
-  imports =
-    [
-      (modulesPath + "/installer/scan/not-detected.nix")
-    ];
+  imports = [
+    (modulesPath + "/installer/scan/not-detected.nix")
+  ];
 
   # Bootloader.
-  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
+  boot.initrd.availableKernelModules = [
+    "nvme"
+    "xhci_pci"
+    "ahci"
+    "usb_storage"
+    "usbhid"
+    "sd_mod"
+  ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
@@ -32,29 +44,25 @@ in
     };
   };
 
-  fileSystems."/" =
-    {
-      device = "/dev/disk/by-uuid/87303987-7581-4340-a158-abebfe0d02b3";
-      fsType = "ext4";
-    };
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/87303987-7581-4340-a158-abebfe0d02b3";
+    fsType = "ext4";
+  };
 
-  fileSystems."/boot" =
-    {
-      device = "/dev/disk/by-uuid/52FB-1A5F";
-      fsType = "vfat";
-    };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/52FB-1A5F";
+    fsType = "vfat";
+  };
 
-  fileSystems."/win" =
-    {
-      device = "/dev/disk/by-uuid/E8204E89204E5F26";
-      fsType = "ntfs";
-    };
+  fileSystems."/win" = {
+    device = "/dev/disk/by-uuid/E8204E89204E5F26";
+    fsType = "ntfs";
+  };
 
-  fileSystems."/secondary" =
-    {
-      device = "/dev/disk/by-uuid/acd118ca-367e-402f-b351-b90f3c441460";
-      fsType = "ext4";
-    };
+  fileSystems."/secondary" = {
+    device = "/dev/disk/by-uuid/acd118ca-367e-402f-b351-b90f3c441460";
+    fsType = "ext4";
+  };
 
   swapDevices = [ ];
 
