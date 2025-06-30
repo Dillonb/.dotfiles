@@ -267,7 +267,9 @@ require("lazy").setup({
         'nil_ls',
         'nixd',
         'rust_analyzer',
-        'pyright'
+        'pyright',
+        'gdscript',
+        'gdshader_lsp'
       })
 
       -- Global config for all LSPs
