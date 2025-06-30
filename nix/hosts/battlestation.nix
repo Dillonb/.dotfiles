@@ -176,6 +176,7 @@ in
     r2modman
     # obs-studio
     prismlauncher
+    godot-mono
   ];
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
