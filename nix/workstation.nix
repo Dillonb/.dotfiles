@@ -59,9 +59,7 @@
       extraCompatPackages = with pkgs; [ proton-ge-bin ];
 
       # Because steam-run is the best way to get unusual binaries to run
-      extraPackages = with pkgs; [
-        libxml2
-      ];
+      extraPackages = with pkgs; [ libxml2 ];
     };
 
     gamemode = pkgs.lib.mkIf (config.dgbCustom.enableGaming && pkgs.stdenv.hostPlatform.isx86_64) {

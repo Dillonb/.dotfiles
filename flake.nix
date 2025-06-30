@@ -72,10 +72,7 @@
       forEachSystem =
         f:
         nixpkgs-stable.lib.genAttrs systems (
-          system:
-          f {
-            pkgs = import nixpkgs-stable { inherit system; };
-          }
+          system: f { pkgs = import nixpkgs-stable { inherit system; }; }
         );
       mac =
         {
@@ -172,9 +169,7 @@
           };
 
           overlay-missing-modules-okay = (
-            final: super: {
-              makeModulesClosure = x: super.makeModulesClosure (x // { allowMissing = true; });
-            }
+            final: super: { makeModulesClosure = x: super.makeModulesClosure (x // { allowMissing = true; }); }
           );
 
           overlays = (
@@ -192,9 +187,7 @@
           agenix-modules = [
             agenix.nixosModules.default
             ./nix/secrets/load-secrets.nix
-            {
-              environment.systemPackages = [ agenix.packages.${system}.default ];
-            }
+            { environment.systemPackages = [ agenix.packages.${system}.default ]; }
           ];
           role-modules = {
             workstation = [
@@ -238,9 +231,7 @@
           specialArgs = { inherit inputs; };
           modules =
             [
-              {
-                networking.hostName = hostname;
-              }
+              { networking.hostName = hostname; }
               ./nix/hosts/${hostname}.nix
               home-manager.nixosModules.home-manager
               overlays
@@ -336,9 +327,7 @@
           system = "aarch64-linux";
           role = "workstation";
           channel = "unstable";
-          modules = [
-            nixos-hardware.nixosModules.pine64-pinebook-pro
-          ];
+          modules = [ nixos-hardware.nixosModules.pine64-pinebook-pro ];
         };
 
         dgbsp7 = nixos {
@@ -357,8 +346,7 @@
           system = "aarch64-linux";
           role = "workstation";
           channel = "unstable";
-          modules = [
-          ];
+          modules = [ ];
         };
 
         wsl = nixos {

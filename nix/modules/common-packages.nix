@@ -121,15 +121,9 @@ let
       fortune
       dwt1-shell-color-scripts
     ]
-    ++ [
-      inputs.detectcharset.packages."${pkgs.system}".default
-    ]
+    ++ [ inputs.detectcharset.packages."${pkgs.system}".default ]
     ++ (optionals isX64 [
-      (asmrepl.override {
-        bundlerApp = bundlerApp.override {
-          ruby = ruby_3_2;
-        };
-      })
+      (asmrepl.override { bundlerApp = bundlerApp.override { ruby = ruby_3_2; }; })
     ]);
 in
 {

@@ -20,9 +20,7 @@ in
 
   system.stateVersion = "24.05";
 
-  environment.systemPackages = [
-    ble-scale
-  ];
+  environment.systemPackages = [ ble-scale ];
 
   systemd.services.ble-scale = {
     wantedBy = [ "multi-user.target" ];

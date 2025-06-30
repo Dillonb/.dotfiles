@@ -12,9 +12,7 @@ let
 in
 {
   systemd.tmpfiles.rules =
-    [
-      "d ${syncthing-data} 770 dillon syncthing"
-    ]
+    [ "d ${syncthing-data} 770 dillon syncthing" ]
     ++ map (
       folder: "d ${config.services.syncthing.settings.folders.${folder}.path} 770 dillon syncthing"
     ) (builtins.attrNames config.services.syncthing.settings.folders);
