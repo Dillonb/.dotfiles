@@ -77,9 +77,7 @@
   #   };
   # };
 
-  environment.systemPackages = with pkgs; [
-    acpi
-  ];
+  environment.systemPackages = with pkgs; [ acpi ];
 
   # dgbCustom.alacritty.fontSize = 9;
 

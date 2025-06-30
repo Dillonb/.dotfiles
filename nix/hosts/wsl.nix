@@ -1,6 +1,4 @@
 { ... }:
 {
-  imports = [
-    ./wsl/configuration.nix
-  ];
+  imports = [ ./wsl/configuration.nix ];
 }

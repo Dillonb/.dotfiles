@@ -11,9 +11,7 @@
   };
   services.desktopManager.plasma6.enable = true;
 
-  environment.systemPackages = with pkgs; [
-    catppuccin-sddm
-  ];
+  environment.systemPackages = with pkgs; [ catppuccin-sddm ];
 
   # Configure keymap in X11
   services.xserver = {

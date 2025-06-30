@@ -26,9 +26,7 @@
 
   security.pam.services.sudo_local.touchIdAuth = true;
 
-  environment.systemPackages = with pkgs; [
-    nh
-  ];
+  environment.systemPackages = with pkgs; [ nh ];
 
   system.activationScripts.applications.text =
     lib.mkForce # sh

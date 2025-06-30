@@ -11,9 +11,7 @@ let
 in
 
 {
-  imports = [
-    (modulesPath + "/installer/scan/not-detected.nix")
-  ];
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   # Bootloader.
   boot.initrd.availableKernelModules = [
@@ -154,9 +152,7 @@ in
         passwordFile = config.age.secrets.restic.path;
         rcloneConfigFile = "${config.services.syncthing.settings.folders."rclone-config".path}/rclone.conf";
         user = "dillon";
-        paths = [
-          "/home/dillon/.local/share/Steam/steamapps/compatdata"
-        ];
+        paths = [ "/home/dillon/.local/share/Steam/steamapps/compatdata" ];
         repository = "rclone:proton:restic-backups/battlestation-steam-compatdata";
         pruneOpts = [
           "--keep-daily 7"

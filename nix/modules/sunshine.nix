@@ -12,9 +12,7 @@ let
   );
 in
 {
-  environment.systemPackages = [
-    sunshine
-  ];
+  environment.systemPackages = [ sunshine ];
 
   # Needed for KMS capture mode - unsure if needed for X11
   security.wrappers.sunshine = {

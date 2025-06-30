@@ -99,11 +99,7 @@ in
     package = pkgs.unstable.jellyfin;
   };
 
-  nixpkgs.overlays = [
-    (final: prev: {
-      ombi = pkgs.unstable.ombi;
-    })
-  ];
+  nixpkgs.overlays = [ (final: prev: { ombi = pkgs.unstable.ombi; }) ];
 
   services.ombi = {
     enable = true;

@@ -67,9 +67,7 @@ in
   nixpkgs.config.packageOverrides = pkgs: {
     vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
   };
-  nixpkgs.config.permittedInsecurePackages = [
-    "aspnetcore-runtime-6.0.36"
-  ];
+  nixpkgs.config.permittedInsecurePackages = [ "aspnetcore-runtime-6.0.36" ];
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
