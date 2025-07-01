@@ -58,7 +58,6 @@ in
 
   environment.systemPackages = with pkgs; [
     weechat
-    intel-gpu-tools
     pwndbg
     pwndbg-lldb
   ];
@@ -68,16 +67,19 @@ in
     vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
   };
   nixpkgs.config.permittedInsecurePackages = [ "aspnetcore-runtime-6.0.36" ];
-  hardware.graphics = {
-    enable = true;
-    extraPackages = with pkgs; [
-      intel-media-driver
-      intel-vaapi-driver
-      vaapiVdpau
-      libvdpau-va-gl
-      intel-compute-runtime
-      unstable.vpl-gpu-rt
-    ];
+  hardware = {
+    intel-gpu-tools.enable = true;
+    graphics = {
+      enable = true;
+      extraPackages = with pkgs; [
+        intel-media-driver
+        intel-vaapi-driver
+        vaapiVdpau
+        libvdpau-va-gl
+        intel-compute-runtime
+        unstable.vpl-gpu-rt
+      ];
+    };
   };
 
   services.samba =
