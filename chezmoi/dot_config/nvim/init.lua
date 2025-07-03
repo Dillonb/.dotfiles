@@ -310,6 +310,9 @@ require("lazy").setup({
               library = {
                 vim.env.VIMRUNTIME,
                 "${3rd}/luv/library"
+              },
+              ignoreDir = {
+                "build",
               }
             }
           })
