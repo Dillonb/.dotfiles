@@ -487,7 +487,8 @@ require("lazy").setup({
       { '<leader>p', ':Telescope buffers<CR>' },
       -- Search in all files
       { '<C-f>',     ':Telescope live_grep<CR>' }
-    }
+    },
+    cmd = "Telescope"
   },
 
   -- show a lightbulb emoji when LSP code actions are available
