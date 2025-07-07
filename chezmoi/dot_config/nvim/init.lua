@@ -775,6 +775,11 @@ require("lazy").setup({
     init = function()
       vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
     end,
+  },
+  {
+    "folke/trouble.nvim",
+    opts = {},
+    cmd = "Trouble",
   }
 })
 
