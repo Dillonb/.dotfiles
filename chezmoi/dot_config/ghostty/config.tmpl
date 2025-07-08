@@ -1,5 +1,9 @@
 font-family = Cascadia Mono NF
+{{ if eq .chezmoi.os "darwin" }}
 font-size = 18
+{{ else }}
+font-size = 14
+{{ end}}
 
 cursor-style = block
 cursor-style-blink = false
