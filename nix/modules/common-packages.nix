@@ -34,7 +34,6 @@ let
       nvme-cli
       smartmontools
       vtm
-      nix-tree
     ]
   );
 
@@ -55,8 +54,6 @@ let
     with pkgs;
     [
       # Dev
-      (big unstable.nixd) # nix language server
-      nixfmt-rfc-style
       nasm
       pyright # python language server
       pipenv
@@ -93,9 +90,6 @@ let
       dos2unix
       jq
       killall
-      nix-search-cli
-      nix-index
-      nix-output-monitor
       file
       netcat-gnu
       inetutils
@@ -107,15 +101,24 @@ let
       sqlite
       sshfs
       dig
-      nix-your-shell
       chezmoi
       unstable.yt-dlp
       mediainfo
-      unstable.nix-search-tv
       television
       nvd
       fend
       zoxide
+
+      # Nix utils
+      nixfmt-rfc-style
+      unstable.nix-search-tv
+      (big unstable.nixd) # nix language server
+      nix-tree
+      statix
+      nix-search-cli
+      nix-index
+      nix-output-monitor
+      nix-your-shell
 
       # Fun
       fortune
