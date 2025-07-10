@@ -70,6 +70,7 @@ let
       nuget
       powershell
       nodejs
+      (big bun)
 
       # Theming
       unstable.oh-my-posh
