@@ -15,11 +15,10 @@ in
         "nix-command"
         "flakes"
       ];
-      # This casues problems on osx
+      # This casues problems on osx, so disable it
       # auto-optimise-store = true;
       trusted-users = [
-        "dbeliveau"
-        "dillon"
+        "${dgbCustom.username}"
       ];
     };
   };
