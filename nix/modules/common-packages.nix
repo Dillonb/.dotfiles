@@ -109,6 +109,7 @@ let
       nvd
       fend
       zoxide
+      zstd
 
       # Nix utils
       nixfmt-rfc-style
