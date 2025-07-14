@@ -30,6 +30,7 @@ in
   services.aerospace = {
     enable = true;
     settings = {
+      default-root-container-layout = "tiles";
       gaps = {
         outer.left = 0;
         outer.bottom = 0;
