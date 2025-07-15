@@ -10,4 +10,5 @@
 AppData
 *.ps1
 *komorebi*
+applications.json
 {{- end }}
