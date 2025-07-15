@@ -269,6 +269,7 @@
             ./nix/modules/restic.nix
             ./nix/modules/syncthing.nix
             ./nix/modules/ssd.nix
+            ./nix/modules/hyprland.nix
           ];
         };
 
