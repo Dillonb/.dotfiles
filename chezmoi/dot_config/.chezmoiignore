@@ -1,0 +1,9 @@
+{{- if eq .chezmoi.os "windows" }}
+# On windows, ignore everything but specific files
+*
+!whkdrc
+{{- else }}
+# Non-Windows OS (Linux/Mac) - ignore windows-specific stuff
+whkdrc
+{{- end }}
+

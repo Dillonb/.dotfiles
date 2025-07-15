@@ -3,8 +3,11 @@
 # On Windows, ignore all Unix-style hidden files
 .*
 *.sh
+# .config has another .chezmoiignore inside it
+!.config
 {{- else }}
 # Non-Windows OS (Linux/Mac)
 AppData
 *.ps1
+*komorebi*
 {{- end }}
