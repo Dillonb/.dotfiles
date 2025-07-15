@@ -8,6 +8,7 @@
   "border": true,
   "border_width": 5,
   "border_offset": -1,
+  "mouse_follows_focus": false,
   "theme": {
     "palette": "Base16",
     "name": "TokyoNightStorm",
