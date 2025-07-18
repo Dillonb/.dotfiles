@@ -37,7 +37,7 @@ in
         outer.top = 0;
         outer.right = 0;
       };
-      on-focused-monitor-changed = [];
+      on-focused-monitor-changed = [ ];
       mode.main.binding = {
         # Switch workspaces
         alt-1 = "workspace 1";
