@@ -67,7 +67,7 @@ let
       bear
       unstable.bash-language-server
       lazygit
-      nuget
+      (big nuget)
       powershell
       nodejs
       (big bun)
@@ -103,7 +103,7 @@ let
       sshfs
       dig
       chezmoi
-      unstable.yt-dlp
+      (big unstable.yt-dlp)
       mediainfo
       television
       nvd

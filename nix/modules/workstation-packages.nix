@@ -82,13 +82,13 @@ let
 
         # Misc utils
         xorg.xkill
-        iodine
-        networkmanager-iodine
+        # iodine
+        # networkmanager-iodine
         stable.tsocks
         mitmproxy
         pavucontrol
         distrobox
-        unstable.posting
+        # unstable.posting
       ]
     )
   );
