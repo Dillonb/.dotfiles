@@ -11,11 +11,12 @@ let
   syncthing-data = "/var/lib/syncthing-data";
 in
 {
-  systemd.tmpfiles.rules =
-    [ "d ${syncthing-data} 770 dillon syncthing" ]
-    ++ map (
-      folder: "d ${config.services.syncthing.settings.folders.${folder}.path} 770 dillon syncthing"
-    ) (builtins.attrNames config.services.syncthing.settings.folders);
+  systemd.tmpfiles.rules = [
+    "d ${syncthing-data} 770 dillon syncthing"
+  ]
+  ++ map (
+    folder: "d ${config.services.syncthing.settings.folders.${folder}.path} 770 dillon syncthing"
+  ) (builtins.attrNames config.services.syncthing.settings.folders);
 
   services.syncthing = {
     enable = true;
