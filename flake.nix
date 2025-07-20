@@ -204,14 +204,16 @@
               ./nix/modules/workstation-packages.nix
               ./nix/modules/common-packages.nix
               ./nix/modules/appimage-support.nix
-            ] ++ agenix-modules;
+            ]
+            ++ agenix-modules;
 
             server = [
               ./nix/common.nix
               ./nix/modules/custom-options.nix
               ./nix/modules/server-packages.nix
               ./nix/modules/common-packages.nix
-            ] ++ agenix-modules;
+            ]
+            ++ agenix-modules;
 
             wsl = [
               ./nix/common.nix
@@ -229,15 +231,14 @@
         nixpkgs.lib.nixosSystem {
           system = system;
           specialArgs = { inherit inputs; };
-          modules =
-            [
-              { networking.hostName = hostname; }
-              ./nix/hosts/${hostname}.nix
-              home-manager.nixosModules.home-manager
-              overlays
-            ]
-            ++ modules
-            ++ role-modules.${role};
+          modules = [
+            { networking.hostName = hostname; }
+            ./nix/hosts/${hostname}.nix
+            home-manager.nixosModules.home-manager
+            overlays
+          ]
+          ++ modules
+          ++ role-modules.${role};
         };
       home =
         {
@@ -252,7 +253,8 @@
             ./nix/hosts/${hostname}.nix
             ./nix/modules/custom-options.nix
             # ./nix/modules/home-manager.nix
-          ] ++ modules;
+          ]
+          ++ modules;
         };
     in
     {
