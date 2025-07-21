@@ -695,8 +695,12 @@ require("lazy").setup({
     "https://github.com/github/copilot.vim.git",
     init = function()
       vim.g.copilot_enabled = true
-      vim.keymap.set('n', '<leader>ct', Copilot_toggle)
     end,
+    event = { "BufReadPre", "BufNewFile" },
+    keys = {
+      { '<Tab>', '<Plug>(copilot-accept-line)', mode = "i" },
+      { '<leader>ct', Copilot_toggle, mode = "n" },
+    }
   },
 
   {
