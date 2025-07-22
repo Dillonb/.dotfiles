@@ -1,0 +1,4 @@
+#compdef nixos-update
+
+_arguments \
+  '1:mode:(switch boot)'
