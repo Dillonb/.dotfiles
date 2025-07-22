@@ -46,6 +46,7 @@ let
       git-lfs
       mosh
       unstable.neovim
+      coreutils-prefixed # GNU coreutils - prefixed with g
     ]
   );
 
