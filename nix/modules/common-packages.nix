@@ -128,7 +128,7 @@ let
     ]
     ++ [ inputs.detectcharset.packages."${pkgs.system}".default ]
     ++ (optionals isX64 [
-      (asmrepl.override { bundlerApp = bundlerApp.override { ruby = ruby_3_2; }; })
+      (big (asmrepl.override { bundlerApp = bundlerApp.override { ruby = ruby_3_2; }; }))
     ]);
 in
 {
