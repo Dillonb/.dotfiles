@@ -111,6 +111,7 @@ let
       fend
       zoxide
       zstd
+      dua
 
       # Nix utils
       nixfmt-rfc-style
