@@ -69,9 +69,7 @@
       ];
       forEachSystem =
         f:
-        nixos-stable.lib.genAttrs systems (
-          system: f { pkgs = import nixos-stable { inherit system; }; }
-        );
+        nixos-stable.lib.genAttrs systems (system: f { pkgs = import nixos-stable { inherit system; }; });
       mac =
         {
           hostname,
