@@ -2,8 +2,8 @@
   description = "Dillon's NixOS configuration";
 
   inputs = {
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixos-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixos-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     agenix.url = "github:ryantm/agenix";
 
@@ -13,22 +13,22 @@
 
     darwin = {
       url = "github:LnL7/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixos-unstable";
     };
 
     home-manager-stable = {
       url = "github:nix-community/home-manager/release-25.05";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
+      inputs.nixpkgs.follows = "nixos-stable";
     };
 
     home-manager-unstable = {
       url = "github:nix-community/home-manager/master";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixos-unstable";
     };
 
     nixGL = {
       url = "github:nix-community/nixGL";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixos-unstable";
     };
 
     ts3status.url = "github:Dillonb/ts3status";
@@ -40,8 +40,8 @@
   outputs =
     {
       self,
-      nixpkgs-stable,
-      nixpkgs-unstable,
+      nixos-stable,
+      nixos-unstable,
       nixos-hardware,
       home-manager-stable,
       home-manager-unstable,
@@ -71,8 +71,8 @@
       ];
       forEachSystem =
         f:
-        nixpkgs-stable.lib.genAttrs systems (
-          system: f { pkgs = import nixpkgs-stable { inherit system; }; }
+        nixos-stable.lib.genAttrs systems (
+          system: f { pkgs = import nixos-stable { inherit system; }; }
         );
       mac =
         {
@@ -83,13 +83,13 @@
         let
           nixpkgs-config = nixpkgs-config-base;
           overlay-stable = final: prev: {
-            stable = import nixpkgs-stable {
+            stable = import nixos-stable {
               system = system;
               config = nixpkgs-config;
             };
           };
           overlay-unstable = final: prev: {
-            unstable = import nixpkgs-unstable {
+            unstable = import nixos-unstable {
               system = system;
               config = nixpkgs-config;
             };
@@ -135,8 +135,8 @@
           };
 
           nixpkgs-by-channel = {
-            stable = nixpkgs-stable;
-            unstable = nixpkgs-unstable;
+            stable = nixos-stable;
+            unstable = nixos-unstable;
           };
 
           home-manager-by-channel = {
@@ -155,14 +155,14 @@
           };
 
           overlay-stable = final: prev: {
-            stable = import nixpkgs-stable {
+            stable = import nixos-stable {
               system = system;
               config = nixpkgs-config;
             };
           };
 
           overlay-unstable = final: prev: {
-            unstable = import nixpkgs-unstable {
+            unstable = import nixos-unstable {
               system = system;
               config = nixpkgs-config;
             };
@@ -247,7 +247,7 @@
           modules,
         }:
         home-manager-unstable.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs-unstable { inherit system; };
+          pkgs = import nixos-unstable { inherit system; };
           extraSpecialArgs = { inherit inputs; };
           modules = [
             ./nix/hosts/${hostname}.nix
