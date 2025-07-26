@@ -48,8 +48,6 @@
       agenix,
       nixos-wsl,
       darwin,
-      pwndbg,
-      nixGL,
       ...
     }@inputs:
     let
