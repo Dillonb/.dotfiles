@@ -3,6 +3,9 @@
   services.copyparty = {
     enable = true;
 
+    user = "dillon";
+    group = "users";
+
     accounts = {
       "dgb".passwordFile = config.age.secrets.copyparty-dgb.path;
       "iris".passwordFile = config.age.secrets.copyparty-iris.path;
@@ -16,7 +19,7 @@
         };
       };
       "/panda" = {
-        path = "/zpool/panda";
+        path = "/zpool/fileshares/panda";
         access = {
           rwmd = [
             "dgb"
@@ -24,11 +27,13 @@
           ];
         };
       };
+      "/public" = {
+        path = "/zpool/fileshares/public";
+        access = {
+          r = "*";
+          rwmd = [ "dgb" ];
+        };
+      };
     };
   };
-
-  users.users."${config.services.copyparty.user}".extraGroups = [
-    "agenix" # secrets access
-    "users"
-  ];
 }
