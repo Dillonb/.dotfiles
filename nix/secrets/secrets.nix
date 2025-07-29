@@ -54,6 +54,7 @@ let
 
     "plex-token"
 
+    "copyparty-iris"
     "copyparty-dgb"
   ];
 
