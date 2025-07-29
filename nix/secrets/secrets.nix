@@ -53,6 +53,8 @@ let
     "anki-password"
 
     "plex-token"
+
+    "copyparty-dgb"
   ];
 
   secretsAttrList = map (filename: {
