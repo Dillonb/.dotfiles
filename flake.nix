@@ -35,6 +35,7 @@
     ble-scale.url = "github:Dillonb/ble-scale";
     detectcharset.url = "github:Dillonb/detectcharset";
     pwndbg.url = "github:pwndbg/pwndbg/2025.05.30";
+    copyparty.url = "github:9001/copyparty";
   };
 
   outputs =
@@ -48,6 +49,7 @@
       agenix,
       nixos-wsl,
       darwin,
+      copyparty,
       ...
     }@inputs:
     let
@@ -176,6 +178,7 @@
                 overlay-unstable
                 overlay-missing-modules-okay
                 overlay-no-cuda
+                copyparty.overlays.default
               ];
               nixpkgs.config = nixpkgs-config;
             }
@@ -232,6 +235,7 @@
             ./nix/hosts/${hostname}.nix
             home-manager.nixosModules.home-manager
             overlays
+            copyparty.nixosModules.default
           ]
           ++ modules
           ++ role-modules.${role};

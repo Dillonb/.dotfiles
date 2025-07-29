@@ -24,6 +24,7 @@ in
     # ./pihole.nix
     ./smart-home.nix
     ./github-runner.nix
+    ./copyparty.nix
   ];
 
   # Use the systemd-boot EFI boot loader.

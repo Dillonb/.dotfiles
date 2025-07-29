@@ -229,6 +229,36 @@
         };
       };
 
+      "files.dgb.sh" = {
+        forceSSL = true;
+        enableACME = true;
+        locations."/" = {
+
+          # proxyPass = "http://localhost:${toString config.services.copyparty.port}";
+          proxyPass = "http://localhost:3923";
+          extraConfig = ''
+            proxy_redirect off;
+            # disable buffering (next 4 lines)
+            proxy_http_version 1.1;
+            client_max_body_size 0;
+            proxy_buffering off;
+            proxy_request_buffering off;
+            # improve download speed from 600 to 1500 MiB/s
+            proxy_buffers 32 8k;
+            proxy_buffer_size 16k;
+            proxy_busy_buffers_size 24k;
+
+            proxy_set_header   Connection        "Keep-Alive";
+            proxy_set_header   Host              $host;
+            proxy_set_header   X-Real-IP         $remote_addr;
+            proxy_set_header   X-Forwarded-Proto $scheme;
+            proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
+            # NOTE: with cloudflare you want this X-Forwarded-For instead:
+            #proxy_set_header   X-Forwarded-For   $http_cf_connecting_ip;
+          '';
+        };
+      };
+
       "home.dgb.sh" = {
         forceSSL = true;
 
