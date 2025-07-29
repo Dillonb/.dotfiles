@@ -71,7 +71,7 @@ let
 
         # Misc/Media
         (big no-cuda.gimp)
-        (big audacity)
+        # (big audacity)
         # gnuradio
         simplescreenrecorder
         # protonvpn-gui
