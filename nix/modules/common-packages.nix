@@ -79,7 +79,7 @@ let
       # System status
       htop
       btop
-      neofetch
+      fastfetch
       nload
       ncdu
 
