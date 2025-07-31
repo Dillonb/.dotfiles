@@ -30,7 +30,7 @@
       "/public" = {
         path = "/zpool/fileshares/public";
         access = {
-          r = "*";
+          g = "*";
           rwmd = [ "dgb" ];
         };
       };
