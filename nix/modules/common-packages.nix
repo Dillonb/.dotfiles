@@ -112,6 +112,7 @@ let
       zoxide
       zstd
       dua
+      difftastic
 
       # Nix utils
       nixfmt-rfc-style
