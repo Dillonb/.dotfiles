@@ -130,8 +130,8 @@ export HISTFILESIZE=100000               # big big history
 export NIXPKGS_ALLOW_UNFREE=1
 
 # Color scheme
-# source ~/.local/share/tinted-shell/scripts/base16-tokyo-night-storm.sh
-source ~/.local/share/tinted-shell/scripts/base16-everforest.sh
+source ~/.local/share/tinted-shell/scripts/base16-tokyo-night-storm.sh
+# source ~/.local/share/tinted-shell/scripts/base16-everforest.sh
 
 if type "direnv" > /dev/null; then
     eval "$(direnv hook zsh)"
