@@ -698,8 +698,8 @@ require("lazy").setup({
     end,
     event = { "BufReadPre", "BufNewFile" },
     keys = {
-      { '<Tab>', '<Plug>(copilot-accept-line)', mode = "i" },
-      { '<leader>ct', Copilot_toggle, mode = "n" },
+      { '<Tab>',      '<Plug>(copilot-accept-line)', mode = "i" },
+      { '<leader>ct', Copilot_toggle,                mode = "n" },
     }
   },
 
