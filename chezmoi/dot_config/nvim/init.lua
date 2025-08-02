@@ -341,26 +341,26 @@ require("lazy").setup({
     }
   },
 
-  -- {
-  --   "folke/tokyonight.nvim",
-  --   priority = 1000, -- Ensure this is loaded before any other plugins
-  --   config = function()
-  --     vim.cmd [[colorscheme tokyonight-storm]]
-  --   end,
-  -- },
-
   {
-    "tinted-theming/tinted-nvim",
+    "folke/tokyonight.nvim",
     priority = 1000, -- Ensure this is loaded before any other plugins
     config = function()
-      require("tinted-colorscheme").setup("base16-everforest-dark-medium", {
-        supports = {
-          tinty = false,
-          live_reload = false
-        }
-      })
-    end
+      vim.cmd [[colorscheme tokyonight-storm]]
+    end,
   },
+
+  -- {
+  --   "tinted-theming/tinted-nvim",
+  --   priority = 1000, -- Ensure this is loaded before any other plugins
+  --   config = function()
+  --     require("tinted-colorscheme").setup("base16-everforest-dark-medium", {
+  --       supports = {
+  --         tinty = false,
+  --         live_reload = false
+  --       }
+  --     })
+  --   end
+  -- },
 
   -- Rainbow brackets, etc
   {
