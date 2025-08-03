@@ -106,6 +106,9 @@ in
 
   environment.systemPackages = with pkgs; [ nh ];
 
+  # https://nikitabobko.github.io/AeroSpace/guide#a-note-on-mission-control
+  system.defaults.dock.expose-group-apps = true;
+
   system.activationScripts.applications.text =
     lib.mkForce # sh
       ''
