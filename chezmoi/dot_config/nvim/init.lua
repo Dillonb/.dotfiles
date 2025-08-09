@@ -454,6 +454,7 @@ require("lazy").setup({
     cmd = "Neotree",
     config = function()
       require("neo-tree").setup({
+        open_files_do_not_replace_types = { "terminal", "Trouble", "qf", "edgy" },
         close_if_last_window = true,
         filesystem = {
           follow_current_file = {
@@ -797,6 +798,32 @@ require("lazy").setup({
     "folke/trouble.nvim",
     opts = {},
     cmd = "Trouble",
+  },
+  {
+    "folke/edgy.nvim",
+    event = "VeryLazy",
+    init = function()
+      vim.opt.laststatus = 3
+      vim.opt.splitkeep = "screen"
+      require("edgy").open()
+    end,
+    opts = {
+      close_when_all_hidden = false, -- Leave sidebar open even when all windows are hidden
+      left = {
+        {
+          title = "Neo-Tree",
+          ft = "neo-tree",
+          filter = function(buf)
+            return vim.b[buf].neo_tree_source == "filesystem"
+          end,
+          size = { height = 0.5 },
+          -- pinned = true,
+          open = function()
+            vim.cmd [[Neotree]]
+          end,
+        },
+      }
+    }
   }
 })
 
