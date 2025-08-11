@@ -31,11 +31,26 @@
       inputs.nixpkgs.follows = "nixos-unstable";
     };
 
-    ts3status.url = "github:Dillonb/ts3status";
-    ble-scale.url = "github:Dillonb/ble-scale";
-    detectcharset.url = "github:Dillonb/detectcharset";
-    pwndbg.url = "github:pwndbg/pwndbg/2025.05.30";
-    copyparty.url = "github:9001/copyparty";
+    ts3status = {
+      url = "github:Dillonb/ts3status";
+      inputs.nixpkgs.follows = "nixos-unstable";
+    };
+    ble-scale = {
+      url = "github:Dillonb/ble-scale";
+      inputs.nixpkgs.follows = "nixos-unstable";
+    };
+    detectcharset = {
+      url = "github:Dillonb/detectcharset";
+      inputs.nixpkgs.follows = "nixos-unstable";
+    };
+    pwndbg = {
+      url = "github:pwndbg/pwndbg/2025.05.30";
+      inputs.nixpkgs.follows = "nixos-unstable";
+    };
+    copyparty = {
+      url = "github:9001/copyparty";
+      inputs.nixpkgs.follows = "nixos-unstable";
+    };
   };
 
   outputs =
