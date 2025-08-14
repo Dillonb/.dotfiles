@@ -106,4 +106,11 @@ in
     user = "dillon";
     package = pkgs.unstable.ombi;
   };
+
+  services.bazarr = {
+    enable = true;
+    user = "dillon";
+    openFirewall = true;
+    package = pkgs.unstable.bazarr;
+  };
 }
