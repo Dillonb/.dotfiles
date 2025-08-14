@@ -23,7 +23,6 @@ in
     ./dns.nix
     # ./pihole.nix
     ./smart-home.nix
-    ./github-runner.nix
     ./copyparty.nix
   ];
 
