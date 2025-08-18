@@ -6,8 +6,6 @@
     username = "dgb.sh";
     use = "web,web=ifconfig.me/ip";
     passwordFile = config.age.secrets."dgb.sh-dynamic-dns-password".path;
-    domains = [
-      "@"
-    ];
+    domains = [ "@" ];
   };
 }
