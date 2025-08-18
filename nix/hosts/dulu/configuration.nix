@@ -24,6 +24,7 @@ in
     # ./pihole.nix
     ./smart-home.nix
     ./copyparty.nix
+    ./miniflux.nix
   ];
 
   # Use the systemd-boot EFI boot loader.

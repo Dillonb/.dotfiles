@@ -54,6 +54,8 @@ let
 
     "copyparty-iris"
     "copyparty-dgb"
+
+    "miniflux-admin-creds"
   ];
 
   secretsAttrList = map (filename: {
