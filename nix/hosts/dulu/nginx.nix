@@ -229,6 +229,14 @@
         };
       };
 
+      "miniflux.dgb.sh" = {
+        forceSSL = true;
+        enableACME = true;
+        locations."/" = {
+          proxyPass = "http://localhost:${toString config.dgbCustom.miniflux.port}";
+        };
+      };
+
       "files.dgb.sh" = {
         forceSSL = true;
         enableACME = true;

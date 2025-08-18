@@ -32,5 +32,11 @@
         description = "The font family for Alacritty";
       };
     };
+
+    miniflux.port = lib.mkOption {
+      type = with pkgs.lib; types.port;
+      default = 8080;
+      description = "The port on which Miniflux will run.";
+    };
   };
 }
