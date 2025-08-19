@@ -35,6 +35,7 @@ let
         wl-clipboard # Wayland clipboard from cli
         xclip # X11 clipboard from cli
         parsec-bin
+        gparted
 
         # Gaming
         unstable.chiaki-ng # ps5 remote play
