@@ -125,7 +125,7 @@ let
     with pkgs;
     [
       mpv-unwrapped # mpv has a broken .app bundle
-      pwndbg-lldb
+      # pwndbg-lldb
       nowplaying-cli
       sqlitebrowser
     ]
