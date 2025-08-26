@@ -65,16 +65,16 @@ in
             enable = true;
             theme = {
               name = "Breeze-Dark";
-              package = pkgs.libsForQt5.breeze-gtk;
+              package = pkgs.kdePackages.breeze-gtk;
             };
             cursorTheme = {
               name = "breeze_cursors";
               size = 24;
-              package = pkgs.libsForQt5.breeze-gtk;
+              package = pkgs.kdePackages.breeze-gtk;
             };
             iconTheme = {
               name = "breeze-dark";
-              package = pkgs.libsForQt5.breeze-gtk;
+              package = pkgs.kdePackages.breeze-gtk;
             };
             font = {
               name = "Noto Sans";
