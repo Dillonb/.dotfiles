@@ -101,6 +101,17 @@ in
         enter = "mode main";
         esc = "mode main";
       };
+
+      on-window-detected = [
+        {
+          "if".window-title-regex-substring="dgb n64";
+          run = [ "layout floating" ];
+        }
+        {
+          "if".app-id = "com.vmware.fusion";
+          run = [ "layout floating" ];
+        }
+      ];
     };
   };
 
