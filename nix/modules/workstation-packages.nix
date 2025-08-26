@@ -86,7 +86,7 @@ let
         # iodine
         # networkmanager-iodine
         stable.tsocks
-        mitmproxy
+        # mitmproxy
         pavucontrol
         distrobox
         # unstable.posting

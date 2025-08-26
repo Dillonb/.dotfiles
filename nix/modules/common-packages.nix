@@ -20,7 +20,6 @@ let
       # Dev
       (big valgrind)
       (big gdb)
-      (big cmake-language-server) # broken on macos
 
       # System status
       iotop
