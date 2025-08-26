@@ -29,6 +29,8 @@
           "/var/lib/postgresql"
           "/var/lib/anki-sync-server"
           "/var/lib/bazarr"
+          "/var/lib/paperless"
+          "/var/lib/redis-paperless"
           "/var/www"
         ];
 
