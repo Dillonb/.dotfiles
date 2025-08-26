@@ -45,4 +45,6 @@
     enableGaming = true;
     minimal = true;
   };
+
+  system.stateVersion = "23.11";
 }

@@ -81,4 +81,5 @@
 
   # dgbCustom.alacritty.fontSize = 9;
 
+  system.stateVersion = "23.11";
 }
