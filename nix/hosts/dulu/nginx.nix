@@ -282,6 +282,14 @@
           '';
         };
       };
+
+      "paperless.dgb.sh" = {
+        forceSSL = true;
+        enableACME = true;
+        locations."/" = {
+          proxyPass = "http://localhost:${toString config.services.paperless.port}";
+        };
+      };
     };
   };
 
