@@ -104,7 +104,7 @@ in
 
       on-window-detected = [
         {
-          "if".window-title-regex-substring="dgb n64";
+          "if".window-title-regex-substring = "dgb n64";
           run = [ "layout floating" ];
         }
         {
