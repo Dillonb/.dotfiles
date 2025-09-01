@@ -13,7 +13,7 @@ jq -r -c '.[]' all-nixos-systems.json | while read -r i; do
     fi
 
     toilet -f future "$i"
-    nix build --cores 8 ..#nixosConfigurations."$i".config.system.build.toplevel --out-link systems-gcroots/"$i"
+    nix build --show-trace --cores 8 ..#nixosConfigurations."$i".config.system.build.toplevel --out-link systems-gcroots/"$i"
 
     if command -v nvd &>/dev/null; then
         if [ -n "$old_derivation" ]; then
