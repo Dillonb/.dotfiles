@@ -9,6 +9,7 @@
     accounts = {
       "dgb".passwordFile = config.age.secrets.copyparty-dgb.path;
       "iris".passwordFile = config.age.secrets.copyparty-iris.path;
+      "snacks".passwordFile = config.age.secrets.copyparty-snacks.path;
     };
 
     volumes = {
@@ -24,6 +25,15 @@
           rwmd = [
             "dgb"
             "iris"
+          ];
+        };
+      };
+      "/dwh" = {
+        path = "/zpool/fileshares/dwh";
+        access = {
+          rwmd = [
+            "dgb"
+            "snacks"
           ];
         };
       };
