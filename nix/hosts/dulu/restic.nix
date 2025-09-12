@@ -31,6 +31,7 @@
           "/var/lib/bazarr"
           "/var/lib/paperless"
           "/var/lib/redis-paperless"
+          "/var/lib/audiobookshelf"
           "/var/www"
         ];
 
