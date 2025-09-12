@@ -113,4 +113,11 @@ in
     openFirewall = true;
     package = pkgs.unstable.bazarr;
   };
+
+  services.audiobookshelf = {
+    enable = true;
+    user = "dillon";
+    group = "users";
+    package = pkgs.unstable.audiobookshelf;
+  };
 }
