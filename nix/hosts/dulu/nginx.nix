@@ -290,6 +290,28 @@
           proxyPass = "http://localhost:${toString config.services.paperless.port}";
         };
       };
+
+      "books.dgb.sh" = {
+        forceSSL = true;
+        enableACME = true;
+        locations."/" = {
+          proxyPass = "http://localhost:${toString config.services.audiobookshelf.port}/";
+          extraConfig = ''
+            proxy_set_header X-Forwarded-For    $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto  $scheme;
+            proxy_set_header Host               $host;
+            proxy_set_header Upgrade            $http_upgrade;
+            proxy_set_header Connection         "upgrade";
+
+            proxy_http_version                  1.1;
+
+            # Prevent 413 Request Entity Too Large error
+            # by increasing the maximum allowed size of the client request body
+            # For example, set it to 10 GiB
+            client_max_body_size                10240M;
+          '';
+        };
+      };
     };
   };
 
