@@ -52,6 +52,7 @@ let
 
     "plex-token"
 
+    "copyparty-snacks"
     "copyparty-iris"
     "copyparty-dgb"
 
