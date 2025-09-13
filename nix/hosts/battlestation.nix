@@ -27,16 +27,18 @@ in
   boot.extraModulePackages = [ ];
   boot.loader = {
     efi.canTouchEfiVariables = false;
-    systemd-boot = {
+    # timeout = null; # No timeout, wait forever
+    grub = {
+      efiSupport = true;
+      efiInstallAsRemovable = true;
       enable = true;
-      edk2-uefi-shell.enable = true;
-      windows = {
-        "11" = {
-          title = "Windows 11";
-          efiDeviceHandle = "HD2d65535a2";
-          sortKey = "z_windows11";
-        };
-      };
+      useOSProber = true;
+      device = "nodev";
+      default = "saved";
+      # theme = pkgs.sleek-grub-theme.override {
+      #   withBanner = config.networking.hostName;
+      #   withStyle = "dark";
+      # };
     };
   };
 
@@ -171,7 +173,6 @@ in
     # obs-studio
     prismlauncher
     godot-mono
-    sbctl
   ];
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
