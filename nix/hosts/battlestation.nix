@@ -177,11 +177,5 @@ in
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
-  programs.alvr = {
-    enable = true;
-    package = pkgs.unstable.alvr;
-    openFirewall = true;
-  };
-
   system.stateVersion = "23.11";
 }
