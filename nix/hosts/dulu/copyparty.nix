@@ -11,6 +11,7 @@
       "iris".passwordFile = config.age.secrets.copyparty-iris.path;
       "snacks".passwordFile = config.age.secrets.copyparty-snacks.path;
       "epiccookie".passwordFile = config.age.secrets.copyparty-epiccookie.path;
+      "dehowell".passwordFile = config.age.secrets.copyparty-dehowell.path;
     };
 
     volumes = {
@@ -36,6 +37,17 @@
             "dgb"
             "snacks"
             "epiccookie"
+          ];
+        };
+      };
+      "/books" = {
+        path = "/zpool/fileshares/books";
+        access = {
+          rwmd = [
+            "dgb"
+            "snacks"
+            "epiccookie"
+            "dehowell"
           ];
         };
       };

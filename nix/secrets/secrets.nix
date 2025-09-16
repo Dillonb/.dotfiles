@@ -50,6 +50,7 @@ let
 
     "plex-token"
 
+    "copyparty-dehowell"
     "copyparty-epiccookie"
     "copyparty-snacks"
     "copyparty-iris"
