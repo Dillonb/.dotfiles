@@ -12,6 +12,7 @@
       "snacks".passwordFile = config.age.secrets.copyparty-snacks.path;
       "epiccookie".passwordFile = config.age.secrets.copyparty-epiccookie.path;
       "dehowell".passwordFile = config.age.secrets.copyparty-dehowell.path;
+      "c".passwordFile = config.age.secrets.copyparty-c.path;
     };
 
     volumes = {
@@ -27,6 +28,7 @@
           rwmd = [
             "dgb"
             "iris"
+            "c"
           ];
         };
       };
@@ -48,6 +50,7 @@
             "snacks"
             "epiccookie"
             "dehowell"
+            "c"
           ];
         };
       };
