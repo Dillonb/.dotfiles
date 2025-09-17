@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 {
   services.copyparty = {
     enable = true;
@@ -6,14 +6,25 @@
     user = "dillon";
     group = "users";
 
-    accounts = {
-      "dgb".passwordFile = config.age.secrets.copyparty-dgb.path;
-      "iris".passwordFile = config.age.secrets.copyparty-iris.path;
-      "snacks".passwordFile = config.age.secrets.copyparty-snacks.path;
-      "epiccookie".passwordFile = config.age.secrets.copyparty-epiccookie.path;
-      "dehowell".passwordFile = config.age.secrets.copyparty-dehowell.path;
-      "c".passwordFile = config.age.secrets.copyparty-c.path;
-    };
+    accounts =
+      let
+        users = [
+          "dgb"
+          "iris"
+          "snacks"
+          "epiccookie"
+          "dehowell"
+          "c"
+        ];
+      in
+      lib.listToAttrs (
+        map (user: {
+          name = user;
+          value = {
+            passwordFile = config.age.secrets."copyparty-${user}".path;
+          };
+        }) users
+      );
 
     volumes = {
       "/zpool" = {
