@@ -112,6 +112,7 @@ let
       zstd
       dua
       difftastic
+      ffmpeg
 
       # Nix utils
       nixfmt-rfc-style
