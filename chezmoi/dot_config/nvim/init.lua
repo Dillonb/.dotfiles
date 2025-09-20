@@ -741,28 +741,6 @@ require("lazy").setup({
     end,
   },
   {
-    "nvim-neotest/neotest",
-    dependencies = {
-      "nvim-neotest/nvim-nio",
-      "nvim-lua/plenary.nvim",
-      "antoinemadec/FixCursorHold.nvim",
-      "nvim-treesitter/nvim-treesitter",
-      -- Adapters
-      "rouge8/neotest-rust",
-      "alfaix/neotest-gtest"
-    },
-    init = function()
-      require("neotest").setup({
-        adapters = {
-          require("neotest-rust") {
-            args = { "--no-capture" },
-          },
-          require("neotest-gtest").setup({})
-        }
-      })
-    end
-  },
-  {
     'stevearc/conform.nvim',
     event = { 'BufWritePre' },
     cmd = { "ConformInfo" },
