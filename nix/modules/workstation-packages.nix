@@ -136,7 +136,6 @@ let
     vim-full # vim-full includes gvim compared to the regular vim package
     unstable.neovide
     unstable.imhex
-    bicep
 
     # Gaming
     moonlight-qt
