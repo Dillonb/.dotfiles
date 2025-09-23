@@ -48,7 +48,7 @@
       inputs.nixpkgs.follows = "nixos-unstable";
     };
     copyparty = {
-      url = "github:9001/copyparty";
+      url = "github:9001/copyparty/v1.19.12";
       inputs.nixpkgs.follows = "nixos-unstable";
     };
   };
