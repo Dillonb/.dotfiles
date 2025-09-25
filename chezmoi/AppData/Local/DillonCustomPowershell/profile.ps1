@@ -10,6 +10,12 @@ if (Get-Command zoxide) {
   Write-Host "Please run `winget install zoxide` to install zoxide"
 }
 
+if (Get-Command eza) {
+  Set-Alias -Name ls -Value eza
+} else {
+  Write-Host "Please run `winget install eza` to install eza"
+}
+
 Set-PSReadLineOption -EditMode Emacs
 Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
 
