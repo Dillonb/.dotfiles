@@ -1,16 +1,16 @@
-if (Get-Command oh-my-posh) {
+if (Get-Command oh-my-posh -ErrorAction SilentlyContinue) {
   oh-my-posh init pwsh --config "~\AppData\Local\DillonCustomPowershell\oh-my-posh\ys.omp.json" | Invoke-Expression
 } else {
   Write-Host "Please run `winget install JanDeDobbeleer.OhMyPosh` to install oh-my-posh"
 }
 
-if (Get-Command zoxide) {
+if (Get-Command zoxide -ErrorAction SilentlyContinue) {
   Invoke-Expression (& { (zoxide init powershell | Out-String) })
 } else {
   Write-Host "Please run `winget install zoxide` to install zoxide"
 }
 
-if (Get-Command eza) {
+if (Get-Command eza -ErrorAction SilentlyContinue) {
   Set-Alias -Name ls -Value eza
 } else {
   Write-Host "Please run `winget install eza` to install eza"
