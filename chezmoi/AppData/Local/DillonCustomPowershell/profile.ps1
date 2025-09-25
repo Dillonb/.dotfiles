@@ -16,6 +16,11 @@ if (Get-Command eza) {
   Write-Host "Please run `winget install eza` to install eza"
 }
 
+# Alias grep to findstr only if grep isn't available:
+if (-not (Get-Command grep -ErrorAction SilentlyContinue)) {
+  Set-Alias -Name grep -Value findstr
+}
+
 Set-PSReadLineOption -EditMode Emacs
 Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
 
