@@ -330,7 +330,7 @@
         pi4 = nixos {
           hostname = "pi4";
           system = "aarch64-linux";
-          role = "workstation";
+          role = "server";
           modules = [
             nixos-hardware.nixosModules.raspberry-pi-4
             ./nix/modules/bluetooth.nix
