@@ -28,7 +28,7 @@ in
   security.pam.services.sudo_local.touchIdAuth = true;
 
   services.aerospace = {
-    enable = true;
+    enable = false;
     settings = {
       default-root-container-layout = "tiles";
       gaps = {
