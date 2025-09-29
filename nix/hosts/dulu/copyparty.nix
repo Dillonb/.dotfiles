@@ -26,6 +26,12 @@
         }) users
       );
 
+    settings = {
+      rproxy = "1";
+      xff-hdr = "X-Real-IP";
+      xff-src = "lan";
+    };
+
     volumes = {
       "/zpool" = {
         path = "/zpool";
