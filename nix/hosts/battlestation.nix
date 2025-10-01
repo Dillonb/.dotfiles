@@ -35,10 +35,8 @@ in
       useOSProber = true;
       device = "nodev";
       default = "saved";
-      # theme = pkgs.sleek-grub-theme.override {
-      #   withBanner = config.networking.hostName;
-      #   withStyle = "dark";
-      # };
+      gfxmodeBios = "1280x720";
+      gfxmodeEfi = "1280x720";
     };
   };
 
