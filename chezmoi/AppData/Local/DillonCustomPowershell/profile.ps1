@@ -11,7 +11,7 @@ if (Get-Command zoxide -ErrorAction SilentlyContinue) {
 }
 
 if (Get-Command eza -ErrorAction SilentlyContinue) {
-  Set-Alias -Name ls -Value eza
+  Set-Alias -Name ls -Value eza -Option AllScope
 } else {
   Write-Host "Please run `winget install eza` to install eza"
 }
