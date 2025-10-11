@@ -397,24 +397,6 @@
             }
           ];
         };
-
-        dgb-workmbp = mac {
-          hostname = "dgb-workmbp";
-          system = "aarch64-darwin";
-          modules = [
-            ./nix/modules/fonts.nix
-            home-manager-unstable.darwinModules.home-manager
-            ./nix/modules/home-manager.nix
-            {
-              dgbCustom.username = "dbeliveau";
-              dgbCustom.alacritty.fontSize = 18;
-              users.users.dbeliveau = {
-                name = "dbeliveau";
-                home = "/Users/dbeliveau";
-              };
-            }
-          ];
-        };
       };
 
       homeConfigurations = {
