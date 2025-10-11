@@ -113,7 +113,7 @@ let
         unstable.discord
         (big jellyfin-media-player)
         (big slack)
-        (big renderdoc)
+        # (big renderdoc)
         (big spotify)
         (big teamspeak_client)
         (big teamspeak5_client)

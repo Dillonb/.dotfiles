@@ -175,10 +175,23 @@
             };
           };
 
+          overlay-cmake-3_5-fix =
+            let
+              set_cmake_minimum = (
+                final: prev: { cmakeFlags = (prev.cmakeFlags or [ ]) ++ [ "-DCMAKE_POLICY_VERSION_MINIMUM=3.5" ]; }
+              );
+            in
+            (final: prev: {
+              libutp = prev.libutp.overrideAttrs set_cmake_minimum;
+              transmission_3 = prev.transmission_3.overrideAttrs set_cmake_minimum;
+              hackrf = prev.hackrf.overrideAttrs set_cmake_minimum;
+            });
+
           overlay-unstable = final: prev: {
             unstable = import nixos-unstable {
               system = system;
               config = nixpkgs-config;
+              overlays = [ overlay-cmake-3_5-fix ];
             };
           };
 
@@ -195,7 +208,9 @@
                 overlay-missing-modules-okay
                 overlay-no-cuda
                 copyparty.overlays.default
-              ];
+              ]
+              # CMake fix is only needed on unstable
+              ++ (if channel == "unstable" then [ overlay-cmake-3_5-fix ] else [ ]);
               nixpkgs.config = nixpkgs-config;
             }
           );
