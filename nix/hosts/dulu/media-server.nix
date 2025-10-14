@@ -120,4 +120,7 @@ in
     group = "users";
     package = pkgs.unstable.audiobookshelf;
   };
+
+  # Increase refresh token expiry to 10 years (default is 7 days) to avoid frequent login requirements
+  systemd.services.audiobookshelf.environment.REFRESH_TOKEN_EXPIRY = "315360000";
 }
