@@ -5,10 +5,13 @@
 *.sh
 # .config has another .chezmoiignore inside it
 !.config
+# Applies to windows only
+!.razzle
 {{- else }}
 # Non-Windows OS (Linux/Mac)
 AppData
 *.ps1
 *komorebi*
 applications.json
+.razzle
 {{- end }}
