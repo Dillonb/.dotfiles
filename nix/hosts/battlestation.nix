@@ -13,6 +13,9 @@ in
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
+  # Remove when https://github.com/NixOS/nixpkgs/issues/457406 is resolved
+  programs.firefox.package = pkgs.no-cuda.firefox;
+
   # Bootloader.
   boot.initrd.availableKernelModules = [
     "nvme"

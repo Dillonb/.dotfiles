@@ -31,14 +31,14 @@ let
         feh
         (big keymapp) # flashing ZSA keyboards
         (big wally-cli) # also for flashing ZSA keyboards (cli tool)
-        unstable.freerdp3
+        unstable.freerdp
         wl-clipboard # Wayland clipboard from cli
         xclip # X11 clipboard from cli
         parsec-bin
         gparted
 
         # Gaming
-        unstable.chiaki-ng # ps5 remote play
+        # unstable.chiaki-ng # ps5 remote play
         # lutris
 
         # Chat
@@ -52,7 +52,7 @@ let
         unstable.vscode-fhs
         (big stable.ghidra)
         unstable.sublime-merge
-        zeal
+        # zeal
         gdb
         (big cargo)
         # (big qtcreator)
@@ -115,8 +115,7 @@ let
         (big slack)
         # (big renderdoc)
         (big spotify)
-        (big teamspeak_client)
-        (big teamspeak5_client)
+        (big teamspeak3)
       ]
     )
   );

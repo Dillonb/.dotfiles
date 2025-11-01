@@ -5,6 +5,16 @@
   ...
 }:
 {
+
+  systemd.services.miniflux-dbsetup.serviceConfig = lib.mkForce {
+    Type = "oneshot";
+    User = config.services.postgresql.superUser;
+    ExecStart = pkgs.writeScript "miniflux-pre-start" ''
+      #!${pkgs.runtimeShell}
+      echo "no-op"
+    '';
+  };
+
   services.miniflux = {
     enable = true;
     package = pkgs.unstable.miniflux;
