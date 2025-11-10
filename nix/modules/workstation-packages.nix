@@ -38,11 +38,11 @@ let
         gparted
 
         # Gaming
-        # unstable.chiaki-ng # ps5 remote play
+        unstable.chiaki-ng # ps5 remote play
         # lutris
 
         # Chat
-        (big unstable.vesktop)
+        # (big unstable.vesktop)
         (big signal-desktop)
         hexchat
         (big element-desktop)
