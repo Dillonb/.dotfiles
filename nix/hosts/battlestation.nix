@@ -54,7 +54,7 @@ in
   };
 
   fileSystems."/win" = {
-    device = "/dev/disk/by-uuid/E8204E89204E5F26";
+    device = "/dev/disk/by-uuid/34CCCB50CCCB0AD6";
     fsType = "ntfs";
   };
 
