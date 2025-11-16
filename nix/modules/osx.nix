@@ -22,7 +22,10 @@ in
   };
 
   programs = {
-    direnv.enable = true;
+    direnv = {
+      enable = true;
+      enableFishIntegration = false;
+    };
   };
 
   security.pam.services.sudo_local.touchIdAuth = true;

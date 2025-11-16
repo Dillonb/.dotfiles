@@ -57,10 +57,7 @@
           "type": "os",
           "style": "plain",
           "foreground": "#26C6DA",
-          "template": "{{ if .WSL }}WSL at {{ end }}{{.Icon}} ",
-          "properties": {
-            "macos": "mac"
-          }
+          "template": "{{ if .WSL }}WSL at {{ end }}{{.Icon}} "
         },
         {
           "properties": {
