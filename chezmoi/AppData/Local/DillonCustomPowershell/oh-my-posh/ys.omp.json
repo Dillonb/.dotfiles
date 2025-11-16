@@ -28,13 +28,10 @@
       "alignment": "left",
       "segments": [
         {
-          "properties": {
-            "cache_duration": "none"
-          },
-          "template": "# ",
+          "type": "os",
+          "style": "plain",
           "foreground": "lightBlue",
-          "type": "text",
-          "style": "plain"
+          "template": "{{ if .WSL }}WSL at {{ end }}{{.Icon}} "
         },
         {
           "properties": {
@@ -52,12 +49,6 @@
           "template": "<cyan>{{ .UserName }}</> <darkGray>@</> <green>{{ .HostName }}</> ",
           "type": "session",
           "style": "plain"
-        },
-        {
-          "type": "os",
-          "style": "plain",
-          "foreground": "#26C6DA",
-          "template": "{{ if .WSL }}WSL at {{ end }}{{.Icon}} "
         },
         {
           "properties": {
