@@ -111,11 +111,12 @@ let
 
         (big google-chrome)
         unstable.discord
-        (big jellyfin-media-player)
+        # (big jellyfin-media-player) # Commented out for now, this requires qtwebengine5 which needs to be built manually
         (big slack)
         # (big renderdoc)
         (big spotify)
-        (big teamspeak3)
+        # (big teamspeak3)
+        (big teamspeak6-client)
       ]
     )
   );
@@ -134,7 +135,7 @@ let
     # Dev/Editor
     vim-full # vim-full includes gvim compared to the regular vim package
     unstable.neovide
-    unstable.imhex
+    # unstable.imhex
 
     # Gaming
     moonlight-qt
