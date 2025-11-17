@@ -280,10 +280,37 @@
           system,
           modules,
         }:
+        let
+          nixpkgs-config = nixpkgs-config-base;
+          overlay-stable = final: prev: {
+            stable = import nixos-stable {
+              system = system;
+              config = nixpkgs-config;
+            };
+          };
+          overlay-unstable = final: prev: {
+            unstable = import nixos-unstable {
+              system = system;
+              config = nixpkgs-config;
+            };
+          };
+          overlays = (
+            { ... }:
+            {
+              nixpkgs.overlays = [
+                overlay-stable
+                overlay-unstable
+                copyparty.overlays.default
+              ];
+              nixpkgs.config = nixpkgs-config;
+            }
+          );
+        in
         home-manager-unstable.lib.homeManagerConfiguration {
           pkgs = import nixos-unstable { inherit system; };
           extraSpecialArgs = { inherit inputs; };
           modules = [
+            overlays
             ./nix/nix-settings.nix
             ./nix/hosts/${hostname}.nix
             ./nix/modules/custom-options.nix
