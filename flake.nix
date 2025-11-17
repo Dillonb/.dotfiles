@@ -222,6 +222,7 @@
           role-modules = {
             workstation = [
               ./nix/common.nix
+              ./nix/nix-settings.nix
               ./nix/workstation.nix
               ./nix/modules/fonts.nix
               ./nix/modules/pipewire.nix
@@ -239,6 +240,7 @@
 
             server = [
               ./nix/common.nix
+              ./nix/nix-settings.nix
               ./nix/modules/custom-options.nix
               ./nix/modules/server-packages.nix
               ./nix/modules/common-packages.nix
@@ -247,6 +249,7 @@
 
             wsl = [
               ./nix/common.nix
+              ./nix/nix-settings.nix
               ./nix/modules/custom-options.nix
               ./nix/modules/common-packages.nix
               ./nix/modules/wsl-packages.nix
@@ -281,6 +284,7 @@
           pkgs = import nixos-unstable { inherit system; };
           extraSpecialArgs = { inherit inputs; };
           modules = [
+            ./nix/nix-settings.nix
             ./nix/hosts/${hostname}.nix
             ./nix/modules/custom-options.nix
             # ./nix/modules/home-manager.nix
@@ -400,7 +404,7 @@
       };
 
       homeConfigurations = {
-        steamdeck = home {
+        deck = home {
           hostname = "steamdeck";
           system = "x86_64-linux";
           modules = [ ];

@@ -13,7 +13,9 @@ in
   home.packages = with pkgs; [
     alacritty
     nh
+    neovim
     ghostty
+    chezmoi
     nixGLPkgs.nixGLIntel
     nixGLPkgs.nixVulkanIntel
     nerd-fonts.caskaydia-mono
