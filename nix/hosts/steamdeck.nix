@@ -7,6 +7,7 @@ in
   home.homeDirectory = "/home/deck";
   home.stateVersion = "25.11";
   programs.home-manager.enable = true;
+  programs.direnv.enable = true;
 
   fonts.fontconfig.enable = true;
 
