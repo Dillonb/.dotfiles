@@ -1,0 +1,178 @@
+{
+    "editor.largeFileOptimizations": false,
+    "remote.SSH.remotePlatform": {
+        "dgb.sh": "linux",
+    },
+    "git.autofetch": true,
+    "vim.normalModeKeyBindings": [
+        {
+            "before": [ "K" ],
+            "commands": [
+                "editor.action.showHover"
+            ],
+            "silent": true
+        }
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "<leader>",
+                "r",
+                "n"
+            ],
+            "commands": [
+                "editor.action.rename"
+            ],
+            "silent": true
+        },
+        {
+            "before": [
+                "<leader>",
+                "s",
+                "h"
+            ],
+            "commands": [
+                "C_Cpp.SwitchHeaderSource"
+                // "clangd.switchheadersource",
+            ],
+            "silent": true
+        },
+        {
+            "before": [
+                "<leader>",
+                "g",
+                "i"
+            ],
+            "commands": [
+                "editor.action.revealDefinition"
+            ],
+            "silent": true
+        },
+        {
+            "before": [
+                "<leader>",
+                "f",
+                "u"
+            ],
+            "commands": [
+                "references-view.findReferences"
+            ],
+            "silent": true
+        },
+        {
+            "before": [
+                "<leader>",
+                "b"
+            ],
+            "commands": [
+                "workbench.action.tasks.build"
+            ],
+            "silent": true
+        },
+        {
+            "before": [
+                "<leader>",
+                "i",
+                "h"
+            ],
+            "commands": [
+                "clangd.inlayHints.toggle"
+            ],
+            "silent": true
+        },
+        {
+            "before": [
+                "<leader>",
+                "q",
+                "f"
+            ],
+            "commands": [
+                "editor.action.quickFix"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "t"
+            ],
+            "commands": [
+                "workbench.action.terminal.toggleTerminal"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "p",
+                "h"
+            ],
+            "commands": [
+                "editor.action.triggerParameterHints"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "f",
+                "f"
+            ],
+            "commands": [
+                "editor.fold"
+            ]
+        }
+    ],
+    "vim.leader": " ",
+    "vim.useSystemClipboard": true,
+    "vim.handleKeys": {
+        "<C-p>": false
+    },
+    "editor.rulers": [
+        120
+    ],
+    "editor.inlayHints.enabled": "on",
+    "git.confirmSync": false,
+    "editor.renderWhitespace": "all",
+    "debug.toolBarLocation": "docked",
+    "workbench.editor.empty.hint": "hidden",
+    "window.density.editorTabHeight": "compact",
+    "remote.SSH.connectTimeout": 30,
+    "security.workspace.trust.untrustedFiles": "open",
+    "editor.fontSize": 16,
+    "remote.autoForwardPortsSource": "hybrid",
+    "editor.accessibilitySupport": "off",
+    "git.openRepositoryInParentFolders": "always",
+    "files.associations": {
+        "*.c.inc": "C"
+    },
+    "editor.fontFamily": "'Cascadia Code', 'Droid Sans Mono', 'monospace', monospace",
+    "files.autoSave": "afterDelay",
+    "remote.SSH.localServerDownload": "auto",
+    "wavespace.defaultExtensions": {
+        "edge": [
+            "ms-vscode.cpptools",
+            "rust-lang.rust-analyzer",
+            "ms-vscode.live-server"
+        ]
+    },
+    "vscode-nmake-tools.notifyNewFeature": {
+        "restoreDependencies": false,
+        "buildLite": true,
+        "autoImport": true
+    },
+    "terminal.integrated.allowedLinkSchemes": [
+        "file",
+        "http",
+        "https",
+        "mailto",
+        "vscode",
+        "vscode-insiders",
+        "d"
+    ],
+    "workbench.colorTheme": "Tokyo Night Storm",
+    "C_Cpp.default.enableConfigurationSquiggles": false,
+    "C_Cpp.configurationWarnings": "Disabled",
+    "nmake.hide-large-folder-notification": true,
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "github.copilot.selectedCompletionModel": "",
+    "diffEditor.ignoreTrimWhitespace": false,
+    "security.promptForLocalFileProtocolHandling": false,
+}
