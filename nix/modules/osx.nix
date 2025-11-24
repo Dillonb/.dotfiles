@@ -24,7 +24,6 @@ in
   programs = {
     direnv = {
       enable = true;
-      enableFishIntegration = false;
     };
   };
 
