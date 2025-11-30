@@ -14,8 +14,8 @@ let
   isMinimalSystem = config.dgbCustom.minimal;
   big = package: if isMinimalSystem then null else package;
 
-  pwndbg = inputs.pwndbg.packages."${pkgs.system}".default;
-  pwndbg-lldb = inputs.pwndbg.packages."${pkgs.system}".pwndbg-lldb;
+  pwndbg = inputs.pwndbg.packages."${pkgs.stdenv.hostPlatform.system}".default;
+  pwndbg-lldb = inputs.pwndbg.packages."${pkgs.stdenv.hostPlatform.system}".pwndbg-lldb;
 
   linuxWorkstationPackages = (
     optionals isLinux (
@@ -257,7 +257,7 @@ let
       fortune
       dwt1-shell-color-scripts
     ]
-    ++ [ inputs.detectcharset.packages."${pkgs.system}".default ]
+    ++ [ inputs.detectcharset.packages."${pkgs.stdenv.hostPlatform.system}".default ]
     ++ (optionals isX64 [
       # (big (asmrepl.override { bundlerApp = bundlerApp.override { ruby = ruby_3_2; }; }))
     ]);

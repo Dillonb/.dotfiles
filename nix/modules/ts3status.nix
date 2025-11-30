@@ -7,7 +7,7 @@
 let
   dataDir = "/var/lib/ts3status";
   configFile = config.age.secrets."ts3status.properties".path;
-  ts3status = inputs.ts3status.packages."${pkgs.system}".ts3status.override {
+  ts3status = inputs.ts3status.packages."${pkgs.stdenv.hostPlatform.system}".ts3status.override {
     configFilePath = configFile;
   };
 in

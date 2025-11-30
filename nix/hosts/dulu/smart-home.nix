@@ -25,7 +25,7 @@
     enable = true;
     package = pkgs.unstable.zigbee2mqtt_2;
     settings = {
-      homeassistant = true;
+      homeassistant.enabled = true;
       permit_join = false;
       serial = {
         # TODO: can't get mDNS working inside the systemd unit.

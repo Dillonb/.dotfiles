@@ -6,7 +6,7 @@
   ...
 }:
 let
-  ble-scale = inputs.ble-scale.packages."${pkgs.system}".default;
+  ble-scale = inputs.ble-scale.packages."${pkgs.stdenv.hostPlatform.system}".default;
 in
 {
   boot.loader = {

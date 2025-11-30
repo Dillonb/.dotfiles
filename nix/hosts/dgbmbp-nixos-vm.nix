@@ -1,7 +1,7 @@
 { inputs, pkgs, ... }:
 let
-  pwndbg = inputs.pwndbg.packages."${pkgs.system}".default;
-  # pwndbg-lldb = inputs.pwndbg.packages."${pkgs.system}".pwndbg-lldb;
+  pwndbg = inputs.pwndbg.packages."${pkgs.stdenv.hostPlatform.system}".default;
+  # pwndbg-lldb = inputs.pwndbg.packages."${pkgs.stdenv.hostPlatform.system}".pwndbg-lldb;
 in
 {
   fileSystems."/" = {

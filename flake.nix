@@ -2,7 +2,7 @@
   description = "Dillon's NixOS configuration";
 
   inputs = {
-    nixos-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixos-stable.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixos-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     agenix.url = "github:ryantm/agenix";
@@ -17,7 +17,7 @@
     };
 
     home-manager-stable = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixos-stable";
     };
 

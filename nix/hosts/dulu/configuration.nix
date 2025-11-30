@@ -10,8 +10,8 @@
 }:
 
 let
-  pwndbg = inputs.pwndbg.packages."${pkgs.system}".default;
-  pwndbg-lldb = inputs.pwndbg.packages."${pkgs.system}".pwndbg-lldb;
+  pwndbg = inputs.pwndbg.packages."${pkgs.stdenv.hostPlatform.system}".default;
+  pwndbg-lldb = inputs.pwndbg.packages."${pkgs.stdenv.hostPlatform.system}".pwndbg-lldb;
 in
 {
   imports = [
@@ -65,7 +65,7 @@ in
 
   # for QSV
   nixpkgs.config.packageOverrides = pkgs: {
-    vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
+    intel-vaapi-driver = pkgs.intel-vaapi-driver.override { enableHybridCodec = true; };
   };
   nixpkgs.config.permittedInsecurePackages = [ "aspnetcore-runtime-6.0.36" ];
   hardware = {
@@ -75,7 +75,7 @@ in
       extraPackages = with pkgs; [
         intel-media-driver
         intel-vaapi-driver
-        vaapiVdpau
+        libva-vdpau-driver
         libvdpau-va-gl
         intel-compute-runtime
         unstable.vpl-gpu-rt
