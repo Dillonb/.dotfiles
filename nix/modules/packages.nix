@@ -241,6 +241,7 @@ let
       dua
       difftastic
       ffmpeg
+      toilet
 
       # Nix utils
       nixfmt-rfc-style
