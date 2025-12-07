@@ -12,9 +12,7 @@
   # install libcec, which includes cec-client (requires root or "video" group, see udev rule below)
   # scan for devices: `echo 'scan' | cec-client -s -d 1`
   # set pi as active source: `echo 'as' | cec-client -s -d 1`
-  environment.systemPackages = with pkgs; [
-    libcec
-  ];
+  environment.systemPackages = with pkgs; [ libcec ];
 
   services.udev.extraRules = ''
     # allow access to raspi cec device for video group (and optionally register it as a systemd device, used below)
@@ -43,7 +41,7 @@
       ExecStop = ''/bin/sh -c "echo q > /run/cec.fifo"'';
       StandardInput = "socket";
       StandardOutput = "journal";
-      Restart="no";
+      Restart = "no";
+    };
   };
-};
 }

@@ -266,7 +266,10 @@ let
 in
 {
   workstationPackages = builtins.filter (pkg: pkg != null) (
-    linuxWorkstationPackages ++ linuxX64WorkstationPackages ++ darwinWorkstationPackages ++ commonWorkstationPackages
+    linuxWorkstationPackages
+    ++ linuxX64WorkstationPackages
+    ++ darwinWorkstationPackages
+    ++ commonWorkstationPackages
   );
 
   commonPackages = builtins.filter (pkg: pkg != null) (
