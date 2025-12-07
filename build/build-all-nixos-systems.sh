@@ -8,17 +8,5 @@ cat all-nixos-systems.json
 mkdir -p systems-gcroots
 
 jq -r -c '.[]' all-nixos-systems.json | while read -r i; do
-    if [ -L "./systems-gcroots/$i" ]; then
-        old_derivation=$(readlink -f "systems-gcroots/$i")
-    fi
-
-    toilet -f future "$i"
-    nix build --show-trace --cores 8 ..#nixosConfigurations."$i".config.system.build.toplevel --out-link systems-gcroots/"$i"
-
-    if command -v nvd &>/dev/null; then
-        if [ -n "$old_derivation" ]; then
-            nvd diff "$old_derivation" "$(readlink -f "systems-gcroots/$i")"
-        fi
-    fi
-
+    ./build-nixos-system.sh $i
 done
