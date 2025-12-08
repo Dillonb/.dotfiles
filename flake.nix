@@ -358,18 +358,25 @@
           ];
         };
 
-        pi4 = nixos {
-          hostname = "pi4";
-          system = "aarch64-linux";
-          role = "server";
-          modules = [
-            nixos-hardware.nixosModules.raspberry-pi-4
-            ./nix/modules/bluetooth.nix
-            ./nix/modules/syncthing.nix
-            ./nix/modules/netdata.nix
-            ./nix/modules/my-wifi.nix
-          ];
-        };
+        pi4 =
+          let
+            overlay-libcec-with-libraspberrypi = (
+              self: super: { libcec = super.libcec.override { withLibraspberrypi = true; }; }
+            );
+          in
+          nixos {
+            hostname = "pi4";
+            system = "aarch64-linux";
+            role = "server";
+            modules = [
+              { nixpkgs.overlays = [ overlay-libcec-with-libraspberrypi ]; }
+              nixos-hardware.nixosModules.raspberry-pi-4
+              ./nix/modules/bluetooth.nix
+              ./nix/modules/syncthing.nix
+              ./nix/modules/netdata.nix
+              ./nix/modules/my-wifi.nix
+            ];
+          };
 
         pbp = nixos {
           hostname = "pbp";
