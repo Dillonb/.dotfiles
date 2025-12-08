@@ -72,6 +72,10 @@
     xwayland.enable = true;
   };
 
+  environment.systemPackages = with pkgs; lib.mkIf (config.dgbCustom.enableGaming && pkgs.stdenv.hostPlatform.isx86_64) [
+    gamescope
+  ];
+
   xdg.mime = {
     enable = true;
     defaultApplications = {
