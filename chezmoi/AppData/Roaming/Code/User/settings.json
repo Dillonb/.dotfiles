@@ -155,7 +155,7 @@
     },
     "vscode-nmake-tools.notifyNewFeature": {
         "restoreDependencies": false,
-        "buildLite": true,
+        "buildLite": false,
         "autoImport": true
     },
     "terminal.integrated.allowedLinkSchemes": [
