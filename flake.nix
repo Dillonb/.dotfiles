@@ -11,6 +11,8 @@
 
     nixos-wsl.url = "github:nix-community/nixos-WSL/main";
 
+    ghostty.url = "github:ghostty-org/ghostty/main";
+
     darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixos-unstable";
@@ -65,6 +67,7 @@
       nixos-wsl,
       darwin,
       copyparty,
+      ghostty,
       ...
     }@inputs:
     let
@@ -186,6 +189,11 @@
             final: super: { makeModulesClosure = x: super.makeModulesClosure (x // { allowMissing = true; }); }
           );
 
+          # TODO: Get rid of this and the flake input once ctrl-f support is in a release
+          overlay-ghostty-tip = final: prev: {
+            ghostty = ghostty.packages.${system}.default;
+          };
+
           overlays = (
             { ... }:
             {
@@ -195,6 +203,7 @@
                 overlay-missing-modules-okay
                 overlay-no-cuda
                 copyparty.overlays.default
+                overlay-ghostty-tip
               ];
               nixpkgs.config = nixpkgs-config;
             }
