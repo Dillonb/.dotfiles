@@ -17,7 +17,7 @@
 
   hardware = {
     raspberry-pi."4" = {
-      audio.enable = true;
+      # audio.enable = true;
       bluetooth.enable = true;
       apply-overlays-dtmerge.enable = true;
       fkms-3d.enable = true;

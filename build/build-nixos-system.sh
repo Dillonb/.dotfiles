@@ -15,7 +15,11 @@ if [ -L "./systems-gcroots/$SYSTEM" ]; then
 fi
 
 toilet -f future "$SYSTEM"
-nix build --show-trace --cores 8 ..#nixosConfigurations."$SYSTEM".config.system.build.toplevel --out-link systems-gcroots/"$SYSTEM"
+nix build \
+    --show-trace \
+    --cores 8 \
+    ..#nixosConfigurations."$SYSTEM".config.system.build.toplevel \
+    --out-link systems-gcroots/"$SYSTEM"
 
 if command -v nvd &>/dev/null; then
     if [ -n "$old_derivation" ]; then

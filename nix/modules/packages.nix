@@ -49,7 +49,7 @@ let
 
         # Dev
         docker-compose
-        unstable.vscode-fhs
+        (big unstable.vscode-fhs)
         (big stable.ghidra)
         unstable.sublime-merge
         # zeal
