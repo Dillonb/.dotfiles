@@ -199,6 +199,7 @@ let
       powershell
       nodejs
       (big bun)
+      delta
 
       # Theming
       unstable.oh-my-posh
