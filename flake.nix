@@ -190,9 +190,7 @@
           );
 
           # TODO: Get rid of this and the flake input once ctrl-f support is in a release
-          overlay-ghostty-tip = final: prev: {
-            ghostty = ghostty.packages.${system}.default;
-          };
+          overlay-ghostty-tip = final: prev: { ghostty = ghostty.packages.${system}.default; };
 
           overlays = (
             { ... }:
