@@ -19,8 +19,13 @@ in
   home.stateVersion = "25.11";
   programs.home-manager.enable = true;
   programs.direnv.enable = true;
+  programs.zsh.enable = true;
+  programs.bash.enable = true;
 
   fonts.fontconfig.enable = true;
+
+  xdg.mime.enable = true;
+  targets.genericLinux.enable = true;
 
   home.packages =
     with pkgs;
