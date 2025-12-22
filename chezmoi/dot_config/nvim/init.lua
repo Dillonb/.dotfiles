@@ -417,22 +417,34 @@ require("lazy").setup({
   { 'tpope/vim-sleuth', lazy = false },
 
   -- Tabs
+  -- {
+  --   'romgrk/barbar.nvim',
+  --   lazy = true,
+  --   event = { 'BufReadPre', 'BufNewFile' },
+  --   dependencies = {
+  --     -- Filetype icons
+  --     'nvim-tree/nvim-web-devicons',
+  --     -- Git status icons
+  --     'lewis6991/gitsigns.nvim',
+  --   },
+  --   init = function()
+  --     -- go to the next tab
+  --     vim.keymap.set('n', '<leader>l', ':BufferNext<CR>');
+  --     vim.keymap.set('n', '<leader>L', ':BufferPrevious<CR>');
+  --     vim.keymap.set('n', '<leader>h', ':BufferPrevious<CR>');
+  --     vim.keymap.set('n', '<C-w>', ':BufferClose<CR>');
+  --   end,
+  -- },
   {
-    'romgrk/barbar.nvim',
-    lazy = true,
-    event = { 'BufReadPre', 'BufNewFile' },
-    dependencies = {
-      -- Filetype icons
-      'nvim-tree/nvim-web-devicons',
-      -- Git status icons
-      'lewis6991/gitsigns.nvim',
-    },
+    'nvim-mini/mini.tabline',
+    version = false,
     init = function()
+      require('mini.tabline').setup()
       -- go to the next tab
-      vim.keymap.set('n', '<leader>l', ':BufferNext<CR>');
-      vim.keymap.set('n', '<leader>L', ':BufferPrevious<CR>');
-      vim.keymap.set('n', '<leader>h', ':BufferPrevious<CR>');
-      vim.keymap.set('n', '<C-w>', ':BufferClose<CR>');
+      vim.keymap.set('n', '<leader>l', ':bnext<CR>');
+      vim.keymap.set('n', '<leader>L', ':bprevious<CR>');
+      vim.keymap.set('n', '<leader>h', ':bprevious<CR>');
+      vim.keymap.set('n', '<C-w>', ':bdelete<CR>');
     end,
   },
 
