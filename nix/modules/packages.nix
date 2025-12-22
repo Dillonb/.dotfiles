@@ -111,8 +111,8 @@ let
 
         (big google-chrome)
         unstable.discord
-        # (big jellyfin-media-player) # Commented out for now, this requires qtwebengine5 which needs to be built manually
-        (big slack)
+        (big jellyfin-media-player)
+        # (big slack)
         # (big renderdoc)
         (big spotify)
         # (big teamspeak3)
