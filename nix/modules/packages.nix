@@ -111,7 +111,7 @@ let
 
         (big google-chrome)
         unstable.discord
-        (big jellyfin-media-player)
+        (big jellyfin-desktop)
         # (big slack)
         # (big renderdoc)
         (big spotify)
