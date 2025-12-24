@@ -31,7 +31,7 @@ let
         feh
         (big keymapp) # flashing ZSA keyboards
         (big wally-cli) # also for flashing ZSA keyboards (cli tool)
-        freerdp
+        # freerdp
         wl-clipboard # Wayland clipboard from cli
         xclip # X11 clipboard from cli
         parsec-bin
@@ -44,7 +44,7 @@ let
         # Chat
         # (big unstable.vesktop)
         (big signal-desktop)
-        hexchat
+        # hexchat
         (big element-desktop)
 
         # Dev
@@ -60,7 +60,7 @@ let
         # Sec
         tcpdump
         nmap
-        (big burpsuite)
+        # (big burpsuite)
         foremost
         (big proxmark3)
         (big pwndbg)
@@ -79,7 +79,7 @@ let
         mpv
 
         # Editor
-        neovim-qt
+        # neovim-qt
 
         # Misc utils
         xorg.xkill
@@ -88,7 +88,7 @@ let
         stable.tsocks
         # mitmproxy
         pavucontrol
-        distrobox
+        # distrobox
         # posting
       ]
     )
