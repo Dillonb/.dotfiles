@@ -31,14 +31,14 @@ let
         feh
         (big keymapp) # flashing ZSA keyboards
         (big wally-cli) # also for flashing ZSA keyboards (cli tool)
-        unstable.freerdp
+        freerdp
         wl-clipboard # Wayland clipboard from cli
         xclip # X11 clipboard from cli
         parsec-bin
         gparted
 
         # Gaming
-        unstable.chiaki-ng # ps5 remote play
+        chiaki-ng # ps5 remote play
         # lutris
 
         # Chat
@@ -49,9 +49,9 @@ let
 
         # Dev
         docker-compose
-        (big unstable.vscode-fhs)
+        (big vscode-fhs)
         (big stable.ghidra)
-        unstable.sublime-merge
+        sublime-merge
         # zeal
         gdb
         (big cargo)
@@ -68,7 +68,7 @@ let
         (big pwntools)
 
         # Notes
-        unstable.obsidian
+        obsidian
 
         # Misc/Media
         (big no-cuda.gimp)
@@ -79,7 +79,7 @@ let
         mpv
 
         # Editor
-        unstable.neovim-qt
+        neovim-qt
 
         # Misc utils
         xorg.xkill
@@ -89,7 +89,7 @@ let
         # mitmproxy
         pavucontrol
         distrobox
-        # unstable.posting
+        # posting
       ]
     )
   );
@@ -100,14 +100,6 @@ let
       [
         # Mail
         (big protonmail-desktop)
-        (big (
-          unstable.mailspring.overrideAttrs (old: {
-            postFixup = ''
-              substituteInPlace $out/share/applications/Mailspring.desktop \
-                --replace-fail Exec=mailspring "Exec=$out/bin/mailspring --password-store=\"kwallet5\""
-            '';
-          })
-        ))
 
         (big google-chrome)
         unstable.discord
@@ -134,7 +126,6 @@ let
   commonWorkstationPackages = with pkgs; [
     # Dev/Editor
     vim-full # vim-full includes gvim compared to the regular vim package
-    unstable.neovide
     # unstable.imhex
 
     # Gaming
@@ -193,16 +184,15 @@ let
       ripgrep
       fd
       bear
-      unstable.bash-language-server
+      bash-language-server
       lazygit
       (big nuget)
-      powershell
+      (big powershell)
       nodejs
-      (big bun)
       delta
 
       # Theming
-      unstable.oh-my-posh
+      oh-my-posh
 
       # System status
       htop
@@ -246,8 +236,8 @@ let
 
       # Nix utils
       nixfmt-rfc-style
-      unstable.nix-search-tv
-      (big unstable.nixd) # nix language server
+      nix-search-tv
+      (big nixd) # nix language server
       nix-tree
       statix
       nix-search-cli
