@@ -326,6 +326,11 @@
             ./nix/modules/restic.nix
             ./nix/modules/syncthing.nix
             ./nix/modules/ssd.nix
+
+            nixos-hardware.nixosModules.common-cpu-amd
+            nixos-hardware.nixosModules.common-cpu-amd-pstate
+            nixos-hardware.nixosModules.common-cpu-amd-zenpower
+            nixos-hardware.nixosModules.common-pc-ssd
           ];
         };
 
