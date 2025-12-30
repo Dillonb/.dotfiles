@@ -6,7 +6,8 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable network-manager only if we're not using wpa-supplicant
-  networking.networkmanager.enable = !config.networking.wireless.enable;
+  # networking.networkmanager.enable = !config.networking.wireless.enable;
+  networking.networkmanager.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
