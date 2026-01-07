@@ -38,7 +38,7 @@ let
         gparted
 
         # Gaming
-        chiaki-ng # ps5 remote play
+        stable.chiaki-ng # ps5 remote play
         # lutris
 
         # Chat
