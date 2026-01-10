@@ -235,7 +235,7 @@ let
       toilet
 
       # Nix utils
-      nixfmt-rfc-style
+      nixfmt
       nix-search-tv
       (big nixd) # nix language server
       nix-tree
