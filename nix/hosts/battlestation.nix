@@ -144,7 +144,7 @@ in
         rcloneConfigFile = "${config.services.syncthing.settings.folders."rclone-config".path}/rclone.conf";
         user = "dillon";
         paths = [ "/home/dillon/.local/share/Steam/steamapps/compatdata" ];
-        repository = "rclone:proton:restic-backups/battlestation-steam-compatdata";
+        repository = "rclone:b2-media:restic-steam-compatdata";
         pruneOpts = [
           "--keep-daily 7"
           "--keep-weekly 5"

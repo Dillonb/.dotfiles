@@ -81,7 +81,7 @@
           "/home/dillon"
           "/home/sean"
         ];
-        repository = "rclone:proton:restic-backups/teamspeak-server";
+        repository = "rclone:b2-media:restic-teamspeak-server";
         pruneOpts = [
           "--keep-daily 7"
           "--keep-weekly 5"
