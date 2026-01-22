@@ -132,14 +132,21 @@ require("lazy").setup({
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     config = function()
+      -- TODO: does this need to be updated too?
       if vim.g.gcc_bin_path ~= nil then
         require("nvim-treesitter.install").compilers = { vim.g.gcc_bin_path }
       end
 
-      local configs = require("nvim-treesitter.configs")
+      -- local configs = require("nvim-treesitter.configs")
 
-      configs.setup({
-        ensure_installed = {
+      -- configs.setup({
+      --   ensure_installed = {
+      --   },
+      --   sync_install = false,
+      --   highlight = { enable = true },
+      --   indent = { enable = true },
+      -- })
+      require'nvim-treesitter'.install {
           "c",
           "cpp",
           "rust",
@@ -168,11 +175,8 @@ require("lazy").setup({
           "python",
           "yaml",
           "typst"
-        },
-        sync_install = false,
-        highlight = { enable = true },
-        indent = { enable = true },
-      })
+      }
+
     end
   },
 
