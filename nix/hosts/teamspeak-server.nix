@@ -36,7 +36,7 @@
         forceSSL = true;
         enableACME = true;
         locations."/" = {
-          proxyPass = "http://localhost:8080/";
+          proxyPass = "http://localhost:8000/";
         };
       };
       "bingchill.ing" = {
