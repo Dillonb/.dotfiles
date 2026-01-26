@@ -629,11 +629,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1769406479,
-        "narHash": "sha256-GcLB76YyOA1ytwVQeeM1CU+XXW1+1zd/OD63P9vKn78=",
+        "lastModified": 1769413647,
+        "narHash": "sha256-ANzRTkT3O2FM6LkyBVwEWmiKsotZdzdJkiYFClLBdqI=",
         "owner": "Dillonb",
         "repo": "ts3status-rs",
-        "rev": "d8c1cb2e79243f350cfcbf849df1291ab2b76253",
+        "rev": "fc9a2802a4531b97d3b2988b556a1d1f519bfeca",
         "type": "github"
       },
       "original": {
