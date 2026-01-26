@@ -34,7 +34,7 @@
     };
 
     ts3status = {
-      url = "github:Dillonb/ts3status";
+      url = "github:Dillonb/ts3status-rs";
       inputs.nixpkgs.follows = "nixos-unstable";
     };
     ble-scale = {
