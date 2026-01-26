@@ -80,6 +80,7 @@ let
 
         # Editor
         # neovim-qt
+        (big zed-editor)
 
         # Misc utils
         xorg.xkill
