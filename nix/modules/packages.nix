@@ -234,6 +234,7 @@ let
       difftastic
       ffmpeg
       toilet
+      tree-sitter
 
       # Nix utils
       nixfmt
