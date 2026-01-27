@@ -24,8 +24,6 @@ let
 
     "wireless.env"
 
-    "ts3status.properties"
-    "ts3status.dev.properties"
     "ts3status.toml"
 
     "transmission-auth"
