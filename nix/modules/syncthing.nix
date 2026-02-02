@@ -78,6 +78,7 @@ in
             "battlestation"
             "dulu"
             "dgbmbp"
+            "teamspeak-server"
           ];
         };
       };
