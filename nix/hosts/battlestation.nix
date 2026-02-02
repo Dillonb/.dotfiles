@@ -166,11 +166,6 @@ in
     godot-mono
   ];
 
-  programs.alvr = {
-    enable = true;
-    openFirewall = true;
-  };
-
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   system.stateVersion = "23.11";
