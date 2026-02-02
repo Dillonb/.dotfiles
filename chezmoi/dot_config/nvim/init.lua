@@ -268,7 +268,8 @@ require("lazy").setup({
         'rust_analyzer',
         'pyright',
         'gdscript',
-        'gdshader_lsp'
+        'gdshader_lsp',
+        'marksman'
       })
 
       -- Global config for all LSPs
