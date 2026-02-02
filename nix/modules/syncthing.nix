@@ -78,7 +78,7 @@ in
             "battlestation"
             "dulu"
             "dgbmbp"
-            "teamspeak-server"
+            "pi4"
           ];
         };
       };
