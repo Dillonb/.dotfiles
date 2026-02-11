@@ -78,7 +78,6 @@ in
             "battlestation"
             "dulu"
             "dgbmbp"
-            "pi4"
           ];
         };
       };
