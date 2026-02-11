@@ -26,6 +26,9 @@ let
         # kitty
         ghostty
 
+        # Mail
+        (big no-cuda.thunderbird)
+
         # Util
         scrot
         feh
