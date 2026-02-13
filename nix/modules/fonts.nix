@@ -19,6 +19,7 @@ in
       hack-font
       noto-fonts-cjk-sans
       cascadia-code
+      libertine
       # (nerdfonts.override { fonts = [ "CascadiaCode" ]; })
       nerd-fonts.caskaydia-mono
     ]
