@@ -388,7 +388,6 @@ require("lazy").setup({
         extensions = {
           'quickfix',
           'fugitive',
-          'nvim-dap-ui'
         }
       }
     end
@@ -572,41 +571,6 @@ require("lazy").setup({
     end
   },
 
-  -- Debugger
-  {
-    'mfussenegger/nvim-dap',
-    init = function()
-      local dap = require("dap")
-      dap.adapters.gdb = {
-        type = "executable",
-        command = "gdb",
-        args = { "-i", "dap" }
-      }
-      dap.adapters.lldb = {
-        type = "executable",
-        command = "lldb-dap",
-        name = "lldb",
-      }
-    end
-  },
-
-  -- UI for debugger
-  {
-    "rcarriga/nvim-dap-ui",
-    dependencies = {
-      "mfussenegger/nvim-dap",
-      "nvim-neotest/nvim-nio"
-    },
-    init = function()
-      local dap = require("dapui")
-      dap.setup()
-      -- vim.keymap.set('n', '<leader>d', dap.toggle);
-      vim.cmd.amenu([[PopUp.Debug\ UI <Cmd>lua require("dapui").toggle()<CR>]])
-      vim.cmd.amenu([[PopUp.Toggle\ Breakpoint <Cmd>lua require("dap").toggle_breakpoint()<CR>]])
-      vim.keymap.set('n', '<leader>bp', require("dap").toggle_breakpoint);
-    end
-  },
-
   -- Automatic session saving + restore functionality
   {
     "folke/persistence.nvim",
@@ -735,7 +699,6 @@ require("lazy").setup({
     lazy = false,
     dependencies = {
       "mason-org/mason-lspconfig.nvim",
-      "jay-babu/mason-nvim-dap.nvim",
     },
     init = function()
       require("mason").setup({
@@ -750,7 +713,6 @@ require("lazy").setup({
       require("mason-lspconfig").setup({
         automatic_enable = true
       })
-      require("mason-nvim-dap").setup()
     end,
   },
   {
