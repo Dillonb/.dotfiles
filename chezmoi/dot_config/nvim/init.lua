@@ -163,7 +163,6 @@ require("lazy").setup({
           "gitignore",
           "git_config",
           "git_rebase",
-          "gitcommit",
           "glsl",
           "ini",
           "javascript",
