@@ -130,6 +130,7 @@ require("lazy").setup({
   -- Parser dependency used by many plugins
   {
     "nvim-treesitter/nvim-treesitter",
+    branch = 'main',
     build = ":TSUpdate",
     config = function()
       -- TODO: does this need to be updated too?
