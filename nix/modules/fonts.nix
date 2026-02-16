@@ -10,8 +10,6 @@ let
   );
 in
 {
-  # Fix noto color emoji fonts not rendering in firefox
-  fonts.fontconfig.useEmbeddedBitmaps = true;
   fonts.packages =
     with pkgs;
     [
