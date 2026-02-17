@@ -21,5 +21,5 @@
   };
   console.useXkbConfig = true; # Use xserver keyboard settings in virtual terminals
 
-  programs.kde-pim.kmail = true;
+  # programs.kde-pim.kmail = true;
 }

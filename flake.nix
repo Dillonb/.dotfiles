@@ -223,6 +223,7 @@
               ./nix/modules/flatpak-support.nix
               # ./nix/modules/ime.nix
               ./nix/modules/kde.nix
+              # ./nix/modules/gnome.nix
               ./nix/modules/home-manager.nix
               ./nix/modules/workstation-packages.nix
               ./nix/modules/common-packages.nix
