@@ -3,7 +3,7 @@
 
   inputs = {
     nixos-stable.url = "github:NixOS/nixpkgs/nixos-25.11";
-    nixos-unstable.url = "github:NixOS/nixpkgs/master";
+    nixos-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     agenix.url = "github:ryantm/agenix";
 
@@ -46,7 +46,7 @@
       inputs.nixpkgs.follows = "nixos-unstable";
     };
     pwndbg = {
-      url = "github:pwndbg/pwndbg/2026.02.17";
+      url = "github:pwndbg/pwndbg/2026.02.18";
       inputs.nixpkgs.follows = "nixos-unstable";
     };
     copyparty = {
