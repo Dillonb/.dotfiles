@@ -189,7 +189,7 @@
             final: super: { makeModulesClosure = x: super.makeModulesClosure (x // { allowMissing = true; }); }
           );
 
-          # TODO: Get rid of this and the flake input once ctrl-f support is in a release
+          # TODO: Get rid of this and the flake input once 1.3.0 is out and on the unstable branch
           overlay-ghostty-tip = final: prev: { ghostty = ghostty.packages.${system}.default; };
 
           overlays = (
