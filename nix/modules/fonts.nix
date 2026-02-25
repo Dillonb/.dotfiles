@@ -22,6 +22,7 @@ in
       libertine
       # (nerdfonts.override { fonts = [ "CascadiaCode" ]; })
       nerd-fonts.caskaydia-mono
+      fixedsys-excelsior
     ]
     ++ linuxFonts;
 }
