@@ -15,6 +15,7 @@
           "epiccookie"
           "dehowell"
           "c"
+          "siri"
         ];
       in
       lib.listToAttrs (
@@ -46,6 +47,7 @@
             "dgb"
             "iris"
             "c"
+            "siri"
           ];
         };
       };
@@ -69,6 +71,12 @@
             "dehowell"
             "c"
           ];
+        };
+      };
+      "/siri" = {
+        path = "/zpool/fileshares/siri";
+        access = {
+          rwmd = "siri";
         };
       };
       "/public" = {

@@ -55,6 +55,7 @@ let
     "copyparty-snacks"
     "copyparty-iris"
     "copyparty-dgb"
+    "copyparty-siri"
 
     "miniflux-admin-creds"
   ];
