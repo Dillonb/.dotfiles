@@ -322,7 +322,7 @@
           system = "x86_64-linux";
           cuda = true;
           modules = [
-            ./nix/modules/libreoffice.nix
+            # ./nix/modules/libreoffice.nix
             ./nix/modules/sunshine.nix
             ./nix/modules/restic.nix
             ./nix/modules/syncthing.nix
