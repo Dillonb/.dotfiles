@@ -29,7 +29,7 @@ in
     settings = {
       devices = {
         "desktop-windows" = {
-          id = "GUZCQLR-VIACQQX-V2JEFTC-IO72U6Z-6PF4MLQ-4DTH4FM-NWXFXAO-MP5HAAX";
+          id = "AOHALDM-MKU2I7M-IIWEUU5-MZ6EIYW-XW5XC2F-NR7SYUT-GX7CSPI-ETB4ZQU";
         };
         "teamspeak-server" = {
           id = "FA2QTLW-XOXLFNT-KG6WGGY-CXFQBKU-A4XKJMX-SCGOWSE-2M4NO4E-N3WCQAI";
