@@ -130,6 +130,8 @@ require("lazy").setup({
   -- Parser dependency used by many plugins
   {
     "nvim-treesitter/nvim-treesitter",
+    lazy = true,
+    event = "VeryLazy",
     branch = 'main',
     build = ":TSUpdate",
     config = function()
@@ -368,7 +370,8 @@ require("lazy").setup({
     -- "You can set up your plugin manager to ignore the submodules. They are only used for testing and development."
     -- https://github.com/HiPhish/rainbow-delimiters.nvim/issues/173#issuecomment-2813808544
     submodules = false,
-    lazy = false,
+    lazy = true,
+    event = "VeryLazy"
   },
 
   -- Nice actions for editing surrounding text
@@ -378,7 +381,7 @@ require("lazy").setup({
   {
     'nvim-lualine/lualine.nvim',
     lazy = true,
-    event = { 'BufReadPre', 'BufNewFile' },
+    event = "VeryLazy",
     dependencies = {
       'nvim-tree/nvim-web-devicons',
     },
@@ -695,7 +698,8 @@ require("lazy").setup({
 
   {
     "mason-org/mason.nvim",
-    lazy = false,
+    lazy = true,
+    event = "VeryLazy",
     dependencies = {
       "mason-org/mason-lspconfig.nvim",
     },
@@ -746,32 +750,32 @@ require("lazy").setup({
     opts = {},
     cmd = "Trouble",
   },
-  {
-    "folke/edgy.nvim",
-    event = "VeryLazy",
-    init = function()
-      vim.opt.laststatus = 3
-      vim.opt.splitkeep = "screen"
-      require("edgy").open()
-    end,
-    opts = {
-      close_when_all_hidden = false, -- Leave sidebar open even when all windows are hidden
-      left = {
-        {
-          title = "Neo-Tree",
-          ft = "neo-tree",
-          filter = function(buf)
-            return vim.b[buf].neo_tree_source == "filesystem"
-          end,
-          size = { height = 0.5 },
-          -- pinned = true,
-          open = function()
-            vim.cmd [[Neotree]]
-          end,
-        },
-      }
-    }
-  }
+  -- {
+  --   "folke/edgy.nvim",
+  --   event = "VeryLazy",
+  --   init = function()
+  --     vim.opt.laststatus = 3
+  --     vim.opt.splitkeep = "screen"
+  --     require("edgy").open()
+  --   end,
+  --   opts = {
+  --     close_when_all_hidden = false, -- Leave sidebar open even when all windows are hidden
+  --     left = {
+  --       {
+  --         title = "Neo-Tree",
+  --         ft = "neo-tree",
+  --         filter = function(buf)
+  --           return vim.b[buf].neo_tree_source == "filesystem"
+  --         end,
+  --         size = { height = 0.5 },
+  --         -- pinned = true,
+  --         open = function()
+  --           vim.cmd [[Neotree]]
+  --         end,
+  --       },
+  --     }
+  --   }
+  -- }
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {
