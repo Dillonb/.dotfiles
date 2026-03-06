@@ -12,7 +12,7 @@
   services.displayManager.plasma-login-manager.enable = true;
   services.desktopManager.plasma6.enable = true;
 
-  environment.systemPackages = with pkgs; [ catppuccin-sddm ];
+  environment.systemPackages = with pkgs; [ kdePackages.kde-gtk-config ];
 
   # Configure keymap in X11
   services.xserver = {

@@ -430,7 +430,6 @@
                 name = "dillon";
                 home = "/Users/dillon";
               };
-              dgbCustom.alacritty.fontSize = 18;
             }
           ];
         };

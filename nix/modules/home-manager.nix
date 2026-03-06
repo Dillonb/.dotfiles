@@ -23,65 +23,9 @@ in
       (
         {
           home.stateVersion = stateVersion;
-
-          programs.alacritty = {
-            enable = true;
-            settings = {
-              keyboard.bindings = linuxOnly [
-                {
-                  key = "T";
-                  mods = "Control|Shift";
-                  action = "SpawnNewInstance";
-                }
-                {
-                  key = "N";
-                  mods = "Control|Shift";
-                  action = "SpawnNewInstance";
-                }
-              ];
-              font = {
-                size = dgbCustom.alacritty.fontSize;
-                normal = {
-                  family = dgbCustom.alacritty.fontFamily;
-                  style = "Regular";
-                };
-                bold = {
-                  family = dgbCustom.alacritty.fontFamily;
-                  style = "Bold";
-                };
-                italic = {
-                  family = dgbCustom.alacritty.fontFamily;
-                  style = "Italic";
-                };
-              };
-            };
-          };
-
         }
         // lib.optionalAttrs isLinux {
           home.stateVersion = stateVersion;
-
-          gtk = {
-            enable = true;
-            theme = {
-              name = "Breeze-Dark";
-              package = pkgs.kdePackages.breeze-gtk;
-            };
-            cursorTheme = {
-              name = "breeze_cursors";
-              size = 24;
-              package = pkgs.kdePackages.breeze-gtk;
-            };
-            iconTheme = {
-              name = "breeze-dark";
-              package = pkgs.kdePackages.breeze-gtk;
-            };
-            font = {
-              name = "Noto Sans";
-              size = 10;
-              package = pkgs.noto-fonts;
-            };
-          };
 
           home.file = {
             # Force home-manager to overwrite ~/.gtkrc-2.0 file

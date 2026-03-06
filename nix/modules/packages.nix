@@ -22,7 +22,7 @@ let
       with pkgs;
       [
         # Terminal
-        alacritty
+        # alacritty
         # kitty
         ghostty
 
