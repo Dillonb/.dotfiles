@@ -17,6 +17,7 @@ in
       terminus_font
       dejavu_fonts
       hack-font
+      noto-fonts
       noto-fonts-cjk-sans
       cascadia-code
       libertine
