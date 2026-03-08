@@ -101,7 +101,7 @@
     description = "Parmesean McFlurry";
     shell = pkgs.bashInteractive;
     packages = with pkgs; [
-      (python312.withPackages (
+      (python3.withPackages (
         python-pkgs: with python-pkgs; [
           discordpy
           requests
