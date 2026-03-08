@@ -79,7 +79,12 @@
 
   environment.systemPackages =
     with pkgs;
-    lib.mkIf (config.dgbCustom.enableGaming && pkgs.stdenv.hostPlatform.isx86_64) [ gamescope ];
+    lib.mkIf (config.dgbCustom.enableGaming && pkgs.stdenv.hostPlatform.isx86_64) [
+      gamescope
+      mangohud
+    ];
+
+  environment.sessionVariables.MANGOHUD = pkgs.lib.mkIf config.dgbCustom.enableGaming "1";
 
   xdg.mime = {
     enable = true;
