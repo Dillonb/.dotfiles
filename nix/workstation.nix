@@ -84,8 +84,6 @@
       mangohud
     ];
 
-  environment.sessionVariables.MANGOHUD = pkgs.lib.mkIf config.dgbCustom.enableGaming "1";
-
   xdg.mime = {
     enable = true;
     defaultApplications = {
