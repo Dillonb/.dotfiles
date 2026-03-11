@@ -40,6 +40,12 @@
           rwmd = "dgb";
         };
       };
+      "/syncthing" = {
+        path = "/home/dillon/Syncthing";
+        access = {
+          rwmd = "dgb";
+        };
+      };
       "/panda" = {
         path = "/zpool/fileshares/panda";
         access = {
