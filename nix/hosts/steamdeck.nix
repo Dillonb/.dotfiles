@@ -32,7 +32,7 @@ in
     [
       nh
       neovim
-      ghostty
+      unstable.ghostty
       chezmoi
       nil
       nixGLPkgs.nixGLIntel

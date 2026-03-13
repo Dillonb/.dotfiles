@@ -24,7 +24,7 @@ let
         # Terminal
         # alacritty
         # kitty
-        ghostty
+        unstable.ghostty
 
         # Mail
         (big no-cuda.thunderbird)
