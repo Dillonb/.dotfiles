@@ -86,7 +86,7 @@ let
         (big zed-editor)
 
         # Misc utils
-        xorg.xkill
+        xkill
         # iodine
         # networkmanager-iodine
         stable.tsocks
