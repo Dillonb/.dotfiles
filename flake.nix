@@ -461,6 +461,7 @@
         {
           default = pkgs.mkShell {
             packages = with pkgs; [
+              bashInteractive
               git
               neovim
               zsh
