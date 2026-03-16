@@ -608,13 +608,17 @@ require("lazy").setup({
   -- Integration with tmux, nicer split navigation
   {
     'mrjones2014/smart-splits.nvim',
-    lazy = true,
-    keys = {
-      { '<C-h>', function() require('smart-splits').move_cursor_left() end,  mode = { 'n', 't' } },
-      { '<C-j>', function() require('smart-splits').move_cursor_down() end,  mode = { 'n', 't' } },
-      { '<C-k>', function() require('smart-splits').move_cursor_up() end,    mode = { 'n', 't' } },
-      { '<C-l>', function() require('smart-splits').move_cursor_right() end, mode = { 'n', 't' } },
-    },
+    init = function()
+      vim.keymap.set('n', '<C-h>', require('smart-splits').move_cursor_left)
+      vim.keymap.set('n', '<C-j>', require('smart-splits').move_cursor_down)
+      vim.keymap.set('n', '<C-k>', require('smart-splits').move_cursor_up)
+      vim.keymap.set('n', '<C-l>', require('smart-splits').move_cursor_right)
+
+      vim.keymap.set('t', '<C-h>', require('smart-splits').move_cursor_left)
+      vim.keymap.set('t', '<C-j>', require('smart-splits').move_cursor_down)
+      vim.keymap.set('t', '<C-k>', require('smart-splits').move_cursor_up)
+      vim.keymap.set('t', '<C-l>', require('smart-splits').move_cursor_right)
+    end
   },
 
   -- Changes made in a quickfix window are reflected in the actual file
