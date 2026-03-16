@@ -50,8 +50,13 @@ vim.opt.list = true
 -- Always show at least this many lines above and below the cursor when scrolling
 vim.opt.scrolloff = 5
 
--- Use system clipboard
-vim.cmd [[ set clipboard+=unnamedplus ]]
+-- Use system clipboard (deferred to avoid slow provider detection at startup)
+vim.api.nvim_create_autocmd("UIEnter", {
+  once = true,
+  callback = function()
+    vim.opt.clipboard:append("unnamedplus")
+  end
+})
 
 -- When entering a terminal buffer, auto switch to insert mode
 vim.api.nvim_create_autocmd({ "BufEnter" },
@@ -70,8 +75,14 @@ if vim.fn.exists('g:os') == 0 then
   if is_windows then
     if vim.fn.executable("pwsh") == 1 then
       vim.opt.shell = "pwsh"
+      vim.opt.shellcmdflag = "-NoLogo -NoProfile -NonInteractive -Command"
+      vim.opt.shellquote = ""
+      vim.opt.shellxquote = ""
     elseif vim.fn.executable("powershell") == 1 then
       vim.opt.shell = "powershell"
+      vim.opt.shellcmdflag = "-NoLogo -NoProfile -NonInteractive -Command"
+      vim.opt.shellquote = ""
+      vim.opt.shellxquote = ""
     else
       vim.opt.shell = "cmd"
     end
@@ -375,7 +386,10 @@ require("lazy").setup({
   },
 
   -- Nice actions for editing surrounding text
-  'tpope/vim-surround',
+  {
+    'tpope/vim-surround',
+    event = { 'BufReadPre', 'BufNewFile' },
+  },
 
   -- Nicer status line
   {
@@ -385,7 +399,7 @@ require("lazy").setup({
     dependencies = {
       'nvim-tree/nvim-web-devicons',
     },
-    init = function()
+    config = function()
       require('lualine').setup {
         extensions = {
           'quickfix',
@@ -415,7 +429,8 @@ require("lazy").setup({
   -- Show git changes on the left side of the window
   {
     "lewis6991/gitsigns.nvim",
-    init = function()
+    event = { 'BufReadPre', 'BufNewFile' },
+    config = function()
       require('gitsigns').setup()
     end
   },
@@ -445,8 +460,11 @@ require("lazy").setup({
   {
     'nvim-mini/mini.tabline',
     version = false,
-    init = function()
+    event = "VeryLazy",
+    config = function()
       require('mini.tabline').setup()
+    end,
+    init = function()
       -- go to the next tab
       vim.keymap.set('n', '<leader>l', ':bnext<CR>');
       vim.keymap.set('n', '<leader>L', ':bprevious<CR>');
@@ -524,7 +542,7 @@ require("lazy").setup({
     'kosayoda/nvim-lightbulb',
     lazy = true,
     event = { 'BufReadPre', 'BufNewFile' },
-    init = function()
+    config = function()
       require("nvim-lightbulb").setup({
         autocmd = { enabled = true }
       })
@@ -534,7 +552,7 @@ require("lazy").setup({
   -- :q closes the current tab/buffer, and only closes Neovim if this buffer is the last one.
   {
     'Dillonb/betterquit.nvim',
-    init = function()
+    config = function()
       require("betterquit").setup {}
     end,
   },
@@ -549,18 +567,23 @@ require("lazy").setup({
   -- },
 
   -- Git integration
-  'tpope/vim-fugitive',
+  {
+    'tpope/vim-fugitive',
+    cmd = { "Git", "G", "Gstatus", "Gblame", "Gpush", "Gpull", "Gdiffsplit", "Gvdiffsplit" },
+    event = "VeryLazy",
+  },
 
   -- Commenting
   {
     'tpope/vim-commentary',
-    init = function()
+    keys = {
       -- map ctrl-/ to toggle comments
       -- Some terminals will send ctrl-/ as ctrl-_
       -- but some (newer?) will send it correctly, so map both
-      vim.keymap.set({ 'n', 'v' }, '<C-_>', ":Commentary<CR>")
-      vim.keymap.set({ 'n', 'v' }, '<C-/>', ":Commentary<CR>")
-    end,
+      { '<C-_>', ":Commentary<CR>", mode = { 'n', 'v' } },
+      { '<C-/>', ":Commentary<CR>", mode = { 'n', 'v' } },
+    },
+    cmd = "Commentary",
   },
 
   -- Automatically close braces, parens, etc, and allows you to type "through"
@@ -568,7 +591,7 @@ require("lazy").setup({
     'windwp/nvim-autopairs',
     lazy = true,
     event = { 'BufReadPre', 'BufNewFile' },
-    init = function()
+    config = function()
       require("nvim-autopairs").setup()
     end
   },
@@ -585,22 +608,19 @@ require("lazy").setup({
   -- Integration with tmux, nicer split navigation
   {
     'mrjones2014/smart-splits.nvim',
-    init = function()
-      vim.keymap.set('n', '<C-h>', require('smart-splits').move_cursor_left)
-      vim.keymap.set('n', '<C-j>', require('smart-splits').move_cursor_down)
-      vim.keymap.set('n', '<C-k>', require('smart-splits').move_cursor_up)
-      vim.keymap.set('n', '<C-l>', require('smart-splits').move_cursor_right)
-
-      vim.keymap.set('t', '<C-h>', require('smart-splits').move_cursor_left)
-      vim.keymap.set('t', '<C-j>', require('smart-splits').move_cursor_down)
-      vim.keymap.set('t', '<C-k>', require('smart-splits').move_cursor_up)
-      vim.keymap.set('t', '<C-l>', require('smart-splits').move_cursor_right)
-    end
+    lazy = true,
+    keys = {
+      { '<C-h>', function() require('smart-splits').move_cursor_left() end,  mode = { 'n', 't' } },
+      { '<C-j>', function() require('smart-splits').move_cursor_down() end,  mode = { 'n', 't' } },
+      { '<C-k>', function() require('smart-splits').move_cursor_up() end,    mode = { 'n', 't' } },
+      { '<C-l>', function() require('smart-splits').move_cursor_right() end, mode = { 'n', 't' } },
+    },
   },
 
   -- Changes made in a quickfix window are reflected in the actual file
   {
-    "stefandtw/quickfix-reflector.vim"
+    "stefandtw/quickfix-reflector.vim",
+    event = "VeryLazy",
   },
 
   -- Find unmapped keys easily
@@ -656,15 +676,16 @@ require("lazy").setup({
         },
       }
     },
-    init = function()
-      vim.keymap.set('n', '<leader>g', require("snacks").lazygit.open)
-      vim.keymap.set('n', '<leader>t', require("snacks").terminal.toggle);
-    end
+    keys = {
+      { '<leader>g', function() require("snacks").lazygit.open() end, desc = "Lazygit" },
+      { '<leader>t', function() require("snacks").terminal.toggle() end, desc = "Toggle terminal" },
+    },
   },
 
   -- Nicer UI for selections
   {
-    "stevearc/dressing.nvim"
+    "stevearc/dressing.nvim",
+    event = "VeryLazy",
   },
 
   -- Show the first line of the function, class, etc, at the top of the screen
@@ -703,7 +724,7 @@ require("lazy").setup({
     dependencies = {
       "mason-org/mason-lspconfig.nvim",
     },
-    init = function()
+    config = function()
       require("mason").setup({
         ui = {
           icons = {
