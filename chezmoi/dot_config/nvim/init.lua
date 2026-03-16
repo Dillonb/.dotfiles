@@ -89,6 +89,18 @@ if vim.fn.exists('g:os') == 0 then
     else
       vim.opt.shell = "cmd"
     end
+
+    -- Windows has no tmux, so the smart-splits plugin is disabled to save startup time.
+    -- Setup the same keybinds here
+    vim.keymap.set('n', '<C-h>', '<C-w>h')
+    vim.keymap.set('n', '<C-j>', '<C-w>j')
+    vim.keymap.set('n', '<C-k>', '<C-w>k')
+    vim.keymap.set('n', '<C-l>', '<C-w>l')
+
+    vim.keymap.set('t', '<C-h>', '<C-\\><C-n><C-w>h')
+    vim.keymap.set('t', '<C-j>', '<C-\\><C-n><C-w>j')
+    vim.keymap.set('t', '<C-k>', '<C-\\><C-n><C-w>k')
+    vim.keymap.set('t', '<C-l>', '<C-\\><C-n><C-w>l')
   end
 end
 
@@ -609,9 +621,10 @@ require("lazy").setup({
     }
   },
 
-  -- Integration with tmux, nicer split navigation
+  -- Integration with tmux, nicer split navigation (disabled on Windows where tmux doesn't exist)
   {
     'mrjones2014/smart-splits.nvim',
+    cond = vim.fn.has("win32") == 0,
     init = function()
       vim.keymap.set('n', '<C-h>', require('smart-splits').move_cursor_left)
       vim.keymap.set('n', '<C-j>', require('smart-splits').move_cursor_down)
@@ -669,17 +682,6 @@ require("lazy").setup({
           { section = "keys", gap = 1, padding = 1 },
           { pane = 2, icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
           { pane = 2, icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
-          {
-            pane = 2,
-            section = 'terminal',
-            icon = ' ',
-            title = 'Git Status',
-            enabled = vim.fn.isdirectory('.git') == 1 and vim.fn.executable("hub") == 1,
-            cmd = 'hub diff --stat -B -M -C',
-            height = 8,
-            padding = 2,
-            indent = 0
-          },
           { section = "startup" },
         },
       }
