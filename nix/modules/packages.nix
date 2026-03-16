@@ -194,7 +194,7 @@ let
       (big powershell)
       nodejs
       delta
-      (big github-copilot-cli)
+      (big unstable.github-copilot-cli)
 
       # Theming
       oh-my-posh
