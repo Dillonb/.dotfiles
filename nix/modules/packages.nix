@@ -183,7 +183,6 @@ let
       python3
       mypy
       gh # github cli
-      hub # another github cli
       lua-language-server
       ripgrep
       fd
