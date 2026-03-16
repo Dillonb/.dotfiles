@@ -1,6 +1,9 @@
-vim.opt.encoding = "utf-8"
--- Not compatible with vi (do I need this in Neovim?)
-vim.opt.compatible = false
+-- Disable unused providers
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_node_provider = 0
+vim.g.loaded_perl_provider = 0
+
 vim.opt.showcmd = true
 
 -- Don't add a newline at the end of the file when saving
@@ -436,7 +439,7 @@ require("lazy").setup({
   },
 
   -- Autodetect indentation settings
-  { 'tpope/vim-sleuth', lazy = false },
+  { 'tpope/vim-sleuth', event = { 'BufReadPre', 'BufNewFile' } },
 
   -- Tabs
   -- {
@@ -552,6 +555,7 @@ require("lazy").setup({
   -- :q closes the current tab/buffer, and only closes Neovim if this buffer is the last one.
   {
     'Dillonb/betterquit.nvim',
+    event = "VeryLazy",
     config = function()
       require("betterquit").setup {}
     end,
