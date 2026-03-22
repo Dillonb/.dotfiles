@@ -105,7 +105,6 @@ fi
 
 if command -v nh &>/dev/null; then
     export NH_FLAKE=$(readlink -f ~/.dotfiles)
-    eval "$(nh completions zsh)"
 fi
 
 alias arch-fastestmirrors="curl -s \"https://archlinux.org/mirrorlist/?country=US&country=CA&protocol=https&use_mirror_status=on\" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 -"
