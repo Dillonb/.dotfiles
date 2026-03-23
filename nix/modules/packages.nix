@@ -193,11 +193,7 @@ let
       (big powershell)
       nodejs
       delta
-      (big (
-        unstable.github-copilot-cli.overrideAttrs (old: {
-          postInstall = "";
-        })
-      ))
+      (big unstable.github-copilot-cli)
 
       # Theming
       oh-my-posh
