@@ -830,10 +830,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- I don't know if this is necessary - hook completion and tags up to the LSP manually
     local client = vim.lsp.get_client_by_id(args.data.client_id)
     if client ~= nil then
-      if client.supports_method("textDocument/completion") then
+      if client:supports_method("textDocument/completion") then
         vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
       end
-      if client.supports_method("textDocument/definition") then
+      if client:supports_method("textDocument/definition") then
         vim.bo[bufnr].tagfunc = "v:lua.vim.lsp.tagfunc"
       end
     end
