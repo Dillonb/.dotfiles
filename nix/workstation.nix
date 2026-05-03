@@ -71,7 +71,7 @@
       enable = true;
     };
 
-    wireshark.enable = true;
+    # wireshark.enable = true;
     dconf.enable = true; # for home-manager
 
     xwayland.enable = true;
