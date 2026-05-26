@@ -33,8 +33,4 @@
     };
 
   };
-  environment.systemPackages = with pkgs; [
-    easyeffects
-    qpwgraph
-  ];
 }

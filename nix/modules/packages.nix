@@ -6,13 +6,12 @@
 let
   optionals = pkgs.lib.optionals;
   isLinux = pkgs.stdenv.isLinux;
-  isX64 = pkgs.stdenv.isx86_64;
-  isLinuxX64 = isLinux && isX64;
-  # isLinuxArm64 = isLinux && pkgs.stdenv.hostPlatform.isAarch64;
   isDarwin = pkgs.stdenv.isDarwin;
-
+  isPipewireEnabled = config.services.pipewire.enable;
   isMinimalSystem = config.dgbCustom.minimal;
+
   big = package: if isMinimalSystem then null else package;
+  x64 = package: if pkgs.stdenv.isx86_64 then package else null;
 
   pwndbg = inputs.pwndbg.packages."${pkgs.stdenv.hostPlatform.system}".default;
   pwndbg-lldb = inputs.pwndbg.packages."${pkgs.stdenv.hostPlatform.system}".pwndbg-lldb;
@@ -94,25 +93,17 @@ let
         pavucontrol
         # distrobox
         # posting
-      ]
-    )
-  );
 
-  linuxX64WorkstationPackages = (
-    optionals isLinuxX64 (
-      with pkgs;
-      [
-        # Mail
-        (big protonmail-desktop)
-
-        (big google-chrome)
-        unstable.discord
-        (big jellyfin-desktop)
-        # (big slack)
-        # (big renderdoc)
-        (big spotify)
-        # (big teamspeak3)
-        (big teamspeak6-client)
+        # x64 only stuff
+        (x64 big protonmail-desktop)
+        (x64 big google-chrome)
+        (x64 unstable.discord)
+        (x64 big jellyfin-desktop)
+        # (x64 big slack)
+        # (x64 big renderdoc)
+        (x64 big spotify)
+        # (x64 big teamspeak3)
+        (x64 big teamspeak6-client)
       ]
     )
   );
@@ -157,6 +148,10 @@ let
       smartmontools
       vtm
     ]
+    ++ (optionals isPipewireEnabled [
+      (x64 easyeffects)
+      qpwgraph
+    ])
   );
 
   # Mac specific
@@ -254,16 +249,12 @@ let
       fortune
       dwt1-shell-color-scripts
     ]
-    ++ [ inputs.detectcharset.packages."${pkgs.stdenv.hostPlatform.system}".default ]
-    ++ (optionals isX64 [
-      # (big (asmrepl.override { bundlerApp = bundlerApp.override { ruby = ruby_3_2; }; }))
-    ]);
+    ++ [ inputs.detectcharset.packages."${pkgs.stdenv.hostPlatform.system}".default ];
 
 in
 {
   workstationPackages = builtins.filter (pkg: pkg != null) (
     linuxWorkstationPackages
-    ++ linuxX64WorkstationPackages
     ++ darwinWorkstationPackages
     ++ commonWorkstationPackages
   );
