@@ -9,9 +9,17 @@ let
   isDarwin = pkgs.stdenv.isDarwin;
   isPipewireEnabled = config.services.pipewire.enable;
   isMinimalSystem = config.dgbCustom.minimal;
+  isGamingEnabled = config.dgbCustom.enableGaming;
 
-  big = package: if isMinimalSystem then null else package;
-  x64 = package: if pkgs.stdenv.isx86_64 then package else null;
+  # Filter packages based on a condition.
+  # `skip` is a marker that is both a boolean and a function that returns itself, allowing filters to be chained.
+  skip = { __skip = true; __functor = self: _: self; };
+  filter = condition: package: if (package ? __skip) || !condition then skip else package;
+
+  big = filter (!isMinimalSystem);
+  x64 = filter pkgs.stdenv.isx86_64;
+  needsPipewire = filter isPipewireEnabled;
+  gaming = filter isGamingEnabled;
 
   pwndbg = inputs.pwndbg.packages."${pkgs.stdenv.hostPlatform.system}".default;
   pwndbg-lldb = inputs.pwndbg.packages."${pkgs.stdenv.hostPlatform.system}".pwndbg-lldb;
@@ -104,6 +112,9 @@ let
         (x64 big spotify)
         # (x64 big teamspeak3)
         (x64 big teamspeak6-client)
+
+        (gaming x64 gamescope)
+        (gaming x64 mangohud)
       ]
     )
   );
@@ -147,11 +158,9 @@ let
       nvme-cli
       smartmontools
       vtm
+      (needsPipewire x64 easyeffects)
+      (needsPipewire qpwgraph)
     ]
-    ++ (optionals isPipewireEnabled [
-      (x64 easyeffects)
-      qpwgraph
-    ])
   );
 
   # Mac specific
@@ -253,13 +262,13 @@ let
 
 in
 {
-  workstationPackages = builtins.filter (pkg: pkg != null) (
+  workstationPackages = builtins.filter (pkg: !(pkg ? __skip)) (
     linuxWorkstationPackages
     ++ darwinWorkstationPackages
     ++ commonWorkstationPackages
   );
 
-  commonPackages = builtins.filter (pkg: pkg != null) (
+  commonPackages = builtins.filter (pkg: !(pkg ? __skip)) (
     linuxCommonPkgs ++ darwinCommonPkgs ++ commonCommonPkgs
   );
 }
