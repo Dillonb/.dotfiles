@@ -13,7 +13,10 @@ let
 
   # Filter packages based on a condition.
   # `skip` is a marker that is both a boolean and a function that returns itself, allowing filters to be chained.
-  skip = { __skip = true; __functor = self: _: self; };
+  skip = {
+    __skip = true;
+    __functor = self: _: self;
+  };
   filter = condition: package: if (package ? __skip) || !condition then skip else package;
 
   big = filter (!isMinimalSystem);
@@ -263,9 +266,7 @@ let
 in
 {
   workstationPackages = builtins.filter (pkg: !(pkg ? __skip)) (
-    linuxWorkstationPackages
-    ++ darwinWorkstationPackages
-    ++ commonWorkstationPackages
+    linuxWorkstationPackages ++ darwinWorkstationPackages ++ commonWorkstationPackages
   );
 
   commonPackages = builtins.filter (pkg: !(pkg ? __skip)) (
