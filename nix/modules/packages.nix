@@ -51,7 +51,7 @@ let
         gparted
 
         # Gaming
-        stable.chiaki-ng # ps5 remote play
+        (big stable.chiaki-ng) # ps5 remote play
         # lutris
 
         # Chat
@@ -138,7 +138,7 @@ let
     # unstable.imhex
 
     # Gaming
-    moonlight-qt
+    (big moonlight-qt)
   ];
 
   # Linux specific
