@@ -55,7 +55,7 @@ let
         # lutris
 
         # Chat
-        # (big unstable.vesktop)
+        (big unstable.vesktop)
         (big signal-desktop)
         # hexchat
         (big element-desktop)
