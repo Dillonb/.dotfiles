@@ -216,7 +216,6 @@ let
       wget
       fzf
       tmux
-      silver-searcher
       bat
       dos2unix
       jq
