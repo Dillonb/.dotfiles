@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   security.wrappers.restic = {
     source = "${pkgs.restic.out}/bin/restic";
     owner = "dillon";

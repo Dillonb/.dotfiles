@@ -3,7 +3,11 @@ let
   webhookFile = config.age.secrets."nixos-unstable-discord-webhook".path;
   script = pkgs.writeShellApplication {
     name = "nixos-unstable-watcher";
-    runtimeInputs = with pkgs; [ curl jq coreutils ];
+    runtimeInputs = with pkgs; [
+      curl
+      jq
+      coreutils
+    ];
     text = ''
       state="$STATE_DIRECTORY/last-revision"
       new=$(curl -fsSL https://channels.nixos.org/nixos-unstable/git-revision)

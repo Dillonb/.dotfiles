@@ -1,5 +1,4 @@
-{ ... }:
-{
+{ ... }: {
   users = {
     users.dbeliveau = {
       name = "dbeliveau";

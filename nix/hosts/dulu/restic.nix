@@ -1,5 +1,4 @@
-{ config, ... }:
-{
+{ config, ... }: {
   services.restic = {
     backups = {
       dulu = {

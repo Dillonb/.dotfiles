@@ -1,5 +1,4 @@
-{ ... }:
-{
+{ ... }: {
   imports = [
     ./pi4/configuration.nix
     ./pi4/hdmi_cec.nix

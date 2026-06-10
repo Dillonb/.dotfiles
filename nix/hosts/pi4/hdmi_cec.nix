@@ -1,6 +1,5 @@
 # https://nixos.wiki/wiki/NixOS_on_ARM/Raspberry_Pi_4#HDMI-CEC
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   # an overlay to enable raspberrypi support in libcec, and thus cec-client
   # nixpkgs.overlays = [
   #   (self: super: { libcec = super.libcec.override { withLibraspberrypi = true; }; })

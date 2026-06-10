@@ -1,5 +1,4 @@
-{ ... }:
-{
+{ ... }: {
   virtualisation.oci-containers = {
     backend = "docker";
     containers.pihole = {

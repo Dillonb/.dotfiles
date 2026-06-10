@@ -109,8 +109,7 @@
             };
           };
           overlays = (
-            { ... }:
-            {
+            { ... }: {
               nixpkgs.overlays = [
                 overlay-unstable
                 overlay-stable
@@ -187,8 +186,7 @@
           );
 
           overlays = (
-            { ... }:
-            {
+            { ... }: {
               nixpkgs.overlays = [
                 overlay-stable
                 overlay-unstable
@@ -282,8 +280,7 @@
             };
           };
           overlays = (
-            { ... }:
-            {
+            { ... }: {
               nixpkgs.overlays = [
                 overlay-stable
                 overlay-unstable
@@ -438,8 +435,7 @@
       };
 
       packages = forEachSystem (
-        { pkgs }:
-        {
+        { pkgs }: {
           all-nixos-systems = pkgs.stdenv.mkDerivation {
             name = "all-nixos-systems.json";
             phases = [
@@ -458,8 +454,7 @@
       );
 
       devShells = forEachSystem (
-        { pkgs }:
-        {
+        { pkgs }: {
           default = pkgs.mkShell {
             packages = with pkgs; [
               bashInteractive
