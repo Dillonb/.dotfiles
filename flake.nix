@@ -362,6 +362,7 @@
             ./nix/modules/restic.nix
             ./nix/modules/netdata.nix
             ./nix/modules/ssd.nix
+            ./nix/modules/nixos-unstable-watcher.nix
           ];
         };
 

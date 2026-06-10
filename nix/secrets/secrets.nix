@@ -58,6 +58,8 @@ let
     "copyparty-siri"
 
     "miniflux-admin-creds"
+
+    "nixos-unstable-discord-webhook"
   ];
 
   secretsAttrList = map (filename: {
