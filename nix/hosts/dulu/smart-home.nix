@@ -5,11 +5,16 @@
   ...
 }:
 {
-  networking.firewall.allowedTCPPorts = [
-    # home assistant
-    8123
-    config.services.zigbee2mqtt.settings.frontend.port
-  ];
+  networking.firewall = {
+    allowedTCPPorts = [
+      # home assistant
+      8123
+      config.services.zigbee2mqtt.settings.frontend.port
+    ];
+    allowedUDPPorts = [
+      5540 # matter
+    ];
+  };
   services.mosquitto = {
     enable = true;
     listeners = [
