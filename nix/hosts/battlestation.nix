@@ -120,6 +120,8 @@ in
     "NIXOS_OZONE_WL" = "1";
     # Disabled for now - if stuttering comes back try reenabling
     "KWIN_DRM_DISABLE_TRIPLE_BUFFERING" = "1";
+    # Offload Nvidia OpenGL driver's CPU computation to a worker thread (can help with cpu-bound GPU intensive applications)
+    "__GL_THREADED_OPTIMIZATIONS" = "1";
   };
 
   # libvirtd
