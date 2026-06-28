@@ -53,6 +53,7 @@ let
         # Gaming
         (big stable.chiaki-ng) # ps5 remote play
         # lutris
+        (big kdePackages.kpat)
 
         # Chat
         (big unstable.vesktop)
