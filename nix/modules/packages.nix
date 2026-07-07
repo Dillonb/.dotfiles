@@ -49,6 +49,7 @@ let
         xclip # X11 clipboard from cli
         parsec-bin
         gparted
+        (big no-cuda.calibre)
 
         # Gaming
         (big stable.chiaki-ng) # ps5 remote play
