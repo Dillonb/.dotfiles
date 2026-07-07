@@ -91,7 +91,6 @@ jobs:
       # Only authenticate to attic when the push token is available (i.e. not on
       # pull requests from forks). Builds still run and verify without it.
       - name: Set up attic cache
-        id: attic
         if: env.ATTIC_TOKEN != ''
         uses: ryanccn/attic-action@v0.5.0
         with:
@@ -101,12 +100,5 @@ jobs:
 
       - name: Build ${{ matrix.host }}
         run: |
-          nix build -L --show-trace --print-out-paths \
-            ".#nixosConfigurations.${{ matrix.host }}.config.system.build.toplevel" \
-            | tee "$RUNNER_TEMP/out-paths"
-
-      # attic-action pushes new paths automatically at the end of the job, but
-      # push explicitly too so failures surface clearly.
-      - name: Push to attic
-        if: steps.attic.outcome == 'success'
-        run: attic push "$ATTIC_CACHE" $(cat "$RUNNER_TEMP/out-paths")
+          nix build -L --show-trace \
+            ".#nixosConfigurations.${{ matrix.host }}.config.system.build.toplevel"
