@@ -230,6 +230,10 @@
             # Allow large NAR uploads and stream them straight to atticd.
             client_max_body_size 0;
             proxy_request_buffering off;
+            # atticd can be slow to respond while writing large NARs under
+            # load; raise the upstream timeouts so pushes don't 504.
+            proxy_read_timeout 300s;
+            proxy_send_timeout 300s;
           '';
         };
       };
