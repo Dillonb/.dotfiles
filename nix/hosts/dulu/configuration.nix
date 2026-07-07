@@ -21,6 +21,7 @@ in
     ./media-server.nix
     ./nginx.nix
     ./dns.nix
+    ./atticd.nix
     # ./pihole.nix
     ./smart-home.nix
     ./copyparty.nix

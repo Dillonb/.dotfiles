@@ -249,6 +249,7 @@ let
 
       # Nix utils
       (big nixfmt)
+      attic-client
       (big nix-search-tv)
       (big nixd) # nix language server
       nix-tree

@@ -220,6 +220,20 @@
         };
       };
 
+      "attic.dgb.sh" = {
+        forceSSL = true;
+        enableACME = true;
+        locations."/" = {
+          proxyPass = "http://${toString config.services.atticd.settings.listen}";
+          recommendedProxySettings = true;
+          extraConfig = ''
+            # Allow large NAR uploads and stream them straight to atticd.
+            client_max_body_size 0;
+            proxy_request_buffering off;
+          '';
+        };
+      };
+
       "anki.dgb.sh" = {
         forceSSL = true;
         enableACME = true;

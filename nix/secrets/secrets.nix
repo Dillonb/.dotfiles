@@ -45,6 +45,8 @@ let
 
     "nix-cache-priv-key.pem"
 
+    "atticd-env"
+
     "anki-password"
 
     "plex-token"
