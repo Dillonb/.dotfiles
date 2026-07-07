@@ -42,6 +42,14 @@ in
   ];
   services.netdata = {
     enable = true;
+    # Add -trimpath to netdata's Go build so it doesn't pin the Go toolchain (~216 MiB) into the closure.
+    package = pkgs.netdata.overrideAttrs (old: {
+      postPatch = (old.postPatch or "") + ''
+        substituteInPlace packaging/cmake/Modules/NetdataGoTools.cmake \
+          --replace-fail '"''${GO_EXECUTABLE}" build -buildvcs=false' \
+                         '"''${GO_EXECUTABLE}" build -trimpath -buildvcs=false'
+      '';
+    });
     configDir = {
       "health_alarm_notify.conf" = config.age.secrets."netdata-discord.conf".path;
       "health.d/systemdunits.conf" = pkgs.writeText "systemdunits-health.conf" (
