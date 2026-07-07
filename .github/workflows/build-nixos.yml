@@ -1,0 +1,112 @@
+name: Build NixOS systems
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+# Shared config, kept here so it is easy to update in one place.
+env:
+  RUNNER_X86: ubuntu-latest
+  RUNNER_ARM: ubuntu-24.04-arm
+  ATTIC_ENDPOINT: https://attic.dgb.sh/
+  ATTIC_CACHE: system
+  ATTIC_PUBLIC_KEY: system:8wY144D+RiSnHTEn14pAI++9jPMPT34mXMYMzZPB/Jg=
+  ALTERNATE_CACHE_ENDPOINT: https://cache.nix.dgb.sh
+  ALTERNATE_CACHE_PUBLIC_KEY: cache.nix.dgb.sh:XzJS7VYoZ90T3fwKySBAqfKdxViX6zk2PJvlKVD+euU=
+
+jobs:
+  # Generate the build matrix straight from the flake so it always tracks
+  # nixosConfigurations. aarch64-linux hosts are routed to native arm64 runners.
+  matrix:
+    name: Generate matrix
+    runs-on: ubuntu-latest
+    outputs:
+      include: ${{ steps.generate.outputs.include }}
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+        with:
+          extra-conf: access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+      - name: Generate matrix
+        id: generate
+        run: |
+          INCLUDE=$(nix eval --json --impure --expr '
+            let
+              flake = builtins.getFlake (toString ./.);
+              systemOf = host:
+                flake.nixosConfigurations.${host}.config.nixpkgs.system;
+              runnerFor = system:
+                if system == "aarch64-linux" then "${{ env.RUNNER_ARM }}" else "${{ env.RUNNER_X86 }}";
+            in
+            map (host: {
+              inherit host;
+              platform = systemOf host;
+              runner = runnerFor (systemOf host);
+            }) (builtins.attrNames flake.nixosConfigurations)
+          ')
+          echo "include=$INCLUDE" >> "$GITHUB_OUTPUT"
+          echo "$INCLUDE" | nix run nixpkgs#jq -- .
+
+  build:
+    name: Build ${{ matrix.host }}
+    needs: matrix
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJson(needs.matrix.outputs.include) }}
+    runs-on: ${{ matrix.runner }}
+    env:
+      ATTIC_TOKEN: ${{ secrets.ATTIC_TOKEN }}
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Free disk space
+        uses: thiagokokada/free-disk-space@main
+        with:
+          tool-cache: true
+          opt: true
+          usrlocal: true
+          usrmisc: true
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+        with:
+          # Pull unchanged paths from the self-hosted caches so each run only
+          # builds what actually changed.
+          extra-conf: |
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+            extra-substituters = ${{ env.ATTIC_ENDPOINT }}${{ env.ATTIC_CACHE }} ${{ env.ALTERNATE_CACHE_ENDPOINT }}
+            extra-trusted-public-keys = ${{ env.ATTIC_PUBLIC_KEY }} ${{ env.ALTERNATE_CACHE_PUBLIC_KEY }}
+
+      # Only authenticate to attic when the push token is available (i.e. not on
+      # pull requests from forks). Builds still run and verify without it.
+      - name: Set up attic cache
+        id: attic
+        if: env.ATTIC_TOKEN != ''
+        uses: ryanccn/attic-action@v0.5.0
+        with:
+          endpoint: ${{ env.ATTIC_ENDPOINT }}
+          cache: ${{ env.ATTIC_CACHE }}
+          token: ${{ secrets.ATTIC_TOKEN }}
+
+      - name: Build ${{ matrix.host }}
+        run: |
+          nix build -L --show-trace --print-out-paths \
+            ".#nixosConfigurations.${{ matrix.host }}.config.system.build.toplevel" \
+            | tee "$RUNNER_TEMP/out-paths"
+
+      # attic-action pushes new paths automatically at the end of the job, but
+      # push explicitly too so failures surface clearly.
+      - name: Push to attic
+        if: steps.attic.outcome == 'success'
+        run: attic push "$ATTIC_CACHE" $(cat "$RUNNER_TEMP/out-paths")
