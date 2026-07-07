@@ -3,4 +3,4 @@
 git:
   autoFetch: false
   pagers:
-    - externalDiffCommand: '{{ .chezmoi.destDir }}/AppData/Roaming/jesseduffield/lazygit/lazygit-pager.bat'
+    - pager: delta --dark --paging=never
