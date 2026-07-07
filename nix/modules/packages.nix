@@ -186,21 +186,21 @@ let
     with pkgs;
     [
       # Dev
-      nasm
-      pyright # python language server
-      pipenv
-      python3
-      mypy
-      gh # github cli
-      lua-language-server
+      (big nasm)
+      (big pyright) # python language server
+      (big pipenv)
+      (big python3)
+      (big mypy)
+      (big gh) # github cli
+      (big lua-language-server)
       ripgrep
       fd
-      bear
-      bash-language-server
-      lazygit
+      (big bear)
+      (big bash-language-server)
+      (big lazygit)
       (big nuget)
       (big powershell)
-      nodejs
+      (big nodejs)
       delta
       (big unstable.github-copilot-cli)
 
@@ -225,7 +225,7 @@ let
       file
       netcat-gnu
       inetutils
-      asciinema
+      (big asciinema)
       unzip
       zip
       p7zip
@@ -235,25 +235,25 @@ let
       dig
       chezmoi
       (big unstable.yt-dlp)
-      mediainfo
+      (big mediainfo)
       television
       nvd
       fend
       zoxide
       zstd
       dua
-      difftastic
-      ffmpeg
+      (big difftastic)
+      (big ffmpeg)
       toilet
-      tree-sitter
+      (big tree-sitter)
 
       # Nix utils
-      nixfmt
-      nix-search-tv
+      (big nixfmt)
+      (big nix-search-tv)
       (big nixd) # nix language server
       nix-tree
-      statix
-      nix-search-cli
+      (big statix)
+      (big nix-search-cli)
       nix-index
       nix-output-monitor
       nix-your-shell

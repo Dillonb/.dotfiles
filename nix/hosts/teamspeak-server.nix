@@ -103,7 +103,7 @@
     packages = with pkgs; [
       (python3.withPackages (
         python-pkgs: with python-pkgs; [
-          discordpy
+          (discordpy.override { withVoice = false; })
           requests
         ]
       ))
