@@ -210,7 +210,7 @@ let
       # System status
       htop
       btop
-      fastfetch
+      (big fastfetch)
       nload
       ncdu
 
