@@ -1,0 +1,54 @@
+name: Update flake.lock
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+
+jobs:
+  check:
+    name: Check if nixpkgs channels advanced
+    runs-on: ubuntu-latest
+    outputs:
+      advanced: ${{ steps.check.outputs.advanced }}
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Compare locked revs to channel branch HEADs
+        id: check
+        run: |
+          advanced=false
+          for input in nixos-unstable nixos-stable; do
+            ref=$(jq -r --arg i "$input" '.nodes[$i].original.ref' flake.lock)
+            locked=$(jq -r --arg i "$input" '.nodes[$i].locked.rev' flake.lock)
+            head=$(git ls-remote https://github.com/NixOS/nixpkgs "refs/heads/$ref" | cut -f1)
+            echo "$input ($ref): locked=${locked:0:12} head=${head:0:12}"
+            if [ -n "$head" ] && [ "$locked" != "$head" ]; then
+              advanced=true
+            fi
+          done
+          echo "advanced=$advanced" >> "$GITHUB_OUTPUT"
+
+  update:
+    name: Update flake.lock and open PR
+    needs: check
+    if: needs.check.outputs.advanced == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+        with:
+          extra-conf: access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+
+      # Uses a PAT so the resulting PR triggers build-nixos.yml (the default
+      # GITHUB_TOKEN cannot trigger further workflow runs).
+      - name: Update flake.lock
+        uses: DeterminateSystems/update-flake-lock@main
+        with:
+          token: ${{ secrets.GH_PAT }}
+          pr-title: "flake.lock: update inputs"
+          commit-msg: "flake.lock: update inputs"
