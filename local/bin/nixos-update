@@ -7,6 +7,11 @@ else
     operation="$1"
 fi
 
-derivation=$(ssh dgb.sh readlink -f .dotfiles/build/systems-gcroots/"$(hostname)")
+derivation=$(curl -fsSL https://github.com/Dillonb/.dotfiles/releases/download/latest/systems.json | jq -r --arg h "$(hostname)" '.[$h]')
+
+if [ -z "$derivation" ] || [ "$derivation" = "null" ]; then
+    echo "No store path found for $(hostname) in the latest systems.json manifest" >&2
+    exit 1
+fi
 
 nixos-from-derivation "$derivation" "$operation"
