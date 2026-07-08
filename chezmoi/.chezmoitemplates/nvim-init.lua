@@ -160,6 +160,11 @@ require("lazy").setup({
     event = "VeryLazy",
     branch = 'main',
     build = ":TSUpdate",
+    init = function()
+      vim.api.nvim_create_autocmd('FileType', {
+        callback = function(args) pcall(vim.treesitter.start, args.buf) end,
+      })
+    end,
     config = function()
       -- TODO: does this need to be updated too?
       if vim.g.gcc_bin_path ~= nil then
