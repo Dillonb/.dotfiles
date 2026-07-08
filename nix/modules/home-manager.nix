@@ -14,7 +14,7 @@ in
     useGlobalPkgs = true;
     backupFileExtension = "home-manager-backup";
     users.${dgbCustom.username} =
-      { pkgs, config, ... }:
+      { pkgs, ... }:
       let
         inherit (pkgs) stdenv;
         inherit (lib) mkIf;
@@ -42,7 +42,7 @@ in
                 };
 
                 Service = {
-                  ExecStart = "${lib.getExe pkgs._1password-gui} --silent";
+                  ExecStart = "${lib.getExe config.programs._1password-gui.package} --silent";
                   Type = "exec";
                   Restart = "always";
                 };
