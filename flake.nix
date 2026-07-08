@@ -12,7 +12,7 @@
     nixos-wsl.url = "github:nix-community/nixos-WSL/main";
 
     darwin = {
-      url = "github:LnL7/nix-darwin";
+      url = "github:nix-darwin/nix-darwin";
       inputs.nixpkgs.follows = "nixos-unstable";
     };
 
