@@ -1,5 +1,4 @@
-{ config, ... }:
-{
+{ config, ... }: {
   services.postgresql = {
     ensureDatabases = [ "atticd" ];
     ensureUsers = [

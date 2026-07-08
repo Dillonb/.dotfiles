@@ -1,4 +1,10 @@
-{ pkgs, lib, config, ... }: {
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+{
   options.dgbCustom = {
     username = lib.mkOption {
       type = with pkgs.lib; types.str;
