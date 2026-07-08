@@ -37,7 +37,7 @@ let
         unstable.ghostty
 
         # Mail
-        (big no-cuda.thunderbird)
+        (big thunderbird)
 
         # Util
         scrot
@@ -49,7 +49,7 @@ let
         xclip # X11 clipboard from cli
         parsec-bin
         gparted
-        (big no-cuda.calibre)
+        (big calibre)
 
         # Gaming
         (big stable.chiaki-ng) # ps5 remote play
@@ -86,7 +86,7 @@ let
         obsidian
 
         # Misc/Media
-        (big no-cuda.gimp)
+        (big gimp)
         # (big audacity)
         # gnuradio
         simplescreenrecorder

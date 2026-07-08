@@ -68,7 +68,7 @@
       ...
     }@inputs:
     let
-      nixpkgs-config-base = {
+      nixpkgs-config = {
         allowUnfree = true;
         nvidia.acceptLicense = true;
         permittedInsecurePackages = [
@@ -95,7 +95,6 @@
           modules,
         }:
         let
-          nixpkgs-config = nixpkgs-config-base;
           overlay-stable = final: prev: {
             stable = import nixos-stable {
               system = system;
@@ -137,14 +136,10 @@
           role,
           modules,
           channel ? "stable",
-          cuda ? false,
         }:
         let
-          nixpkgs-config = nixpkgs-config-base // {
-            cudaSupport = cuda;
-          };
-          nixpkgs-config-no-cuda = nixpkgs-config-base // {
-            cudaSupport = false;
+          nixpkgs-config-cuda = nixpkgs-config // {
+            cudaSupport = true;
           };
 
           nixpkgs-by-channel = {
@@ -160,10 +155,10 @@
           nixpkgs = nixpkgs-by-channel."${channel}";
           home-manager = home-manager-by-channel."${channel}";
 
-          overlay-no-cuda = final: prev: {
-            no-cuda = import nixpkgs {
+          overlay-cuda = final: prev: {
+            cuda = import nixpkgs {
               system = system;
-              config = nixpkgs-config-no-cuda;
+              config = nixpkgs-config-cuda;
             };
           };
 
@@ -191,7 +186,7 @@
                 overlay-stable
                 overlay-unstable
                 overlay-missing-modules-okay
-                overlay-no-cuda
+                overlay-cuda
                 copyparty.overlays.default
               ];
               nixpkgs.config = nixpkgs-config;
@@ -266,7 +261,6 @@
           modules,
         }:
         let
-          nixpkgs-config = nixpkgs-config-base;
           overlay-stable = final: prev: {
             stable = import nixos-stable {
               system = system;
@@ -310,7 +304,6 @@
           role = "workstation";
           channel = "unstable";
           system = "x86_64-linux";
-          cuda = true;
           modules = [
             # ./nix/modules/libreoffice.nix
             ./nix/modules/sunshine.nix

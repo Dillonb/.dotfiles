@@ -1,10 +1,10 @@
 { config, pkgs, ... }:
 
 let
-  lib = pkgs.lib;
-  cudaPackages = pkgs.cudaPackages;
+  # lib = pkgs.lib;
+  cudaPackages = pkgs.cuda.cudaPackages;
   sunshine = (
-    pkgs.unstable.sunshine.override {
+    pkgs.cuda.sunshine.override {
       cudaSupport = true;
       cudaPackages = cudaPackages;
       # boost = pkgs.boost186;
