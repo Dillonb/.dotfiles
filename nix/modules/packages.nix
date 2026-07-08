@@ -221,6 +221,7 @@ let
       bat
       dos2unix
       jq
+      yq
       killall
       file
       netcat-gnu
