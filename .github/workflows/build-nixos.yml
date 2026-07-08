@@ -138,6 +138,7 @@ jobs:
       - name: Publish release asset
         env:
           GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
         run: |
           gh release create latest --title latest \
             --notes "Latest built NixOS system store paths" 2>/dev/null || true
