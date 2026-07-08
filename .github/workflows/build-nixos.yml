@@ -31,6 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       include: ${{ steps.generate.outputs.include }}
+      manifest: ${{ steps.generate.outputs.manifest }}
     steps:
       - name: Check out source
         uses: actions/checkout@v4
@@ -41,7 +42,7 @@ jobs:
       - name: Generate matrix
         id: generate
         run: |
-          INCLUDE=$(nix eval --json --impure --expr '
+          base=$(nix eval --json --impure --expr '
             let
               flake = builtins.getFlake (toString ./.);
               runnerFor = system:
@@ -65,12 +66,27 @@ jobs:
             in
             nixos ++ darwin
           ')
-          echo "include=$INCLUDE" >> "$GITHUB_OUTPUT"
-          echo "$INCLUDE" | nix run nixpkgs#jq -- .
+          # Full name -> path map for the manifest (every system).
+          manifest=$(jq -c 'map({(.name): .path}) | add' <<<"$base")
+          # Build only the systems whose output path isn't already in attic.
+          store="${{ env.ATTIC_ENDPOINT }}${{ env.ATTIC_CACHE }}"
+          include='[]'
+          while read -r entry; do
+            path=$(jq -r '.path' <<<"$entry")
+            if nix path-info --store "$store" "$path" >/dev/null 2>&1; then
+              echo "✔ cached, skipping: $(jq -r '.name' <<<"$entry")"
+            else
+              include=$(jq -c --argjson e "$entry" '. + [$e]' <<<"$include")
+            fi
+          done < <(jq -c '.[]' <<<"$base")
+          echo "include=$include" >> "$GITHUB_OUTPUT"
+          echo "manifest=$manifest" >> "$GITHUB_OUTPUT"
+          jq . <<<"$include"
 
   build:
     name: Build ${{ matrix.name }}
     needs: matrix
+    if: ${{ needs.matrix.outputs.include != '[]' }}
     strategy:
       fail-fast: false
       matrix:
@@ -117,15 +133,18 @@ jobs:
   publish:
     name: Publish store-path manifest
     needs: [matrix, build]
-    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    if: >-
+      github.event_name == 'push' && github.ref == 'refs/heads/master'
+      && !cancelled()
+      && needs.matrix.result == 'success'
+      && (needs.build.result == 'success' || needs.build.result == 'skipped')
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
       - name: Assemble systems.json
         run: |
-          echo '${{ needs.matrix.outputs.include }}' \
-            | jq 'map({(.name): .path}) | add' | tee systems.json
+          echo '${{ needs.matrix.outputs.manifest }}' | jq . | tee systems.json
 
       - name: Publish release asset
         env:
