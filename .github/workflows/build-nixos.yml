@@ -15,6 +15,7 @@ concurrency:
 env:
   RUNNER_X86: ubuntu-latest
   RUNNER_ARM: ubuntu-24.04-arm
+  RUNNER_MACOS: macos-latest
   ATTIC_ENDPOINT: https://attic.dgb.sh/
   ATTIC_CACHE: system
   ATTIC_PUBLIC_KEY: system:E5ubGe/xsSF5nf2gxvZBP4WSVVFWis3lo+3A3HERoxc=
@@ -22,8 +23,9 @@ env:
   ALTERNATE_CACHE_PUBLIC_KEY: cache.nix.dgb.sh:XzJS7VYoZ90T3fwKySBAqfKdxViX6zk2PJvlKVD+euU=
 
 jobs:
-  # Generate the build matrix straight from the flake so it always tracks
-  # nixosConfigurations. aarch64-linux hosts are routed to native arm64 runners.
+  # Generate the build matrix from the flake so it always tracks the nixos/darwin
+  # configurations. Each entry carries the attr to build, its (deterministic)
+  # output path, and a runner routed by platform.
   matrix:
     name: Generate matrix
     runs-on: ubuntu-latest
@@ -42,22 +44,32 @@ jobs:
           INCLUDE=$(nix eval --json --impure --expr '
             let
               flake = builtins.getFlake (toString ./.);
-              systemOf = host:
-                flake.nixosConfigurations.${host}.config.nixpkgs.system;
               runnerFor = system:
-                if system == "aarch64-linux" then "${{ env.RUNNER_ARM }}" else "${{ env.RUNNER_X86 }}";
+                if system == "aarch64-linux" then "${{ env.RUNNER_ARM }}"
+                else if system == "x86_64-linux" then "${{ env.RUNNER_X86 }}"
+                else "${{ env.RUNNER_MACOS }}";
+              nixos = map (name:
+                let c = flake.nixosConfigurations.${name}; in {
+                  inherit name;
+                  target = ".#nixosConfigurations.${name}.config.system.build.toplevel";
+                  path = c.config.system.build.toplevel.outPath;
+                  runner = runnerFor c.config.nixpkgs.system;
+                }) (builtins.attrNames flake.nixosConfigurations);
+              darwin = map (name:
+                let c = flake.darwinConfigurations.${name}; in {
+                  inherit name;
+                  target = ".#darwinConfigurations.${name}.system";
+                  path = c.system.outPath;
+                  runner = runnerFor c.config.nixpkgs.system;
+                }) (builtins.attrNames (flake.darwinConfigurations or {}));
             in
-            map (host: {
-              inherit host;
-              platform = systemOf host;
-              runner = runnerFor (systemOf host);
-            }) (builtins.attrNames flake.nixosConfigurations)
+            nixos ++ darwin
           ')
           echo "include=$INCLUDE" >> "$GITHUB_OUTPUT"
           echo "$INCLUDE" | nix run nixpkgs#jq -- .
 
   build:
-    name: Build ${{ matrix.host }}
+    name: Build ${{ matrix.name }}
     needs: matrix
     strategy:
       fail-fast: false
@@ -71,6 +83,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Free disk space
+        if: runner.os == 'Linux'
         uses: thiagokokada/free-disk-space@main
         with:
           tool-cache: true
@@ -98,42 +111,21 @@ jobs:
           cache: ${{ env.ATTIC_CACHE }}
           token: ${{ secrets.ATTIC_TOKEN }}
 
-      - name: Build ${{ matrix.host }}
-        run: |
-          mkdir -p manifest
-          nix build -L --show-trace --print-out-paths \
-            ".#nixosConfigurations.${{ matrix.host }}.config.system.build.toplevel" \
-            > "manifest/${{ matrix.host }}"
-
-      - name: Upload store path
-        uses: actions/upload-artifact@v4
-        with:
-          name: syspath-${{ matrix.host }}
-          path: manifest/${{ matrix.host }}
+      - name: Build ${{ matrix.name }}
+        run: nix build -L --show-trace "${{ matrix.target }}"
 
   publish:
     name: Publish store-path manifest
-    needs: build
+    needs: [matrix, build]
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
-      - name: Download store paths
-        uses: actions/download-artifact@v4
-        with:
-          pattern: syspath-*
-          path: manifest
-          merge-multiple: true
-
       - name: Assemble systems.json
         run: |
-          json='{}'
-          for f in manifest/*; do
-            json=$(jq --arg h "$(basename "$f")" --arg p "$(cat "$f")" \
-              '. + {($h): $p}' <<<"$json")
-          done
-          echo "$json" | jq . | tee systems.json
+          echo '${{ needs.matrix.outputs.include }}' \
+            | jq 'map({(.name): .path}) | add' | tee systems.json
 
       - name: Publish release asset
         env:
