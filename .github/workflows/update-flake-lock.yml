@@ -40,6 +40,9 @@ jobs:
     needs: check
     if: ${{ needs.check.outputs.advanced == 'true' || inputs.force }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - name: Check out source
         uses: actions/checkout@v4
@@ -49,11 +52,7 @@ jobs:
         with:
           extra-conf: access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
 
-      # Uses a PAT so the resulting PR triggers build-nixos.yml (the default
-      # GITHUB_TOKEN cannot trigger further workflow runs).
       - name: Update flake.lock
         uses: DeterminateSystems/update-flake-lock@main
         with:
-          token: ${{ secrets.GH_PAT }}
-          pr-title: "flake.lock: update inputs"
-          commit-msg: "flake.lock: update inputs"
+          token: ${{ secrets.GITHUB_TOKEN }}
