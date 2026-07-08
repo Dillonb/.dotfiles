@@ -17,7 +17,7 @@ env:
   RUNNER_ARM: ubuntu-24.04-arm
   ATTIC_ENDPOINT: https://attic.dgb.sh/
   ATTIC_CACHE: system
-  ATTIC_PUBLIC_KEY: system:8wY144D+RiSnHTEn14pAI++9jPMPT34mXMYMzZPB/Jg=
+  ATTIC_PUBLIC_KEY: system:E5ubGe/xsSF5nf2gxvZBP4WSVVFWis3lo+3A3HERoxc=
   ALTERNATE_CACHE_ENDPOINT: https://cache.nix.dgb.sh
   ALTERNATE_CACHE_PUBLIC_KEY: cache.nix.dgb.sh:XzJS7VYoZ90T3fwKySBAqfKdxViX6zk2PJvlKVD+euU=
 
