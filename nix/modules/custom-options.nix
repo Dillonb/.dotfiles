@@ -1,7 +1,6 @@
 {
   pkgs,
   lib,
-  config,
   ...
 }:
 {
@@ -29,10 +28,5 @@
       default = 8080;
       description = "The port on which Miniflux will run.";
     };
-  };
-
-  config = lib.mkIf config.dgbCustom.minimal {
-    # The generated NixOS HTML manual isn't needed on minimal systems.
-    documentation.nixos.enable = lib.mkDefault false;
   };
 }

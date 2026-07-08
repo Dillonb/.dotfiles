@@ -1,4 +1,7 @@
-{ pkgs, ... }: {
+{ pkgs, lib, config, ... }: {
+  # The generated NixOS HTML manual isn't needed on minimal systems.
+  documentation.nixos.enable = lib.mkIf config.dgbCustom.minimal (lib.mkDefault false);
+
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
 
