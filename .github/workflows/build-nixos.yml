@@ -100,5 +100,45 @@ jobs:
 
       - name: Build ${{ matrix.host }}
         run: |
-          nix build -L --show-trace \
-            ".#nixosConfigurations.${{ matrix.host }}.config.system.build.toplevel"
+          mkdir -p manifest
+          nix build -L --show-trace --print-out-paths \
+            ".#nixosConfigurations.${{ matrix.host }}.config.system.build.toplevel" \
+            > "manifest/${{ matrix.host }}"
+
+      - name: Upload store path
+        uses: actions/upload-artifact@v4
+        with:
+          name: syspath-${{ matrix.host }}
+          path: manifest/${{ matrix.host }}
+
+  publish:
+    name: Publish store-path manifest
+    needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download store paths
+        uses: actions/download-artifact@v4
+        with:
+          pattern: syspath-*
+          path: manifest
+          merge-multiple: true
+
+      - name: Assemble systems.json
+        run: |
+          json='{}'
+          for f in manifest/*; do
+            json=$(jq --arg h "$(basename "$f")" --arg p "$(cat "$f")" \
+              '. + {($h): $p}' <<<"$json")
+          done
+          echo "$json" | jq . | tee systems.json
+
+      - name: Publish release asset
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create latest --title latest \
+            --notes "Latest built NixOS system store paths" 2>/dev/null || true
+          gh release upload latest systems.json --clobber
