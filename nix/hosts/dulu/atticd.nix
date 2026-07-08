@@ -1,4 +1,4 @@
-{ config, ... }: {
+{ config, pkgs, ... }: {
   services.postgresql = {
     ensureDatabases = [ "atticd" ];
     ensureUsers = [
@@ -12,6 +12,7 @@
   services.atticd = {
     enable = true;
     environmentFile = config.age.secrets."atticd-env".path;
+    package = pkgs.unstable.attic-server;
     settings = {
       listen = "127.0.0.1:8091";
       api-endpoint = "https://attic.dgb.sh/";
