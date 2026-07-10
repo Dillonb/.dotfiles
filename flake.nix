@@ -451,6 +451,7 @@
           default = pkgs.mkShell {
             packages = with pkgs; [
               bashInteractive
+              attic-client
               git
               neovim
               zsh
