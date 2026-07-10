@@ -25,7 +25,7 @@
           "/var/lib/mosquitto"
           "/var/lib/pihole"
           "/var/lib/zigbee2mqtt"
-          "/var/lib/postgresql"
+          "/var/backup/postgresql"
           "/var/lib/anki-sync-server"
           "/var/lib/bazarr"
           "/var/lib/audiobookshelf"
