@@ -140,7 +140,7 @@ let
     # unstable.imhex
 
     # Gaming
-    # (big moonlight-qt)
+    (big moonlight-qt)
   ];
 
   # Linux specific
