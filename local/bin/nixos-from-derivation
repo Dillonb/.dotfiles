@@ -9,6 +9,11 @@ else
     operation="$2"
 fi
 
+if [ "$(readlink -f /run/current-system)" = "$(readlink -f "$derivation")" ]; then
+    echo "$(hostname) is already running $derivation"
+    exit 0
+fi
+
 nix-store --realise "$derivation" --log-format bar-with-logs --option narinfo-cache-negative-ttl 0
 
 nvd diff /nix/var/nix/profiles/system "$derivation"
