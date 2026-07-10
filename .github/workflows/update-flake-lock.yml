@@ -4,41 +4,10 @@ on:
   schedule:
     - cron: "0 */6 * * *"
   workflow_dispatch:
-    inputs:
-      force:
-        description: "Update flake.lock even if the channels haven't advanced"
-        type: boolean
-        default: false
 
 jobs:
-  check:
-    name: Check if nixpkgs channels advanced
-    runs-on: ubuntu-latest
-    outputs:
-      advanced: ${{ steps.check.outputs.advanced }}
-    steps:
-      - name: Check out source
-        uses: actions/checkout@v4
-
-      - name: Compare locked revs to channel branch HEADs
-        id: check
-        run: |
-          advanced=false
-          for input in nixos-unstable nixos-stable; do
-            ref=$(jq -r --arg i "$input" '.nodes[$i].original.ref' flake.lock)
-            locked=$(jq -r --arg i "$input" '.nodes[$i].locked.rev' flake.lock)
-            head=$(git ls-remote https://github.com/NixOS/nixpkgs "refs/heads/$ref" | cut -f1)
-            echo "$input ($ref): locked=${locked:0:12} head=${head:0:12}"
-            if [ -n "$head" ] && [ "$locked" != "$head" ]; then
-              advanced=true
-            fi
-          done
-          echo "advanced=$advanced" >> "$GITHUB_OUTPUT"
-
   update:
     name: Update flake.lock and open PR
-    needs: check
-    if: ${{ needs.check.outputs.advanced == 'true' || inputs.force }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
