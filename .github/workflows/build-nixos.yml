@@ -11,7 +11,6 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-# Shared config, kept here so it is easy to update in one place.
 env:
   RUNNER_X86: ubuntu-latest
   RUNNER_ARM: ubuntu-24.04-arm
@@ -34,11 +33,13 @@ jobs:
       manifest: ${{ steps.generate.outputs.manifest }}
     steps:
       - name: Check out source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@main
+        uses: DeterminateSystems/nix-installer-action@v22
         with:
           extra-conf: access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+      - name: Check flake
+        run: nix flake check --all-systems -v
       - name: Generate matrix
         id: generate
         run: |
@@ -74,8 +75,9 @@ jobs:
           while read -r entry; do
             path=$(jq -r '.path' <<<"$entry")
             if nix path-info --store "$store" "$path" >/dev/null 2>&1; then
-              echo "✔ cached, skipping: $(jq -r '.name' <<<"$entry")"
+              echo "✔ cached, skipping: $path"
             else
+              echo "building: $path"
               include=$(jq -c --argjson e "$entry" '. + [$e]' <<<"$include")
             fi
           done < <(jq -c '.[]' <<<"$base")
@@ -96,11 +98,11 @@ jobs:
       ATTIC_TOKEN: ${{ secrets.ATTIC_TOKEN }}
     steps:
       - name: Check out source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Free disk space
         if: runner.os == 'Linux'
-        uses: thiagokokada/free-disk-space@main
+        uses: thiagokokada/free-disk-space@d3e470a0e298133572dc766e6b10d5a51c71c0e3 # Dec 10, 2025
         with:
           tool-cache: true
           opt: true
@@ -108,10 +110,8 @@ jobs:
           usrmisc: true
 
       - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@main
+        uses: DeterminateSystems/nix-installer-action@v22
         with:
-          # Pull unchanged paths from the self-hosted caches so each run only
-          # builds what actually changed.
           extra-conf: |
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
             extra-substituters = ${{ env.ATTIC_ENDPOINT }}${{ env.ATTIC_CACHE }} ${{ env.ALTERNATE_CACHE_ENDPOINT }}
