@@ -188,7 +188,7 @@ let
       # Dev
       (big nasm)
       (big pyright) # python language server
-      (big pipenv)
+      # (big pipenv)
       (big python3)
       (big mypy)
       (big gh) # github cli
