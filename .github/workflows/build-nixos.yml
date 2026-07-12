@@ -30,7 +30,6 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       include: ${{ steps.generate.outputs.include }}
-      manifest: ${{ steps.generate.outputs.manifest }}
     steps:
       - name: Check out source
         uses: actions/checkout@v7
@@ -67,8 +66,6 @@ jobs:
             in
             nixos ++ darwin
           ')
-          # Full name -> path map for the manifest (every system).
-          manifest=$(jq -c 'map({(.name): .path}) | add' <<<"$base")
           # Build only the systems whose output path isn't already in attic.
           store="${{ env.ATTIC_ENDPOINT }}${{ env.ATTIC_CACHE }}"
           include='[]'
@@ -82,7 +79,6 @@ jobs:
             fi
           done < <(jq -c '.[]' <<<"$base")
           echo "include=$include" >> "$GITHUB_OUTPUT"
-          echo "manifest=$manifest" >> "$GITHUB_OUTPUT"
           jq . <<<"$include"
 
   build:
@@ -94,6 +90,8 @@ jobs:
       matrix:
         include: ${{ fromJson(needs.matrix.outputs.include) }}
     runs-on: ${{ matrix.runner }}
+    permissions:
+      contents: write
     env:
       ATTIC_TOKEN: ${{ secrets.ATTIC_TOKEN }}
     steps:
@@ -130,27 +128,24 @@ jobs:
       - name: Build ${{ matrix.name }}
         run: nix build -L --show-trace "${{ matrix.target }}"
 
-  publish:
-    name: Publish store-path manifest
-    needs: [matrix, build]
-    if: >-
-      github.event_name == 'push' && github.ref == 'refs/heads/master'
-      && !cancelled()
-      && needs.matrix.result == 'success'
-      && (needs.build.result == 'success' || needs.build.result == 'skipped')
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - name: Assemble systems.json
-        run: |
-          echo '${{ needs.matrix.outputs.manifest }}' | jq . | tee systems.json
-
-      - name: Publish release asset
+      - name: Publish ${{ matrix.name }} release
+        if: >-
+          github.event_name == 'push' && github.ref == 'refs/heads/master'
+          && env.ATTIC_TOKEN != ''
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
         run: |
-          gh release create latest --title latest \
-            --notes "Latest built NixOS system store paths" 2>/dev/null || true
-          gh release upload latest systems.json --clobber
+          tag='system-${{ matrix.name }}'
+          printf '%s\n' '${{ matrix.path }}' > store-path
+
+          if gh release view "$tag" >/dev/null 2>&1; then
+            gh release upload "$tag" store-path --clobber
+            gh api --method PATCH "repos/$GH_REPO/git/refs/tags/$tag" \
+              -f sha="$GITHUB_SHA" -F force=true >/dev/null
+          else
+            gh release create "$tag" store-path \
+              --target "$GITHUB_SHA" \
+              --title "${{ matrix.name }}" \
+              --notes "Latest successful ${{ matrix.name }} system build"
+          fi
