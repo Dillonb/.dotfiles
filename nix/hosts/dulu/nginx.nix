@@ -130,7 +130,11 @@
       };
 
       "jellyfin.dgb.sh" = {
-        serverAliases = [ "jellyfishing.dgb.sh" ];
+        serverAliases = [
+          "jellyfishing.dgb.sh"
+          "jellyfih.dgb.sh"
+          "jelly.dgb.sh"
+        ];
         forceSSL = true;
         enableACME = true;
         locations."/" = {
