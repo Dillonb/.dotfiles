@@ -30,6 +30,7 @@
     defaultUserShell = pkgs.zsh;
     users.dillon = {
       isNormalUser = true;
+      uid = 1000;
       description = "Dillon Beliveau";
       extraGroups = [
         # Should be self explanatory
