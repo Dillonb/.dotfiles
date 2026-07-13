@@ -7,10 +7,11 @@ else
     operation="$1"
 fi
 
-derivation=$(curl -fsSL https://github.com/Dillonb/.dotfiles/releases/download/latest/systems.json | jq -r --arg h "$(hostname)" '.[$h]')
+hostname=$(hostname)
+derivation=$(curl -fsSL "https://github.com/Dillonb/.dotfiles/releases/download/system-$hostname/store-path")
 
-if [ -z "$derivation" ] || [ "$derivation" = "null" ]; then
-    echo "No store path found for $(hostname) in the latest systems.json manifest" >&2
+if [ -z "$derivation" ]; then
+    echo "No successful system build found for $hostname" >&2
     exit 1
 fi
 
