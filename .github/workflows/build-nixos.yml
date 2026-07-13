@@ -115,10 +115,10 @@ jobs:
             extra-substituters = ${{ env.ATTIC_ENDPOINT }}${{ env.ATTIC_CACHE }} ${{ env.ALTERNATE_CACHE_ENDPOINT }}
             extra-trusted-public-keys = ${{ env.ATTIC_PUBLIC_KEY }} ${{ env.ALTERNATE_CACHE_PUBLIC_KEY }}
 
-      # Only authenticate to attic when the push token is available (i.e. not on
-      # pull requests from forks). Builds still run and verify without it.
       - name: Set up attic cache
-        if: env.ATTIC_TOKEN != ''
+        if: >-
+          github.event_name == 'push' && github.ref == 'refs/heads/master'
+          && env.ATTIC_TOKEN != ''
         uses: ryanccn/attic-action@v0.5.0
         with:
           endpoint: ${{ env.ATTIC_ENDPOINT }}
