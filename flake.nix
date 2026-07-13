@@ -427,25 +427,6 @@
         };
       };
 
-      packages = forEachSystem (
-        { pkgs }: {
-          all-nixos-systems = pkgs.stdenv.mkDerivation {
-            name = "all-nixos-systems.json";
-            phases = [
-              "installPhase"
-              "fixupPhase"
-            ];
-            installPhase =
-              let
-                systems = builtins.attrNames self.nixosConfigurations;
-              in
-              ''
-                echo '${builtins.toJSON systems}' > $out
-              '';
-          };
-        }
-      );
-
       devShells = forEachSystem (
         { pkgs }: {
           default = pkgs.mkShell {
@@ -469,5 +450,44 @@
           };
         }
       );
+      github-actions-matrix =
+        let
+          runner-arm64-linux = "ubuntu-24.04-arm";
+          runner-x64-linux = "ubuntu-latest";
+          runner-macos = "macos-latest";
+          runnerFor =
+            system:
+            if system == "aarch64-linux" then
+              runner-arm64-linux
+            else if system == "x86_64-linux" then
+              runner-x64-linux
+            else
+              runner-macos;
+          nixos = map (
+            name:
+            let
+              c = self.nixosConfigurations.${name};
+            in
+            {
+              inherit name;
+              target = ".#nixosConfigurations.${name}.config.system.build.toplevel";
+              path = builtins.unsafeDiscardStringContext c.config.system.build.toplevel.outPath;
+              runner = runnerFor c.config.nixpkgs.system;
+            }
+          ) (builtins.attrNames self.nixosConfigurations);
+          darwin = map (
+            name:
+            let
+              c = self.darwinConfigurations.${name};
+            in
+            {
+              inherit name;
+              target = ".#darwinConfigurations.${name}.system";
+              path = builtins.unsafeDiscardStringContext c.system.outPath;
+              runner = runnerFor c.config.nixpkgs.system;
+            }
+          ) (builtins.attrNames (self.darwinConfigurations or { }));
+        in
+        builtins.toJSON (nixos ++ darwin);
     };
 }

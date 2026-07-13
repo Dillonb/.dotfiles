@@ -12,9 +12,6 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  RUNNER_X86: ubuntu-latest
-  RUNNER_ARM: ubuntu-24.04-arm
-  RUNNER_MACOS: macos-latest
   ATTIC_ENDPOINT: https://attic.dgb.sh/
   ATTIC_CACHE: system
   ATTIC_PUBLIC_KEY: system:E5ubGe/xsSF5nf2gxvZBP4WSVVFWis3lo+3A3HERoxc=
@@ -42,30 +39,7 @@ jobs:
       - name: Generate matrix
         id: generate
         run: |
-          base=$(nix eval --json --impure --expr '
-            let
-              flake = builtins.getFlake (toString ./.);
-              runnerFor = system:
-                if system == "aarch64-linux" then "${{ env.RUNNER_ARM }}"
-                else if system == "x86_64-linux" then "${{ env.RUNNER_X86 }}"
-                else "${{ env.RUNNER_MACOS }}";
-              nixos = map (name:
-                let c = flake.nixosConfigurations.${name}; in {
-                  inherit name;
-                  target = ".#nixosConfigurations.${name}.config.system.build.toplevel";
-                  path = c.config.system.build.toplevel.outPath;
-                  runner = runnerFor c.config.nixpkgs.system;
-                }) (builtins.attrNames flake.nixosConfigurations);
-              darwin = map (name:
-                let c = flake.darwinConfigurations.${name}; in {
-                  inherit name;
-                  target = ".#darwinConfigurations.${name}.system";
-                  path = c.system.outPath;
-                  runner = runnerFor c.config.nixpkgs.system;
-                }) (builtins.attrNames (flake.darwinConfigurations or {}));
-            in
-            nixos ++ darwin
-          ')
+          base=$(nix eval --raw .#github-actions-matrix)
           # Build only the systems whose output path isn't already in attic.
           store="${{ env.ATTIC_ENDPOINT }}${{ env.ATTIC_CACHE }}"
           include='[]'
