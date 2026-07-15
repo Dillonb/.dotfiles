@@ -12,7 +12,6 @@ let
     "/var/lib/radarr/.config/Radarr/radarr.db"
     "/var/lib/private/prowlarr/prowlarr.db"
     "/var/lib/bazarr/db/bazarr.db"
-    "/var/lib/sabnzbd/admin/history1.db"
     "/var/lib/tautulli/tautulli.db"
     "/var/lib/audiobookshelf/config/absdatabase.sqlite"
     "/var/lib/ombi/Ombi.db"
@@ -40,6 +39,10 @@ let
     '';
   };
 in
+# If this starts failing, need to rewrite the backup script to handle duplicates.
+assert lib.assertMsg (
+  lib.length sqlite_dbs == lib.length (lib.unique (map baseNameOf sqlite_dbs))
+) "sqlite_dbs must have unique basenames";
 {
   systemd.tmpfiles.rules = [ "d ${sqlite_backup_dir} 0700 root root -" ];
 
@@ -75,6 +78,7 @@ in
           "/var/lib/bazarr"
           "/var/lib/audiobookshelf"
           "/var/www"
+          sqlite_backup_dir
         ];
 
         exclude = [
