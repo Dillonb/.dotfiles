@@ -71,7 +71,6 @@ assert lib.assertMsg (
           "/var/lib/plexpy"
           "/var/lib/ombi"
           "/var/lib/mosquitto"
-          "/var/lib/pihole"
           "/var/lib/zigbee2mqtt"
           "/var/backup/postgresql"
           "/var/lib/anki-sync-server"

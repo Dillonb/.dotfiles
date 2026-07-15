@@ -23,7 +23,6 @@ in
     ./dns.nix
     ./atticd.nix
     ./postgresql.nix
-    # ./pihole.nix
     ./smart-home.nix
     ./copyparty.nix
     ./miniflux.nix
