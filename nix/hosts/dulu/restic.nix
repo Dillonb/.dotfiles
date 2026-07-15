@@ -1,4 +1,44 @@
-{ config, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+
+let
+  sqlite_backup_dir = "/var/backup/sqlite";
+  sqlite_dbs = [
+    "/var/lib/sonarr/.config/NzbDrone/sonarr.db"
+    "/var/lib/radarr/.config/Radarr/radarr.db"
+    "/var/lib/private/prowlarr/prowlarr.db"
+    "/var/lib/bazarr/db/bazarr.db"
+    "/var/lib/sabnzbd/admin/history1.db"
+    "/var/lib/tautulli/tautulli.db"
+    "/var/lib/audiobookshelf/config/absdatabase.sqlite"
+    "/var/lib/ombi/Ombi.db"
+    "/var/lib/ombi/OmbiExternal.db"
+    "/var/lib/ombi/OmbiSettings.db"
+    "/var/lib/jellyfin/data/jellyfin.db"
+    "/var/lib/plex/Plex Media Server/Plug-in Support/Databases/com.plexapp.plugins.library.db"
+    "/var/lib/plex/Plex Media Server/Plug-in Support/Databases/com.plexapp.plugins.library.blobs.db"
+  ];
+  sqlite_backup = pkgs.writeShellApplication {
+    name = "backup-sqlite-databases";
+    runtimeInputs = [ pkgs.sqlite ];
+    text = ''
+      ${lib.concatMapStringsSep "\n" (
+        db:
+        let
+          output = "${sqlite_backup_dir}/${baseNameOf db}";
+        in
+        "sqlite3 ${lib.escapeShellArg db} ${lib.escapeShellArg ".backup '${output}'"}"
+      ) sqlite_dbs}
+    '';
+  };
+in
+{
+  systemd.tmpfiles.rules = [ "d ${sqlite_backup_dir} 0700 root root -" ];
+
   services.restic = {
     backups = {
       dulu = {
@@ -6,6 +46,7 @@
         passwordFile = config.age.secrets.restic.path;
         rcloneConfigFile = "${config.services.syncthing.settings.folders."rclone-config".path}/rclone.conf";
         user = "root";
+        backupPrepareCommand = lib.getExe sqlite_backup;
 
         paths = [
           "/home/dillon"
