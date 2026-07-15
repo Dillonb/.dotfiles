@@ -29,9 +29,13 @@ let
       ${lib.concatMapStringsSep "\n" (
         db:
         let
-          output = "${sqlite_backup_dir}/${baseNameOf db}";
+          db_name = baseNameOf db;
+          output = "${sqlite_backup_dir}/${db_name}";
         in
-        "sqlite3 ${lib.escapeShellArg db} ${lib.escapeShellArg ".backup '${output}'"}"
+        ''
+          sqlite3 ${lib.escapeShellArg db} ${lib.escapeShellArg ".backup '${output}'"}
+          echo "Backed up ${db} to ${output}"
+        ''
       ) sqlite_dbs}
     '';
   };
