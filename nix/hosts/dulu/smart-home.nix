@@ -7,18 +7,16 @@
 {
   networking.firewall = {
     allowedTCPPorts = [
-      # home assistant
-      8123
+      config.dgbCustom.ports.homeAssistant
       config.services.zigbee2mqtt.settings.frontend.port
     ];
-    allowedUDPPorts = [
-      5540 # matter
-    ];
+    allowedUDPPorts = [ config.dgbCustom.ports.matter ];
   };
   services.mosquitto = {
     enable = true;
     listeners = [
       {
+        port = config.dgbCustom.ports.mqtt;
         acl = [ "pattern readwrite #" ];
         omitPasswordAuth = true;
         settings.allow_anonymous = true;
@@ -46,10 +44,10 @@
       };
       advanced.transmit_power = 20;
       mqtt = {
-        server = "mqtt://localhost:1883";
+        server = "mqtt://localhost:${toString config.dgbCustom.ports.mqtt}";
       };
       frontend = {
-        port = 8099;
+        port = config.dgbCustom.ports.zigbee2mqttFrontend;
       };
     };
   };

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 let
   plex-version = import ./plex.nix;
   plex-package = pkgs.plex.override {
@@ -74,7 +74,7 @@ in
       rpc-host-whitelist = "127.0.0.1";
       rpc-host-whitelist-enabled = true;
       rpc-authentication-required = false;
-      rpc-port = 9091;
+      rpc-port = config.dgbCustom.ports.transmission;
       rpc-url = "/transmission/";
     };
   };
@@ -104,6 +104,7 @@ in
   services.ombi = {
     enable = true;
     user = "dillon";
+    port = config.dgbCustom.ports.ombi;
     package = pkgs.unstable.ombi;
   };
 
@@ -118,6 +119,7 @@ in
     enable = true;
     user = "dillon";
     group = "users";
+    port = config.dgbCustom.ports.audiobookshelf;
     package = pkgs.unstable.audiobookshelf;
   };
 

@@ -36,7 +36,7 @@
         forceSSL = true;
         enableACME = true;
         locations."/" = {
-          proxyPass = "http://localhost:8000/";
+          proxyPass = "http://localhost:${toString config.dgbCustom.ports.teamspeakWeb}/";
         };
       };
       "bingchill.ing" = {

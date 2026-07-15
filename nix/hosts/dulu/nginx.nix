@@ -1,4 +1,8 @@
-{ config, ... }: {
+{ config, ... }:
+let
+  strPort = name: toString config.dgbCustom.ports.${name};
+in
+{
   services.nginx = {
     enable = true;
     virtualHosts = {
@@ -90,7 +94,7 @@
           proxy_buffering off;
         '';
         locations."/" = {
-          proxyPass = "http://127.0.0.1:32400/";
+          proxyPass = "http://127.0.0.1:${strPort "plex"}/";
         };
       };
 
@@ -125,7 +129,7 @@
           proxy_buffers 32 4k;
         '';
         locations."/" = {
-          proxyPass = "http://127.0.0.1:${builtins.toString config.services.ombi.port}/";
+          proxyPass = "http://127.0.0.1:${strPort "ombi"}/";
         };
       };
 
@@ -138,7 +142,7 @@
         forceSSL = true;
         enableACME = true;
         locations."/" = {
-          proxyPass = "http://127.0.0.1:8096/";
+          proxyPass = "http://127.0.0.1:${strPort "jellyfin"}/";
           proxyWebsockets = true;
         };
       };
@@ -147,7 +151,7 @@
         forceSSL = true;
         enableACME = true;
         locations."/" = {
-          proxyPass = "http://127.0.0.1:8097/";
+          proxyPass = "http://127.0.0.1:${strPort "jellyfinDev"}/";
         };
 
         locations."/socket" = {
@@ -159,7 +163,7 @@
         forceSSL = true;
         enableACME = true;
         locations."/" = {
-          proxyPass = "http://127.0.0.1:7878/";
+          proxyPass = "http://127.0.0.1:${strPort "radarr"}/";
         };
       };
 
@@ -167,7 +171,7 @@
         forceSSL = true;
         enableACME = true;
         locations."/" = {
-          proxyPass = "http://127.0.0.1:8989/";
+          proxyPass = "http://127.0.0.1:${strPort "sonarr"}/";
         };
       };
 
@@ -175,7 +179,7 @@
         forceSSL = true;
         enableACME = true;
         locations."/" = {
-          proxyPass = "https://127.0.0.1:1010/";
+          proxyPass = "https://127.0.0.1:${strPort "nextcloud"}/";
           extraConfig = ''
             client_max_body_size 10G;
             client_body_buffer_size 400M;
@@ -187,7 +191,7 @@
         forceSSL = true;
         enableACME = true;
         locations."/" = {
-          proxyPass = "http://127.0.0.1:8081/";
+          proxyPass = "http://127.0.0.1:${strPort "sabnzbd"}/";
         };
       };
 
@@ -195,7 +199,7 @@
         forceSSL = true;
         enableACME = true;
         locations."/" = {
-          proxyPass = "http://127.0.0.1:9091/";
+          proxyPass = "http://127.0.0.1:${strPort "transmission"}/";
           basicAuthFile = "/run/agenix/transmission-auth";
         };
       };
@@ -204,7 +208,7 @@
         forceSSL = true;
         enableACME = true;
         locations."/" = {
-          proxyPass = "http://127.0.0.1:8111/";
+          proxyPass = "http://127.0.0.1:${strPort "sk"}/";
         };
       };
 
@@ -212,7 +216,7 @@
         forceSSL = true;
         enableACME = true;
         locations."/" = {
-          proxyPass = "http://127.0.0.1:8181/";
+          proxyPass = "http://127.0.0.1:${strPort "tautulli"}/";
         };
       };
 
@@ -246,7 +250,7 @@
         forceSSL = true;
         enableACME = true;
         locations."/" = {
-          proxyPass = "http://localhost:${toString config.services.anki-sync-server.port}";
+          proxyPass = "http://localhost:${strPort "ankiSync"}";
         };
       };
 
@@ -254,7 +258,7 @@
         forceSSL = true;
         enableACME = true;
         locations."/" = {
-          proxyPass = "http://localhost:${toString config.dgbCustom.miniflux.port}";
+          proxyPass = "http://localhost:${strPort "miniflux"}";
         };
       };
 
@@ -263,8 +267,7 @@
         enableACME = true;
         locations."/" = {
 
-          # proxyPass = "http://localhost:${toString config.services.copyparty.port}";
-          proxyPass = "http://localhost:3923";
+          proxyPass = "http://localhost:${strPort "copyparty"}";
           extraConfig = ''
             proxy_redirect off;
             # disable buffering (next 4 lines)
@@ -291,7 +294,7 @@
 
         enableACME = true;
         locations."/" = {
-          proxyPass = "http://127.0.0.1:8123/";
+          proxyPass = "http://127.0.0.1:${strPort "homeAssistant"}/";
           extraConfig = ''
             proxy_redirect   http://    https://;
             proxy_set_header Host       $host;
@@ -306,7 +309,7 @@
         forceSSL = true;
         enableACME = true;
         locations."/" = {
-          proxyPass = "http://localhost:${toString config.services.audiobookshelf.port}/";
+          proxyPass = "http://localhost:${strPort "audiobookshelf"}/";
           extraConfig = ''
             proxy_set_header X-Forwarded-For    $proxy_add_x_forwarded_for;
             proxy_set_header X-Forwarded-Proto  $scheme;

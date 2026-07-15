@@ -162,12 +162,13 @@ in
   services.nix-serve = {
     enable = true;
     secretKeyFile = config.age.secrets."nix-cache-priv-key.pem".path;
-    port = 5001;
+    port = config.dgbCustom.ports.nixServe;
   };
 
   services.anki-sync-server = {
     enable = true;
     openFirewall = true;
+    port = config.dgbCustom.ports.ankiSync;
     address = "0.0.0.0";
     users = [
       {

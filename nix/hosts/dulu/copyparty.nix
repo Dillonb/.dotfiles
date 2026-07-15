@@ -27,6 +27,7 @@
       );
 
     settings = {
+      p = config.dgbCustom.ports.copyparty;
       rproxy = "1";
       xff-hdr = "X-Real-IP";
       xff-src = "lan";
