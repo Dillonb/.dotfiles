@@ -443,6 +443,7 @@
               nix-prefetch
               curl
               jq
+              actionlint
             ];
             shellHook = ''
               export FLAKE="`readlink -f ~/.dotfiles`"
