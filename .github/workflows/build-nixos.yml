@@ -113,6 +113,12 @@ jobs:
           cache: ${{ env.ATTIC_CACHE }}
           token: ${{ secrets.ATTIC_TOKEN }}
 
+      - name: Monitor nix store
+        if: >-
+          github.event_name == 'push' && github.ref == 'refs/heads/master'
+          && env.ATTIC_TOKEN != ''
+        run: nohup attic watch-store "$ATTIC_CACHE" >/dev/null 2>&1 &
+
       - name: Build ${{ matrix.name }}
         run: nix build -L --show-trace "${{ matrix.target }}"
 
