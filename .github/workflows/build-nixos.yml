@@ -117,7 +117,7 @@ jobs:
         if: >-
           github.event_name == 'push' && github.ref == 'refs/heads/master'
           && env.ATTIC_TOKEN != ''
-        run: nohup attic watch-store "$ATTIC_CACHE" >/dev/null 2>&1 &
+        run: nohup attic watch-store "$ATTIC_CACHE" &
 
       - name: Build ${{ matrix.name }}
         run: nix build -L --show-trace "${{ matrix.target }}"
