@@ -25,6 +25,8 @@ jobs:
   matrix:
     name: Generate matrix
     runs-on: ubuntu-latest
+    env:
+      ATTIC_TOKEN: ${{ secrets.ATTIC_TOKEN }}
     outputs:
       include: ${{ steps.generate.outputs.include }}
     steps:
@@ -33,7 +35,19 @@ jobs:
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@v22
         with:
-          extra-conf: access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+          extra-conf: |
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+            extra-substituters = ${{ env.ATTIC_ENDPOINT }}${{ env.ATTIC_CACHE }} ${{ env.ALTERNATE_CACHE_ENDPOINT }}
+            extra-trusted-public-keys = ${{ env.ATTIC_PUBLIC_KEY }} ${{ env.ALTERNATE_CACHE_PUBLIC_KEY }}
+      - name: Set up attic cache
+        if: >-
+          github.event_name == 'push' && github.ref == 'refs/heads/master'
+          && env.ATTIC_TOKEN != ''
+        uses: ryanccn/attic-action@v0.5.0
+        with:
+          endpoint: ${{ env.ATTIC_ENDPOINT }}
+          cache: ${{ env.ATTIC_CACHE }}
+          token: ${{ secrets.ATTIC_TOKEN }}
       - name: Check flake
         run: nix flake check --all-systems -v
       - name: Generate matrix
