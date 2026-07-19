@@ -41,11 +41,13 @@ in
     enable = true;
     package = pkgs.unstable.sonarr;
     user = "dillon";
+    settings.server.port = config.dgbCustom.ports.sonarr;
   };
 
   services.radarr = {
     enable = true;
     package = pkgs.unstable.radarr;
+    settings.server.port = config.dgbCustom.ports.radarr;
     user = "dillon";
   };
 
@@ -53,6 +55,7 @@ in
     enable = true;
     user = "dillon";
     package = pkgs.unstable.sabnzbd;
+    settings.misc.port = config.dgbCustom.ports.sabnzbd;
   };
 
   services.transmission = {
@@ -82,11 +85,13 @@ in
   services.prowlarr = {
     enable = true;
     package = pkgs.unstable.prowlarr;
+    settings.server.port = config.dgbCustom.ports.prowlarr;
   };
 
   services.tautulli = {
     enable = true;
     package = pkgs.unstable.tautulli;
+    port = config.dgbCustom.ports.tautulli;
     user = "dillon";
     dataDir = "/var/lib/tautulli";
     configFile = "/var/lib/tautulli/config.ini";
@@ -112,6 +117,7 @@ in
     enable = true;
     user = "dillon";
     openFirewall = true;
+    listenPort = config.dgbCustom.ports.bazarr;
     package = pkgs.unstable.bazarr;
   };
 

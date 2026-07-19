@@ -22,7 +22,9 @@ in
     nextcloud = mkPort 1010 "Nextcloud";
     copyparty = mkPort 3923 "copyparty";
     ombi = mkPort 5000 "Ombi";
+    bazarr = mkPort 6767 "Bazarr";
     audiobookshelf = mkPort 13378 "Audiobookshelf";
+    prowlarr = mkPort 9696 "Prowlarr";
 
     miniflux = mkPort 8080 "Miniflux";
     nixServe = mkPort 5001 "nix-serve";
