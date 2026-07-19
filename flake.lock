@@ -28,11 +28,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1784497097,
-        "narHash": "sha256-jTlhrzRQyufbGBVOVOnyNGZtyJjpJP67PIlZZvB2uTU=",
+        "lastModified": 1784503815,
+        "narHash": "sha256-i8ivnV6hWwge2IJaKcCmoVSMPt8t1SI8E2MVMz78C5g=",
         "owner": "Dillonb",
         "repo": "ble-scale",
-        "rev": "24fceeeb3fb1bb6aec2916fa8e948107fcb564e2",
+        "rev": "2f7f33584a92ea31c460be2e3caf37b294d3862d",
         "type": "github"
       },
       "original": {
