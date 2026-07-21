@@ -176,10 +176,23 @@
             };
           };
 
+          # New check added in https://github.com/NixOS/nixpkgs/pull/532778
+          # breaks cheetah3 for now - override it until there's a real fix in
+          overlay-cheetah3 = final: prev: {
+            pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
+              (python-final: python-prev: {
+                cheetah3 = python-prev.cheetah3.overridePythonAttrs (_: {
+                  pname = "ct3";
+                });
+              })
+            ];
+          };
+
           overlay-unstable = final: prev: {
             unstable = import nixos-unstable {
               system = system;
               config = nixpkgs-config;
+              overlays = [ overlay-cheetah3 ];
             };
           };
 
@@ -190,6 +203,7 @@
           overlays = (
             { ... }: {
               nixpkgs.overlays = [
+                overlay-cheetah3
                 overlay-stable
                 overlay-unstable
                 overlay-missing-modules-okay
