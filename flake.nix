@@ -181,9 +181,13 @@
           overlay-cheetah3 = final: prev: {
             pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
               (python-final: python-prev: {
-                cheetah3 = python-prev.cheetah3.overridePythonAttrs (_: {
-                  pname = "ct3";
-                });
+                cheetah3 =
+                  assert prev.lib.assertMsg (
+                    python-prev.cheetah3.pname == "cheetah3"
+                  ) "Nixpkgs fixed cheetah3; remove overlay-cheetah3 from flake.nix";
+                  python-prev.cheetah3.overridePythonAttrs (_: {
+                    pname = "ct3";
+                  });
               })
             ];
           };
