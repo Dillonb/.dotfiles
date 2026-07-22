@@ -120,7 +120,9 @@ jobs:
         run: nohup attic watch-store "$ATTIC_CACHE" &
 
       - name: Build ${{ matrix.name }}
-        run: nix build -L --show-trace "${{ matrix.target }}"
+        run: |
+          nix build -L --show-trace "${{ matrix.target }}"
+          nix build -L --show-trace ".#devShells.$(nix eval --impure --raw --expr builtins.currentSystem).default"
 
       - name: Publish ${{ matrix.name }} release
         if: >-
