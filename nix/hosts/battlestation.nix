@@ -159,7 +159,7 @@ in
   };
 
   environment.systemPackages = with pkgs; [
-    r2modman
+    # r2modman
     # obs-studio
     prismlauncher
     godot-mono
