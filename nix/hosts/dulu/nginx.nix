@@ -138,6 +138,7 @@ in
           "jellyfishing.dgb.sh"
           "jellyfih.dgb.sh"
           "jelly.dgb.sh"
+          "fuckplexim.bingchill.ing"
         ];
         forceSSL = true;
         enableACME = true;
