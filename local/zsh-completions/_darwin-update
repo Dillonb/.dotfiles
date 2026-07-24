@@ -1,0 +1,4 @@
+#compdef darwin-update
+
+_arguments \
+  '1:mode:(switch check)'

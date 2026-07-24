@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+derivation=$1
+profile=/nix/var/nix/profiles/system
+hostname=$(scutil --get LocalHostName)
+
+case "$2" in
+    check|switch)
+        operation="$2"
+        ;;
+    *)
+        echo "Usage: $0 <derivation> [check|switch]"
+        exit 1
+        ;;
+esac
+
+if [ "$(readlink -f /run/current-system)" = "$(readlink -f "$derivation")" ]; then
+    echo "$hostname is already running $derivation"
+    exit 0
+fi
+
+nix-store --realise "$derivation" --log-format bar-with-logs --option narinfo-cache-negative-ttl 0 || exit 1
+
+nvd diff $profile "$derivation"
+echo ""
+echo "Update $hostname to $derivation: $operation"
+read -r -p "Are you sure? [y/N] " response
+case "$response" in
+    [yY][eE][sS]|[yY])
+        if [ "$operation" = check ]; then
+            sudo env checkActivation=1 "$derivation/activate"
+        else
+            sudo nix-env -p $profile --set "$derivation"
+            sudo "$derivation/activate"
+        fi
+        ;;
+    *)
+        echo "Exiting."
+        ;;
+esac
