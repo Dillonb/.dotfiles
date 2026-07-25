@@ -55,6 +55,14 @@ in
       "health.d/systemdunits.conf" = pkgs.writeText "systemdunits-health.conf" (
         lib.concatMapStringsSep "\n" unitAlert unitTypes
       );
+    }
+    // lib.optionalAttrs config.boot.zfs.enabled {
+      # Netdata by default harcodes the path to /usr/bin/zpool
+      "go.d/zfspool.conf" = pkgs.writeText "zfspool.conf" ''
+        jobs:
+          - name: zfspool
+            binary_path: ${config.boot.zfs.package}/bin/zpool
+      '';
     };
   };
 }
