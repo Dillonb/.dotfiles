@@ -120,11 +120,6 @@ if vim.g.neovide then
   vim.g.neovide_cursor_animation_length = 0.01
 end
 
--- TODO: probably want to move this to my Nix config and get rid of the gcc_bin_path thing entirely
-if vim.g.gcc_bin_path ~= nil then
-  vim.env.CC = vim.g.gcc_bin_path
-end
-
 -- Automatically install lazy.nvim if it's not already installed
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then

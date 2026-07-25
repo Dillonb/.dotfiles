@@ -81,7 +81,7 @@
       configure = {
         customRC = ''
           " Tell nvim where GCC is. Needed so it can compile the treesitter parsers.
-          let g:gcc_bin_path = '${pkgs.lib.getExe pkgs.gcc}'
+          vim.env.CC = '${pkgs.lib.getExe pkgs.gcc}'
 
           " Set a variable so we know we're in NixOS
           let g:os_is_nixos = v:true
