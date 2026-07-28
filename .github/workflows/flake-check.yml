@@ -1,0 +1,21 @@
+name: Check flake
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  check-flake:
+    name: Check flake
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v7
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v22
+        with:
+          extra-conf: access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+      - name: Run checks
+        run: nix flake check --all-systems -v

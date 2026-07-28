@@ -48,8 +48,6 @@ jobs:
           endpoint: ${{ env.ATTIC_ENDPOINT }}
           cache: ${{ env.ATTIC_CACHE }}
           token: ${{ secrets.ATTIC_TOKEN }}
-      - name: Check flake
-        run: nix flake check --all-systems -v
       - name: Generate matrix
         id: generate
         run: |
