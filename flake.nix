@@ -83,7 +83,7 @@
           # "aspnetcore-runtime-6.0.36"
           # "dotnet-sdk-wrapped-6.0.428"
           # "dotnet-sdk-6.0.428"
-          # "qtwebengine-5.15.19"
+          "qtwebengine-5.15.19"
         ];
       };
       systems = [
@@ -451,6 +451,32 @@
           modules = [ ];
         };
       };
+
+      packages = nixos-stable.lib.genAttrs [ "x86_64-linux" ] (
+        system:
+        let
+          pkgs = import nixos-unstable {
+            inherit system;
+            config = nixpkgs-config;
+          };
+
+          qtwebengine5 = pkgs.qt5.callPackage ./nix/packages/qtwebengine5/package.nix {
+            stdenv = if pkgs.stdenv.cc.isClang then pkgs.llvmPackages_19.stdenv else pkgs.stdenv;
+            inherit (pkgs.qt5.srcs.qtwebengine) version;
+            inherit (pkgs.darwin) bootstrap_cmds;
+            python = pkgs.python3;
+          };
+        in
+        {
+          inherit qtwebengine5;
+
+          teamspeak3 = pkgs.callPackage ./nix/packages/teamspeak3/package.nix {
+            qt5 = pkgs.qt5 // {
+              qtwebengine = qtwebengine5;
+            };
+          };
+        }
+      );
 
       devShells = forEachSystem (
         { pkgs }: {
