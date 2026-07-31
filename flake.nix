@@ -460,8 +460,16 @@
             config = nixpkgs-config;
           };
 
+          # chromium 87 doesn't build against libstdc++ 15
+          webengineStdenv = pkgs.gcc14Stdenv;
+
           qtwebengine5 = pkgs.qt5.callPackage ./nix/packages/qtwebengine5/package.nix {
-            stdenv = if pkgs.stdenv.cc.isClang then pkgs.llvmPackages_19.stdenv else pkgs.stdenv;
+            stdenv = webengineStdenv;
+            qtModule = pkgs.qt5.callPackage "${nixos-unstable}/pkgs/development/libraries/qt-5/qtModule.nix" {
+              stdenv = webengineStdenv;
+              mkDerivation = webengineStdenv.mkDerivation;
+              patches = { };
+            };
             inherit (pkgs.qt5.srcs.qtwebengine) version;
             inherit (pkgs.darwin) bootstrap_cmds;
             python = pkgs.python3;
