@@ -97,7 +97,7 @@ let
 
         # Editor
         # neovim-qt
-        (big zed-editor)
+        # (big zed-editor)
 
         # Misc utils
         xkill
