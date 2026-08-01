@@ -14,5 +14,6 @@
   user = {
     "battlestation" =
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMNsw5AFJSHDB11PdcOY60UeIGIhj3MRfBRLYrElHOL1";
+    "dulu" = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFxQ3M2CH8EHwat4DEypSt6GSeIwSEpZCJxJnPso6ve/";
   };
 }
