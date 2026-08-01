@@ -25,8 +25,8 @@ jobs:
   matrix:
     name: Generate matrix
     runs-on: ubuntu-latest
-    env:
-      ATTIC_TOKEN: ${{ secrets.ATTIC_TOKEN }}
+    permissions:
+      contents: read
     outputs:
       include: ${{ steps.generate.outputs.include }}
     steps:
@@ -39,28 +39,25 @@ jobs:
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
             extra-substituters = ${{ env.ATTIC_ENDPOINT }}${{ env.ATTIC_CACHE }} ${{ env.ALTERNATE_CACHE_ENDPOINT }}
             extra-trusted-public-keys = ${{ env.ATTIC_PUBLIC_KEY }} ${{ env.ALTERNATE_CACHE_PUBLIC_KEY }}
-      - name: Set up attic cache
-        if: >-
-          github.event_name == 'push' && github.ref == 'refs/heads/master'
-          && env.ATTIC_TOKEN != ''
-        uses: ryanccn/attic-action@v0.5.0
-        with:
-          endpoint: ${{ env.ATTIC_ENDPOINT }}
-          cache: ${{ env.ATTIC_CACHE }}
-          token: ${{ secrets.ATTIC_TOKEN }}
       - name: Generate matrix
         id: generate
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
         run: |
           base=$(nix eval --raw .#github-actions-matrix)
-          # Build only the systems whose output path isn't already in attic.
-          store="${{ env.ATTIC_ENDPOINT }}${{ env.ATTIC_CACHE }}"
+          # Build only the systems whose output path isn't the one already
+          # published in the corresponding GitHub release.
           include='[]'
           while read -r entry; do
+            name=$(jq -r '.name' <<<"$entry")
             path=$(jq -r '.path' <<<"$entry")
-            if nix path-info --store "$store" "$path" >/dev/null 2>&1; then
-              echo "✔ cached, skipping: $path"
+            tag="system-$name"
+            released=$(gh release download "$tag" --pattern store-path --output - 2>/dev/null | head -n1 | tr -d '[:space:]' || true)
+            if [ "$released" = "$path" ]; then
+              echo "✔ released, skipping: $path"
             else
-              echo "building: $path"
+              echo "building: $path (released: ${released:-<none>})"
               include=$(jq -c --argjson e "$entry" '. + [$e]' <<<"$include")
             fi
           done < <(jq -c '.[]' <<<"$base")
@@ -102,9 +99,7 @@ jobs:
             extra-trusted-public-keys = ${{ env.ATTIC_PUBLIC_KEY }} ${{ env.ALTERNATE_CACHE_PUBLIC_KEY }}
 
       - name: Set up attic cache
-        if: >-
-          github.event_name == 'push' && github.ref == 'refs/heads/master'
-          && env.ATTIC_TOKEN != ''
+        if: ${{ env.ATTIC_TOKEN != '' }}
         uses: ryanccn/attic-action@v0.5.0
         with:
           endpoint: ${{ env.ATTIC_ENDPOINT }}
@@ -112,18 +107,20 @@ jobs:
           token: ${{ secrets.ATTIC_TOKEN }}
 
       - name: Monitor nix store
-        if: >-
-          github.event_name == 'push' && github.ref == 'refs/heads/master'
-          && env.ATTIC_TOKEN != ''
+        if: ${{ env.ATTIC_TOKEN != '' }}
         run: nohup attic watch-store "$ATTIC_CACHE" &
 
       - name: Build ${{ matrix.name }}
-        run: nix build --keep-going -L --show-trace "${{ matrix.target }}"
+        run: |
+          store="${{ env.ATTIC_ENDPOINT }}${{ env.ATTIC_CACHE }}"
+          if nix path-info --store "$store" '${{ matrix.path }}' >/dev/null 2>&1; then
+            echo "✔ cached, skipping build: ${{ matrix.path }}"
+          else
+            nix build --keep-going -L --show-trace "${{ matrix.target }}"
+          fi
 
       - name: Publish ${{ matrix.name }} release
-        if: >-
-          github.event_name == 'push' && github.ref == 'refs/heads/master'
-          && env.ATTIC_TOKEN != ''
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
