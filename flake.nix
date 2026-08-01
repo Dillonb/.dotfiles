@@ -452,7 +452,7 @@
         };
       };
 
-      packages = nixos-stable.lib.genAttrs [ "x86_64-linux" ] (
+      packages = nixos-stable.lib.genAttrs systems (
         system:
         let
           pkgs = import nixos-unstable {
@@ -476,6 +476,10 @@
           };
         in
         {
+          sops-yaml = pkgs.callPackage ./nix/secrets/sops-yaml.nix { };
+        }
+        # teamspeak3 is x86_64-linux only, and qtwebengine5 exists to build it
+        // nixos-stable.lib.optionalAttrs (system == "x86_64-linux") {
           inherit qtwebengine5;
 
           teamspeak3 = pkgs.callPackage ./nix/packages/teamspeak3/package.nix {
@@ -487,7 +491,11 @@
       );
 
       devShells = forEachSystem (
-        { pkgs }: {
+        { pkgs }:
+        let
+          sops-yaml = pkgs.callPackage ./nix/secrets/sops-yaml.nix { };
+        in
+        {
           default = pkgs.mkShell {
             packages = with pkgs; [
               bashInteractive
@@ -503,9 +511,19 @@
               curl
               jq
               actionlint
+              sops
             ];
             shellHook = ''
               export FLAKE="`readlink -f ~/.dotfiles`"
+
+              _root="$(git rev-parse --show-toplevel 2>/dev/null || true)"
+              if [ -n "$_root" ] && ! cmp -s ${sops-yaml} "$_root/.sops.yaml"; then
+                install -m 644 ${sops-yaml} "$_root/.sops.yaml"
+                echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+                echo "!! regenerated .sops.yaml, remember to commit it !!"
+                echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+              fi
+              unset _root
             '';
           };
         }
