@@ -117,6 +117,9 @@ jobs:
             echo "✔ cached, skipping build: ${{ matrix.path }}"
           else
             nix build --keep-going -L --show-trace "${{ matrix.target }}"
+            if [ -n "$ATTIC_TOKEN" ]; then
+              attic push "$ATTIC_CACHE" ./result
+            fi
           fi
 
       - name: Publish ${{ matrix.name }} release
