@@ -14,6 +14,11 @@
       };
     };
 
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixos-stable";
+    };
+
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     nixos-wsl.url = "github:nix-community/nixos-WSL/main";
@@ -69,6 +74,7 @@
       home-manager-stable,
       home-manager-unstable,
       agenix,
+      sops-nix,
       nixos-wsl,
       darwin,
       copyparty,
@@ -216,10 +222,12 @@
               nixpkgs.config = nixpkgs-config;
             }
           );
-          agenix-modules = [
+          secrets-modules = [
             agenix.nixosModules.default
             ./nix/secrets/load-secrets.nix
             { environment.systemPackages = [ agenix.packages.${system}.default ]; }
+
+            sops-nix.nixosModules.sops
           ];
           role-modules = {
             workstation = [
@@ -240,7 +248,7 @@
               # broken on aarch64 as of 2025-12-11
               # ./nix/modules/appimage-support.nix
             ]
-            ++ agenix-modules;
+            ++ secrets-modules;
 
             server = [
               ./nix/common.nix
@@ -249,7 +257,7 @@
               ./nix/modules/server-packages.nix
               ./nix/modules/common-packages.nix
             ]
-            ++ agenix-modules;
+            ++ secrets-modules;
 
             wsl = [
               ./nix/common.nix
