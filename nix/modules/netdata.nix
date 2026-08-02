@@ -37,9 +37,12 @@ let
   '';
 in
 {
-  users.users.netdata.extraGroups = [
-    "agenix" # secrets access
-  ];
+  sops.secrets."netdata-discord.conf" = {
+    sopsFile = ../secrets/misc.yaml;
+    owner = "netdata";
+    restartUnits = [ "netdata.service" ];
+  };
+
   services.netdata = {
     enable = true;
     # Add -trimpath to netdata's Go build so it doesn't pin the Go toolchain (~216 MiB) into the closure.
@@ -51,7 +54,7 @@ in
       '';
     });
     configDir = {
-      "health_alarm_notify.conf" = config.age.secrets."netdata-discord.conf".path;
+      "health_alarm_notify.conf" = config.sops.secrets."netdata-discord.conf".path;
       "health.d/systemdunits.conf" = pkgs.writeText "systemdunits-health.conf" (
         lib.concatMapStringsSep "\n" unitAlert unitTypes
       );

@@ -13,6 +13,11 @@ in
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
+  sops.secrets.restic = {
+    sopsFile = ../secrets/misc.yaml;
+    owner = config.services.restic.backups.steam-compatdata.user;
+  };
+
   # Bootloader.
   boot.initrd.availableKernelModules = [
     "nvme"
@@ -139,7 +144,7 @@ in
     backups = {
       steam-compatdata = {
         initialize = true;
-        passwordFile = config.age.secrets.restic.path;
+        passwordFile = config.sops.secrets.restic.path;
         rcloneConfigFile = "${config.services.syncthing.settings.folders."rclone-config".path}/rclone.conf";
         user = "dillon";
         paths = [ "/home/dillon/.local/share/Steam/steamapps/compatdata" ];

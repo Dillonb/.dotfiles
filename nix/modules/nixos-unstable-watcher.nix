@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 let
-  webhookFile = config.age.secrets."nixos-unstable-discord-webhook".path;
+  webhookFile = config.sops.secrets."nixos-unstable-discord-webhook".path;
   script = pkgs.writeShellApplication {
     name = "nixos-unstable-watcher";
     runtimeInputs = with pkgs; [
@@ -28,6 +28,8 @@ let
   };
 in
 {
+  sops.secrets."nixos-unstable-discord-webhook".sopsFile = ../secrets/misc.yaml;
+
   systemd.services.nixos-unstable-watcher = {
     description = "Notify Discord when nixos-unstable advances";
     after = [ "network-online.target" ];

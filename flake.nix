@@ -5,15 +5,6 @@
     nixos-stable.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixos-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    agenix = {
-      url = "github:ryantm/agenix";
-      inputs = {
-        nixpkgs.follows = "nixos-stable";
-        darwin.follows = "darwin";
-        home-manager.follows = "home-manager-stable";
-      };
-    };
-
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixos-stable";
@@ -73,7 +64,6 @@
       nixos-hardware,
       home-manager-stable,
       home-manager-unstable,
-      agenix,
       sops-nix,
       nixos-wsl,
       darwin,
@@ -222,13 +212,7 @@
               nixpkgs.config = nixpkgs-config;
             }
           );
-          secrets-modules = [
-            agenix.nixosModules.default
-            ./nix/secrets/load-secrets.nix
-            { environment.systemPackages = [ agenix.packages.${system}.default ]; }
-
-            sops-nix.nixosModules.sops
-          ];
+          secrets-modules = [ sops-nix.nixosModules.sops ];
           role-modules = {
             workstation = [
               ./nix/common.nix

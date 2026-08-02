@@ -44,13 +44,18 @@ assert lib.assertMsg (
   lib.length sqlite_dbs == lib.length (lib.unique (map baseNameOf sqlite_dbs))
 ) "sqlite_dbs must have unique basenames";
 {
+  sops.secrets.restic = {
+    sopsFile = ../../secrets/misc.yaml;
+    owner = config.services.restic.backups.dulu.user;
+  };
+
   systemd.tmpfiles.rules = [ "d ${sqlite_backup_dir} 0700 root root -" ];
 
   services.restic = {
     backups = {
       dulu = {
         initialize = true;
-        passwordFile = config.age.secrets.restic.path;
+        passwordFile = config.sops.secrets.restic.path;
         rcloneConfigFile = "${config.services.syncthing.settings.folders."rclone-config".path}/rclone.conf";
         user = "root";
         backupPrepareCommand = lib.getExe sqlite_backup;

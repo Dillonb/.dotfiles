@@ -10,6 +10,11 @@
     "${modulesPath}/virtualisation/azure-image.nix"
   ];
 
+  sops.secrets.restic = {
+    sopsFile = ../secrets/misc.yaml;
+    owner = config.services.restic.backups.teamspeak-server.user;
+  };
+
   virtualisation.azureImage.vmGeneration = "v1";
 
   services.openssh.settings.PasswordAuthentication = false;
@@ -62,7 +67,6 @@
   };
 
   users.users.teamspeak.extraGroups = [
-    "agenix" # secrets access
     "syncthing" # access to syncthing data
   ];
 
@@ -70,7 +74,7 @@
     backups = {
       teamspeak-server = {
         initialize = true;
-        passwordFile = config.age.secrets.restic.path;
+        passwordFile = config.sops.secrets.restic.path;
         rcloneConfigFile = "${config.services.syncthing.settings.folders."rclone-config".path}/rclone.conf";
         user = "root";
         paths = [

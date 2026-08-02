@@ -46,8 +46,6 @@
         "libvirtd"
         # for SDR/logitech unifying
         "plugdev"
-        # Access to secrets
-        "agenix"
         # Access to syncthing data
         "syncthing"
         # Access to set the CPU governor through gamemode

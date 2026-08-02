@@ -6,10 +6,16 @@
 }:
 let
   dataDir = "/var/lib/ts3status";
-  configFile = config.age.secrets."ts3status.toml".path;
+  configFile = config.sops.secrets."ts3status.toml".path;
   ts3status = inputs.ts3status.packages."${pkgs.stdenv.hostPlatform.system}".default;
 in
 {
+  sops.secrets."ts3status.toml" = {
+    sopsFile = ../secrets/misc.yaml;
+    owner = "teamspeak";
+    restartUnits = [ "ts3status.service" ];
+  };
+
   systemd.services.ts3status = {
     description = "ts3status TeamSpeak 3 Status Page";
     after = [ "network.target" ];
