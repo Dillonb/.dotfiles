@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 CURRENT_PLEX_VER=`nix-instantiate --eval -E '(import ./plex.nix).version' | tr -d '"'`
 if [ -z "${1}" ]; then
-  TOKEN=$(cat /run/agenix/plex-token)
+  TOKEN=$(cat /run/secrets/plex-token)
   URL=$(curl -Ls -o /dev/null -w %{url_effective} https://plex.tv/downloads/latest/5\?channel\=8\&build\=linux-x86_64\&distro\=debian\&X-Plex-Token\=$TOKEN)
   PLEX_VER=$(echo $URL | cut -d/ -f5)
 else

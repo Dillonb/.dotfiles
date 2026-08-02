@@ -13,21 +13,7 @@ let
 
     "ts3status.toml"
 
-    "transmission-auth"
-
-    "dgb.sh-dynamic-dns-password"
-
     "netdata-discord.conf"
-
-    "nix-cache-priv-key.pem"
-
-    "atticd-env"
-
-    "anki-password"
-
-    "plex-token"
-
-    "miniflux-admin-creds"
 
     "nixos-unstable-discord-webhook"
   ];

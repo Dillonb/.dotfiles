@@ -14,6 +14,21 @@ let
   pwndbg-lldb = inputs.pwndbg.packages."${pkgs.stdenv.hostPlatform.system}".pwndbg-lldb;
 in
 {
+  sops.secrets = {
+    "nix-cache-priv-key.pem" = {
+      sopsFile = ../../secrets/dulu.yaml;
+      restartUnits = [ "nix-serve.service" ];
+    };
+    "anki-password" = {
+      sopsFile = ../../secrets/dulu.yaml;
+      restartUnits = [ "anki-sync-server.service" ];
+    };
+    "plex-token" = {
+      sopsFile = ../../secrets/dulu.yaml;
+      owner = "dillon";
+    };
+  };
+
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -160,7 +175,7 @@ in
 
   services.nix-serve = {
     enable = true;
-    secretKeyFile = config.age.secrets."nix-cache-priv-key.pem".path;
+    secretKeyFile = config.sops.secrets."nix-cache-priv-key.pem".path;
     port = config.dgbCustom.ports.nixServe;
   };
 
@@ -172,7 +187,7 @@ in
     users = [
       {
         username = "dgb";
-        passwordFile = config.age.secrets."anki-password".path;
+        passwordFile = config.sops.secrets."anki-password".path;
       }
     ];
   };

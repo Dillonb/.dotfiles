@@ -106,7 +106,6 @@ in
     isNormalUser = false;
     isSystemUser = true;
     group = "syncthing";
-    extraGroups = [ "agenix" ]; # secrets access
   };
   users.groups.syncthing = { };
 }

@@ -5,6 +5,10 @@
   ...
 }:
 {
+  sops.secrets."miniflux-admin-creds" = {
+    sopsFile = ../../secrets/dulu.yaml;
+    restartUnits = [ "miniflux.service" ];
+  };
 
   systemd.services.miniflux-dbsetup.serviceConfig = lib.mkForce {
     Type = "oneshot";
@@ -18,7 +22,7 @@
   services.miniflux = {
     enable = true;
     package = pkgs.unstable.miniflux;
-    adminCredentialsFile = config.age.secrets."miniflux-admin-creds".path;
+    adminCredentialsFile = config.sops.secrets."miniflux-admin-creds".path;
     config = {
       LISTEN_ADDR = "localhost:${toString config.dgbCustom.ports.miniflux}";
     };

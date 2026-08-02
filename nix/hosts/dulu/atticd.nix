@@ -1,4 +1,9 @@
 { config, pkgs, ... }: {
+  sops.secrets."atticd-env" = {
+    sopsFile = ../../secrets/dulu.yaml;
+    restartUnits = [ "atticd.service" ];
+  };
+
   services.postgresql = {
     ensureDatabases = [ "atticd" ];
     ensureUsers = [
@@ -11,7 +16,7 @@
 
   services.atticd = {
     enable = true;
-    environmentFile = config.age.secrets."atticd-env".path;
+    environmentFile = config.sops.secrets."atticd-env".path;
     package = pkgs.unstable.attic-server;
     settings = {
       listen = "127.0.0.1:${toString config.dgbCustom.ports.atticd}";

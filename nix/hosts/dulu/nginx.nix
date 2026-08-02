@@ -3,6 +3,12 @@ let
   strPort = name: toString config.dgbCustom.ports.${name};
 in
 {
+  sops.secrets."transmission-auth" = {
+    sopsFile = ../../secrets/dulu.yaml;
+    owner = config.services.nginx.user;
+    reloadUnits = [ "nginx.service" ];
+  };
+
   services.nginx = {
     enable = true;
     virtualHosts = {
@@ -201,7 +207,7 @@ in
         enableACME = true;
         locations."/" = {
           proxyPass = "http://127.0.0.1:${strPort "transmission"}/";
-          basicAuthFile = "/run/agenix/transmission-auth";
+          basicAuthFile = config.sops.secrets."transmission-auth".path;
         };
       };
 
@@ -328,9 +334,5 @@ in
         };
       };
     };
-  };
-
-  users.users.nginx = {
-    extraGroups = [ "agenix" ]; # secrets access
   };
 }
