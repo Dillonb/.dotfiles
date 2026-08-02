@@ -523,6 +523,10 @@
             shellHook = ''
               export FLAKE="`readlink -f ~/.dotfiles`"
 
+              if [ -f "$HOME/.ssh/id_ed25519" ]; then
+                export SOPS_AGE_KEY_CMD="${pkgs.ssh-to-age}/bin/ssh-to-age -private-key -i $HOME/.ssh/id_ed25519"
+              fi
+
               _root="$(git rev-parse --show-toplevel 2>/dev/null || true)"
               if [ -n "$_root" ] && ! cmp -s ${sops-yaml} "$_root/.sops.yaml"; then
                 install -m 644 ${sops-yaml} "$_root/.sops.yaml"

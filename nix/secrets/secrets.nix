@@ -38,14 +38,6 @@ let
 
     "plex-token"
 
-    "copyparty-dehowell"
-    "copyparty-c"
-    "copyparty-epiccookie"
-    "copyparty-snacks"
-    "copyparty-iris"
-    "copyparty-dgb"
-    "copyparty-siri"
-
     "miniflux-admin-creds"
 
     "nixos-unstable-discord-webhook"

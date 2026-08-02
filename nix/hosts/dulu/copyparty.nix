@@ -1,30 +1,37 @@
-{ config, lib, ... }: {
+{ config, lib, ... }:
+let
+  users = [
+    "dgb"
+    "iris"
+    "snacks"
+    "epiccookie"
+    "dehowell"
+    "c"
+    "siri"
+  ];
+in
+{
+  sops.secrets = lib.genAttrs (map (user: "copyparty-${user}") users) (name: {
+    sopsFile = ../../secrets/copyparty.yaml;
+    key = lib.removePrefix "copyparty-" name;
+    owner = config.services.copyparty.user;
+    restartUnits = [ "copyparty.service" ];
+  });
+
   services.copyparty = {
     enable = true;
 
     user = "dillon";
     group = "users";
 
-    accounts =
-      let
-        users = [
-          "dgb"
-          "iris"
-          "snacks"
-          "epiccookie"
-          "dehowell"
-          "c"
-          "siri"
-        ];
-      in
-      lib.listToAttrs (
-        map (user: {
-          name = user;
-          value = {
-            passwordFile = config.age.secrets."copyparty-${user}".path;
-          };
-        }) users
-      );
+    accounts = lib.listToAttrs (
+      map (user: {
+        name = user;
+        value = {
+          passwordFile = config.sops.secrets."copyparty-${user}".path;
+        };
+      }) users
+    );
 
     settings = {
       p = config.dgbCustom.ports.copyparty;
