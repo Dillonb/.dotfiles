@@ -11,6 +11,23 @@ let
   syncthing-data = "/var/lib/syncthing-data";
 in
 {
+  sops.secrets =
+    let
+      common = {
+        sopsFile = ../secrets/syncthing.yaml;
+        owner = config.services.syncthing.user;
+        restartUnits = [ "syncthing.service" ];
+      };
+    in
+    {
+      syncthing-cert = common // {
+        key = "${config.networking.hostName}/cert";
+      };
+      syncthing-key = common // {
+        key = "${config.networking.hostName}/key";
+      };
+    };
+
   systemd.tmpfiles.rules = [
     "d ${syncthing-data} 770 dillon syncthing"
   ]
@@ -24,8 +41,8 @@ in
     group = "syncthing";
     overrideDevices = true;
     overrideFolders = true;
-    key = config.age.secrets."${config.networking.hostName}-syncthing.key.pem".path;
-    cert = config.age.secrets."${config.networking.hostName}-syncthing.cert.pem".path;
+    key = config.sops.secrets.syncthing-key.path;
+    cert = config.sops.secrets.syncthing-cert.path;
     settings = {
       devices = {
         "desktop-windows" = {

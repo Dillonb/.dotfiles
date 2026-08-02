@@ -17,17 +17,6 @@ let
 
     "dgb.sh-dynamic-dns-password"
 
-    "teamspeak-server-syncthing.key.pem"
-    "teamspeak-server-syncthing.cert.pem"
-    "mini-syncthing.key.pem"
-    "mini-syncthing.cert.pem"
-    "battlestation-syncthing.key.pem"
-    "battlestation-syncthing.cert.pem"
-    "dulu-syncthing.key.pem"
-    "dulu-syncthing.cert.pem"
-    "pi4-syncthing.key.pem"
-    "pi4-syncthing.cert.pem"
-
     "netdata-discord.conf"
 
     "nix-cache-priv-key.pem"
