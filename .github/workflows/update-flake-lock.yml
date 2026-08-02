@@ -21,7 +21,8 @@ jobs:
         with:
           extra-conf: access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
 
+      # PAT rather than GITHUB_TOKEN so the PR triggers the build/check workflows.
       - name: Update flake.lock
         uses: DeterminateSystems/update-flake-lock@main
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.FLAKE_LOCK_TOKEN }}
