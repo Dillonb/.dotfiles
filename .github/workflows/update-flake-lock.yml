@@ -5,11 +5,15 @@ on:
     - cron: "0 */6 * * *"
   workflow_dispatch:
 
+env:
+  UPDATE_BRANCH: update_flake_lock_action
+
 jobs:
   update:
     name: Update flake.lock and open PR
     runs-on: ubuntu-latest
     permissions:
+      actions: write
       contents: write
       pull-requests: write
     steps:
@@ -22,6 +26,17 @@ jobs:
           extra-conf: access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
 
       - name: Update flake.lock
+        id: update
         uses: DeterminateSystems/update-flake-lock@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ env.UPDATE_BRANCH }}
+
+      # PRs opened by a GitHub Action don't trigger workflows, so kick off the
+      # build explicitly against the update branch.
+      - name: Build NixOS systems
+        if: ${{ steps.update.outputs.pull-request-operation == 'created' || steps.update.outputs.pull-request-operation == 'updated' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: gh workflow run build-nixos.yml --ref "$UPDATE_BRANCH"
