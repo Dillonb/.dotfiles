@@ -468,6 +468,7 @@
         in
         {
           sops-yaml = pkgs.callPackage ./nix/secrets/sops-yaml.nix { };
+          obsidian-headless = pkgs.callPackage ./nix/packages/obsidian-headless/package.nix { };
         }
         # teamspeak3 is x86_64-linux only, and qtwebengine5 exists to build it
         // nixos-stable.lib.optionalAttrs (system == "x86_64-linux") {

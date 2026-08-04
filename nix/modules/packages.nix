@@ -28,6 +28,8 @@ let
   pwndbg-lldb = inputs.pwndbg.packages."${pkgs.stdenv.hostPlatform.system}".pwndbg-lldb;
 
   teamspeak3 = inputs.self.packages."${pkgs.stdenv.hostPlatform.system}".teamspeak3 or skip;
+  obsidian-headless =
+    inputs.self.packages."${pkgs.stdenv.hostPlatform.system}".obsidian-headless or skip;
 
   linuxWorkstationPackages = (
     optionals isLinux (
@@ -205,6 +207,9 @@ let
       (big nodejs)
       delta
       (big unstable.github-copilot-cli)
+
+      # Notes
+      obsidian-headless
 
       # Theming
       oh-my-posh
