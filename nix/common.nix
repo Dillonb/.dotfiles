@@ -93,7 +93,7 @@
 
   services = {
     openssh.enable = true;
-    envfs.enable = true;
+    # envfs.enable = true;
     locate = {
       enable = true;
       package = pkgs.plocate;
