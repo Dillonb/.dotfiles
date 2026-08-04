@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
   services.postgresqlBackup = {
     enable = true;
     # pg_dumpall of every database -> /var/backup/postgresql/all.sql.zstd
@@ -10,6 +10,9 @@
     # internally-consistent dump (see restic.nix).
     startAt = [ ];
   };
+
+  # pg_dumpall popen()s /bin/sh, which envfs resolves from this PATH.
+  systemd.services.postgresqlBackup.path = [ pkgs.bash ];
 
   # Ensure a fresh dump is produced immediately before restic runs, and that
   # restic waits for it to finish before archiving.
