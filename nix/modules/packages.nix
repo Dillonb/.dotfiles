@@ -207,6 +207,7 @@ let
       (big nodejs)
       delta
       (big unstable.github-copilot-cli)
+      (big unstable.crush)
 
       # Notes
       obsidian-headless
