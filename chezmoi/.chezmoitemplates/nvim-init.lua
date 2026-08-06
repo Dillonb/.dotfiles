@@ -41,6 +41,9 @@ vim.opt.expandtab = true
 vim.opt.modeline = true
 vim.opt.modelines = 5
 
+-- Disable this even if editorconfig enables it.
+require('editorconfig').properties.trim_trailing_whitespace = nil
+
 -- Persistent undo between sessions
 vim.opt.undodir = vim.fn.stdpath('config') .. '/undo'
 vim.opt.undofile = true
