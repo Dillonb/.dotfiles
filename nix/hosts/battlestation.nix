@@ -31,17 +31,13 @@ in
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
   boot.loader = {
-    efi.canTouchEfiVariables = false;
+    efi.canTouchEfiVariables = true;
     # timeout = null; # No timeout, wait forever
-    grub = {
-      efiSupport = true;
-      efiInstallAsRemovable = true;
+    systemd-boot = {
       enable = true;
-      useOSProber = true;
-      device = "nodev";
-      default = "saved";
-      gfxmodeBios = "1280x720";
-      gfxmodeEfi = "1280x720";
+      consoleMode = "auto";
+      # Protect against /boot filling up
+      configurationLimit = 3;
     };
   };
 
