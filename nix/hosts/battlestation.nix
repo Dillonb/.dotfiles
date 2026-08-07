@@ -34,11 +34,25 @@ in
     efi.canTouchEfiVariables = true;
     # timeout = null; # No timeout, wait forever
     systemd-boot = {
-      enable = true;
+      # Disabled: lanzaboote installs systemd-boot itself. These options are
+      # still read for loader.conf and lanzaboote's generation limit.
+      # enable = true;
       consoleMode = "auto";
       # Protect against /boot filling up
       configurationLimit = 3;
     };
+  };
+
+  # Secure Boot. Signing keys are machine-local state in /var/lib/sbctl, not in
+  # this repo, so a from-scratch install must recreate them before the first
+  # rebuild, then enroll them with firmware in Setup Mode:
+  #   sudo sbctl create-keys
+  #   sudo sbctl enroll-keys --microsoft
+  # --microsoft is required: the NVIDIA option ROM and Windows' bootmgfw are
+  # Microsoft-signed and won't load without those certs in db.
+  boot.lanzaboote = {
+    enable = true;
+    pkiBundle = "/var/lib/sbctl";
   };
 
   fileSystems."/" = {

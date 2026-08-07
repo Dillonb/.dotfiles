@@ -12,6 +12,11 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v1.1.0";
+      inputs.nixpkgs.follows = "nixos-unstable";
+    };
+
     nixos-wsl.url = "github:nix-community/nixos-WSL/main";
 
     darwin = {
@@ -322,6 +327,7 @@
           system = "x86_64-linux";
           modules = [
             # ./nix/modules/libreoffice.nix
+            inputs.lanzaboote.nixosModules.lanzaboote
             ./nix/modules/sunshine.nix
             ./nix/modules/restic.nix
             ./nix/modules/syncthing.nix
