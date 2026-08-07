@@ -123,7 +123,7 @@ jobs:
           fi
 
       - name: Publish ${{ matrix.name }} release
-        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+        if: ${{ github.ref == 'refs/heads/master' }}
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
