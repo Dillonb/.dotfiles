@@ -2,5 +2,5 @@
 
 git:
   autoFetch: false
-  pagers:
-    - pager: delta --dark --paging=never
+  diffRenderers:
+    - command: delta --dark --paging=never
