@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+set -o pipefail
+
 derivation=$1
 profile=/nix/var/nix/profiles/system
 
@@ -14,7 +16,7 @@ if [ "$(readlink -f /run/current-system)" = "$(readlink -f "$derivation")" ]; th
     exit 0
 fi
 
-nix-store --realise "$derivation" --log-format bar-with-logs --option narinfo-cache-negative-ttl 0
+nix-store --realise "$derivation" --log-format internal-json -v --option narinfo-cache-negative-ttl 0 2>&1 | nom --json || exit 1
 
 nvd diff /nix/var/nix/profiles/system "$derivation"
 echo ""
