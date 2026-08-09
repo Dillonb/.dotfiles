@@ -154,6 +154,7 @@ let
       # Dev
       (big valgrind)
       (big gdb)
+      (big bubblewrap)
 
       # System status
       iotop
