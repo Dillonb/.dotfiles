@@ -7,6 +7,9 @@
 !.config
 # Applies to windows only
 !.razzle
+# psmux reads ~/.tmux.conf and keeps its plugins in ~/.psmux
+!.tmux.conf
+!.psmux
 {{- else }}
 # Non-Windows OS (Linux/Mac)
 AppData
@@ -14,4 +17,6 @@ AppData
 *komorebi*
 applications.json
 .razzle
+# psmux is Windows only
+.psmux
 {{- end }}

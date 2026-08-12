@@ -1,0 +1,7 @@
+["ppm"]
+    type = "archive"
+    url = "https://github.com/psmux/psmux-plugins/archive/main.tar.gz"
+    exact = true
+    stripComponents = 2
+    include = ["*/ppm/**"]
+    refreshPeriod = "168h"

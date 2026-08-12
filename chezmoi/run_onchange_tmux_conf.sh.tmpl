@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# .tmux.conf hash: {{ include "dot_tmux.conf" | sha256sum }}
+# .tmux.conf hash: {{ include "dot_tmux.conf.tmpl" | sha256sum }}
 ~/.tmux/plugins/tpm/bin/install_plugins
 ~/.tmux/plugins/tpm/bin/update_plugins all
 ~/.tmux/plugins/tpm/bin/clean_plugins
