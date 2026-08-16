@@ -71,7 +71,7 @@ let
         (big vscode-fhs)
         (big stable.ghidra)
         sublime-merge
-        # zeal
+        zeal
         gdb
         (big cargo)
         # (big qtcreator)
