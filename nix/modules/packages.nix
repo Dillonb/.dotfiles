@@ -93,7 +93,7 @@ let
         (big gimp)
         # (big audacity)
         # gnuradio
-        simplescreenrecorder
+        # simplescreenrecorder
         # protonvpn-gui
         mpv
 
