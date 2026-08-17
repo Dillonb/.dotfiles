@@ -146,33 +146,6 @@ jobs:
               --notes "Latest successful ${{ matrix.name }} system build"
           fi
 
-      - name: Diff ${{ matrix.name }} against master
-        if: ${{ github.event_name == 'pull_request' && matrix.released != '' }}
-        continue-on-error: true
-        env:
-          NAME: ${{ matrix.name }}
-          OLD: ${{ matrix.released }}
-          NEW: ${{ matrix.path }}
-        run: |
-          mkdir -p nvd-diff
-          out="nvd-diff/$NAME.txt"
-          if ! nix-store --realise "$OLD" "$NEW" > /dev/null; then
-            echo "Could not fetch closures to diff ($OLD -> $NEW)." > "$out"
-            exit 0
-          fi
-          nixpkgs="github:NixOS/nixpkgs/$(jq -r '.nodes["nixos-unstable"].locked.rev' flake.lock)"
-          nix run "$nixpkgs#nvd" -- diff "$OLD" "$NEW" > "$out" \
-            || echo "nvd failed to diff $OLD -> $NEW." > "$out"
-
-      - name: Upload ${{ matrix.name }} diff
-        if: ${{ github.event_name == 'pull_request' && matrix.released != '' }}
-        continue-on-error: true
-        uses: actions/upload-artifact@v7
-        with:
-          name: nvd-diff-${{ matrix.name }}
-          path: nvd-diff/
-          if-no-files-found: ignore
-
   nvd-diff:
     name: Post nvd diff
     needs:
@@ -183,13 +156,44 @@ jobs:
     permissions:
       pull-requests: write
     steps:
-      - name: Download diffs
-        continue-on-error: true
-        uses: actions/download-artifact@v8
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v22
         with:
-          path: nvd-diff
-          pattern: nvd-diff-*
-          merge-multiple: true
+          extra-conf: |
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install nvd
+        run: nix profile install --no-write-lock-file github:Dillonb/nvd
+
+      - name: Diff closures
+        continue-on-error: true
+        env:
+          INCLUDE: ${{ needs.matrix.outputs.include }}
+          # Every cache the closures are spread across, in priority order.
+          STORES: >-
+            ${{ env.ATTIC_ENDPOINT }}${{ env.ATTIC_CACHE }}
+            ${{ env.ALTERNATE_CACHE_ENDPOINT }}
+            https://cache.nixos.org
+        run: |
+          mkdir -p nvd-diff
+          stores=()
+          for store in $STORES; do stores+=(--store "$store"); done
+
+          # nvd reads closure metadata straight from the caches, so neither
+          # closure has to be downloaded in order to diff them.
+          while read -r entry; do
+            name=$(jq -r '.name' <<<"$entry")
+            old=$(jq -r '.released' <<<"$entry")
+            new=$(jq -r '.path' <<<"$entry")
+            [ -n "$old" ] || continue
+
+            out="nvd-diff/$name.txt"
+            if ! nvd "${stores[@]}" diff "$old" "$new" \
+                   >"$out" 2>"$out.err" </dev/null; then
+              { echo "Could not diff $old -> $new."; echo; cat "$out.err"; } > "$out"
+            fi
+            rm -f "$out.err"
+          done < <(jq -c '.[]' <<<"$INCLUDE")
 
       - name: Render comment
         env:
@@ -208,7 +212,7 @@ jobs:
           for p in diffs:
               text = p.read_text(errors="replace").strip()
               if len(text) > cap:
-                  text = text[:cap].rsplit("\n", 1)[0] + "\n... truncated, see the run artifacts ..."
+                  text = text[:cap].rsplit("\n", 1)[0] + "\n... truncated ..."
               out += [f"<details><summary><code>{p.stem}</code></summary>", "",
                       "```", text, "```", "", "</details>", ""]
 
