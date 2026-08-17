@@ -151,7 +151,7 @@ jobs:
     needs:
       - matrix
       - build
-    if: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository }}
+    if: ${{ !cancelled() && github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
@@ -168,7 +168,7 @@ jobs:
       - name: Diff closures
         continue-on-error: true
         env:
-          INCLUDE: ${{ needs.matrix.outputs.include }}
+          INCLUDE: ${{ needs.matrix.outputs.include || '[]' }}
           # Every cache the closures are spread across, in priority order.
           STORES: >-
             ${{ env.ATTIC_ENDPOINT }}${{ env.ATTIC_CACHE }}
@@ -179,6 +179,14 @@ jobs:
           stores=()
           for store in $STORES; do stores+=(--store "$store"); done
 
+          # A path only reaches a cache once its build has succeeded.
+          in_cache() {
+            for store in $STORES; do
+              nix-store -q --references --store "$store" "$1" >/dev/null 2>&1 && return 0
+            done
+            return 1
+          }
+
           # nvd reads closure metadata straight from the caches, so neither
           # closure has to be downloaded in order to diff them.
           while read -r entry; do
@@ -188,8 +196,10 @@ jobs:
             [ -n "$old" ] || continue
 
             out="nvd-diff/$name.txt"
-            if ! nvd "${stores[@]}" diff "$old" "$new" \
-                   >"$out" 2>"$out.err" </dev/null; then
+            if ! in_cache "$new"; then
+              echo "Build failed, nothing to diff." > "$out"
+            elif ! nvd "${stores[@]}" diff "$old" "$new" \
+                    >"$out" 2>"$out.err" </dev/null; then
               { echo "Could not diff $old -> $new."; echo; cat "$out.err"; } > "$out"
             fi
             rm -f "$out.err"
