@@ -182,7 +182,8 @@ jobs:
           # A path only reaches a cache once its build has succeeded.
           in_cache() {
             for store in $STORES; do
-              nix-store -q --references --store "$store" "$1" >/dev/null 2>&1 && return 0
+              nix path-info --store "$store" --option substituters "" "$1" \
+                >/dev/null 2>&1 && return 0
             done
             return 1
           }
