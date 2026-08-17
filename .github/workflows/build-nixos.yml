@@ -29,6 +29,7 @@ jobs:
       contents: read
     outputs:
       include: ${{ steps.generate.outputs.include }}
+      unchanged: ${{ steps.generate.outputs.unchanged }}
     steps:
       - name: Check out source
         uses: actions/checkout@v7
@@ -49,6 +50,7 @@ jobs:
           # Build only the systems whose output path isn't the one already
           # published in the corresponding GitHub release.
           include='[]'
+          unchanged='[]'
           while read -r entry; do
             name=$(jq -r '.name' <<<"$entry")
             path=$(jq -r '.path' <<<"$entry")
@@ -56,12 +58,14 @@ jobs:
             released=$(gh release download "$tag" --pattern store-path --output - 2>/dev/null | head -n1 | tr -d '[:space:]' || true)
             if [ "$released" = "$path" ]; then
               echo "✔ released, skipping: $path"
+              unchanged=$(jq -c --arg n "$name" '. + [$n]' <<<"$unchanged")
             else
               echo "building: $path (released: ${released:-<none>})"
-              include=$(jq -c --argjson e "$entry" '. + [$e]' <<<"$include")
+              include=$(jq -c --argjson e "$entry" --arg r "$released" '. + [$e + {released: $r}]' <<<"$include")
             fi
           done < <(jq -c '.[]' <<<"$base")
           echo "include=$include" >> "$GITHUB_OUTPUT"
+          echo "unchanged=$unchanged" >> "$GITHUB_OUTPUT"
           jq . <<<"$include"
 
   build:
@@ -140,4 +144,92 @@ jobs:
               --target "$GITHUB_SHA" \
               --title "${{ matrix.name }}" \
               --notes "Latest successful ${{ matrix.name }} system build"
+          fi
+
+      - name: Diff ${{ matrix.name }} against master
+        if: ${{ github.event_name == 'pull_request' && matrix.released != '' }}
+        continue-on-error: true
+        env:
+          NAME: ${{ matrix.name }}
+          OLD: ${{ matrix.released }}
+          NEW: ${{ matrix.path }}
+        run: |
+          mkdir -p nvd-diff
+          out="nvd-diff/$NAME.txt"
+          if ! nix-store --realise "$OLD" "$NEW" > /dev/null; then
+            echo "Could not fetch closures to diff ($OLD -> $NEW)." > "$out"
+            exit 0
+          fi
+          nixpkgs="github:NixOS/nixpkgs/$(jq -r '.nodes["nixos-unstable"].locked.rev' flake.lock)"
+          nix run "$nixpkgs#nvd" -- diff "$OLD" "$NEW" > "$out" \
+            || echo "nvd failed to diff $OLD -> $NEW." > "$out"
+
+      - name: Upload ${{ matrix.name }} diff
+        if: ${{ github.event_name == 'pull_request' && matrix.released != '' }}
+        continue-on-error: true
+        uses: actions/upload-artifact@v7
+        with:
+          name: nvd-diff-${{ matrix.name }}
+          path: nvd-diff/
+          if-no-files-found: ignore
+
+  nvd-diff:
+    name: Post nvd diff
+    needs:
+      - matrix
+      - build
+    if: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository }}
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Download diffs
+        continue-on-error: true
+        uses: actions/download-artifact@v8
+        with:
+          path: nvd-diff
+          pattern: nvd-diff-*
+          merge-multiple: true
+
+      - name: Render comment
+        env:
+          UNCHANGED: ${{ needs.matrix.outputs.unchanged }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          python3 - > comment.md <<'PY'
+          import json, os, pathlib
+
+          diffs = sorted(pathlib.Path("nvd-diff").glob("*.txt"))
+          if not diffs:
+              raise SystemExit
+          cap = 58000 // len(diffs)  # GitHub caps comments at 65536 characters
+
+          out = ["<!-- nvd-diff -->", "## `nvd` closure diff vs. `master`", ""]
+          for p in diffs:
+              text = p.read_text(errors="replace").strip()
+              if len(text) > cap:
+                  text = text[:cap].rsplit("\n", 1)[0] + "\n... truncated, see the run artifacts ..."
+              out += [f"<details><summary><code>{p.stem}</code></summary>", "",
+                      "```", text, "```", "", "</details>", ""]
+
+          unchanged = json.loads(os.environ.get("UNCHANGED") or "[]")
+          if unchanged:
+              out += ["Unchanged: " + ", ".join(f"`{n}`" for n in sorted(unchanged)), ""]
+          out += [f"[Workflow run]({os.environ['RUN_URL']})"]
+          print("\n".join(out))
+          PY
+
+      - name: Post comment
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          [ -s comment.md ] || exit 0
+          id=$(gh api "repos/$GH_REPO/issues/$PR/comments" --paginate \
+                 --jq '.[] | select(.body | startswith("<!-- nvd-diff -->")) | .id' | head -n1)
+          if [ -n "$id" ]; then
+            gh api --method PATCH "repos/$GH_REPO/issues/comments/$id" -F body=@comment.md --silent
+          else
+            gh api --method POST "repos/$GH_REPO/issues/$PR/comments" -F body=@comment.md --silent
           fi
