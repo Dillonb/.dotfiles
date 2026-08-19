@@ -85,15 +85,6 @@ jobs:
       - name: Check out source
         uses: actions/checkout@v7
 
-      - name: Free disk space
-        if: runner.os == 'Linux'
-        uses: thiagokokada/free-disk-space@d3e470a0e298133572dc766e6b10d5a51c71c0e3 # Dec 10, 2025
-        with:
-          tool-cache: true
-          opt: true
-          usrlocal: true
-          usrmisc: true
-
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@v22
         with:
@@ -114,16 +105,33 @@ jobs:
         if: ${{ env.ATTIC_TOKEN != '' }}
         run: nohup attic watch-store "$ATTIC_CACHE" &
 
-      - name: Build ${{ matrix.name }}
+      - name: Check cache
+        id: cache
         run: |
           store="${{ env.ATTIC_ENDPOINT }}${{ env.ATTIC_CACHE }}"
           if nix path-info --store "$store" '${{ matrix.path }}' >/dev/null 2>&1; then
-            echo "✔ cached, skipping build: ${{ matrix.path }}"
+            echo "✔ cached: ${{ matrix.path }}"
+            echo "hit=true" >> "$GITHUB_OUTPUT"
           else
-            nix build --keep-going -L --show-trace "${{ matrix.target }}"
-            if [ -n "$ATTIC_TOKEN" ]; then
-              attic push "$ATTIC_CACHE" ./result
-            fi
+            echo "not cached: ${{ matrix.path }}"
+            echo "hit=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Free disk space
+        if: ${{ runner.os == 'Linux' && steps.cache.outputs.hit != 'true' }}
+        uses: thiagokokada/free-disk-space@d3e470a0e298133572dc766e6b10d5a51c71c0e3 # Dec 10, 2025
+        with:
+          tool-cache: true
+          opt: true
+          usrlocal: true
+          usrmisc: true
+
+      - name: Build ${{ matrix.name }}
+        if: ${{ steps.cache.outputs.hit != 'true' }}
+        run: |
+          nix build --keep-going -L --show-trace "${{ matrix.target }}"
+          if [ -n "$ATTIC_TOKEN" ]; then
+            attic push "$ATTIC_CACHE" ./result
           fi
 
       - name: Publish ${{ matrix.name }} release
