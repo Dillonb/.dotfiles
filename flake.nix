@@ -143,6 +143,7 @@
           role,
           modules,
           channel ? "stable",
+          hostnameOverride ? hostname,
         }:
         let
           nixpkgs-config-cuda = nixpkgs-config // {
@@ -266,7 +267,7 @@
           system = system;
           specialArgs = { inherit inputs; };
           modules = [
-            { networking.hostName = hostname; }
+            { networking.hostName = hostnameOverride; }
             ./nix/hosts/${hostname}.nix
             home-manager.nixosModules.home-manager
             overlays
@@ -417,6 +418,15 @@
         wsl = nixos {
           hostname = "wsl";
           system = "x86_64-linux";
+          role = "wsl";
+          channel = "unstable";
+          modules = [ ];
+        };
+
+        wsl-aarch64 = nixos {
+          hostname = "wsl";
+          hostnameOverride = "wsl-aarch64";
+          system = "aarch64-linux";
           role = "wsl";
           channel = "unstable";
           modules = [ ];
