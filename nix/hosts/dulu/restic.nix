@@ -7,6 +7,8 @@
 
 let
   sqlite_backup_dir = "/var/backup/sqlite";
+  sqlite_backup_attempts = 5;
+  sqlite_backup_retry_delay = 30;
   sqlite_dbs = [
     "/var/lib/sonarr/.config/NzbDrone/sonarr.db"
     "/var/lib/radarr/.config/Radarr/radarr.db"
@@ -25,16 +27,32 @@ let
     name = "backup-sqlite-databases";
     runtimeInputs = [ pkgs.sqlite ];
     text = ''
+      backup_db() {
+        local db="$1"
+        local output="$2"
+        local attempt=1
+        while true; do
+          if sqlite3 "$db" ".backup '$output'"; then
+            echo "Backed up $db to $output"
+            return 0
+          fi
+          if [ "$attempt" -ge ${toString sqlite_backup_attempts} ]; then
+            echo "Failed to back up $db after $attempt attempts" >&2
+            return 1
+          fi
+          echo "Attempt $attempt to back up $db failed, retrying in ${toString sqlite_backup_retry_delay}s" >&2
+          sleep ${toString sqlite_backup_retry_delay}
+          attempt=$((attempt + 1))
+        done
+      }
+
       ${lib.concatMapStringsSep "\n" (
         db:
         let
           db_name = baseNameOf db;
           output = "${sqlite_backup_dir}/${db_name}";
         in
-        ''
-          sqlite3 ${lib.escapeShellArg db} ${lib.escapeShellArg ".backup '${output}'"}
-          echo "Backed up ${db} to ${output}"
-        ''
+        "backup_db ${lib.escapeShellArg db} ${lib.escapeShellArg output}"
       ) sqlite_dbs}
     '';
   };
