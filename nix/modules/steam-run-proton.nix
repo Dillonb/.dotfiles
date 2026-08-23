@@ -34,7 +34,7 @@ let
       export STEAM_COMPAT_DATA_PATH="$prefix"
       export STEAM_COMPAT_CLIENT_INSTALL_PATH="$HOME/.steam/root"
 
-      exec steam-run ${pkgs.proton-ge-bin.steamcompattool}/proton run "$exe" "$@"
+      exec steam-run ${pkgs.proton-ge-bin.steamcompattool}/proton runinprefix "$exe" "$@"
     '';
   };
 in
