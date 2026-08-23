@@ -240,6 +240,7 @@
               ./nix/modules/home-manager.nix
               ./nix/modules/workstation-packages.nix
               ./nix/modules/common-packages.nix
+              ./nix/modules/steam-run-proton.nix
               # broken on aarch64 as of 2025-12-11
               # ./nix/modules/appimage-support.nix
             ]
