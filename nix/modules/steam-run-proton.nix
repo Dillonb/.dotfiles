@@ -28,8 +28,7 @@ let
         exit 1
       fi
 
-      name=''${exe##*/}
-      prefix="$HOME/.local/share/steam-run-proton/''${name%.*}"
+      prefix="$HOME/.local/share/steam-run-proton"
       mkdir -p "$prefix"
 
       export STEAM_COMPAT_DATA_PATH="$prefix"
