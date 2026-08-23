@@ -12,6 +12,11 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
+    bc250-nixos = {
+      url = "github:TesseractCat/bc250-nixos";
+      inputs.nixpkgs.follows = "nixos-unstable";
+    };
+
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v1.1.0";
       inputs.nixpkgs.follows = "nixos-unstable";
@@ -337,6 +342,20 @@
             nixos-hardware.nixosModules.common-cpu-amd
             nixos-hardware.nixosModules.common-cpu-amd-pstate
             nixos-hardware.nixosModules.common-cpu-amd-zenpower
+            nixos-hardware.nixosModules.common-pc-ssd
+          ];
+        };
+
+        bc250 = nixos {
+          hostname = "bc250";
+          role = "workstation";
+          channel = "unstable";
+          system = "x86_64-linux";
+          modules = [
+            inputs.bc250-nixos.nixosModules.bc250
+
+            nixos-hardware.nixosModules.common-cpu-amd
+            nixos-hardware.nixosModules.common-gpu-amd
             nixos-hardware.nixosModules.common-pc-ssd
           ];
         };
