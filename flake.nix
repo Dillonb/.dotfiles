@@ -99,7 +99,9 @@
       ];
       forEachSystem =
         f:
-        nixos-unstable.lib.genAttrs systems (system: f { pkgs = import nixos-unstable { inherit system; }; });
+        nixos-unstable.lib.genAttrs systems (
+          system: f { pkgs = import nixos-unstable { inherit system; }; }
+        );
       mac =
         {
           hostname,
