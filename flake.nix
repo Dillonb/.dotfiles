@@ -363,18 +363,18 @@
           ];
         };
 
-        # mini = nixos {
-        #   hostname = "mini";
-        #   system = "x86_64-linux";
-        #   role = "workstation";
-        #   channel = "unstable";
-        #   modules = [
-        #     nixos-hardware.nixosModules.dell-xps-13-9300
-        #     ./nix/modules/libreoffice.nix
-        #     ./nix/modules/syncthing.nix
-        #     ./nix/modules/ssd.nix
-        #   ];
-        # };
+        mini = nixos {
+          hostname = "mini";
+          system = "x86_64-linux";
+          role = "workstation";
+          channel = "unstable";
+          modules = [
+            nixos-hardware.nixosModules.dell-xps-13-9300
+            # ./nix/modules/libreoffice.nix
+            ./nix/modules/syncthing.nix
+            ./nix/modules/ssd.nix
+          ];
+        };
 
         teamspeak-server = nixos {
           hostname = "teamspeak-server";
