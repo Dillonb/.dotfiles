@@ -7,6 +7,7 @@ creation_rules:
           - age1l2nj8te3e4sej3ddcxptx8le8ypfgm85kfy7jq4ezjq0afsj8eysh6vsg6 # host/bc250
           - age1y32dp7pqk7c4hzw4tkn348c0gwry5cuux8k3w04wj9x3nqn7xpps6f4pl9 # host/dgbmbp-nixos-vm
           - age10w0gvs3nhvgfzxwut0u9skqjp3jts3awvmywwlqx9qeavw9a85esr0hr8q # host/dulu
+          - age1v9hl9c2psrmhrqd8l93anmscc54jaqcsnajzu80v6y7ryq7rrehqp2upsq # host/mini
           - age1mrh6mxyd4vwzghgn50g5tty9e5ssuvgej3x0p8vj06v2et9lfs6ss0wwtk # host/pi4
           - age1fhd73zp36eg8agyky9uwy0yy93038ae29ssaxtxhpjatftpq6c3sq8g3wt # host/teamspeak-server
           - age1qkzcg4uh3q42uard34az2pc73sj2smvllzgx4wyvpa9m7afg05ssh2yhzy # user/battlestation

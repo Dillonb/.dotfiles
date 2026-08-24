@@ -10,6 +10,7 @@
     "dgbmbp-nixos-vm" =
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAmfX8OldvzJt2ia6yVFdjtmA0i7hjw4XDFeKoTgluPJ";
     "bc250" = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINz38cAw97vTsR3HC7dlossfARztObclE+khcOPFWKyT";
+    "mini" = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKoIcEamnhpeJGmTfCwFGhZ5bRPvJjAejPZGtmNpprfP";
   };
   # ~/.ssh/id_ed25519.pub
   user = {
