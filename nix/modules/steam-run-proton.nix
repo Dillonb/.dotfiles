@@ -34,7 +34,16 @@ let
       export STEAM_COMPAT_DATA_PATH="$prefix"
       export STEAM_COMPAT_CLIENT_INSTALL_PATH="$HOME/.steam/root"
 
-      exec steam-run ${pkgs.proton-ge-bin.steamcompattool}/proton runinprefix "$exe" "$@"
+      proton=${pkgs.proton-ge-bin.steamcompattool}/proton
+
+      # This is just here to ensure the prefix exists and is updated
+      # (runinprefix doesn't create or update a prefix)
+      if ! setup=$(steam-run "$proton" getnativepath 'c:\windows' 2>&1); then
+        echo "$setup" >&2
+        exit 1
+      fi
+
+      exec steam-run "$proton" runinprefix "$exe" "$@"
     '';
   };
 in
