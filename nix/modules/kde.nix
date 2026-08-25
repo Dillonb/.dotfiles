@@ -3,13 +3,8 @@
   services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
-  # services.displayManager.sddm = {
-  #   enable = true;
-  #   theme = "catppuccin-mocha";
-  #   settings.General.InputMethod = ""; # Stop onscreen keyboard from showing up
-  # };
-  services.displayManager.plasma-login-manager.enable = true;
   services.desktopManager.plasma6.enable = true;
+  services.displayManager.plasma-login-manager.enable = true;
 
   environment.systemPackages = with pkgs; [ kdePackages.kde-gtk-config ];
 

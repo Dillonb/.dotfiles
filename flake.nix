@@ -64,6 +64,10 @@
       url = "github:9001/copyparty/v1.20.21";
       inputs.nixpkgs.follows = "nixos-unstable";
     };
+    jovian-nixos = {
+      url = "github:Jovian-Experiments/Jovian-NixOS";
+      inputs.nixpkgs.follows = "nixos-unstable";
+    };
   };
 
   outputs =
@@ -360,6 +364,8 @@
             nixos-hardware.nixosModules.common-cpu-amd
             nixos-hardware.nixosModules.common-gpu-amd
             nixos-hardware.nixosModules.common-pc-ssd
+
+            inputs.jovian-nixos.nixosModules.jovian
           ];
         };
 

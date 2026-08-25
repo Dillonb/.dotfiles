@@ -1,6 +1,7 @@
-# Asrock AMD BC-250 (Cyan Skillfish APU)
-{ ... }:
-
+{ config, lib, ... }:
+let
+  dgbCustom = config.dgbCustom;
+in
 {
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 5;
@@ -31,6 +32,17 @@
       vramDynamicSplit = null;
     };
   };
+
+  jovian.steam = {
+    enable = true;
+    autoStart = true;
+    desktopSession = "plasma";
+    user = dgbCustom.username;
+  };
+  services.displayManager.plasma-login-manager.enable = lib.mkForce false;
+
+  # Jovian defaults to zram, which conflicts with the bc250 module's zswap.
+  jovian.steamos.enableZram = false;
 
   # zswap needs a backing store.
   swapDevices = [
