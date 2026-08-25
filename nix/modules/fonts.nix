@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-  isLinux = pkgs.stdenv.isLinux;
+  isLinux = pkgs.stdenv.hostPlatform.isLinux;
   optionals = pkgs.lib.optionals;
   linuxFonts = optionals isLinux (
     with pkgs;

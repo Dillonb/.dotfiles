@@ -6,7 +6,7 @@
 }:
 let
   dgbCustom = config.dgbCustom;
-  isLinux = pkgs.stdenv.isLinux;
+  isLinux = pkgs.stdenv.hostPlatform.isLinux;
   stateVersion = "23.11";
 in
 {
@@ -18,7 +18,7 @@ in
       let
         inherit (pkgs) stdenv;
         inherit (lib) mkIf;
-        linuxOnly = mkIf stdenv.isLinux;
+        linuxOnly = mkIf stdenv.hostPlatform.isLinux;
       in
       (
         {

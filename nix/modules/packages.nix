@@ -5,8 +5,8 @@
 }:
 let
   optionals = pkgs.lib.optionals;
-  isLinux = pkgs.stdenv.isLinux;
-  isDarwin = pkgs.stdenv.isDarwin;
+  isLinux = pkgs.stdenv.hostPlatform.isLinux;
+  isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
   isPipewireEnabled = config.services.pipewire.enable;
   isMinimalSystem = config.dgbCustom.minimal;
   isGamingEnabled = config.dgbCustom.enableGaming;
@@ -20,7 +20,7 @@ let
   filter = condition: package: if (package ? __skip) || !condition then skip else package;
 
   big = filter (!isMinimalSystem);
-  x64 = filter pkgs.stdenv.isx86_64;
+  x64 = filter pkgs.stdenv.hostPlatform.isx86_64;
   needsPipewire = filter isPipewireEnabled;
   gaming = filter isGamingEnabled;
 

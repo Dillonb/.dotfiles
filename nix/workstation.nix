@@ -26,11 +26,8 @@
     # ZSA keyboard udev rule
     keyboard.zsa.enable = true;
 
-    # udev rules and software for configuring logitech unifying recivers
-    logitech.wireless = {
-      enable = true;
-      enableGraphical = true;
-    };
+    # udev rules for configuring logitech unifying recivers
+    logitech.wireless.enable = true;
   };
 
   virtualisation = {
@@ -48,6 +45,9 @@
     zsh.enable = true;
 
     firefox.enable = true;
+
+    # GUI for configuring logitech unifying receivers
+    solaar.enable = true;
 
     _1password.enable = true;
     _1password-gui = {

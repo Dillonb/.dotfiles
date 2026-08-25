@@ -56,6 +56,8 @@ in
 
   # ZFS
   boot.supportedFilesystems = [ "zfs" ];
+  # No ZFS root pool, so this only silences the deprecation warning
+  boot.zfs.forceImportRoot = false;
   boot.zfs.extraPools = [ "zpool" ];
   services.zfs.autoScrub.enable = true;
 

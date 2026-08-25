@@ -20,11 +20,15 @@
   pkgsBuildTarget,
   pkgsBuildBuild,
 
-  xorg,
   libXcursor,
   libXScrnSaver,
   libXrandr,
   libXtst,
+  libpciaccess,
+  libxcomposite,
+  libxdamage,
+  libxkbfile,
+  xrandr,
   fontconfig,
   freetype,
   harfbuzz,
@@ -379,16 +383,16 @@ qtModule (
       pciutils
 
       # X11 libs
-      xorg.xrandr
+      xrandr
       libXScrnSaver
       libXcursor
       libXrandr
-      xorg.libpciaccess
+      libpciaccess
       libXtst
-      xorg.libXcomposite
-      xorg.libXdamage
+      libxcomposite
+      libxdamage
       libdrm
-      xorg.libxkbfile
+      libxkbfile
 
     ]
     ++ lib.optionals pipewireSupport [
