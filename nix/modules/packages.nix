@@ -120,7 +120,7 @@ let
         # (x64 big renderdoc)
         (x64 big spotify)
         (x64 big teamspeak3)
-        # (x64 big teamspeak6-client)
+        (x64 big teamspeak6-client)
 
         (gaming x64 gamescope)
         (gaming x64 mangohud)
