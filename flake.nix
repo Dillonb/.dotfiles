@@ -568,6 +568,9 @@
           };
         }
       );
+
+      formatter = forEachSystem ({ pkgs }: pkgs.nixfmt-tree);
+
       github-actions-matrix =
         let
           runner-arm64-linux = "ubuntu-24.04-arm";
