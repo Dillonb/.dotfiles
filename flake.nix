@@ -124,6 +124,7 @@
           modules = modules ++ [
             ./nix/hosts/${hostname}.nix
             home-manager-unstable.darwinModules.home-manager
+            ./nix/modules/fonts.nix
             ./nix/modules/home-manager.nix
             ./nix/modules/osx.nix
             ./nix/modules/common-packages.nix
@@ -397,7 +398,6 @@
           hostname = "dgbmbp";
           system = "aarch64-darwin";
           modules = [
-            ./nix/modules/fonts.nix
             {
               users.users.dillon = {
                 name = "dillon";
