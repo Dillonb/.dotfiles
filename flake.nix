@@ -101,6 +101,12 @@
         "aarch64-linux"
         "aarch64-darwin"
       ];
+      inherit
+        (import ./nix/lib/overlays.nix {
+          inherit nixos-stable nixos-unstable nixpkgs-config;
+        })
+        mkOverlaysModule
+        ;
       forEachSystem =
         f:
         nixos-unstable.lib.genAttrs systems (
@@ -112,39 +118,18 @@
           system,
           modules,
         }:
-        let
-          overlay-stable = final: prev: {
-            stable = import nixos-stable {
-              system = system;
-              config = nixpkgs-config;
-            };
-          };
-          overlay-unstable = final: prev: {
-            unstable = import nixos-unstable {
-              system = system;
-              config = nixpkgs-config;
-            };
-          };
-          overlays = (
-            { ... }: {
-              nixpkgs.overlays = [
-                overlay-unstable
-                overlay-stable
-              ];
-              nixpkgs.config = nixpkgs-config;
-            }
-          );
-        in
         darwin.lib.darwinSystem {
           inherit system;
           specialArgs = { inherit inputs; };
           modules = modules ++ [
             ./nix/hosts/${hostname}.nix
+            home-manager-unstable.darwinModules.home-manager
+            ./nix/modules/home-manager.nix
             ./nix/modules/osx.nix
             ./nix/modules/common-packages.nix
             ./nix/modules/workstation-packages.nix
             ./nix/modules/custom-options.nix
-            overlays
+            (mkOverlaysModule { inherit system; })
           ];
         };
       nixos =
@@ -181,54 +166,18 @@
             };
           };
 
-          overlay-stable = final: prev: {
-            stable = import nixos-stable {
-              system = system;
-              config = nixpkgs-config;
-            };
-          };
-
-          # New check added in https://github.com/NixOS/nixpkgs/pull/532778
-          # breaks cheetah3 for now - override it until there's a real fix in
-          overlay-cheetah3 = final: prev: {
-            pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
-              (python-final: python-prev: {
-                cheetah3 =
-                  assert prev.lib.assertMsg (
-                    python-prev.cheetah3.pname == "cheetah3"
-                  ) "Nixpkgs fixed cheetah3; remove overlay-cheetah3 from flake.nix";
-                  python-prev.cheetah3.overridePythonAttrs (_: {
-                    pname = "ct3";
-                  });
-              })
-            ];
-          };
-
-          overlay-unstable = final: prev: {
-            unstable = import nixos-unstable {
-              system = system;
-              config = nixpkgs-config;
-              overlays = [ overlay-cheetah3 ];
-            };
-          };
-
           overlay-missing-modules-okay = (
             final: super: { makeModulesClosure = x: super.makeModulesClosure (x // { allowMissing = true; }); }
           );
 
-          overlays = (
-            { ... }: {
-              nixpkgs.overlays = [
-                overlay-cheetah3
-                overlay-stable
-                overlay-unstable
-                overlay-missing-modules-okay
-                overlay-cuda
-                copyparty.overlays.default
-              ];
-              nixpkgs.config = nixpkgs-config;
-            }
-          );
+          overlays = mkOverlaysModule {
+            inherit system;
+            extraOverlays = [
+              overlay-missing-modules-okay
+              overlay-cuda
+              copyparty.overlays.default
+            ];
+          };
           secrets-modules = [ sops-nix.nixosModules.sops ];
           role-modules = {
             workstation = [
@@ -295,28 +244,10 @@
           modules,
         }:
         let
-          overlay-stable = final: prev: {
-            stable = import nixos-stable {
-              system = system;
-              config = nixpkgs-config;
-            };
+          overlays = mkOverlaysModule {
+            inherit system;
+            extraOverlays = [ copyparty.overlays.default ];
           };
-          overlay-unstable = final: prev: {
-            unstable = import nixos-unstable {
-              system = system;
-              config = nixpkgs-config;
-            };
-          };
-          overlays = (
-            { ... }: {
-              nixpkgs.overlays = [
-                overlay-stable
-                overlay-unstable
-                copyparty.overlays.default
-              ];
-              nixpkgs.config = nixpkgs-config;
-            }
-          );
         in
         home-manager-unstable.lib.homeManagerConfiguration {
           pkgs = import nixos-unstable { inherit system; };
@@ -467,8 +398,6 @@
           system = "aarch64-darwin";
           modules = [
             ./nix/modules/fonts.nix
-            home-manager-unstable.darwinModules.home-manager
-            ./nix/modules/home-manager.nix
             {
               users.users.dillon = {
                 name = "dillon";
