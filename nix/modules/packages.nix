@@ -31,6 +31,8 @@ let
   obsidian-headless =
     inputs.self.packages."${pkgs.stdenv.hostPlatform.system}".obsidian-headless or skip;
 
+  slop = inputs.slop.packages."${pkgs.stdenv.hostPlatform.system}";
+
   linuxWorkstationPackages = (
     optionals isLinux (
       with pkgs;
@@ -207,8 +209,8 @@ let
       (big powershell)
       (big nodejs)
       delta
-      (big unstable.github-copilot-cli)
-      (big unstable.pi-coding-agent)
+      (big slop.copilot-cli)
+      (big slop.pi)
 
       # Notes
       obsidian-headless

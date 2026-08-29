@@ -68,6 +68,10 @@
       url = "github:Jovian-Experiments/Jovian-NixOS";
       inputs.nixpkgs.follows = "nixos-unstable";
     };
+    slop = {
+      url = "github:numtide/llm-agents.nix";
+      inputs.nixpkgs.follows = "nixos-unstable";
+    };
   };
 
   outputs =
