@@ -208,6 +208,7 @@ let
       (big nodejs)
       delta
       (big unstable.github-copilot-cli)
+      (big unstable.pi-coding-agent)
 
       # Notes
       obsidian-headless
