@@ -191,6 +191,7 @@
               ./nix/nix-settings.nix
               ./nix/workstation.nix
               ./nix/modules/fonts.nix
+              ./nix/modules/avahi.nix
               ./nix/modules/pipewire.nix
               ./nix/modules/bluetooth.nix
               ./nix/modules/custom-options.nix
@@ -211,6 +212,7 @@
               ./nix/common.nix
               ./nix/nix-settings.nix
               ./nix/modules/custom-options.nix
+              ./nix/modules/avahi.nix
               ./nix/modules/server-packages.nix
               ./nix/modules/common-packages.nix
             ]

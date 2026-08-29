@@ -96,19 +96,7 @@
     # "discouraged" to turn this off, but Steam downloads are very slow with this on.
     # nscd.enableNsncd = false;
     resolved.enable = true;
-    avahi = {
-      enable = true;
-      nssmdns4 = true;
-      nssmdns6 = true;
-      publish = {
-        enable = true;
-        addresses = true;
-        domain = true;
-        hinfo = true;
-        userServices = true;
-        workstation = true;
-      };
-    };
+    avahi.publish.workstation = true;
   };
 
   xdg.portal = {

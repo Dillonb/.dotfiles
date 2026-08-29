@@ -162,19 +162,6 @@ in
       };
     };
 
-  services.avahi = {
-    enable = true;
-    nssmdns4 = true;
-    nssmdns6 = true;
-    publish = {
-      enable = true;
-      addresses = true;
-      domain = true;
-      hinfo = true;
-      userServices = true;
-    };
-  };
-
   services.nix-serve = {
     enable = true;
     secretKeyFile = config.sops.secrets."nix-cache-priv-key.pem".path;
