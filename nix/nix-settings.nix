@@ -1,11 +1,18 @@
-{ pkgs, ... }: {
+{
+  lib,
+  pkgs,
+  ...
+}:
+{
   nix = {
     settings = {
       experimental-features = [
         "nix-command"
         "flakes"
       ];
-      auto-optimise-store = true;
+
+      # This causes problems on osx, so only enable it elsewhere
+      auto-optimise-store = lib.mkIf (!pkgs.stdenv.hostPlatform.isDarwin) true;
 
       substituters = [
         "https://cache.nix.dgb.sh"

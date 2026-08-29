@@ -124,6 +124,7 @@
           modules = modules ++ [
             ./nix/hosts/${hostname}.nix
             home-manager-unstable.darwinModules.home-manager
+            ./nix/nix-settings.nix
             ./nix/modules/fonts.nix
             ./nix/modules/home-manager.nix
             ./nix/modules/osx.nix
