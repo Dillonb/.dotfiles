@@ -5,6 +5,10 @@
 {{ else }}
 # Truecolor support
 set-option -a terminal-features 'xterm-256color:RGB'
+
+# Preserve modified keys such as Shift+Enter and Ctrl+Enter.
+set -g extended-keys on
+set -g extended-keys-format csi-u
 {{ end }}
 # Mouse support
 
