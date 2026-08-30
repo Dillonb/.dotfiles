@@ -1,0 +1,160 @@
+#!/usr/bin/env bash
+# Repair KDE Plasma taskbar launchers that are pinned as absolute paths.
+#
+# Plasma sometimes records a pinned launcher as an absolute "file://" path
+# instead of a desktop-file ID. On NixOS those paths point into /nix/store, so
+# nix-collect-garbage deletes them and the icons go blank while left/right click
+# still work. See https://discuss.kde.org/t/plasma-6-1-3-pinned-kde-application-icons-go-blank-after-gc-nixos/19444
+#
+# This rewrites such entries to the "applications:<id>.desktop" form, which
+# Plasma resolves through XDG_DATA_DIRS at runtime and therefore survives GC.
+#
+# An entry is only rewritten if its desktop ID actually resolves in the current
+# XDG data dirs, so launchers pinned from outside the XDG search path are left
+# alone rather than silently broken.
+
+set -euo pipefail
+
+config="${XDG_CONFIG_HOME:-$HOME/.config}/plasma-org.kde.plasma.desktop-appletsrc"
+dry_run=0
+restart=1
+
+usage() {
+    cat <<'EOF'
+Usage: fix-plasma-launchers [options]
+
+Rewrites absolute file:// Plasma taskbar launchers to the GC-proof
+applications:<id>.desktop form.
+
+Options:
+  -n, --dry-run     Show what would change, write nothing.
+      --no-restart  Edit the config but do not stop/start plasmashell.
+                    The panel keeps the old launchers until it restarts.
+  -f, --file PATH   Operate on an alternate appletsrc file.
+  -h, --help        Show this help.
+EOF
+}
+
+while [ $# -gt 0 ]; do
+    case "$1" in
+        -n|--dry-run) dry_run=1 ;;
+        --no-restart) restart=0 ;;
+        -f|--file) config="${2:?--file needs an argument}"; shift ;;
+        -h|--help) usage; exit 0 ;;
+        *) echo "unknown option: $1" >&2; usage >&2; exit 2 ;;
+    esac
+    shift
+done
+
+[ -f "$config" ] || { echo "not found: $config" >&2; exit 1; }
+
+# Directories Plasma searches for desktop files. XDG_DATA_HOME is not part of
+# XDG_DATA_DIRS but is still searched, so include it explicitly.
+mapfile -t search_dirs < <(
+    printf '%s\n' "${XDG_DATA_HOME:-$HOME/.local/share}" \
+        | cat - <(printf '%s' "${XDG_DATA_DIRS:-/usr/local/share:/usr/share}" | tr ':' '\n') \
+        | awk 'NF && !seen[$0]++'
+)
+
+urldecode() { local s="${1//+/ }"; printf '%b' "${s//%/\\x}"; }
+
+# Succeeds if a desktop ID resolves somewhere in the XDG search path.
+resolves() {
+    local id="$1" dir
+    for dir in "${search_dirs[@]}"; do
+        [ -e "$dir/applications/$id" ] && return 0
+    done
+    return 1
+}
+
+stop_shell() {
+    if systemctl --user cat plasma-plasmashell.service >/dev/null 2>&1; then
+        systemctl --user stop plasma-plasmashell.service
+    elif command -v kquitapp6 >/dev/null 2>&1; then
+        kquitapp6 plasmashell >/dev/null 2>&1 || true
+    else
+        echo "warning: cannot stop plasmashell; it may overwrite this edit" >&2
+        return 0
+    fi
+    sleep 2
+}
+
+start_shell() {
+    if systemctl --user cat plasma-plasmashell.service >/dev/null 2>&1; then
+        systemctl --user start plasma-plasmashell.service
+    elif command -v kstart >/dev/null 2>&1; then
+        kstart plasmashell >/dev/null 2>&1 &
+    else
+        (setsid plasmashell >/dev/null 2>&1 &)
+    fi
+}
+
+tmp=$(mktemp)
+trap 'rm -f "$tmp"' EXIT
+
+changed=0
+declare -a skipped=()
+
+while IFS= read -r line; do
+    # Only the launcher lists are candidates; everything else passes through.
+    if [[ $line != launchers=* ]]; then
+        printf '%s\n' "$line" >> "$tmp"
+        continue
+    fi
+
+    out=""
+    IFS=',' read -ra entries <<< "${line#launchers=}"
+    for entry in "${entries[@]}"; do
+        new="$entry"
+        if [[ $entry == file://*/applications/*.desktop ]]; then
+            # Decode only to probe the filesystem; emit the original encoding so
+            # the value stays a well-formed URL.
+            raw_id="${entry##*/}"
+            id=$(urldecode "$raw_id")
+            if resolves "$id"; then
+                new="applications:$raw_id"
+                [ "$new" != "$entry" ] && { changed=1; echo "  $entry"; echo "    -> $new"; }
+            else
+                skipped+=("$id")
+            fi
+        fi
+        out+="${out:+,}$new"
+    done
+    printf 'launchers=%s\n' "$out" >> "$tmp"
+done < "$config"
+
+if [ ${#skipped[@]} -gt 0 ]; then
+    echo
+    echo "left untouched (desktop ID not found in XDG data dirs):" >&2
+    printf '  %s\n' "${skipped[@]}" >&2
+    echo "  these launchers are broken and need re-pinning by hand" >&2
+fi
+
+if [ "$changed" -eq 0 ]; then
+    echo "nothing to do: no absolute launcher paths in $config"
+    exit 0
+fi
+
+if [ "$dry_run" -eq 1 ]; then
+    echo
+    echo "dry run: $config left unchanged"
+    exit 0
+fi
+
+backup="$config.bak.$(date +%Y%m%d-%H%M%S)"
+cp -a "$config" "$backup"
+echo
+echo "backup: $backup"
+
+[ "$restart" -eq 1 ] && stop_shell
+
+# Copy rather than move so the original inode, owner and 0600 mode survive.
+cat "$tmp" > "$config"
+echo "updated: $config"
+
+if [ "$restart" -eq 1 ]; then
+    start_shell
+    echo "plasmashell restarted"
+else
+    echo "plasmashell not restarted; changes apply on next restart"
+fi
