@@ -32,6 +32,8 @@ in
     };
   };
 
+  hardware.usb-modeswitch.enable = true;
+
   jovian.steam = {
     enable = true;
     autoStart = true;
