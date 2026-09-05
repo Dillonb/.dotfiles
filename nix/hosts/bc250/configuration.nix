@@ -21,6 +21,8 @@ in
       # Only needed for AIC8800D80-based WiFi dongles.
       aic8800d80.enable = false;
       cuLiveManager.enable = true;
+      # Cold boots reboot once; use bc250.nocoreunlock to bypass.
+      coreUnlock.enable = true;
       # Requires running `bc250-detect` first and setting cpuOverclock.configFile.
       cpuOverclock.enable = false;
       # Modded BIOSes may already provide these; enabling both conflicts.
@@ -31,6 +33,9 @@ in
       vramDynamicSplit = null;
     };
   };
+
+  # CPU core unlocking breaks GPU clock reporting without this.
+  services.cyan-skillfish-governor-smu.settings.gpu-usage.fix-freq = true;
 
   hardware.usb-modeswitch.enable = true;
 
