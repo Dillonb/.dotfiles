@@ -151,6 +151,7 @@ in
         locations."/" = {
           proxyPass = "http://127.0.0.1:${strPort "jellyfin"}/";
           proxyWebsockets = true;
+          recommendedProxySettings = true;
         };
       };
 
@@ -159,6 +160,7 @@ in
         enableACME = true;
         locations."/" = {
           proxyPass = "http://127.0.0.1:${strPort "jellyfinDev"}/";
+          recommendedProxySettings = true;
         };
 
         locations."/socket" = {
