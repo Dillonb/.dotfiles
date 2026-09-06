@@ -11,7 +11,9 @@ else
     operation="$2"
 fi
 
-if [ "$(readlink -f /run/current-system)" = "$(readlink -f "$derivation")" ]; then
+# Boot must refresh stale bootloader entries even when the system is unchanged.
+if [ "$operation" != "boot" ] &&
+    [ "$(readlink -f /run/current-system)" = "$(readlink -f "$derivation")" ]; then
     echo "$(hostname) is already running $derivation"
     exit 0
 fi
