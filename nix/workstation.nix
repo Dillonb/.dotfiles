@@ -93,6 +93,7 @@
   # Cover all my bases
   environment.sessionVariables.BROWSER = "firefox";
   environment.sessionVariables.DEFAULT_BROWSER = "firefox";
+  environment.sessionVariables.TERMINAL = "ghostty";
 
   # Services
   services = {
