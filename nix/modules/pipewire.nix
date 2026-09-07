@@ -1,6 +1,7 @@
 { pkgs, ... }: {
   security.rtkit.enable = true;
   services.pulseaudio.enable = false;
+  programs.nix-ld.libraries = [ pkgs.pipewire ];
   services.pipewire = {
     enable = true;
     alsa.enable = true;
