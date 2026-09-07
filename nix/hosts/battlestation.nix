@@ -173,20 +173,20 @@ in
 
   # Run firefox graphics stuff through Mesa Zink, fixes slowness in google maps
   programs.firefox.package = pkgs.firefox.overrideAttrs (oldAttrs: {
-       makeWrapperArgs = (oldAttrs.makeWrapperArgs or [ ]) ++ [
-         "--set"
-         "__EGL_VENDOR_LIBRARY_FILENAMES"
-         "/run/opengl-driver/share/glvnd/egl_vendor.d/50_mesa.json"
+    makeWrapperArgs = (oldAttrs.makeWrapperArgs or [ ]) ++ [
+      "--set"
+      "__EGL_VENDOR_LIBRARY_FILENAMES"
+      "/run/opengl-driver/share/glvnd/egl_vendor.d/50_mesa.json"
 
-         "--set"
-         "MESA_LOADER_DRIVER_OVERRIDE"
-         "zink"
+      "--set"
+      "MESA_LOADER_DRIVER_OVERRIDE"
+      "zink"
 
-         "--set"
-         "VK_DRIVER_FILES"
-         "/run/opengl-driver/share/vulkan/icd.d/nvidia_icd.json"
-       ];
-     });
+      "--set"
+      "VK_DRIVER_FILES"
+      "/run/opengl-driver/share/vulkan/icd.d/nvidia_icd.json"
+    ];
+  });
 
   environment.systemPackages = with pkgs; [
     # r2modman
