@@ -40,7 +40,10 @@
   };
 
   programs = {
-    nix-ld.enable = true;
+    nix-ld = {
+      enable = true;
+      libraries = with pkgs; [ icu ];
+    };
 
     zsh.enable = true;
 
