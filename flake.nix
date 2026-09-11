@@ -39,6 +39,12 @@
       inputs.nixpkgs.follows = "nixos-unstable";
     };
 
+    plasma-manager = {
+      url = "github:nix-community/plasma-manager";
+      inputs.nixpkgs.follows = "nixos-unstable";
+      inputs.home-manager.follows = "home-manager-unstable";
+    };
+
     nixGL = {
       url = "github:nix-community/nixGL";
       inputs.nixpkgs.follows = "nixos-unstable";

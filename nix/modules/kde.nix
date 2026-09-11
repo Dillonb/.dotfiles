@@ -1,4 +1,10 @@
-{ pkgs, ... }: {
+{
+  pkgs,
+  config,
+  inputs,
+  ...
+}:
+{
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
@@ -7,6 +13,15 @@
   services.displayManager.plasma-login-manager.enable = true;
 
   environment.systemPackages = with pkgs; [ kdePackages.kde-gtk-config ];
+
+  home-manager.users.${config.dgbCustom.username} = {
+    imports = [ inputs.plasma-manager.homeModules.plasma-manager ];
+
+    programs.plasma = {
+      enable = true;
+      workspace.theme = "breeze-dark";
+    };
+  };
 
   # Configure keymap in X11
   services.xserver = {
