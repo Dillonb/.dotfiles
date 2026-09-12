@@ -12,7 +12,6 @@ in
   options.dgbCustom.ports = {
     plex = mkPort 32400 "Plex Media Server";
     jellyfin = mkPort 8096 "Jellyfin media server";
-    jellyfinDev = mkPort 8097 "Jellyfin (dev instance)";
     radarr = mkPort 7878 "Radarr";
     sonarr = mkPort 8989 "Sonarr";
     sabnzbd = mkPort 8081 "SABnzbd";

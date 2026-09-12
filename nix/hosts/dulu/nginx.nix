@@ -155,19 +155,6 @@ in
         };
       };
 
-      "jellyfin-dev.dgb.sh" = {
-        forceSSL = true;
-        enableACME = true;
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:${strPort "jellyfinDev"}/";
-          recommendedProxySettings = true;
-        };
-
-        locations."/socket" = {
-          proxyWebsockets = true;
-        };
-      };
-
       "r.cyphe.red" = {
         forceSSL = true;
         enableACME = true;
