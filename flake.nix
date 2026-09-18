@@ -10,7 +10,10 @@
       inputs.nixpkgs.follows = "nixos-stable";
     };
 
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware/master";
+      inputs.nixpkgs.follows = "nixos-unstable";
+    };
 
     bc250-nixos = {
       url = "github:TesseractCat/bc250-nixos";
