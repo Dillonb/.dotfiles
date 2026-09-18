@@ -135,6 +135,8 @@ in
   # I dual boot Windows on this machine, so store the time in local time.
   time.hardwareClockInLocalTime = true;
 
+  hardware.usb-modeswitch.enable = true;
+
   environment.sessionVariables = {
     # Run Electron apps with native wayland instead of XWayland (buggy)
     "NIXOS_OZONE_WL" = "1";
