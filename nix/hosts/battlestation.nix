@@ -203,6 +203,7 @@ in
     # obs-studio
     prismlauncher
     godot-mono
+    oversteer
   ];
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
