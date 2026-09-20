@@ -66,7 +66,7 @@
       inputs.nixpkgs.follows = "nixos-unstable";
     };
     pwndbg = {
-      url = "github:pwndbg/pwndbg/2026.07.29";
+      url = "github:pwndbg/pwndbg/2026.09.15";
       inputs.nixpkgs.follows = "nixos-unstable";
     };
     copyparty = {
