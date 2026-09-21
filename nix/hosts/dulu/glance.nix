@@ -1,18 +1,32 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 let
   localUrl = name: "http://127.0.0.1:${toString config.dgbCustom.ports.${name}}";
 in
 {
-  sops.secrets."glance-env" = {
-    sopsFile = ../../secrets/glance.yaml;
-    key = "environment";
+  sops.secrets."glance_secret_key" = {
+    sopsFile = ../../secrets/dulu.yaml;
+  };
+  sops.secrets."glance_password_hash" = {
+    sopsFile = ../../secrets/dulu.yaml;
+  };
+  sops.secrets."plex-token".restartUnits = [ "glance.service" ];
+  sops.secrets."jellyfin-api-key" = {
+    sopsFile = ../../secrets/dulu.yaml;
+  };
+  sops.templates."glance-env" = {
+    content = ''
+      GLANCE_SECRET_KEY=${config.sops.placeholder."glance_secret_key"}
+      GLANCE_PASSWORD_HASH=${config.sops.placeholder."glance_password_hash"}
+      JELLYFIN_API_KEY=${config.sops.placeholder."jellyfin-api-key"}
+    '';
     restartUnits = [ "glance.service" ];
   };
 
   services.glance = {
     enable = true;
+    package = pkgs.unstable.glance;
     openFirewall = false;
-    environmentFile = config.sops.secrets."glance-env".path;
+    environmentFile = config.sops.templates."glance-env".path;
     settings = {
       server = {
         host = "127.0.0.1";
@@ -73,6 +87,35 @@ in
             {
               size = "full";
               widgets = [
+                {
+                  type = "split-column";
+                  widgets = [
+                    {
+                      type = "custom-api";
+                      title = "Plex - Now playing";
+                      title-url = "https://dulu.dgb.sh/web";
+                      cache = "15s";
+                      url = "${localUrl "plex"}/status/sessions";
+                      headers = {
+                        Accept = "application/json";
+                        X-Plex-Token._secret = config.sops.secrets."plex-token".path;
+                      };
+                      template = builtins.readFile ./glance/plex.html;
+                    }
+                    {
+                      type = "custom-api";
+                      title = "Jellyfin - Now playing";
+                      title-url = "https://jellyfin.dgb.sh";
+                      cache = "15s";
+                      url = "${localUrl "jellyfin"}/Sessions";
+                      headers = {
+                        Accept = "application/json";
+                        Authorization = "MediaBrowser Token=\"\${JELLYFIN_API_KEY}\"";
+                      };
+                      template = builtins.readFile ./glance/jellyfin.html;
+                    }
+                  ];
+                }
                 {
                   type = "monitor";
                   title = "Services";

@@ -1,0 +1,17 @@
+{{ $container := .JSON.Get "MediaContainer" }}
+{{ if ne .Response.StatusCode 200 }}<p class="color-negative">Plex request failed (HTTP {{ .Response.StatusCode }}).</p>
+{{ else if or (not $container.IsObject) (and ($container.Exists "Metadata") (not ($container.Get "Metadata").IsArray)) }}<p class="color-negative">Unexpected Plex response.</p>
+{{ else }}
+<ul class="list list-gap-15">
+{{ range $session := $container.Array "Metadata" }}
+  <li>
+    <div class="color-highlight">{{ or (.String "User.title") "Unknown user" }}</div>
+    <div class="color-primary margin-top-5">{{ with .String "grandparentTitle" }}{{ . }} - {{ with $session.String "parentTitle" }}{{ . }} - {{ end }}{{ end }}{{ or (.String "title") "Unknown title" }}</div>
+    <div class="size-h6 margin-top-5">
+      {{ or (.String "Player.state") "Unknown state" }} &middot; {{ or (.String "Player.product") "Unknown player" }}
+      {{ $duration := .Int "duration" }}{{ if gt $duration 0 }} &middot; {{ div (mul (.Int "viewOffset") 100) $duration }}%{{ end }}
+    </div>
+  </li>
+{{ else }}<li class="color-subdue">No active streams.</li>{{ end }}
+</ul>
+{{ end }}

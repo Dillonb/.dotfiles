@@ -1,0 +1,22 @@
+{{ if ne .Response.StatusCode 200 }}<p class="color-negative">Jellyfin request failed (HTTP {{ .Response.StatusCode }}).</p>
+{{ else if not .JSON.IsArray }}<p class="color-negative">Unexpected Jellyfin response.</p>
+{{ else }}
+{{ $active := false }}
+<ul class="list list-gap-15">
+{{ range .JSON.Array "" }}
+  {{ $item := .Get "NowPlayingItem" }}{{ if $item.Map }}{{ $active = true }}
+  <li>
+    <div class="color-highlight">{{ or (.String "UserName") "Unknown user" }}</div>
+    <div class="color-primary margin-top-5">
+      {{ with $item.String "SeriesName" }}{{ . }} - {{ if and ($item.String "ParentIndexNumber") ($item.String "IndexNumber") }}{{ printf "S%02dE%02d" ($item.Int "ParentIndexNumber") ($item.Int "IndexNumber") }} - {{ end }}{{ end }}{{ or ($item.String "Name") "Unknown title" }}
+    </div>
+    <div class="size-h6 margin-top-5">
+      {{ if .Bool "PlayState.IsPaused" }}paused{{ else }}playing{{ end }} &middot; {{ or (.String "Client") "Unknown client" }}
+      {{ $duration := $item.Int "RunTimeTicks" }}{{ if gt $duration 0 }} &middot; {{ div (mul (.Int "PlayState.PositionTicks") 100) $duration }}%{{ end }}
+    </div>
+  </li>
+  {{ end }}
+{{ end }}
+{{ if not $active }}<li class="color-subdue">No active streams.</li>{{ end }}
+</ul>
+{{ end }}
