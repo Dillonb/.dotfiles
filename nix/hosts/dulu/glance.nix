@@ -37,6 +37,12 @@ in
         secret-key = "\${GLANCE_SECRET_KEY}";
         users.dgb.password-hash = "\${GLANCE_PASSWORD_HASH}";
       };
+      theme = {
+        background-color = "230 24 19";
+        primary-color = "221 89 72";
+        positive-color = "89 51 61";
+        negative-color = "349 89 72";
+      };
       pages = [
         {
           name = "Home";
