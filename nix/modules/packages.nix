@@ -77,6 +77,7 @@ let
         gdb
         (big cargo)
         # (big qtcreator)
+        (big unstable.unsloth-desktop)
 
         # Sec
         tcpdump
