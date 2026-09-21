@@ -41,6 +41,7 @@ in
     ./smart-home.nix
     ./copyparty.nix
     ./miniflux.nix
+    ./glance.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
