@@ -75,7 +75,7 @@ let
         sublime-merge
         zeal
         gdb
-        (big cargo)
+        # (big cargo)
         # (big qtcreator)
         (big unstable.unsloth-desktop)
 
