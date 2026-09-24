@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   dgbCustom = config.dgbCustom;
 in
@@ -57,6 +62,8 @@ in
       size = 16 * 1024;
     }
   ];
+
+  environment.systemPackages = with pkgs; [ wine64Packages.unstable ];
 
   system.stateVersion = "26.05";
 }
