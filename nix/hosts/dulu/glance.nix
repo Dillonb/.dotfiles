@@ -13,11 +13,28 @@ in
   sops.secrets."jellyfin-api-key" = {
     sopsFile = ../../secrets/dulu.yaml;
   };
+
+  sops.secrets."google_calendar_client_id" = {
+    sopsFile = ../../secrets/dulu.yaml;
+  };
+  sops.secrets."google_calendar_client_secret" = {
+    sopsFile = ../../secrets/dulu.yaml;
+  };
+  sops.secrets."google_calendar_authorization_code" = {
+    sopsFile = ../../secrets/dulu.yaml;
+  };
+  sops.secrets."google_calendar_refresh_token" = {
+    sopsFile = ../../secrets/dulu.yaml;
+  };
+
   sops.templates."glance-env" = {
     content = ''
       GLANCE_SECRET_KEY=${config.sops.placeholder."glance_secret_key"}
       GLANCE_PASSWORD_HASH=${config.sops.placeholder."glance_password_hash"}
       JELLYFIN_API_KEY=${config.sops.placeholder."jellyfin-api-key"}
+      GOOGLE_CLIENT_ID=${config.sops.placeholder."google_calendar_client_id"}
+      GOOGLE_CLIENT_SECRET=${config.sops.placeholder."google_calendar_client_secret"}
+      GOOGLE_REFRESH_TOKEN=${config.sops.placeholder."google_calendar_refresh_token"}
     '';
     restartUnits = [ "glance.service" ];
   };
@@ -53,6 +70,12 @@ in
                 {
                   type = "calendar";
                   first-day-of-week = "monday";
+                }
+                {
+                  type = "custom-api";
+                  title = "Upcoming Calendar Events";
+                  cache = "15m";
+                  template = builtins.readFile ./glance/google-calendar.html;
                 }
                 {
                   type = "bookmarks";

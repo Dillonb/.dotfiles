@@ -1,0 +1,53 @@
+{{
+  $token := newRequest "https://oauth2.googleapis.com/token"
+    | withHeader "Content-Type" "application/x-www-form-urlencoded"
+    | withStringBody "client_id=${GOOGLE_CLIENT_ID}&client_secret=${GOOGLE_CLIENT_SECRET}&refresh_token=${GOOGLE_REFRESH_TOKEN}&grant_type=refresh_token"
+    | getResponse
+}}
+{{ if ne $token.Response.StatusCode 200 }}<p class="color-negative">Failed to get Google token (HTTP {{ $token.Response.StatusCode }}).</p>
+{{ else }}
+{{
+  $events := newRequest "https://www.googleapis.com/calendar/v3/calendars/primary/events"
+    | withParameter "timeMin" (now | formatTime "rfc3339")
+    | withParameter "timeMax" (offsetNow "720h" | formatTime "rfc3339")
+    | withParameter "singleEvents" "true"
+    | withParameter "orderBy" "startTime"
+    | withParameter "maxResults" "25"
+    | withHeader "Authorization" (print "Bearer " ($token.JSON.String "access_token"))
+    | getResponse
+}}
+{{ if ne $events.Response.StatusCode 200 }}<p class="color-negative">Failed to fetch events (HTTP {{ $events.Response.StatusCode }}).</p>
+{{ else }}
+<ul class="list list-gap-10 collapsible-container" data-collapse-after="5">
+{{ range $events.JSON.Array "items" }}
+  {{ $isAllDay := eq (.String "start.dateTime") "" }}
+  {{ $start := now }}{{ $end := now }}
+  {{ if $isAllDay }}
+    {{ $start = parseLocalTime "DateOnly" (.String "start.date") }}
+    {{/* Google's all-day end date is exclusive */}}
+    {{ $end = (parseLocalTime "DateOnly" (.String "end.date")).AddDate 0 0 -1 }}
+  {{ else }}
+    {{ $start = parseTime "rfc3339" (.String "start.dateTime") }}
+    {{ $end = parseTime "rfc3339" (.String "end.dateTime") }}
+  {{ end }}
+  {{ $sameDay := eq ($start | formatTime "DateOnly") ($end | formatTime "DateOnly") }}
+  <li>
+    <a class="size-h4 color-highlight block" href="{{ or (.String "htmlLink") "https://calendar.google.com/calendar/u/0" }}" target="_blank" rel="noreferrer">{{ or (.String "summary") "(No title)" }}</a>
+    <ul class="list-horizontal-text size-h6 margin-top-3">
+      {{ if $start.Before now }}<li class="color-primary">Now</li>{{ else }}<li class="color-primary" {{ $start | toRelativeTime }}></li>{{ end }}
+      {{ if $isAllDay }}
+        <li>{{ $start | formatTime "Mon, Jan 2" }}{{ if not $sameDay }} – {{ $end | formatTime "Mon, Jan 2" }}{{ end }}</li>
+        <li>All day</li>
+      {{ else if $sameDay }}
+        <li>{{ $start | formatTime "Mon, Jan 2" }}</li>
+        <li>{{ $start | formatTime "3:04 PM" }} – {{ $end | formatTime "3:04 PM" }}</li>
+      {{ else }}
+        <li>{{ $start | formatTime "Mon, Jan 2 3:04 PM" }} – {{ $end | formatTime "Mon, Jan 2 3:04 PM" }}</li>
+      {{ end }}
+      {{ with .String "location" }}<li class="text-truncate">{{ . }}</li>{{ end }}
+    </ul>
+  </li>
+{{ else }}<li class="color-subdue">No upcoming events.</li>{{ end }}
+</ul>
+{{ end }}
+{{ end }}
