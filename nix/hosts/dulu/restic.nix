@@ -117,7 +117,7 @@ assert lib.assertMsg (
           "/home/dillon/.vscode-server"
           "/home/dillon/src/meta-pine64"
           "/zpool/transmission/incomplete"
-          "/zpool/sabnzbd/incomplete"
+          "/zpool/sabnzbd"
         ];
 
         repository = "rclone:b2-media:restic-dulu";
