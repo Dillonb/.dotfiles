@@ -273,7 +273,7 @@ let
       nix-your-shell
 
       # Fun
-      fortune
+      stable.fortune
       dwt1-shell-color-scripts
     ]
     ++ [ inputs.detectcharset.packages."${pkgs.stdenv.hostPlatform.system}".default ];
