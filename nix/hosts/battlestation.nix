@@ -119,6 +119,8 @@ in
     "nvidia-drm.fbdev=1"
     "nvidia.NVreg_EnableGpuFirmware=0"
     # "nvidia.Nvreg_PreserveVideoMemoryAllocations"
+    # Without a country the regdomain stays "00", which disables 6 GHz (needed by the Steam Frame dongle)
+    "cfg80211.ieee80211_regdom=US"
   ];
 
   # Nvidia in Docker
