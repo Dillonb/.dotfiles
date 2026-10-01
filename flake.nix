@@ -463,7 +463,7 @@
         // nixos-stable.lib.optionalAttrs (system == "x86_64-linux") {
           inherit qtwebengine5;
 
-          teamspeak3 = pkgs.callPackage ./nix/packages/teamspeak3/package.nix {
+          teamspeak3 = pkgs.stable.callPackage ./nix/packages/teamspeak3/package.nix {
             qt5 = pkgs.qt5 // {
               qtwebengine = qtwebengine5;
             };
