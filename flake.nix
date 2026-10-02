@@ -106,7 +106,7 @@
           # "aspnetcore-runtime-6.0.36"
           # "dotnet-sdk-wrapped-6.0.428"
           # "dotnet-sdk-6.0.428"
-          "qtwebengine-5.15.19"
+          # "qtwebengine-5.15.19"
         ];
       };
       systems = [
@@ -439,35 +439,10 @@
             inherit system;
             config = nixpkgs-config;
           };
-
-          # chromium 87 doesn't build against libstdc++ 15
-          webengineStdenv = pkgs.gcc14Stdenv;
-
-          qtwebengine5 = pkgs.qt5.callPackage ./nix/packages/qtwebengine5/package.nix {
-            stdenv = webengineStdenv;
-            qtModule = pkgs.qt5.callPackage "${nixos-unstable}/pkgs/development/libraries/qt-5/qtModule.nix" {
-              stdenv = webengineStdenv;
-              mkDerivation = webengineStdenv.mkDerivation;
-              patches = { };
-            };
-            inherit (pkgs.qt5.srcs.qtwebengine) version;
-            inherit (pkgs.darwin) bootstrap_cmds;
-            python = pkgs.python3;
-          };
         in
         {
           sops-yaml = pkgs.callPackage ./nix/secrets/sops-yaml.nix { };
           obsidian-headless = pkgs.callPackage ./nix/packages/obsidian-headless/package.nix { };
-        }
-        # teamspeak3 is x86_64-linux only, and qtwebengine5 exists to build it
-        // nixos-stable.lib.optionalAttrs (system == "x86_64-linux") {
-          inherit qtwebengine5;
-
-          teamspeak3 = pkgs.callPackage ./nix/packages/teamspeak3/package.nix {
-            qt5 = pkgs.qt5 // {
-              qtwebengine = qtwebengine5;
-            };
-          };
         }
       );
 
