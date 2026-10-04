@@ -61,6 +61,8 @@
 
     steam = pkgs.lib.mkIf (config.dgbCustom.enableGaming && pkgs.stdenv.hostPlatform.isx86_64) {
       enable = true;
+      # Steam remote play / streaming on Wayland using pipewire
+      package = pkgs.steam.override { extraArgs = "-pipewire"; };
       remotePlay.openFirewall = true;
       localNetworkGameTransfers.openFirewall = true;
 
