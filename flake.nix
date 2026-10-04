@@ -290,6 +290,7 @@
             # ./nix/modules/libreoffice.nix
             inputs.lanzaboote.nixosModules.lanzaboote
             ./nix/modules/sunshine.nix
+            ./nix/modules/steam-frame.nix
             ./nix/modules/restic.nix
             ./nix/modules/syncthing.nix
             ./nix/modules/ssd.nix

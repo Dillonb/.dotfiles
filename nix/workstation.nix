@@ -68,9 +68,10 @@
 
       extraCompatPackages = with pkgs; [ proton-ge-bin ];
 
-      # Because steam-run is the best way to get unusual binaries to run
       extraPackages = with pkgs; [
         hidapi # Steam Controller
+
+        # Because steam-run is the best way to get unusual binaries to run
         libxml2
         icu
       ];
