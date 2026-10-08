@@ -108,7 +108,7 @@ in
     };
 
     modesetting.enable = true;
-    open = false;
+    open = true;
     nvidiaSettings = true;
     package = nvidia-driver;
   };
