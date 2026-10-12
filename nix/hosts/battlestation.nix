@@ -124,6 +124,9 @@ in
     # "nvidia.Nvreg_PreserveVideoMemoryAllocations"
   ];
 
+  # GPU monitoring, power limit, clock offsets and fan curves
+  services.lact.enable = true;
+
   # Nvidia in Docker
   virtualisation.docker.enableNvidia = true;
   # virtualisation.containers.cdi.dynamic.nvidia.enable = true;
