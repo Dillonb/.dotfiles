@@ -36,7 +36,11 @@ in
     "sd_mod"
   ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-amd" ];
+  boot.kernelModules = [
+    "kvm-amd"
+    # Faster Windows sync primitives for Wine/Proton
+    "ntsync"
+  ];
   boot.extraModulePackages = [ ];
   boot.loader = {
     efi.canTouchEfiVariables = true;
