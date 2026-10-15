@@ -23,6 +23,7 @@ in
     ombi = mkPort 5000 "Ombi";
     bazarr = mkPort 6767 "Bazarr";
     audiobookshelf = mkPort 13378 "Audiobookshelf";
+    calibreServer = mkPort 8083 "Calibre content server";
     prowlarr = mkPort 9696 "Prowlarr";
 
     miniflux = mkPort 8080 "Miniflux";

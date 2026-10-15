@@ -301,6 +301,17 @@ in
         };
       };
 
+      "ebooks.dgb.sh" = {
+        forceSSL = true;
+        enableACME = true;
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:${strPort "calibreServer"}";
+          extraConfig = ''
+            client_max_body_size 500M;
+          '';
+        };
+      };
+
       "home.dgb.sh" = {
         forceSSL = true;
 

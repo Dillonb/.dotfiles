@@ -42,6 +42,7 @@ in
     ./copyparty.nix
     ./miniflux.nix
     ./glance.nix
+    ./calibre-server.nix
   ];
 
   # Use the systemd-boot EFI boot loader.

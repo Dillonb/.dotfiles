@@ -16,6 +16,7 @@ let
     "/var/lib/bazarr/db/bazarr.db"
     "/var/lib/tautulli/tautulli.db"
     "/var/lib/audiobookshelf/config/absdatabase.sqlite"
+    "/var/lib/calibre-server/metadata.db"
     "/var/lib/ombi/Ombi.db"
     "/var/lib/ombi/OmbiExternal.db"
     "/var/lib/ombi/OmbiSettings.db"
@@ -99,6 +100,7 @@ assert lib.assertMsg (
           "/var/lib/anki-sync-server"
           "/var/lib/bazarr"
           "/var/lib/audiobookshelf"
+          "/var/lib/calibre-server"
           "/var/www"
           sqlite_backup_dir
         ];
