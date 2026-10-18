@@ -203,7 +203,7 @@ let
       (big lua-language-server)
       ripgrep
       fd
-      (big bear)
+      # (big bear)
       (big bash-language-server)
       (big lazygit)
       (big nuget)
