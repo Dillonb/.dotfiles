@@ -62,7 +62,10 @@
     steam = pkgs.lib.mkIf (config.dgbCustom.enableGaming && pkgs.stdenv.hostPlatform.isx86_64) {
       enable = true;
       # Steam remote play / streaming on Wayland using pipewire
-      package = pkgs.steam.override { extraArgs = "-pipewire"; };
+      # Jovian sets its own package (which already passes -pipewire)
+      package = pkgs.lib.mkIf (!(config.jovian.steam.enable or false)) (
+        pkgs.steam.override { extraArgs = "-pipewire"; }
+      );
       remotePlay.openFirewall = true;
       localNetworkGameTransfers.openFirewall = true;
 
