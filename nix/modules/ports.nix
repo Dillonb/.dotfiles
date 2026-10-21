@@ -18,7 +18,6 @@ in
     transmission = mkPort 9091 "Transmission RPC/web UI";
     tautulli = mkPort 8181 "Tautulli";
     sk = mkPort 8111 "Shoko";
-    nextcloud = mkPort 1010 "Nextcloud";
     copyparty = mkPort 3923 "copyparty";
     ombi = mkPort 5000 "Ombi";
     bazarr = mkPort 6767 "Bazarr";
