@@ -210,7 +210,7 @@ let
       (big powershell)
       (big nodejs)
       delta
-      (big slop.copilot-cli)
+      # (big slop.copilot-cli)
       (big slop.pi)
 
       # Notes
