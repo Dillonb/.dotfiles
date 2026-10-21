@@ -55,7 +55,7 @@ let
         xclip # X11 clipboard from cli
         parsec-bin
         gparted
-        (big calibre)
+        # (big calibre)
 
         # Gaming
         (big stable.chiaki-ng) # ps5 remote play
@@ -84,7 +84,7 @@ let
         nmap
         # (big burpsuite)
         foremost
-        (big proxmark3)
+        # (big proxmark3)
         (big pwndbg)
         (big pwndbg-lldb)
         (big pwntools)
@@ -143,7 +143,7 @@ let
 
   commonWorkstationPackages = with pkgs; [
     # Dev/Editor
-    vim-full # vim-full includes gvim compared to the regular vim package
+    # vim-full # vim-full includes gvim compared to the regular vim package
     # unstable.imhex
 
     # Gaming
