@@ -3,7 +3,7 @@
 
 {
   # The adapter's driver (rtw89_8852cu) needs Linux 7.2+
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Without a country the regdomain stays "00", which disables 6 GHz (needed by the adapter)
   boot.kernelParams = [ "cfg80211.ieee80211_regdom=US" ];
