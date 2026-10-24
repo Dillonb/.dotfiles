@@ -16,7 +16,7 @@
     };
 
     bc250-nixos = {
-      url = "github:TesseractCat/bc250-nixos";
+      url = "github:Dillonb/bc250-nixos/remove-stale-asserts";
       inputs.nixpkgs.follows = "nixos-unstable";
     };
 

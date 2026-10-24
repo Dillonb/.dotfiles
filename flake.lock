@@ -7,15 +7,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1791135214,
-        "narHash": "sha256-T9KgtAoAUZ3ZbZVnZNWVy3mFAkIYupJ5BgPu8WUkfNo=",
-        "owner": "TesseractCat",
+        "lastModified": 1792874084,
+        "narHash": "sha256-6aNfl05ACITwg4h3NzqAFRyZNN83y4xH8jCVQoyxxIE=",
+        "owner": "Dillonb",
         "repo": "bc250-nixos",
-        "rev": "f0fa8c70635a8304fe8d328ee923826f1eabca3d",
+        "rev": "d891ec29aa6c7949c27e3d3d3db7122f1d21c553",
         "type": "github"
       },
       "original": {
-        "owner": "TesseractCat",
+        "owner": "Dillonb",
+        "ref": "remove-stale-asserts",
         "repo": "bc250-nixos",
         "type": "github"
       }
