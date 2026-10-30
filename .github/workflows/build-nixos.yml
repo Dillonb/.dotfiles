@@ -119,10 +119,9 @@ jobs:
 
       - name: Free disk space
         if: ${{ runner.os == 'Linux' && steps.cache.outputs.hit != 'true' }}
-        uses: thiagokokada/free-disk-space@d3e470a0e298133572dc766e6b10d5a51c71c0e3 # Dec 10, 2025
+        uses: thiagokokada/free-disk-space@36acb471c3627309dc6702e832ca6f02911318f8 # Oct 30, 2026
         with:
           tool-cache: true
-          opt: true
           usrlocal: true
           usrmisc: true
 
