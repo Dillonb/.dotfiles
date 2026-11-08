@@ -59,7 +59,7 @@ let
 
         # Gaming
         (big stable.chiaki-ng) # ps5 remote play
-        # lutris
+        lutris
         (big kdePackages.kpat)
 
         # Chat
