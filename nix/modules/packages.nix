@@ -58,8 +58,7 @@ let
         # (big calibre)
 
         # Gaming
-        (big stable.chiaki-ng) # ps5 remote play
-        lutris
+        # (big stable.chiaki-ng) # ps5 remote play
         (big kdePackages.kpat)
 
         # Chat
@@ -124,6 +123,7 @@ let
         (x64 big spotify)
         (x64 big teamspeak3)
         (x64 big teamspeak6-client)
+        (x64 big gaming lutris)
 
         (gaming x64 gamescope)
         (gaming x64 mangohud)
