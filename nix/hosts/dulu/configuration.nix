@@ -43,6 +43,7 @@ in
     ./miniflux.nix
     ./glance.nix
     ./calibre-server.nix
+    ./tailnet.nix
   ];
 
   # Use the systemd-boot EFI boot loader.

@@ -158,6 +158,7 @@ in
       "r.cyphe.red" = {
         forceSSL = true;
         enableACME = true;
+        tailnetOnly = true;
         locations."/" = {
           proxyPass = "http://127.0.0.1:${strPort "radarr"}/";
         };
@@ -166,6 +167,7 @@ in
       "s.cyphe.red" = {
         forceSSL = true;
         enableACME = true;
+        tailnetOnly = true;
         locations."/" = {
           proxyPass = "http://127.0.0.1:${strPort "sonarr"}/";
         };
@@ -174,6 +176,7 @@ in
       "sab.cyphe.red" = {
         forceSSL = true;
         enableACME = true;
+        tailnetOnly = true;
         locations."/" = {
           proxyPass = "http://127.0.0.1:${strPort "sabnzbd"}/";
         };
@@ -182,6 +185,7 @@ in
       "t.cyphe.red" = {
         forceSSL = true;
         enableACME = true;
+        tailnetOnly = true;
         locations."/" = {
           proxyPass = "http://127.0.0.1:${strPort "transmission"}/";
           basicAuthFile = config.sops.secrets."transmission-auth".path;
@@ -191,6 +195,7 @@ in
       "sk.cyphe.red" = {
         forceSSL = true;
         enableACME = true;
+        tailnetOnly = true;
         locations."/" = {
           proxyPass = "http://127.0.0.1:${strPort "sk"}/";
         };
@@ -199,6 +204,7 @@ in
       "tt.cyphe.red" = {
         forceSSL = true;
         enableACME = true;
+        tailnetOnly = true;
         locations."/" = {
           proxyPass = "http://127.0.0.1:${strPort "tautulli"}/";
         };
