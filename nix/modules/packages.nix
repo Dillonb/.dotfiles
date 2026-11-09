@@ -27,7 +27,6 @@ let
   pwndbg = inputs.pwndbg.packages."${pkgs.stdenv.hostPlatform.system}".default;
   pwndbg-lldb = inputs.pwndbg.packages."${pkgs.stdenv.hostPlatform.system}".pwndbg-lldb;
 
-  teamspeak3 = inputs.self.packages."${pkgs.stdenv.hostPlatform.system}".teamspeak3 or skip;
   obsidian-headless =
     inputs.self.packages."${pkgs.stdenv.hostPlatform.system}".obsidian-headless or skip;
 
@@ -121,7 +120,6 @@ let
         # (x64 big slack)
         # (x64 big renderdoc)
         (x64 big spotify)
-        (x64 big teamspeak3)
         (x64 big teamspeak6-client)
         (x64 big gaming lutris)
 
