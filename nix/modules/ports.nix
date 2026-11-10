@@ -27,7 +27,6 @@ in
 
     miniflux = mkPort 8080 "Miniflux";
     glance = mkPort 8082 "Glance dashboard";
-    nixServe = mkPort 5001 "nix-serve";
     atticd = mkPort 8091 "atticd";
     ankiSync = mkPort 27701 "Anki sync server";
 

@@ -15,10 +15,6 @@ let
 in
 {
   sops.secrets = {
-    "nix-cache-priv-key.pem" = {
-      sopsFile = ../../secrets/dulu.yaml;
-      restartUnits = [ "nix-serve.service" ];
-    };
     "anki-password" = {
       sopsFile = ../../secrets/dulu.yaml;
       restartUnits = [ "anki-sync-server.service" ];
@@ -164,12 +160,6 @@ in
         };
       };
     };
-
-  services.nix-serve = {
-    enable = true;
-    secretKeyFile = config.sops.secrets."nix-cache-priv-key.pem".path;
-    port = config.dgbCustom.ports.nixServe;
-  };
 
   services.anki-sync-server = {
     enable = true;

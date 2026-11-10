@@ -15,8 +15,6 @@ env:
   ATTIC_ENDPOINT: https://attic.dgb.sh/
   ATTIC_CACHE: system
   ATTIC_PUBLIC_KEY: system:E5ubGe/xsSF5nf2gxvZBP4WSVVFWis3lo+3A3HERoxc=
-  ALTERNATE_CACHE_ENDPOINT: https://cache.nix.dgb.sh
-  ALTERNATE_CACHE_PUBLIC_KEY: cache.nix.dgb.sh:XzJS7VYoZ90T3fwKySBAqfKdxViX6zk2PJvlKVD+euU=
 
 jobs:
   # Generate the build matrix from the flake so it always tracks the nixos/darwin
@@ -38,8 +36,8 @@ jobs:
         with:
           extra-conf: |
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-            extra-substituters = ${{ env.ATTIC_ENDPOINT }}${{ env.ATTIC_CACHE }} ${{ env.ALTERNATE_CACHE_ENDPOINT }}
-            extra-trusted-public-keys = ${{ env.ATTIC_PUBLIC_KEY }} ${{ env.ALTERNATE_CACHE_PUBLIC_KEY }}
+            extra-substituters = ${{ env.ATTIC_ENDPOINT }}${{ env.ATTIC_CACHE }}
+            extra-trusted-public-keys = ${{ env.ATTIC_PUBLIC_KEY }}
       - name: Generate matrix
         id: generate
         env:
@@ -90,8 +88,8 @@ jobs:
         with:
           extra-conf: |
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-            extra-substituters = ${{ env.ATTIC_ENDPOINT }}${{ env.ATTIC_CACHE }} ${{ env.ALTERNATE_CACHE_ENDPOINT }}
-            extra-trusted-public-keys = ${{ env.ATTIC_PUBLIC_KEY }} ${{ env.ALTERNATE_CACHE_PUBLIC_KEY }}
+            extra-substituters = ${{ env.ATTIC_ENDPOINT }}${{ env.ATTIC_CACHE }}
+            extra-trusted-public-keys = ${{ env.ATTIC_PUBLIC_KEY }}
 
       - name: Set up attic cache
         if: ${{ env.ATTIC_TOKEN != '' }}
@@ -179,7 +177,6 @@ jobs:
           # Every cache the closures are spread across, in priority order.
           STORES: >-
             ${{ env.ATTIC_ENDPOINT }}${{ env.ATTIC_CACHE }}
-            ${{ env.ALTERNATE_CACHE_ENDPOINT }}
             https://cache.nixos.org
         run: |
           mkdir -p nvd-diff
