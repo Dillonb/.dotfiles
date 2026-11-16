@@ -183,6 +183,28 @@ in
                   ];
                 }
                 {
+                  type = "markets";
+                  sort-by = "change";
+                  markets = [
+                    {
+                      symbol = "VOO";
+                      name = "S&P 500";
+                    }
+                    {
+                      symbol = "MSFT";
+                      name = "Microsoft";
+                    }
+                    {
+                      symbol = "NVDA";
+                      name = "Nvidia";
+                    }
+                    {
+                      symbol = "AMD";
+                      name = "AMD";
+                    }
+                  ];
+                }
+                {
                   type = "hacker-news";
                   limit = 15;
                   collapse-after = 5;
