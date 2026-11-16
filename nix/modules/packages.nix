@@ -203,7 +203,7 @@ let
       fd
       # (big bear)
       (big bash-language-server)
-      (big lazygit)
+      lazygit
       (big nuget)
       (big powershell)
       (big nodejs)
@@ -256,7 +256,7 @@ let
       (big difftastic)
       (big ffmpeg)
       toilet
-      (big tree-sitter)
+      tree-sitter
 
       # Nix utils
       (big nixfmt)
