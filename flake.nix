@@ -376,13 +376,13 @@
             ];
           };
 
-        # pbp = nixos {
-        #   hostname = "pbp";
-        #   system = "aarch64-linux";
-        #   role = "workstation";
-        #   channel = "unstable";
-        #   modules = [ nixos-hardware.nixosModules.pine64-pinebook-pro ];
-        # };
+        pbp = nixos {
+          hostname = "pbp";
+          system = "aarch64-linux";
+          role = "workstation";
+          channel = "unstable";
+          modules = [ nixos-hardware.nixosModules.pine64-pinebook-pro ];
+        };
 
         dgbmbp-nixos-vm = nixos {
           hostname = "dgbmbp-nixos-vm";
